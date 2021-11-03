@@ -25,8 +25,3 @@ int	ft_atoi(const char *str)
 	}
 	return (res * sign);
 }
-#include <stdio.h>
-int  main()
-{
-	printf("%d", ft_atoi("\t\n\r\v\f-4646"));
-}
