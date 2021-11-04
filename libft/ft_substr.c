@@ -6,7 +6,7 @@
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 18:12:13 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/11/03 18:24:54 by jmilhas          ###   ########.fr       */
+/*   Updated: 2021/11/04 20:01:07 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	i = 0;
 	j = 0;
-	str = (char *)malloc(sizeof(*s) * (len + 1));
+	str = (char *)ft_memalloc(len + 1);
 	if (!str)
 		return (NULL);
 	while (s[i])
@@ -32,6 +32,5 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		}
 		i++;
 	}
-	str[j] = '\0';
-	return (NULL);
+	return (str);
 }

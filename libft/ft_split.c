@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/04 18:58:09 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/11/04 19:22:32 by jmilhas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static int	ft_charsplit(char *s, char c, int j)
@@ -31,7 +43,7 @@ static char	**ft_tab(char **tab, const char *s, int len, char c)
 	while (len > 0 && *s)
 	{
 		tab[i] = (char *)malloc(sizeof(char) * (len + 1));
-		while (*s != c && len > 0)
+		while ((*s != c && len > 0) || !*s)
 		{
 			tab[i][letter++] = (const char)*s;
 			len--;
@@ -48,10 +60,10 @@ static char	**ft_tab(char **tab, const char *s, int len, char c)
 	return (tab);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
-	int	len;
-	int	i;
+	int		len;
+	int		i;
 	char	**tab;
 
 	len = ft_strlen((char *)s);
@@ -67,4 +79,3 @@ char		**ft_split(char const *s, char c)
 	tab = ft_tab(tab, s, len, c);
 	return (tab);
 }
-
