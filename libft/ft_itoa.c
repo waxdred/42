@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/03 18:13:07 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/11/03 19:31:36 by jmilhas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static int	ft_len_str(long long int n)
@@ -15,7 +27,7 @@ static int	ft_len_str(long long int n)
 	return (i);
 }
 
-static char		*ft_complet(char *str, long long int n, int len)
+static char	*ft_complet(char *str, long long int n, int len)
 {
 	int		debut;
 
@@ -40,9 +52,9 @@ static char		*ft_complet(char *str, long long int n, int len)
 
 char	*ft_itoa(int n)
 {
-	char		*str;
-	int		len;
 	long long int	lln;
+	int				len;
+	char			*str;
 
 	lln = n;
 	len = ft_len_str(lln);
@@ -50,7 +62,7 @@ char	*ft_itoa(int n)
 		len = len + 1;
 	str = (char *)ft_memalloc(len + 1);
 	if (!str)
-		return(NULL);
+		return (NULL);
 	str = ft_complet(str, lln, len);
 	return (str);
 }
