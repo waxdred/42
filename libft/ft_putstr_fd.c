@@ -6,7 +6,7 @@
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 18:57:50 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/11/04 19:04:32 by jmilhas          ###   ########.fr       */
+/*   Updated: 2021/11/05 15:22:17 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_putstr_fd(char const *s, int fd)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return ;
 	while (s[i])
 	{
 		write(fd, &s[i], 1);

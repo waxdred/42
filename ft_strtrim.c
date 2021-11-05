@@ -6,7 +6,7 @@
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 22:23:37 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/11/05 15:06:21 by jmilhas          ###   ########.fr       */
+/*   Updated: 2021/11/04 01:43:41 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*ft_complet(char const *s1, char const *set, char *dest)
 	len = ft_strlen(s1);
 	while (ft_check(s1[i], set))
 		i++;
-	while (ft_check(s1[len - 1], set))
+	while (ft_check(s1[len-1], set))
 		len--;
 	while (i < len)
 	{
@@ -67,19 +67,17 @@ static size_t	ft_get_trim_len(char const *s1, char const *set)
 	return (trimlen - i);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char *ft_strtrim(char const *s1, char const *set)
 {
 	size_t	trimlen;
 	size_t	len;
 	char	*dest;
 
-	if (!s1)
-		return (NULL);
 	trimlen = ft_get_trim_len(s1, set);
 	dest = (char *)ft_memalloc(trimlen + 1);
 	len = ft_strlen(s1);
 	if (!s1 || len < 1)
-		return (dest);
+		return (NULL);
 	if (!dest)
 		return (NULL);
 	dest = ft_complet(s1, set, dest);

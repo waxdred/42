@@ -6,7 +6,7 @@
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 18:11:55 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/11/03 18:20:19 by jmilhas          ###   ########.fr       */
+/*   Updated: 2021/11/05 17:25:20 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ size_t	ft_strlen(const char *str)
 	size_t	i;
 
 	i = 0;
-	if (!str)
-		return (0);
 	while (str[i])
 		i++;
 	return (i);

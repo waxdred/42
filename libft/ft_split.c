@@ -6,76 +6,68 @@
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 18:58:09 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/11/04 19:22:32 by jmilhas          ###   ########.fr       */
+/*   Updated: 2021/11/05 18:17:29 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_charsplit(char *s, char c, int j)
+static char	*ft_strndup(const char *s, size_t size)
 {
-	int		i;
-	int		len;
+	char	*res;
+
+	res = malloc(sizeof(char) * (size + 1));
+	if (!res)
+		return (0);
+	ft_memcpy(res, s, size);
+	res[size] = 0;
+	return (res);
+}
+
+static int	split_len(const char *str, char c)
+{
+	int	i;
+	int	trigger;
 
 	i = 0;
-	len = 0;
-	while (len < j && s[len])
+	trigger = 0;
+	while (*str)
 	{
-		if (s[len] != c && len < j && s[len])
+		if (*str != c && trigger == 0)
 		{
-			while (s[len] != c && len < j && s[len])
-				len++;
+			trigger = 1;
 			i++;
 		}
-		while (s[len] == c && len < j && s[len])
-			len++;
+		else if (*str == c)
+			trigger = 0;
+		str++;
 	}
 	return (i);
 }
 
-static char	**ft_tab(char **tab, const char *s, int len, char c)
-{
-	int		letter;
-	int		i;
-
-	letter = 0;
-	i = 0;
-	while (len > 0 && *s)
-	{
-		tab[i] = (char *)malloc(sizeof(char) * (len + 1));
-		while ((*s != c && len > 0) || !*s)
-		{
-			tab[i][letter++] = (const char)*s;
-			len--;
-			s++;
-		}
-		while (*s == c && *s)
-			s++;
-		tab[i][letter] = '\0';
-		letter = 0;
-		i++;
-	}
-	tab[i] = (char *)malloc(sizeof(char));
-	tab[i] = NULL;
-	return (tab);
-}
-
 char	**ft_split(char const *s, char c)
 {
-	int		len;
-	int		i;
-	char	**tab;
+	size_t	i;
+	size_t	j;
+	size_t	tmp;
+	char	**split;
 
-	len = ft_strlen((char *)s);
-	i = ft_charsplit((char *)s, c, len);
-	tab = (char **)malloc(sizeof(char *) * (i + 1));
-	if (tab == NULL)
-		return (NULL);
-	tab[0] = NULL;
-	if (!s || !c || !len)
-		return (tab);
-	while (*s == c)
-		s++;
-	tab = ft_tab(tab, s, len, c);
-	return (tab);
+	if (!s)
+		return (0);
+	split = ft_calloc((split_len(s, c) + 1), sizeof(char *));
+	if (!split)
+		return (0);
+	j = 0;
+	i = 0;
+	while (s[i])
+	{
+		while (s[i] && s[i] == c)
+			i++;
+		tmp = i;
+		while (s[i] && s[i] != c)
+			i++;
+		if (i != tmp)
+			split[j++] = ft_strndup(&s[tmp], i - tmp);
+	}
+	return (split);
 }
