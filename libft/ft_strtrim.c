@@ -11,77 +11,18 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static size_t	ft_check(char c, char const *set)
-{
-	size_t	i;
-
-	i = 0;
-	while (set[i])
-	{
-		if (set[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-static char	*ft_complet(char const *s1, char const *set, char *dest)
-{
-	size_t	i;
-	size_t	j;
-	size_t	len;
-
-	i = 0;
-	j = 0;
-	len = ft_strlen(s1);
-	while (ft_check(s1[i], set))
-		i++;
-	while (ft_check(s1[len - 1], set))
-		len--;
-	while (i < len)
-	{
-		dest[j] = s1[i];
-		j++;
-		i++;
-	}
-	return (dest);
-}
-
-static size_t	ft_get_trim_len(char const *s1, char const *set)
-{
-	size_t	i;
-	size_t	len;
-	size_t	trimlen;
-
-	i = 0;
-	len = ft_strlen(s1);
-	trimlen = len;
-	while (ft_check(s1[i], set))
-		i++;
-	while (ft_check(s1[len], set))
-	{
-		len--;
-		i++;
-	}
-	return (trimlen - i);
-}
-
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	trimlen;
-	size_t	len;
-	char	*dest;
+	size_t		size_s;
+	char		*newstring;
 
-	if (!s1)
+	if (!s1 || !set)
 		return (NULL);
-	trimlen = ft_get_trim_len(s1, set);
-	dest = (char *)ft_memalloc(trimlen + 1);
-	len = ft_strlen(s1);
-	if (!s1 || len < 1)
-		return (dest);
-	if (!dest)
-		return (NULL);
-	dest = ft_complet(s1, set, dest);
-	return (dest);
+	while (*s1 && ft_strchr(set, *s1))
+		s1++;
+	size_s = ft_strlen(s1);
+	while (size_s && ft_strchr(set, s1[size_s]))
+		size_s--;
+	newstring = ft_substr((char*)s1, 0, size_s + 1);
+	return (newstring);
 }

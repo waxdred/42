@@ -9,15 +9,6 @@ SRC =     ft_atoi.c	   \
 	  ft_isdigit.c	   \
 	  ft_isprint.c	   \
 	  ft_itoa.c 	   \
-	  ft_lstadd_back.c \
-	  ft_lstadd_front.c\
-	  ft_lstclear.c    \
-	  ft_lstdelone.c   \
-	  ft_lstlast.c     \
-	  ft_lstmap.c      \
-	  ft_lstnew.c	   \
-	  ft_lstsize.c     \
-	  ft_lstiter.c     \
 	  ft_memalloc.c	   \
 	  ft_memchr.c	   \
 	  ft_memcmp.c	   \
@@ -49,7 +40,19 @@ SRC =     ft_atoi.c	   \
 	  ft_toupper.c	   \
       	  ft_strcpy.c	   
 
-FILEO = $(SRC:.c=.o)
+BONUS  =  ft_lstadd_back.c \
+	  ft_lstadd_front.c\
+	  ft_lstclear.c    \
+	  ft_lstdelone.c   \
+	  ft_lstlast.c     \
+	  ft_lstmap.c      \
+	  ft_lstnew.c	   \
+	  ft_lstsize.c     \
+	  ft_lstiter.c     
+
+
+FILESO = $(SRC:.c=.o)
+FILEBO = $(BONUS:.c=.o)
 
 HEADER = libft.h
 
@@ -57,12 +60,16 @@ FLAGS = -Wall -Werror -Wextra
 
 $(NAME):
 	gcc $(FLAGS) -c $(SRC) -I ./includes
-	ar rc $(NAME) $(FILEO)
+	ar rc $(NAME) $(FILESO)
 
 all: $(NAME)
 
+bonus:
+	gcc $(FLAGS) -c  $(BONUS) -I ./includes
+	ar rc $(NAME) $(FILEBO)
+
 clean:
-	/bin/rm -f $(FILEO)
+	/bin/rm -f $(FILESO) $(FILEBO)
 
 fclean: clean
 	/bin/rm -f $(NAME)
