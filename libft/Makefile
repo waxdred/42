@@ -1,5 +1,7 @@
 NAME = libft.a
 
+CC = gcc
+
 SRC =     ft_atoi.c	   \
 	  ft_bzero.c	   \
 	  ft_calloc.c      \
@@ -52,20 +54,22 @@ BONUS  =  ft_lstadd_back.c \
 
 
 FILESO = $(SRC:.c=.o)
+
 FILEBO = $(BONUS:.c=.o)
 
 HEADER = libft.h
 
 FLAGS = -Wall -Werror -Wextra
 
-$(NAME):
-	gcc $(FLAGS) -c $(SRC) -I ./includes
+%.o : %.c $(HEADER)
+	$(CC) $(FLAGS) -I ./includes -c $< -o $@
+
+$(NAME): $(FILESO)
 	ar rc $(NAME) $(FILESO)
 
 all: $(NAME)
 
-bonus:
-	gcc $(FLAGS) -c  $(BONUS) -I ./includes
+bonus: $(NAME) $(FILEBO)
 	ar rc $(NAME) $(FILEBO)
 
 clean:
