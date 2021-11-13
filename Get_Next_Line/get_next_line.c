@@ -37,13 +37,13 @@ static char	*ft_complet_line(char *line, char *buf, char **s_buf)
 	return (line);
 }
 
-char	*get_next_line(int *fd)
+char	*get_next_line(int fd)
 {
 	static	char	*s_buf;
 	char		buf[BUFFER_SIZE + 1];
 	char		*line;
 	char		*tmp;
-	static int	ret;
+	int		ret;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -51,7 +51,7 @@ char	*get_next_line(int *fd)
 		line = ft_strdup(s_buf);
 	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
-		buf[BUFFER_SIZE] = 0;
+		buf[ret] = 0;
 		tmp = ft_complet_line(line, buf, &s_buf);
 		line = ft_strjoin(line, tmp);
 		ft_free(tmp);
