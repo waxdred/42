@@ -5,28 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/07 18:31:06 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/11/07 19:00:32 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/11/14 22:56:14 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/11/14 22:56:32 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "includes/get_next_line.h"
-
+#include "get_next_line.h"
 int main(int argv, char **argc)
 {
 	int fd;
+	int i = 0;
+	char *line;
 
-	if (argv < 1)
-	{
-		ft_putstr_fd("create function when no arg", 1);
-	}
 	if (argv >= 1)
 	{
-		ft_putstr_fd(argc[2], 1);
-		ft_putchar_fd('\n', 1);
 		fd = open(argc[1], O_RDONLY);
-		ft_putnbr_fd(fd, 1);
+		while (i++ < 10000)
+		{
+			line = get_next_line(fd);
+			printf("%s", line);
+			if (!line)
+			{
+				free(line);
+				return(0);
+			}
+			free(line);
+		}
 	}
 	return (0);
 }
