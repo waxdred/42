@@ -1,0 +1,126 @@
+
+
+
+#  install lmine de command pour la vm
+
+== update debian==
+apt-get update -y
+apt-get upgrade -y
+apt install sudo
+
+== add user in sudo groups
+su -
+usermod -aG sudo your_username
+
+== Check if user is in sudo groups
+getent group sudo
+
+== Open sudoer file
+sudo visudo
+
+== Add in end File
+jmilhas    ALL=(ALL) ALL
+
+== add git wget vim zsh
+apt-get install git -y
+sudo apt-get install wget
+sudo apt-get install vim
+sudo apt-get install zsh
+sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+============================================
+=Installing SSH and configuring SSH service=
+============================================
+sudo apt install openssh-server
+sudo systemctl status ssh
+service ssh restart
+sudo vim /etc/ssh/sshd_config
+== Check setting 
+sudo grep Port sshd_config
+== restart again ssh
+===========================
+== setting UFW fire-wall ==
+===========================
+apt-get install ufw -y
+sudo ufw enable
+sudo ufw status numbered
+sudo ufw allow shh 
+sudo ufw allow 4242 
+
+=====================================
+	ATTENTION DEFENCE
+=====================================
+=sudo ufw status numbered
+sudo ufw delete (choose number)
+=change host Name
+=hostnamectl
+=hostnamectl set-hostname new_hostname
+=sudo nano /etc/hosts    for change the by rthe new Name
+=sudo reboot
+=====================================
+
+sudo ufw delete (that number, for example 5 or 6)
+Choose “Network”-> “Adapter 1"->”Advanced”->”Port Forwarding”
+add 
+Name			Protocol	Host Port		Guest Port
+Rule 1			TCP		4242			4242
+
+sudo systemctl restart SSH
+
+sudo service sshd status
+Try connection with
+iterm ssh your_username@127.0.0.1 -p 4242
+=====================
+=Set password policy=
+=====================
+sudo apt-get install libpam-pwquality
+sudo nano /etc/pam.d/common-password
+change 
+password [success=2 default=ignore] pam_unix.so obscure sha512 minlen=10
+add after retry=3
+password    requisite   pam_pwquality.so retry=3 lcredit =-1 ucredit=-1 dcredit=-1 maxrepeat=3 usercheck=0 difok=7 enforce_for_root
+=password expiration
+sudo nano /etc/login.defs
+PASS_MAX_DAYS 30
+PASS_MIN_DAYS 2
+PASS_WARN_AGE 7
+
+sudo reboot
+==create grp
+sudo groupadd user42
+sudo groupadd evaluating
+getent group      =====for check if group create
+=Create user and assign into groups
+
+cut -d: -f1 /etc/passwd
+sudo adduser new_username
+sudo usermod -aG user42 your_username
+sudo usermod -aG evaluating your_new_username
+== Check if rule password 
+chage -l your_new_username
+== Conf sudo user
+sudo vim /etc/sudoers
+add:
+Defaults     secure_path="..."
+Defaults     passwd_tries=3
+Defaults     badpass_message="Password is wrong, please try again!"
+Defaults	logfile="/var/log/sudo/sudo.log"
+Defaults	log_input,log_output
+Defaults        requiretty
+Defaults   secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+
+============================
+=Crontab configuring
+sudo apt-get install -y net-tools
+vi /usr/local/bin/monitoring.sh
+add script
+sudo visudo
+add
+your_username ALL=(ALL) NOPASSWD: /usr/local/bin/monitoring.sh
+sudo reboot
+try the script
+sudo /usr/local/bin/monitoring.sh
+sudo crontab -u root -e
+add
+*/10 * * * * /usr/local/bin/monitoring.sh
+
+
