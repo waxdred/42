@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	ft_free(char *ptr)
 {
@@ -24,10 +24,10 @@ void	ft_free(char *ptr)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*s_buff = NULL;
+	static char	*s_buff[OPEN_MAX];
 	char		*buf;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0  || fd > OPEN_MAX)
 		return (NULL);
 	buf = (char *) malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buf)
@@ -37,9 +37,9 @@ char	*get_next_line(int fd)
 		free(buf);
 		return (NULL);
 	}
-	if (!s_buff)
-		s_buff = ft_strdup("");
-	if (ft_read(fd, &buf, &s_buff, &line) == 0 && *line == '\0')
+	if (!s_buff[fd])
+		s_buff[fd] = ft_strdup("");
+	if (ft_read(fd, &buf, &s_buff[fd], &line) == 0 && *line == '\0')
 	{
 		ft_free(line);
 		return (NULL);
