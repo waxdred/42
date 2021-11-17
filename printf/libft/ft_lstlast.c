@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 21:06:42 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/11/04 21:16:29 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/11/04 21:28:57 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/11/04 21:49:22 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **alst, t_list *ne)
+t_list	*ft_lstlast(t_list *lst)
 {
-	if (ne == NULL || alst == NULL)
-		return ;
-	ne->next = *alst;
-	*alst = ne;
+	if (lst == NULL)
+		return (NULL);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
 }

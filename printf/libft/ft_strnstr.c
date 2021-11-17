@@ -1,28 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 21:38:16 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/11/04 21:47:34 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/11/03 18:12:02 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/11/03 21:47:00 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **alst, t_list *ne)
+char	*ft_strnstr(const char *str, const char *to_found, size_t n)
 {
-	t_list	*elem;
+	size_t	i;
+	size_t	j;
+	char	*pt;
 
-	if (ne == NULL || alst == NULL)
-		return ;
-	if (*alst == NULL)
+	i = 0;
+	pt = 0;
+	if (to_found[i] == '\0')
+		return ((char *)str);
+	while (str[i] != '\0' && i < n)
 	{
-		*alst = ne;
-		return ;
+		if (str[i] == to_found[0])
+		{
+			pt = (char *)str + i;
+			j = 0;
+			while (str[i + j] == to_found[j] && i + j < n)
+			{
+				if (to_found[j + 1] == '\0')
+					return (pt);
+				j++;
+			}
+			pt = 0;
+		}
+		i++;
 	}
-	elem = ft_lstlast(*alst);
-	elem->next = ne;
+	return (NULL);
 }

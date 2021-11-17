@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 21:06:42 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/11/04 21:16:29 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/11/16 21:27:51 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/11/16 21:27:51 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/ft_printf.h"
+#include <stdio.h> 
 
-void	ft_lstadd_front(t_list **alst, t_list *ne)
+int main(int argc, char **argv)
 {
-	if (ne == NULL || alst == NULL)
-		return ;
-	ne->next = *alst;
-	*alst = ne;
+	int res;
+	char str[] = "sal";
+	char str1[] = "salfwfewfewfewfewfgrwgdsfdscvdsgvwdsgrwdsgrw";
+	void *st = str;
+	void *st1 = str1;
+
+
+	res = ft_printf("%p\n", st);
+	printf("%p\n", st);
+	res = ft_printf("%p\n", st1);
+	printf("%p\n", st1);
+	return (0);
 }

@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 21:06:42 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/11/04 21:16:29 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/11/03 18:13:13 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/11/03 18:42:15 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **alst, t_list *ne)
+void	*ft_memalloc(size_t size)
 {
-	if (ne == NULL || alst == NULL)
-		return ;
-	ne->next = *alst;
-	*alst = ne;
+	void	*mem;
+
+	mem = malloc(size);
+	if (mem)
+	{
+		ft_bzero(mem, size);
+		return (mem);
+	}
+	else
+		return (NULL);
 }

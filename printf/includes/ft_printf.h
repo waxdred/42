@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 21:06:42 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/11/04 21:16:29 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/11/16 20:52:30 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/11/16 20:52:30 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef	FT_PRINTF_H
+# define	FT_PRINTF_H
+#include <stdarg.h>
+#include "../libft/libft.h"
 
-void	ft_lstadd_front(t_list **alst, t_list *ne)
-{
-	if (ne == NULL || alst == NULL)
-		return ;
-	ne->next = *alst;
-	*alst = ne;
-}
+# define BASE16 "0123456789abcdef"
+int	ft_printf(const char *str, ...);
+# endif
