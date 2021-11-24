@@ -44,13 +44,13 @@ int		ft_count(char *argv, t_env *fdf)
 	if (fd == -1)
 		return (-1);
 	line = get_next_line(fd);
-	MAPNBLIN++;
-	MAPNBCOL = ft_count_words_sep(line, ' ');
+	fdf->map.nblin++;
+	fdf->map.nbcol = ft_count_words_sep(line, ' ');
 	if (line)
 		free(line);
 	while ((line = get_next_line(fd)))
 	{
-		MAPNBLIN++;
+		fdf->map.nblin++;
 		free(line);
 	}
 	if ((close(fd)) == -1)
@@ -63,24 +63,25 @@ int		ft_complet_map(int fd, t_env *fdf)
 	char	*line;
 	char	**split_line;
 
-	if (!(MAPMAP = ft_tabnew_two(MAPNBCOL, MAPNBLIN)))
+	if (!(fdf->map.map = ft_tabnew_two(fdf->map.nbcol, fdf->map.nblin)))
 		return (-1);
 	while ((line = get_next_line(fd)))
 	{
-		MAPX = 0;
+		fdf->map.posx = 0;
 		split_line = ft_split(line, ' ');
-		while (split_line[MAPX] != NULL)
+		while (split_line[fdf->map.posx] != NULL)
 		{
-			MAPMAP[MAPY][MAPX] = ft_atoi(split_line[MAPX]);
-			free(split_line[MAPX]);
-			MAPX++;
+			fdf->map.map[fdf->map.posy][fdf->map.posx] = 
+				ft_atoi(split_line[fdf->map.posx]);
+			free(split_line[fdf->map.posx]);
+			fdf->map.posx++;
 		}
-		fdf->map.max = ft_max(MAPMAP[MAPY], MAPNBLIN);
+		fdf->map.max = ft_max(fdf->map.map[fdf->map.posy], fdf->map.nblin);
 		if (fdf->map.max > fdf->map.pad)
 			fdf->map.pad = fdf->map.max;
 		free(split_line);
 		free(line);
-		MAPY++;
+		fdf->map.posy++;
 	}
 	return (0);
 }

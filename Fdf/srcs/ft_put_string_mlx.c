@@ -14,13 +14,13 @@
 
 void	ft_put_str_mlx(t_env *fdf, char *argv)
 {
-	printf("%d", POS);
-	mlx_string_put(P_MLX, P_WIN, POS, SPC, 0xABCDEF, "Fdf :");
-	SPC += 30;
-	mlx_string_put(P_MLX, P_WIN, POS, SPC, 0xABCDEF, "Map :");
-	POS += 60;
-	mlx_string_put(P_MLX, P_WIN, POS, SPC, 0xABCDEF, argv);
-	POS -= 60;
-	SPC += 30;
-	mlx_string_put(P_MLX, P_WIN, POS, SPC, 0xABCDEF, "Press <ESC> for quit");
+	printf("%d", fdf->p.pos);
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, fdf->p.pos, fdf->p.spc, 0xABCDEF, "Fdf :");
+	fdf->p.spc += 30;
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, fdf->p.pos, fdf->p.spc, 0xABCDEF, "Map :");
+	fdf->p.pos += 60;
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, fdf->p.pos, fdf->p.spc, 0xABCDEF, argv);
+	fdf->p.pos -= 60;
+	fdf->p.spc += 30;
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, fdf->p.pos, fdf->p.spc, 0xABCDEF, "Press <ESC> for quit");
 }

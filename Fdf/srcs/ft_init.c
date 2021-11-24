@@ -15,15 +15,15 @@
 void	ft_space(t_env *fdf)
 {
 	if (fdf->map.nbcol <= 20)
-		fdf->point.spc = 25;
+		fdf->p.spc = 25;
 	else if (fdf->map.nbcol >= 20 && fdf->map.nbcol <= 50)
-		fdf->point.spc = 20;
+		fdf->p.spc = 20;
 	else if (fdf->map.nbcol >= 50 && fdf->map.nbcol <= 100)
-		fdf->point.spc = 15;
+		fdf->p.spc = 15;
 	else if (fdf->map.nbcol >= 100 && fdf->map.nbcol <= 200)
-		fdf->point.spc = 5;
+		fdf->p.spc = 5;
 	else
-		fdf->point.spc = 1;
+		fdf->p.spc = 1;
 }
 
 void	ft_window(t_env *fdf)
@@ -61,8 +61,8 @@ void	ft_init(t_env *fdf)
 		fdf->color.green = 255;
 		fdf->color.blue = 255;
 	}
-	fdf->mov.y = fdf->win_length / 3;
-	fdf->mov.x = fdf->win_width / 3;
-	fdf->mov.s_y = fdf->win_length / 3;
-	fdf->mov.s_x = fdf->win_width / 3;
+	fdf->mov.y = fdf->win_length / 2;
+	fdf->mov.x = fdf->win_width / 4;
+	fdf->mov.s_y = fdf->win_length / 2;
+	fdf->mov.s_x = fdf->win_width / 4;
 }

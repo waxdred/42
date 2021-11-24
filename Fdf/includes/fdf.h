@@ -29,4 +29,5 @@ int	deal_key(int key, t_env *fdf);
 int	**ft_tabnew_two(size_t x, size_t y);
 void	ft_draw_mlx(t_env *fdf);
 void	ft_put_str_mlx(t_env *fdf, char *argv);
+void	ft_bresenham(t_env *fdf);
 #endif
