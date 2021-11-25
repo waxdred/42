@@ -20,7 +20,7 @@ int	ft_free_map(t_env *fdf)
 	i = 0;
 	while (i < fdf->map.y - 2)
 	{
-		free(MAPMAP[i]);
+		free(fdf->map.map[i]);
 		i++;
 	}
 	return (0);

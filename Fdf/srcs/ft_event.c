@@ -14,11 +14,12 @@
 
 int	deal_key(int key, t_env *fdf)
 {
+	printf("value de key %d", key);
 	if (key == ESC)
 	{
 		mlx_destroy_window(fdf->mlx_ptr, fdf->win_ptr);
 		printf("exit programme\n");
-		free(*(MAPMAP));
+		free(*(fdf->map.map));
 		exit (0);
 	}
 	return (0);

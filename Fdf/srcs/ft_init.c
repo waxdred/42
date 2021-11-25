@@ -24,6 +24,7 @@ void	ft_space(t_env *fdf)
 		fdf->p.spc = 5;
 	else
 		fdf->p.spc = 1;
+	printf("spc value  =====   %d\n", fdf->p.spc);
 }
 
 void	ft_window(t_env *fdf)

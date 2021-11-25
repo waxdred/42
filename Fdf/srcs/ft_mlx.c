@@ -14,14 +14,14 @@
 
 int	ft_mlx(t_env *fdf, char *argv)
 {
-	P_MLX = mlx_init();
+	fdf->mlx_ptr = mlx_init();
 	ft_window(fdf);
 	ft_init(fdf);
-	fdf->win_ptr = mlx_new_window(P_MLX, fdf->win_length,
+	fdf->win_ptr = mlx_new_window(fdf->mlx_ptr, fdf->win_length,
 			fdf->win_width, "fdf");
-	ft_draw_mlx(fdf);
+	ft_draw_mlx_print(fdf);
 	ft_put_str_mlx(fdf, argv);
 	mlx_key_hook(fdf->win_ptr, deal_key, fdf);
-	mlx_loop(P_MLX);
+	mlx_loop(fdf->mlx_ptr);
 	return (0);
 }
