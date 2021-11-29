@@ -26,6 +26,7 @@ int	**ft_tabnew_two(size_t x, size_t y)
 	while (i < y)
 	{
 		tab[i] = &tab2[i * x];
+		tab[0][0] = 1000;
 		i++;
 	}
 	return (tab);

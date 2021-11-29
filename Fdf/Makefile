@@ -21,6 +21,7 @@ SRC =    srcs/ft_fdf.c	\
 	 srcs/ft_draw_y.c \
 	 srcs/ft_free.c	\
 	 srcs/ft_mlx.c	\
+	 srcs/ft_create_ord.c	\
 	 srcs/ft_bresenham.c	\
 	 srcs/ft_put_string_mlx.c	\
 	 srcs/ft_new_tab_two.c	\

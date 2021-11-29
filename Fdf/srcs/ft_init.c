@@ -64,6 +64,6 @@ void	ft_init(t_env *fdf)
 	}
 	fdf->mov.y = fdf->win_length / 2;
 	fdf->mov.x = fdf->win_width / 4;
-	fdf->mov.s_y = fdf->win_length / 2;
+	fdf->mov.s_y = fdf->win_length / 4;
 	fdf->mov.s_x = fdf->win_width / 4;
 }

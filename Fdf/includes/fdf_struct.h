@@ -16,6 +16,8 @@
 typedef struct	s_map
 {
 	int	**map;
+	int	**Ox;
+	int	**Oy;
 	int	x;
 	int	y;
 	int	posx;

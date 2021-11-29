@@ -20,6 +20,8 @@ int	deal_key(int key, t_env *fdf)
 		mlx_destroy_window(fdf->mlx_ptr, fdf->win_ptr);
 		printf("exit programme\n");
 		free(*(fdf->map.map));
+		free(*(fdf->map.Ox));
+		free(*(fdf->map.Oy));
 		exit (0);
 	}
 	return (0);

@@ -40,7 +40,7 @@ int	ft_fdf(char *argv)
 
 	ft_bzero(&fdf, sizeof(t_env));
 	ft_create_map(argv, &fdf);
-	ft_printmap(&fdf);
+	ft_create_map_or(&fdf);
 	ft_mlx(&fdf, argv);
 	ft_free_map(&fdf);
 	free(*(fdf.map.map));

@@ -22,9 +22,12 @@
 int	ft_fdf(char *argv);
 int	ft_free_map(t_env *fdf);
 int	ft_create_map(char *argv, t_env *fdf);
+int	ft_create_map_or(t_env *fdf);
+void	ft_draw_tab(t_env *fdf);
 void	ft_init(t_env *fdf);
 void	ft_window(t_env *fdf);
 int	ft_mlx(t_env *fdf, char *argv);
+void	ft_add_ord(t_env *fdf, int i, int j);
 int	deal_key(int key, t_env *fdf);
 int	**ft_tabnew_two(size_t x, size_t y);
 void	ft_draw_mlx_print(t_env *fdf);
