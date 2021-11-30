@@ -15,8 +15,14 @@
 void	ft_put_str_mlx(t_env *fdf, char *argv)
 {
 	int	y;
+	int	Ox;
+	int	Oy;
 
 	y = 0;
 	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 15, y += 20, 0xABCDEF, "Fdf :");
 	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 15, y += 25, 0xABCDEF, "Press esc for quit");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 15, y += 25, 0xABCDEF, 
+			"mouse ");
+	mlx_string_put(fdf->mlx_ptr, fdf->win_ptr, 15, y += 25, 0xABCDEF, 
+			"mouse ");
 }

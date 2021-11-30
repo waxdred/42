@@ -26,3 +26,4 @@ int	deal_key(int key, t_env *fdf)
 	}
 	return (0);
 }
+

@@ -15,15 +15,15 @@
 void	ft_space(t_env *fdf)
 {
 	if (fdf->map.nbcol <= 20)
-		fdf->p.spc = 25;
+		fdf->p.spc = 32;
 	else if (fdf->map.nbcol >= 20 && fdf->map.nbcol <= 50)
-		fdf->p.spc = 20;
+		fdf->p.spc = 22;
 	else if (fdf->map.nbcol >= 50 && fdf->map.nbcol <= 100)
-		fdf->p.spc = 15;
+		fdf->p.spc = 12;
 	else if (fdf->map.nbcol >= 100 && fdf->map.nbcol <= 200)
-		fdf->p.spc = 5;
+		fdf->p.spc = 6;
 	else
-		fdf->p.spc = 1;
+		fdf->p.spc = 2;
 	printf("spc value  =====   %d\n", fdf->p.spc);
 }
 
@@ -62,8 +62,6 @@ void	ft_init(t_env *fdf)
 		fdf->color.green = 255;
 		fdf->color.blue = 255;
 	}
-	fdf->mov.y = fdf->win_length / 2;
-	fdf->mov.x = fdf->win_width / 4;
-	fdf->mov.s_y = fdf->win_length / 4;
-	fdf->mov.s_x = fdf->win_width / 4;
+	fdf->mov.s_y = fdf->win_length / 3;
+	fdf->mov.s_x = fdf->win_width / 3;
 }
