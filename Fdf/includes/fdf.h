@@ -29,9 +29,13 @@ void	ft_window(t_env *fdf);
 int	ft_mlx(t_env *fdf, char *argv);
 void	ft_add_ord(t_env *fdf, int i, int j);
 int	deal_key(int key, t_env *fdf);
+int	ft_reload(t_env *fdf, char *argv);
 int	**ft_tabnew_two(size_t x, size_t y);
 void	ft_draw_mlx_print(t_env *fdf, int i, int j);
 void	ft_put_str_mlx(t_env *fdf, char *argv);
 void	ft_bresenham(t_env *fdf);
 int	ft_init_ord(t_env *fdf);
+int	ft_move_mouse(t_env *fdf);
+int	ft_reload(t_env *fdf, char *argv);
+int	mouse_key(int key, t_env *fdf);
 #endif

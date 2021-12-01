@@ -24,7 +24,6 @@ void	ft_space(t_env *fdf)
 		fdf->p.spc = 6;
 	else
 		fdf->p.spc = 2;
-	printf("spc value  =====   %d\n", fdf->p.spc);
 }
 
 void	ft_window(t_env *fdf)
@@ -62,6 +61,6 @@ void	ft_init(t_env *fdf)
 		fdf->color.green = 255;
 		fdf->color.blue = 255;
 	}
-	fdf->mov.s_y = fdf->win_length / 3;
-	fdf->mov.s_x = fdf->win_width / 3;
+	fdf->mov.s_y = fdf->win_length / 2;
+	fdf->mov.s_x = fdf->win_width / 4;
 }

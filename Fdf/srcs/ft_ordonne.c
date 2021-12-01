@@ -6,7 +6,7 @@
 void	ft_draw_tab(t_env *fdf, int i, int j)
 {
 	j = 0;
-	while (j < fdf->map.nbcol)
+	while (j < fdf->map.nbcol - 1)
 	{
 		i = 0;
 		while (i < fdf->map.nblin - 2)
@@ -24,12 +24,7 @@ void	ft_draw_tab(t_env *fdf, int i, int j)
 
 void	ft_add_ord(t_env *fdf, int i, int j)
 {
-	if (j == 0 && i == 0)
-	{
-		fdf->map.Ox[i][j] = fdf->mov.s_x;
-		fdf->map.Oy[i][j] = fdf->mov.s_y;
-	}
-	else if (j == 0)
+	if (j == 0)
 	{
 		fdf->map.Ox[i][j] = fdf->mov.s_x + (fdf->p.spc * i);
 		fdf->map.Oy[i][j] = fdf->mov.s_y + ((fdf->p.spc * i) / 2);

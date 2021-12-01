@@ -40,6 +40,8 @@ typedef struct	s_point
 {
 	int	spc;
 	int	pos;
+	int	x;
+	int	y;
 	int	x1;
 	int	x2;
 	int	x3;
@@ -55,6 +57,9 @@ typedef struct	s_point
 	int	Dx;
 	int	Dy;
 	int	i;
+	int	cte;
+	int	cte1;
+	int	cte2;
 	int	Xincr;
 	int	Yincr;
 }		t_point;
@@ -75,6 +80,7 @@ typedef struct	s_env
 	void	*win_ptr;
 	int	win_length;
 	int	win_width;
+	int	proj;
 	struct s_map	map;
 	struct s_mov	mov;
 	struct s_point p;

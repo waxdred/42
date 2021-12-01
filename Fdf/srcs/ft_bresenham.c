@@ -12,9 +12,9 @@
 
 #include "../includes/fdf.h"
 
-void	ft_pixel(t_env *fdf, int x, int y)
+void	ft_pixel(t_env *fdf, int x, int y, int color)
 {
-	mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, x, y, 0xffff);
+	mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, x, y, color);
 }
 
 void	ft_init_bre(t_env *fdf)
@@ -40,7 +40,7 @@ void	ft_case_one(t_env *fdf)
 {
 	while (fdf->p.i <= fdf->p.Dx)
 	{
-		ft_pixel(fdf, fdf->p.x1, fdf->p.y1);
+		ft_pixel(fdf, fdf->p.x1, fdf->p.y1, 16776960);
 		fdf->p.i++;
 		fdf->p.x1 +=fdf->p.Xincr;
 		fdf->p.errx -= fdf->p.dy;
@@ -56,7 +56,7 @@ void	ft_case_two(t_env *fdf)
 {
 	while (fdf->p.i <= fdf->p.Dy)
 	{
-		ft_pixel(fdf, fdf->p.x1, fdf->p.y1);
+		ft_pixel(fdf, fdf->p.x1, fdf->p.y1, 16747776);
 		fdf->p.i++;
 		fdf->p.y1 += fdf->p.Yincr;
 		fdf->p.erry -= fdf->p.dx;
