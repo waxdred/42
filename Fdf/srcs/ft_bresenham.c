@@ -12,66 +12,68 @@
 
 #include "../includes/fdf.h"
 
-void	ft_pixel(t_env *fdf, int x, int y, int color)
+static void	ft_iso(t_env *fdf, float *x, float *y, int z)
 {
-	mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, x, y, color);
+	float	u;
+	float	w;
+
+	u = (*x - *y) * cos(fdf->mov.angle);
+	w = (*x + *y) * sin(fdf->mov.angle) - (z * (fdf->p.spc + fdf->mov.up));
+	*x = u;
+	*y = w;
 }
 
-void	ft_init_bre(t_env *fdf)
+void	ft_set(t_env *fdf)
 {
-	fdf->p.errx = abs(fdf->p.x2 - fdf->p.x1);
-	fdf->p.erry = abs(fdf->p.y2 - fdf->p.y1);
-	fdf->p.dx = 2 * fdf->p.errx;
-	fdf->p.dy = 2 * fdf->p.erry;
-	fdf->p.Dx = fdf->p.errx;
-	fdf->p.Dy = fdf->p.erry;
-	fdf->p.i = 0;
-	if (fdf->p.x1 > fdf->p.x2)
-		fdf->p.Xincr = -1;
-	else
-		fdf->p.Xincr = 1;
-	if (fdf->p.y1 > fdf->p.y2)
-		fdf->p.Yincr = -1;
-	else
-		fdf->p.Yincr = 1;
+	fdf->p.B_x = (fdf->p.B_x * (float)fdf->p.spc) + (float)fdf->mov.s_x;
+	fdf->p.B_y = (fdf->p.B_y * (float)fdf->p.spc) + (float)fdf->mov.s_y;
+	fdf->p.B_x1 = (fdf->p.B_x1 * (float)fdf->p.spc) + (float)fdf->mov.s_x;
+	fdf->p.B_y1 = (fdf->p.B_y1 * (float)fdf->p.spc) + (float)fdf->mov.s_y;
 }
 
-void	ft_case_one(t_env *fdf)
+void	ft_set_color(t_env *fdf)
 {
-	while (fdf->p.i <= fdf->p.Dx)
+	if (fdf->p.z >= 0 && fdf->p.z <= 5)
+		fdf->color = 0x10879D;
+	else if (fdf->p.z >= 6 && fdf->p.z <= 10)
+		fdf->color = 0x82370f;
+	else if (fdf->p.z >= 11 && fdf->p.z <= 15)
+		fdf->color = 0x1e2e4d;
+	else if (fdf->p.z >= 16 && fdf->p.z <= 20)
+		fdf->color = 46221;
+	else if (fdf->p.z >= -1 && fdf->p.z <= -5)
+		fdf->color = 39935;
+	else if (fdf->p.z >= -6 && fdf->p.z <= -10)
+		fdf->color = 16737617;
+	else if (fdf->p.z >= -11 && fdf->p.z <= -15)
+		fdf->color = 11180288;
+	else if (fdf->p.z >= -16 && fdf->p.z <= -20)
+		fdf->color = 46500;
+}
+
+void	ft_bresenham(t_env *fdf, float x1, float y1)
+{
+	fdf->p.B_x1 = x1;
+	fdf->p.B_y1 = y1;
+	fdf->p.z = fdf->map.map[(int)fdf->p.B_y][(int)fdf->p.B_x];
+	fdf->p.z1 = fdf->map.map[(int)y1][(int)x1];
+	ft_set_color(fdf);
+	ft_set(fdf);
+	if (fdf->proj == 0)
 	{
-		ft_pixel(fdf, fdf->p.x1, fdf->p.y1, 16776960);
-		fdf->p.i++;
-		fdf->p.x1 +=fdf->p.Xincr;
-		fdf->p.errx -= fdf->p.dy;
-		if (fdf->p.errx < 0 )
-		{
-			fdf->p.y1 += fdf->p.Yincr;
-			fdf->p.errx += fdf->p.dx;
-		}
+		ft_iso(fdf, &fdf->p.B_x, &fdf->p.B_y, fdf->p.z);
+		ft_iso(fdf, &fdf->p.B_x1, &fdf->p.B_y1, fdf->p.z1);
 	}
-}
-
-void	ft_case_two(t_env *fdf)
-{
-	while (fdf->p.i <= fdf->p.Dy)
+	fdf->p.x_step = fdf->p.B_x1 - fdf->p.B_x;
+	fdf->p.y_step = fdf->p.B_y1 - fdf->p.B_y;
+	fdf->p.max = MAX(MOD(fdf->p.x_step), MOD(fdf->p.y_step));
+	fdf->p.x_step /= fdf->p.max;
+	fdf->p.y_step /= fdf->p.max;
+	while ((int)(fdf->p.B_x - fdf->p.B_x1) || (int)(fdf->p.B_y - fdf->p.B_y1))
 	{
-		ft_pixel(fdf, fdf->p.x1, fdf->p.y1, 16747776);
-		fdf->p.i++;
-		fdf->p.y1 += fdf->p.Yincr;
-		fdf->p.erry -= fdf->p.dx;
-		if (fdf->p.erry < 0 )
-		{
-			fdf->p.x1 += fdf->p.Xincr;
-			fdf->p.erry += fdf->p.dy;
-		}
+		mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, fdf->p.B_x,
+			fdf->p.B_y, fdf->color);
+		fdf->p.B_x += fdf->p.x_step;
+		fdf->p.B_y += fdf->p.y_step;
 	}
-}
-void	ft_bresenham(t_env *fdf)
-{
-	ft_init_bre(fdf);
-	if (fdf->p.Dx > fdf->p.Dy)
-		ft_case_one(fdf);
-	if (fdf->p.Dx < fdf->p.Dy)
-		ft_case_two(fdf);
 }

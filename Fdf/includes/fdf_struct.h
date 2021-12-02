@@ -16,74 +16,54 @@
 typedef struct	s_map
 {
 	int	**map;
-	int	**Ox;
-	int	**Oy;
-	int	x;
-	int	y;
-	int	posx;
-	int	posy;
+	int	max;
 	int	nbcol;
 	int	nblin;
-	int	max;
 	int	pad;
+	int	posx;
+	int	posy;
+	int	x;
+	int	y;
 }		t_map;
-
-typedef struct	s_color
-{
-	int	color;
-	int	red;
-	int	green;
-	int	blue;
-}		t_color;
 
 typedef struct	s_point
 {
-	int	spc;
+	float	x_step;
+	float	y_step;
+	int	max;
 	int	pos;
+	int	spc;
 	int	x;
 	int	y;
-	int	x1;
-	int	x2;
-	int	x3;
-	int	x4;
-	int	y1;
-	int	y2;
-	int	y3;
-	int	y4;
-	int	errx;
-	int	erry;
-	int	dx;
-	int	dy;
-	int	Dx;
-	int	Dy;
-	int	i;
-	int	cte;
-	int	cte1;
-	int	cte2;
-	int	Xincr;
-	int	Yincr;
+	float	B_x;
+	float	B_y;
+	float	B_x1;
+	float	B_y1;
+	int	z1;
+	int	z;
 }		t_point;
 
 typedef struct	s_mov
 {
-	double	y;
-	double	x;
-	double	tmp_y;
-	double	tmp_x;
-	double	s_y;
 	double	s_x;
+	double	s_y;
+	double	x;
+	double	y;
+	float	angle;
+	int	up;
 }		t_mov;
 
 typedef struct	s_env
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	int	color;
+	int	proj;
 	int	win_length;
 	int	win_width;
-	int	proj;
-	struct s_map	map;
-	struct s_mov	mov;
-	struct s_point p;
-	struct s_color	color;
+	int	menu;
+	struct	s_map	map;
+	struct	s_mov	mov;
+	struct	s_point p;
 }		t_env;
 #endif

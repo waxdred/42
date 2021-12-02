@@ -19,9 +19,11 @@ int	**ft_tabnew_two(size_t x, size_t y)
 	int		*tab2;
 
 	i = 0;
-	if (!(tab = (int**)malloc(sizeof(tab) * y)))
+	tab = (int **)malloc(sizeof(tab) * y);
+	if (!tab)
 		return (NULL);
-	if (!(tab2 = (int*)malloc(sizeof(tab2) * (x * y))))
+	tab2 = (int *)malloc(sizeof(tab2) * (x * y));
+	if (!tab2)
 		return (NULL);
 	while (i < y)
 	{

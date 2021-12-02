@@ -14,8 +14,8 @@
 
 int	ft_free_map(t_env *fdf)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < fdf->map.y - 2)

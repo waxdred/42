@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2021/11/24 01:08:33 by jmilhas          ###   ########.fr        #
+#    Updated: 2021/12/02 01:10:33 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,10 @@ SRC =    srcs/ft_fdf.c	\
 	 srcs/ft_create_map.c	\
 	 srcs/ft_init.c	\
 	 srcs/ft_event.c	\
+	 srcs/ft_event_utils.c	\
 	 srcs/ft_draw.c \
 	 srcs/ft_free.c	\
 	 srcs/ft_mlx.c	\
-	 srcs/ft_ordonne.c	\
 	 srcs/ft_bresenham.c	\
 	 srcs/ft_put_string_mlx.c	\
 	 srcs/ft_new_tab_two.c	\

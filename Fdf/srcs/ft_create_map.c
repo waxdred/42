@@ -35,7 +35,7 @@ int	ft_count_sep(char *line, int c)
 	return (len);
 }
 
-int		ft_count(char *argv, t_env *fdf)
+int	ft_count(char *argv, t_env *fdf)
 {
 	char	*line;
 	int		fd;
@@ -58,7 +58,7 @@ int		ft_count(char *argv, t_env *fdf)
 	return (0);
 }
 
-int		ft_complet_map(int fd, t_env *fdf)
+int	ft_complet_map(int fd, t_env *fdf)
 {
 	char	*line;
 	char	**split_line;
@@ -71,8 +71,8 @@ int		ft_complet_map(int fd, t_env *fdf)
 		split_line = ft_split(line, ' ');
 		while (split_line[fdf->map.posx] != NULL)
 		{
-			fdf->map.map[fdf->map.posy][fdf->map.posx] = 
-				ft_atoi(split_line[fdf->map.posx]);
+			fdf->map.map[fdf->map.posy][fdf->map.posx]
+				= ft_atoi(split_line[fdf->map.posx]);
 			free(split_line[fdf->map.posx]);
 			fdf->map.posx++;
 		}
@@ -86,7 +86,7 @@ int		ft_complet_map(int fd, t_env *fdf)
 	return (0);
 }
 
-int		ft_create_map(char *argv, t_env *fdf)
+int	ft_create_map(char *argv, t_env *fdf)
 {
 	int		fd;
 

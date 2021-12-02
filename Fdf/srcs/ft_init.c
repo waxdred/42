@@ -15,13 +15,13 @@
 void	ft_space(t_env *fdf)
 {
 	if (fdf->map.nbcol <= 20)
-		fdf->p.spc = 32;
+		fdf->p.spc = 20;
 	else if (fdf->map.nbcol >= 20 && fdf->map.nbcol <= 50)
-		fdf->p.spc = 22;
+		fdf->p.spc = 15;
 	else if (fdf->map.nbcol >= 50 && fdf->map.nbcol <= 100)
-		fdf->p.spc = 12;
+		fdf->p.spc = 10;
 	else if (fdf->map.nbcol >= 100 && fdf->map.nbcol <= 200)
-		fdf->p.spc = 6;
+		fdf->p.spc = 5;
 	else
 		fdf->p.spc = 2;
 }
@@ -55,12 +55,8 @@ void	ft_window(t_env *fdf)
 void	ft_init(t_env *fdf)
 {
 	ft_space(fdf);
-	if (!fdf->color.color)
-	{
-		fdf->color.red = 255;
-		fdf->color.green = 255;
-		fdf->color.blue = 255;
-	}
-	fdf->mov.s_y = fdf->win_length / 2;
-	fdf->mov.s_x = fdf->win_width / 4;
+	fdf->proj = 0;
+	fdf->mov.angle = 0.6;
+	fdf->mov.s_y = -300;
+	fdf->mov.s_x = 600;
 }
