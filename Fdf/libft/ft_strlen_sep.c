@@ -17,7 +17,7 @@ size_t	ft_strlen_sep(char const *s, char c)
 	int	i;
 	int	len;
 	int	check;
-	
+
 	i = 0;
 	len = 0;
 	check = 0;

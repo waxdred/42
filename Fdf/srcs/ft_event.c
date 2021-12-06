@@ -15,9 +15,9 @@
 int	ft_hight(t_env *fdf, int key)
 {
 	if (key == W)
-		fdf->mov.up += 5;
+		fdf->mov.up += 1;
 	else if (key == S)
-		fdf->mov.up -= 5;
+		fdf->mov.up -= 1;
 	mlx_clear_window(fdf->mlx_ptr, fdf->win_ptr);
 	ft_reload(fdf);
 	return (0);
@@ -25,11 +25,14 @@ int	ft_hight(t_env *fdf, int key)
 
 int	ft_open_menu(t_env *fdf, int key)
 {
-	if (fdf->menu == 0)
-		fdf->menu = 1;
-	else if (fdf->menu == 1)
-		fdf->menu = 0;
-	ft_reload(fdf);
+	if (key == M)
+	{
+		if (fdf->menu == 0)
+			fdf->menu = 1;
+		else if (fdf->menu == 1)
+			fdf->menu = 0;
+		ft_reload(fdf);
+	}
 	return (0);
 }
 
@@ -52,17 +55,14 @@ int	deal_key(int key, t_env *fdf)
 	else if (key == ISO || key == PROJECT)
 		ft_projection(fdf, key);
 	else if (key == LEFT || key == RIGHT || key == UP || key == DOWN)
-	{
-		if (fdf->proj == 0)
-			ft_move_proj(fdf, key);
-		else
-			ft_move_iso(fdf, key);
-	}
+		ft_move_view(fdf, key);
 	else if (key == W || key == S)
 		ft_hight(fdf, key);
 	else if (key == M)
 		ft_open_menu(fdf, key);
 	else if (key == A || key == D)
 		ft_rotate(fdf, key);
+	else if (key == C)
+		ft_color_on(fdf, key);
 	return (0);
 }

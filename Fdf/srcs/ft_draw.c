@@ -14,28 +14,25 @@
 
 void	ft_draw_mlx_print(t_env *fdf, int x, int y)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < fdf->map.nblin - 1)
+	fdf->i = 0;
+	while (fdf->i < fdf->map.nblin - 1)
 	{
-		j = 0;
+		fdf->j = 0;
 		x = 0;
-		while (j < fdf->map.nbcol - 1)
+		while (fdf->j < fdf->map.nbcol - 1)
 		{
-			fdf->p.B_x = x;
-			fdf->p.B_y = y;
-			if (i < fdf->map.nblin - 1)
+			fdf->p.b_x = x;
+			fdf->p.b_y = y;
+			if (fdf->i < fdf->map.nblin - 1)
 				ft_bresenham(fdf, x + 1, y);
-			fdf->p.B_x = x;
-			fdf->p.B_y = y;
-			if (j < fdf->map.nbcol - 1)
+			fdf->p.b_x = x;
+			fdf->p.b_y = y;
+			if (fdf->j < fdf->map.nbcol - 1)
 				ft_bresenham(fdf, x, y + 1);
 			x++;
-			j++;
+			fdf->j++;
 		}
 		y++;
-		i++;
+		fdf->i++;
 	}	
 }

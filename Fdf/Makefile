@@ -6,68 +6,74 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2021/12/02 01:10:33 by jmilhas          ###   ########.fr        #
+#    Updated: 2021/12/06 20:41:57 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 	 fdf.a
 
+EXEC = 	 fdf
+
 CC = 	 gcc
 
-SRC =    srcs/ft_fdf.c	\
-	 srcs/ft_create_map.c	\
-	 srcs/ft_init.c	\
-	 srcs/ft_event.c	\
-	 srcs/ft_event_utils.c	\
-	 srcs/ft_draw.c \
-	 srcs/ft_free.c	\
-	 srcs/ft_mlx.c	\
-	 srcs/ft_bresenham.c	\
+SRC =    srcs/ft_fdf.c			\
+	 srcs/ft_bresenham.c		\
+	 srcs/ft_calcul.c		\
+	 srcs/ft_colors.c		\
+	 srcs/ft_create_map.c		\
+	 srcs/ft_create_map_utils.c	\
+	 srcs/ft_draw.c 		\
+	 srcs/ft_event.c		\
+	 srcs/ft_event_utils.c		\
+	 srcs/ft_free.c			\
+	 srcs/ft_init.c			\
+	 srcs/ft_mlx.c			\
+	 srcs/ft_new_tab_two.c		\
 	 srcs/ft_put_string_mlx.c	\
-	 srcs/ft_new_tab_two.c	\
 	 srcs/main.c
 
 OBJS = $(SRC:.c=.o)
 
 HEADER = includes/fdf.h\
-	 includes/define.h\
+	 includes/fdf_define.h\
 	 includes/fdf_struct.h
 
+SAN = -fsanitize=address
 
-
-FLAGS = -Wall -Werror -Wextra -ggdb
+FLAGS = -Wall -Werror -Wextra -ggdb 
 
 MLX = -Lminilibx -lmlx -framework OpenGL -framework AppKit
 
 LIB= -lGnl -llibft
 
 %.o : %.c $(HEADER)
-	$(CC) -I ./includes -c $< -o $@
+	$(CC) $(FLAGS) -I ./includes -c $< -o $@
+
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	@make -C libft
 	@make -C Gnl
 	@make -C minilibx
-	@echo "\033[34mCreation of $(NAME) ...\033[0m"
+	@echo "\033[34mCreation of $(NAME) ..."
 	@ar rc $(NAME) $(OBJS)
-	@$(CC) $(MLX) $(NAME) Gnl/gnl.a libft/libft.a && ./a.out
+	@$(CC) $(MLX) $(NAME) Gnl/gnl.a libft/libft.a -o $(EXEC)
 
-
-all: $(NAME)
-
-clean:	
-	@echo "\033[33mRemoval of .o files of $(NAME) ...\033[0m"
+clean:
+	@echo "\033[33mRemoval of .o files of $(NAME) ..."
 	@make clean -C libft
 	@make clean -C Gnl
-	@/bin/rm -f $(OBJS) 
+	@/bin/rm -f $(OBJS)
 
 fclean: clean
-	@echo "\033[33mRemoval of $(NAME)...\033[0m"
+	@echo "\033[33mRemoval of $(NAME)..."
 	@make fclean -C libft
 	@make fclean -C Gnl
 	@/bin/rm -f $(NAME)
-r:
-	@rm ./a.out
+	@/bin/rm -f $(EXEC)
+norme:
+	@echo "\033[33mNorme ..."
+	@norminette $(SRC)
+	@norminette $(HEADER)
 
-re: fclean all 
-
+re: fclean all

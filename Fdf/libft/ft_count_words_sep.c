@@ -32,4 +32,3 @@ int	ft_count_words_sep(char const *s, char c)
 	}
 	return (count);
 }
-

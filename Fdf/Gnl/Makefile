@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 23:27:08 by jmilhas           #+#    #+#              #
-#    Updated: 2021/11/19 23:35:04 by jmilhas          ###   ########.fr        #
+#    Updated: 2021/12/06 19:54:34 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,15 +27,18 @@ FLAGS = -Wall -Werror -Wextra
 	$(CC) $(FLAGS) -I ./includes -c $< -o $@
 
 $(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
+	@echo "\033[34mCreation of $(NAME) ..."
+	@ar rc $(NAME) $(OBJS)
 
 all: $(NAME)
 
 clean:
-	/bin/rm -f $(OBJS) 
+	@echo "\033[33mRemoval of .o files of $(NAME) ..."
+	@-/bin/rm -f $(OBJS) 
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	@echo "\033[33mRemoval of $(NAME) ..."
+	@-/bin/rm -f $(NAME)
 
 re: fclean all 
 

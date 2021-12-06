@@ -18,7 +18,7 @@ int	ft_putnbr_unsigned(unsigned int n)
 
 	res = 0;
 	if (n == 0)
-		res+= ft_putchar('0');
+		res += ft_putchar('0');
 	if (n <= 9 && n > 0)
 		res += ft_putchar(n + 48);
 	else if (n > 0)
@@ -28,4 +28,3 @@ int	ft_putnbr_unsigned(unsigned int n)
 	}
 	return (res);
 }
-

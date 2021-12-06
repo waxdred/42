@@ -21,7 +21,9 @@ SRC =     ft_atoi.c	   \
 	  ft_memset.c	   \
 	  ft_memset.c	   \
 	  ft_putchar_fd.c  \
+	  ft_putchar.c     \
 	  ft_putendl_fd.c  \
+	  ft_putstr.c      \
 	  ft_putnbr_fd.c   \
 	  ft_putstr_fd.c   \
 	  ft_split.c       \
@@ -32,6 +34,7 @@ SRC =     ft_atoi.c	   \
 	  ft_strjoin.c	   \
 	  ft_strjoin.c	   \
 	  ft_strsplit.c	   \
+	  ft_strcat.c	   \
 	  ft_strlcat.c	   \
 	  ft_strlcpy.c     \
 	  ft_strlen.c	   \
@@ -46,20 +49,7 @@ SRC =     ft_atoi.c	   \
 	  ft_toupper.c	   \
       	  ft_strcpy.c	   
 
-BONUS  =  ft_lstadd_back.c \
-	  ft_lstadd_front.c\
-	  ft_lstclear.c    \
-	  ft_lstdelone.c   \
-	  ft_lstlast.c     \
-	  ft_lstmap.c      \
-	  ft_lstnew.c	   \
-	  ft_lstsize.c     \
-	  ft_lstiter.c     
-
-
 FILESO = $(SRC:.c=.o)
-
-FILEBO = $(BONUS:.c=.o)
 
 HEADER = libft.h
 
@@ -68,19 +58,19 @@ FLAGS = -Wall -Werror -Wextra
 %.o : %.c $(HEADER)
 	$(CC) $(FLAGS) -I ./includes -c $< -o $@
 
-$(NAME): $(FILESO)
-	ar rc $(NAME) $(FILESO)
-
 all: $(NAME)
 
-bonus: $(NAME) $(FILEBO)
-	ar rc $(NAME) $(FILEBO)
+$(NAME): $(FILESO)
+	@echo "\033[34mCreation of $(NAME) ..."
+	@ar rc $(NAME) $(FILESO)
 
 clean:
-	/bin/rm -f $(FILESO) $(FILEBO)
+	@echo "\033[33mRemoval of .o files of $(NAME) ..."
+	@-/bin/rm -f $(FILESO)
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	@echo "\033[33mRemoval of $(NAME) $(OUT) $(OBJS)..."
+	@-/bin/rm -f $(NAME)
 
 re: fclean all 
 

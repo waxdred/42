@@ -13,9 +13,11 @@
 #ifndef FDF_STRUCT_H
 # define FDF_STRUCT_H
 
-typedef struct	s_map
+typedef struct s_map
 {
 	int	**map;
+	int	dhigh;
+	int	high;
 	int	max;
 	int	nbcol;
 	int	nblin;
@@ -26,44 +28,57 @@ typedef struct	s_map
 	int	y;
 }		t_map;
 
-typedef struct	s_point
+typedef struct s_point
 {
+	float	b_x1;
+	float	b_x;
+	float	b_y1;
+	float	b_y;
 	float	x_step;
 	float	y_step;
-	int	max;
-	int	pos;
-	int	spc;
-	int	x;
-	int	y;
-	float	B_x;
-	float	B_y;
-	float	B_x1;
-	float	B_y1;
-	int	z1;
-	int	z;
+	int		max;
+	int		pos;
+	int		spc;
+	int		x;
+	int		y;
+	int		z1;
+	int		z;
+	int		zoom;
 }		t_point;
 
-typedef struct	s_mov
+typedef struct s_color
+{
+	float	coef;
+	int		end;
+	int		start;
+}		t_color;
+
+typedef struct s_mov
 {
 	double	s_x;
 	double	s_y;
 	double	x;
 	double	y;
 	float	angle;
-	int	up;
+	int		up;
 }		t_mov;
 
-typedef struct	s_env
+typedef struct s_env
 {
+	char	*name;
+	int		color;
+	int		color_on;
+	int		i;
+	int		j;
+	int		menu;
+	int		proj;
+	int		win_length;
+	int		win_width;
+	t_map	map;
+	t_mov	mov;
+	t_point	p;
+	t_color	colors;
 	void	*mlx_ptr;
 	void	*win_ptr;
-	int	color;
-	int	proj;
-	int	win_length;
-	int	win_width;
-	int	menu;
-	struct	s_map	map;
-	struct	s_mov	mov;
-	struct	s_point p;
 }		t_env;
 #endif

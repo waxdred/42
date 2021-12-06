@@ -6,7 +6,7 @@
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 01:13:50 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/11/20 01:13:50 by jmilhas          ###   ########.fr       */
+/*   Updated: 2021/12/05 17:08:53 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	**ft_tabnew_two(size_t x, size_t y)
 	i = 0;
 	tab = (int **)malloc(sizeof(tab) * y);
 	if (!tab)
-		return (NULL);
+		exit(EXIT_FAILURE);
 	tab2 = (int *)malloc(sizeof(tab2) * (x * y));
 	if (!tab2)
-		return (NULL);
+		exit(EXIT_FAILURE);
 	while (i < y)
 	{
 		tab[i] = &tab2[i * x];

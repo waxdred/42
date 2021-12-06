@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 21:23:58 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/11/16 21:23:58 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/12/04 01:58:36 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/12/04 01:58:36 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_putnbr(int n)
+char	*ft_strcat(char *dest, char *s1)
 {
-	int	res;
+	int	i;
+	int	j;
 
-	res = 0;
-	if (n == 0)
-		res += ft_putchar('0');
-	if (n == -2147483648)
-		res += ft_putstr("-2147483648");
-	if (n < 0 && n != -2147483648)
+	i = 0;
+	j = 0;
+	while (dest[i])
+		i++;
+	while (s1[j])
 	{
-		res += ft_putchar('-');
-		n = -n;
+		dest[i + j] = s1[j];
+		j++;
 	}
-	if (n <= 9 && n > 0)
-		res += ft_putchar(n + 48);
-	else if (n > 0)
-	{
-		res += ft_putnbr(n / 10);
-		res += ft_putchar(n % 10 + 48);
-	}
-	return (res);
+	dest[i + j] = '\0';
+	return (dest);
 }

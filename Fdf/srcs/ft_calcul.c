@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_calcul.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 21:23:58 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/11/16 21:23:58 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/12/05 21:13:19 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/12/05 21:13:19 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/fdf.h"
 
-int	ft_putnbr(int n)
+void	ft_iso(t_env *fdf, float *x, float *y, int z)
 {
-	int	res;
+	float	u;
+	float	w;
 
-	res = 0;
-	if (n == 0)
-		res += ft_putchar('0');
-	if (n == -2147483648)
-		res += ft_putstr("-2147483648");
-	if (n < 0 && n != -2147483648)
-	{
-		res += ft_putchar('-');
-		n = -n;
-	}
-	if (n <= 9 && n > 0)
-		res += ft_putchar(n + 48);
-	else if (n > 0)
-	{
-		res += ft_putnbr(n / 10);
-		res += ft_putchar(n % 10 + 48);
-	}
-	return (res);
+	u = (*x - *y) * cos(fdf->mov.angle);
+	w = (*x + *y) * sin(fdf->mov.angle) - (z * (fdf->mov.up + fdf->p.spc / 2));
+	*x = u;
+	*y = w;
+}
+
+float	mod(float a)
+{
+	if (a < 0)
+		return (-a);
+	return (a);
+}
+
+float	max(float a, float b)
+{
+	if (a > b)
+		return (a);
+	return (b);
 }
