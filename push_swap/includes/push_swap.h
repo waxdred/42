@@ -20,10 +20,12 @@ typedef struct	s_swap
 	int	min_b;
 	int	max_a;
 	int	max_b;
+	int	len;
 }		t_swap;
 
 void	ft_clear_stack(t_pile **list);
 t_pile	*ft_push_param(int ac, char **av);
 int	ft_check_doublon(t_pile *stack, int data);
 int	ft_error(char *av);
+int	ft_stack_len(t_pile *stack, t_swap *env);
 #endif

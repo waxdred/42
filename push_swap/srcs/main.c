@@ -2,13 +2,14 @@
 
 #include "../includes/push_swap.h"
 
-void	ft_print_list(t_pile **list)
+void	ft_print_list(t_pile **stack, t_swap *env)
 {
-	while (*list != NULL)
+	while (*stack != NULL)
 	{
-		printf("[ %d ] \n", (*list)->data);
-		*list = (*list)->next;
+		printf("[%d] \n", (*stack)->data);
+		*stack = (*stack)->next;
 	}
+	printf("len = %d\n", env->len);
 }
 
 int main(int argc, char **argv)
@@ -28,7 +29,8 @@ int main(int argc, char **argv)
 		ft_putstr("Error");
 		return (-1);
 	}
-	ft_print_list(&env->pa);
+	ft_stack_len(env->pa, env);
+	ft_print_list(&env->pa, env);
 	ft_clear_stack(&env->pa);
 	free(env);
 	return (0);

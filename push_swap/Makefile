@@ -18,6 +18,7 @@ CC = 	 gcc
 
 SRC =    srcs/ft_clear_stack.c			\
 	 srcs/ft_push.c				\
+	 srcs/utils.c				\
 	 srcs/check_error.c			\
 	 srcs/main.c
 

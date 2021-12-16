@@ -62,7 +62,7 @@ ft_memcpy	libft/ft_memcpy.c	/^void	*ft_memcpy(void *dst, const void *src, size_t
 ft_memmove	libft/ft_memmove.c	/^void	*ft_memmove(void *dst, const void *src, size_t len)$/;"	f
 ft_memset	libft/ft_memset.c	/^void	*ft_memset(void *b, int c, size_t len)$/;"	f
 ft_num	srcs/check_error.c	/^int	ft_num(char *av)$/;"	f
-ft_print_list	srcs/main.c	/^void	ft_print_list(t_pile **list)$/;"	f
+ft_print_list	srcs/main.c	/^void	ft_print_list(t_pile **stack, t_swap *env)$/;"	f
 ft_push_back	srcs/ft_push.c	/^void	ft_push_back(t_pile **stack, int data)$/;"	f
 ft_push_param	srcs/ft_push.c	/^t_pile	*ft_push_param(int ac, char **av)$/;"	f
 ft_putchar	libft/ft_putchar.c	/^int	ft_putchar(int c)$/;"	f
@@ -78,6 +78,7 @@ ft_putstr_fd	libft/ft_putstr_fd.c	/^void	ft_putstr_fd(char const *s, int fd)$/;"
 ft_sort_int_tab	libft/ft_putnbr_base.c	/^static int	ft_sort_int_tab(char *str)$/;"	f	file:
 ft_sort_int_tab	libft/ft_putnbr_unbase.c	/^static int	ft_sort_int_tab(char *str)$/;"	f	file:
 ft_split	libft/ft_split.c	/^char	**ft_split(char const *s, char c)$/;"	f
+ft_stack_len	srcs/utils.c	/^int	ft_stack_len(t_pile *stack, t_swap *env)$/;"	f
 ft_stack_max	srcs/check_error.c	/^int	ft_stack_max(ssize_t data)$/;"	f
 ft_start_str	libft/ft_atoi_base.c	/^char	*ft_start_str(char *str, int *sign)$/;"	f
 ft_strchr	libft/ft_strchr.c	/^char	*ft_strchr(const char *str, int c)$/;"	f
@@ -97,6 +98,7 @@ ft_strtrim	libft/ft_strtrim.c	/^char	*ft_strtrim(char const *s1, char const *set
 ft_substr	libft/ft_substr.c	/^char	*ft_substr(char const *s, unsigned int start, size_t len)$/;"	f
 ft_tolower	libft/ft_tolower.c	/^int	ft_tolower(int c)$/;"	f
 ft_toupper	libft/ft_toupper.c	/^int	ft_toupper(int c)$/;"	f
+len	includes/push_swap.h	/^	int	len;$/;"	m	struct:s_swap
 main	srcs/main.c	/^int main(int argc, char **argv)$/;"	f
 max_a	includes/push_swap.h	/^	int	max_a;$/;"	m	struct:s_swap
 max_b	includes/push_swap.h	/^	int	max_b;$/;"	m	struct:s_swap
