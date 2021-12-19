@@ -160,5 +160,6 @@ clean:
 fclean: clean
 	@printf "[✅]\t$(CCRED)Removal of $(NAME)...$(CCEND)\n"
 	@-/bin/rm -f $(NAME)
+	@-/bin/rm -f Tags
 
 re: fclean all 
