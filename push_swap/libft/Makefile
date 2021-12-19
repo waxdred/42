@@ -18,7 +18,7 @@ CCRED 		=   	\033[31m
 CCPURPLE 	=   	\033[35m
 
 NAME 		=	libft.a
-
+EXEC 		= 	libft
 CC 		= 	gcc
 
 PATH_CONV	=	./conv/
@@ -111,41 +111,39 @@ OBJ_LST		=	$(addprefix $(PATH_OBJ), $(OBJS_LST))
 OBJ_C		=	$(addprefix $(PATH_OBJ), $(OBJS_CONV))
 
 HEADER 		= 	include/libft.h
-
 FLAGS 		= 	-Wall -Werror -Wextra
-
 MK 		= 	Makefile
 
 $(PATH_OBJ)%.o : $(PATH_CONV)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.05
+	@sleep 0.03
 $(PATH_OBJ)%.o : $(PATH_ISA)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.05
+	@sleep 0.03
 $(PATH_OBJ)%.o : $(PATH_MEM)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.05
+	@sleep 0.03
 $(PATH_OBJ)%.o : $(PATH_STR)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.05
+	@sleep 0.03
 $(PATH_OBJ)%.o : $(PATH_PRINT)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.05
+	@sleep 0.03
 $(PATH_OBJ)%.o : $(PATH_LST)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.05
+	@sleep 0.03
 
 all: $(NAME)
 
@@ -156,7 +154,7 @@ $(NAME): $(OBJ_C) $(OBJ_ISA) $(OBJ_MEM) $(OBJ_STR) $(OBJ_PRINT) $(OBJ_LST)
 
 
 clean:
-	@printf "[✅]\t$(CCRED)Removal of Objects...$(CCEND)\n"
+	@printf "[✅]\t$(CCRED)Removal of $(EXEC) Objects...$(CCEND)\n"
 	@-/bin/rm -rf $(PATH_OBJ)
 
 fclean: clean
