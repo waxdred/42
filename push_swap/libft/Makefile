@@ -1,92 +1,163 @@
-CCEND 		=   \033[0m
-CCYAN 		=   \033[34m
-CGREEN		=   \033[33m
-CCRED 		=   \033[31m
-CCPURPLE 	=   \033[35m
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
+#    Updated: 2021/12/19 01:25:16 by jmilhas          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
+#Setting Color
+CCEND 		=   	\033[0m
+CCYAN 		=   	\033[34m
+CGREEN		=   	\033[33m
+CCRED 		=   	\033[31m
+CCPURPLE 	=   	\033[35m
 
+NAME 		=	libft.a
 
-NAME 	= 	  libft.a
+CC 		= 	gcc
 
-CC 	= 	  gcc
+PATH_CONV	=	./conv/
+PATH_ISA	=	./isa/
+PATH_MEM	=	./mem/
+PATH_STR	=	./str/
+PATH_PRINT	=	./print/
+PATH_LST	=	./lst/
+PATH_OBJ	=	./objs/
 
-SRC 	=     	convert/ft_atoi.c	   	\
-		convert/ft_atoi_base.c   	\
-		convert/ft_itoa.c 		\
-		isa/ft_isalnum.c	   	\
-		isa/ft_isalpha.c	   	\
-		isa/ft_isascii.c	   	\
-		isa/ft_isdigit.c	   	\
-		isa/ft_isprint.c	   	\
-		lst/ft_lstadd_back.c 		\
-		lst/ft_lstadd_front.c		\
-		lst/ft_lstclear.c    		\
-		lst/ft_lstdelone.c   		\
-		lst/ft_lstiter.c     		\
-		lst/ft_lstlast.c     		\
-		lst/ft_lstmap.c      		\
-		lst/ft_lstnew.c			\
-		lst/ft_lstsize.c     		\
-		mem/ft_bzero.c	   		\
-		mem/ft_calloc.c      		\
-		mem/ft_strdup.c	   		\
-		mem/ft_strdupcat.c		\
-		mem/ft_memalloc.c   		\
-		mem/ft_memchr.c	   		\
-		mem/ft_memcmp.c	   		\
-		mem/ft_memcpy.c	   		\
-		mem/ft_memmove.c	  	\
-		mem/ft_memset.c	   	        \
-		mem/ft_memset.c	   	        \
-		mem/ft_freetab.c	  	\
-		print/ft_putchar_fd.c  	        \
-		print/ft_putendl_fd.c  		\
-		print/ft_putnbr_fd.c   		\
-		print/ft_putstr_fd.c   		\
-		str/ft_split.c       		\
-		str/ft_len_tab.c       		\
-		str/ft_strsplit.c       	\
-		str/ft_strchr.c	 		\
-		str/ft_strcpy.c	   		\
-		str/ft_striteri.c    		\
-		str/ft_strjoin.c		\
-		str/ft_strjoin.c	   	\
-		str/ft_strlcat.c	   	\
-		str/ft_strlcpy.c    		\
-		str/ft_strlen.c	   		\
-		str/ft_strmapi.c     		\
-		str/ft_strncmp.c	   	\
-		str/ft_strnstr.c	   	\
-		str/ft_strrchr.c	   	\
-		str/ft_strtrim.c     		\
-		str/ft_substr.c	   		\
-		str/ft_tolower.c	   	\
-		str/ft_toupper.c	   	\
-      		str/ft_strcpy.c
+CONV 		=     	ft_atoi.c			\
+			ft_atoi_base.c			\
+			ft_itoa.c
+OBJS_CONV	=	$(CONV:.c=.o)
 
-OBJS 	= $(SRC:.c=.o)
+ISA		=	ft_isalnum.c	   		\
+			ft_isalpha.c	   		\
+			ft_isascii.c	   		\
+			ft_isdigit.c	   		\
+			ft_isprint.c
+OBJS_ISA	=	$(ISA:.c=.o)
 
-HEADER 	= include/libft.h
+MEM		=	ft_bzero.c	   		\
+			ft_calloc.c      		\
+			ft_strdup.c	   		\
+			ft_strdupcat.c			\
+			ft_memalloc.c   		\
+			ft_memchr.c	   		\
+			ft_memcmp.c	   		\
+			ft_memcpy.c	   		\
+			ft_memmove.c	  		\
+			ft_memset.c	   	        \
+			ft_memset.c	   	        \
+			ft_freetab.c
+OBJS_MEM	=	$(MEM:.c=.o)
+	
+STR		=	ft_split.c       		\
+			ft_len_tab.c       		\
+			ft_strsplit.c       		\
+			ft_strchr.c	 		\
+			ft_strcpy.c	   		\
+			ft_striteri.c    		\
+			ft_strjoin.c			\
+			ft_strjoin.c	   		\
+			ft_strlcat.c	   		\
+			ft_strlcpy.c    		\
+			ft_strlen.c	   		\
+			ft_strmapi.c    		\
+			ft_strncmp.c	   		\
+			ft_strnstr.c	   		\
+			ft_strrchr.c	   		\
+			ft_strtrim.c     		\
+			ft_substr.c   			\
+			ft_tolower.c	   		\
+			ft_toupper.c	   		\
+      			ft_strcpy.c
+OBJS_STR	=	$(STR:.c=.o)
 
-FLAGS 	= -Wall -Werror -Wextra
+PRINT		=	ft_putchar_fd.c  	        \
+			ft_putendl_fd.c  		\
+			ft_putnbr_fd.c   		\
+			ft_putstr_fd.c
+OBJS_PRINT	=	$(PRINT:.c=.o)
 
-MK 	= Makefile
+LST	=		ft_lstadd_back.c 		\
+			ft_lstadd_front.c		\
+			ft_lstclear.c    		\
+			ft_lstdelone.c   		\
+			ft_lstiter.c     		\
+			ft_lstlast.c     		\
+			ft_lstmap.c      		\
+			ft_lstnew.c			\
+			ft_lstsize.c
+OBJS_LST	=	$(LST:.c=.o)
 
-%.o : %.c $(HEADER) $(MK)
-	@-$(CC) $(FLAGS) -I ./includes -c $< -o $@
+#dir .o
+CONV_O		=	$(addprefix $(PATH_CONV), $(CONV))
+ISA_O		=	$(addprefix $(PATH_ISA), $(ISA))
+MEM_O		=	$(addprefix $(PATH_MEM), $(MEM))
+STR_O		=	$(addprefix $(PATH_STR), $(STR))
+PRINT_O		=	$(addprefix $(PATH_PRINT), $(PRINT))
+LST_O		=	$(addprefix $(PATH_LST), $(LST))
+
+#dir obj/.o
+OBJ_ISA		=	$(addprefix $(PATH_OBJ), $(OBJS_ISA))
+OBJ_MEM		=	$(addprefix $(PATH_OBJ), $(OBJS_MEM))
+OBJ_STR		=	$(addprefix $(PATH_OBJ), $(OBJS_STR))
+OBJ_PRINT	=	$(addprefix $(PATH_OBJ), $(OBJS_PRINT))
+OBJ_LST		=	$(addprefix $(PATH_OBJ), $(OBJS_LST))
+OBJ_C		=	$(addprefix $(PATH_OBJ), $(OBJS_CONV))
+
+HEADER 		= 	include/libft.h
+
+FLAGS 		= 	-Wall -Werror -Wextra
+
+MK 		= 	Makefile
+
+$(PATH_OBJ)%.o : $(PATH_CONV)%.c $(HEADER) $(MK)
+	@mkdir $(PATH_OBJ) 2> /dev/null || true
+	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
+	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
+	@sleep 0.05
+$(PATH_OBJ)%.o : $(PATH_ISA)%.c $(HEADER) $(MK)
+	@mkdir $(PATH_OBJ) 2> /dev/null || true
+	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
+	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
+	@sleep 0.05
+$(PATH_OBJ)%.o : $(PATH_MEM)%.c $(HEADER) $(MK)
+	@mkdir $(PATH_OBJ) 2> /dev/null || true
+	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
+	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
+	@sleep 0.05
+$(PATH_OBJ)%.o : $(PATH_STR)%.c $(HEADER) $(MK)
+	@mkdir $(PATH_OBJ) 2> /dev/null || true
+	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
+	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
+	@sleep 0.05
+$(PATH_OBJ)%.o : $(PATH_PRINT)%.c $(HEADER) $(MK)
+	@mkdir $(PATH_OBJ) 2> /dev/null || true
+	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
+	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
+	@sleep 0.05
+$(PATH_OBJ)%.o : $(PATH_LST)%.c $(HEADER) $(MK)
+	@mkdir $(PATH_OBJ) 2> /dev/null || true
+	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
 	@sleep 0.05
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJ_C) $(OBJ_ISA) $(OBJ_MEM) $(OBJ_STR) $(OBJ_PRINT) $(OBJ_LST)
 	@printf "\n[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
 	@printf "[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
-	@ar rc $(NAME) $(OBJS)
+	@ar rc $(NAME) $(OBJ_ISA) $(OBJ_MEM) $(OBJ_STR) $(OBJ_PRINT) $(OBJ_LST) $(OBJ_C)
+
 
 clean:
 	@printf "[✅]\t$(CCRED)Removal of Objects...$(CCEND)\n"
-	@-/bin/rm -f $(OBJS)
+	@-/bin/rm -rf $(PATH_OBJ)
 
 fclean: clean
 	@printf "[✅]\t$(CCRED)Removal of $(NAME)...$(CCEND)\n"

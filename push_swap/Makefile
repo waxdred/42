@@ -18,8 +18,6 @@ CCRED 		=   	\033[31m
 CCPURPLE 	=   	\033[35m
 
 #Get arguments pass
-
-
 ARGV		=	$(filter-out $@,$(MAKECMDGOALS))
 
 NAME 		= 	 push_swap.a
@@ -51,7 +49,7 @@ HEADER 		= 	includes/push_swap.h
 
 MK		= 	Makefile
 
-SAN 		= 	-fsanitize=address
+SAN 		= 	-g3 -fsanitize=address
 
 FLAGS 		= 	-Wall -Werror -Wextra -ggdb 
 
@@ -71,7 +69,7 @@ $(NAME): $(OBJ_S)
 	@printf "\n[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
 	@make -C libft
 	@printf "[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
-	@ar rc $(NAME) $(OBJ_S) $(OBJ_SW)
+	@ar rc $(NAME) $(OBJ_S)
 	@$(CC) $(NAME) $(DEPEND) -o $(EXEC)
 
 clean:
@@ -92,6 +90,6 @@ norme:
 git:
 	@git add .
 	@git commit -m "$(filter-out $@,$(MAKECMDGOALS))"
-	#@git push
+	@git push
 
 re: fclean all
