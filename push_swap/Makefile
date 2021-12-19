@@ -63,6 +63,9 @@ $(PATH_OBJ)%.o : $(PATH_SRC)%.c $(HEADER) $(MK)
 	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
 	@sleep 0.1
 
+.PHONY: all clean fclean re san
+.SILENT :
+
 all: $(NAME)
 
 $(NAME): $(OBJ_S)
@@ -70,7 +73,16 @@ $(NAME): $(OBJ_S)
 	@make -C libft
 	@printf "[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
 	@ar rc $(NAME) $(OBJ_S)
-	@$(CC) $(NAME) $(DEPEND) -o $(EXEC)
+	@$(CC) $(FLAGS) $(NAME) $(DEPEND) -o $(EXEC)
+	@printf "[✅]\t$(CCPURPLE)Compilation ./$(EXEC)...$(CCEND)\n"
+
+san: $(OBJ_S)
+	@printf "\n[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
+	@make -C libft
+	@printf "[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
+	@ar rc $(NAME) $(OBJ_S)
+	@$(CC) $(FLAGS) $(SAN) $(NAME) $(DEPEND) -o $(EXEC)
+	@printf "[✅]\t$(CCPURPLE)Compilation with sanitize $(EXEC)...$(CCEND)\n"
 
 clean:
 	@printf "[✅]\t$(CCRED)Removal of $(EXEC) Object...$(CCEND)\n"
