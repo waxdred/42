@@ -10,57 +10,74 @@
 #                                                                              #
 # **************************************************************************** #
 
-CCEND 		=   \033[0m
-CCYAN 		=   \033[34m
-CGREEN		=   \033[33m
-CCRED 		=   \033[31m
-CCPURPLE 	=   \033[35m
+#Setting Color
+CCEND 		=   	\033[0m
+CCYAN 		=   	\033[34m
+CGREEN		=   	\033[33m
+CCRED 		=   	\033[31m
+CCPURPLE 	=   	\033[35m
 
-NAME = 	 push_swap.a
+#Get arguments pass
 
-EXEC = 	 push_swap
 
-CC = 	 gcc
+ARGV		=	$(filter-out $@,$(MAKECMDGOALS))
 
-SRC =    srcs/ft_clear_stack.c			\
-	 srcs/ft_push.c				\
-	 srcs/utils.c				\
-	 srcs/push_swap.c                       \
-	 srcs/swap/ft_sa.c			\
-	 srcs/check_error.c			\
-	 srcs/main.c
+NAME 		= 	 push_swap.a
 
-OBJS = $(SRC:.c=.o)
+EXEC 		= 	 push_swap
 
-HEADER = includes/push_swap.h
+CC 		= 	 gcc
 
-MK	= Makefile
+PATH_SRC	=	./srcs/
 
-SAN = -fsanitize=address
+PATH_SWAP	=	./srcs/swap/
 
-FLAGS = -Wall -Werror -Wextra -ggdb 
+PATH_OBJ	=	./objs/
 
-LIB= -llibft
+SRC 		=   	ft_clear_stack.c		\
+			ft_push.c			\
+			utils.c				\
+			push_swap.c                     \
+			check_error.c			\
+			ft_sa.c				\
+			main.c
 
-DEPEND= libft/libft.a
+OBJ_SRC		=	$(SRC:.c=.o)
 
-%.o : %.c $(HEADER) $(MK)
-	@-$(CC) $(FLAGS) -I ./includes -c $< -o $@
-	@printf "\r\t\033[K[✅]\t$(CCYAN)$< $(CCPURPLE)--> $(CCYAN)$@$(CCEND)"
+SRC_O		=	$(addprefix $(PATH_SRC), $(SRC))
+OBJ_S		=	$(addprefix $(PATH_OBJ), $(OBJ_SRC))
+
+HEADER 		= 	includes/push_swap.h
+
+MK		= 	Makefile
+
+SAN 		= 	-fsanitize=address
+
+FLAGS 		= 	-Wall -Werror -Wextra -ggdb 
+
+LIB		= 	-llibft
+
+DEPEND		= 	libft/libft.a
+
+$(PATH_OBJ)%.o : $(PATH_SRC)%.c $(HEADER) $(MK)
+	@mkdir $(PATH_OBJ) 2> /dev/null || true
+	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
+	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
 	@sleep 0.1
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJ_S)
+	@printf "\n[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
 	@make -C libft
 	@printf "[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
-	@ar rc $(NAME) $(OBJS)
+	@ar rc $(NAME) $(OBJ_S) $(OBJ_SW)
 	@$(CC) $(NAME) $(DEPEND) -o $(EXEC)
 
 clean:
 	@printf "[✅]\t$(CCRED)Removal of $(EXEC) Object...$(CCEND)\n"
 	@make clean -C libft
-	@-/bin/rm -f $(OBJS)
+	@-/bin/rm -rf $(PATH_OBJ)
 
 fclean: clean
 	@make fclean -C libft
@@ -71,5 +88,10 @@ norme:
 	@echo "\033[33mNorme ..."
 	@norminette $(SRC)
 	@norminette $(HEADER)
+
+git:
+	@git add .
+	@git commit -m "$(filter-out $@,$(MAKECMDGOALS))"
+	#@git push
 
 re: fclean all
