@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_error.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/16 19:23:34 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/12/16 19:23:34 by jmilhas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
@@ -28,7 +39,7 @@ int	ft_num(char *av)
 	{
 		if (*av == '-' || *av == '+')
 			av++;
-		if (ft_isdigit(*av))
+		if (ft_isdigit(*av) == 0)
 			return (-1);
 		av++;
 	}
@@ -37,7 +48,7 @@ int	ft_num(char *av)
 
 int	ft_error(char *av)
 {
-	if (ft_num(av))
+	if (ft_num(av) || ft_stack_max(ft_atoi(av)) || ft_strlen(av) > 19)
 		return (-1);
 	return (0);
 }
