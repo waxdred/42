@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2021/12/19 01:25:16 by jmilhas          ###   ########.fr        #
+#    Updated: 2021/12/20 18:50:37 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,7 @@ start:
 	@sleep 0.5
 	@clear
 	@printf "\n\n\n$(CCYAN)"
-	@figlet -x push_swap
+	@printf "\t\t$(EXEC)"
 	@printf "\n\n\n"
 	@printf "Execution make:\n$(CCEND)"
 

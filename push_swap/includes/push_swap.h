@@ -39,10 +39,12 @@ typedef struct	s_swap
 }		t_swap;
 
 int	ft_check_doublon(t_pile *stack, int data);
-
+int	ft_check_sort(t_pile **stack);
+int	ft_get_last(t_pile **stack, int data);
 int	ft_error(char *av);
 int	ft_stack_len(t_pile *stack, t_swap *env);
 int	ft_swap(t_pile **stack);
+int	ft_check_last(t_pile **stack, int data);
 t_pile	*push_top(t_pile **stack, t_pile **dstack);
 int	swap_top_bottom(t_pile **stack);
 t_pile	*top_to_bottom(t_pile **stack);

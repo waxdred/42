@@ -72,5 +72,5 @@ t_pile	*push_top(t_pile **stack, t_pile **dstack)
 		elem = ft_create_elem((*stack)->data);
 	*dstack = elem;
 	*stack = ft_clear_lst(&(*stack));
-	return (0);
+	return (*stack);
 }

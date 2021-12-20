@@ -14,6 +14,7 @@
 
 int	ft_stack_len(t_pile *stack, t_swap *env)
 {
+	env->len = 0;
 	while (stack != NULL)
 	{
 		stack = stack->next;
@@ -59,14 +60,15 @@ void	ft_get_env_a(t_pile *stack, t_swap *env)
 	if (elem->data > env->max_a)
 		env->max_a = elem->data;
 	elem = stack;
+	env->half_a = 0;
 	while (elem->next != NULL)
 	{
-		if (env->max_a / 2 >= elem->data && elem->data > env->half_a)
-			env->half_a = elem->data;
+		env->half_a += elem->data;
 		elem = elem->next;
 	}
-	if (env->max_a / 2 >= elem->data && elem->data > env->half_a)
-		env->half_a = elem->data;
+		env->half_a += elem->data;
+		env->half_a /= env->len;
+
 }
 
 void	ft_get_env_b(t_pile *stack, t_swap *env)
@@ -85,4 +87,46 @@ void	ft_get_env_b(t_pile *stack, t_swap *env)
 		env->min_b = stack->data;
 	else if (stack->data > env->max_b)
 		env->max_b = stack->data;
+}
+
+int	ft_get_last(t_pile **stack, int data)
+{
+	t_pile	*elem;
+
+	elem = *stack;
+	while (elem->next != NULL)
+		elem = elem->next;
+	if (elem->data < data)
+		return (1);
+	return (0);
+}
+
+int	ft_check_last(t_pile **stack, int data)
+{
+	t_pile	*elem;
+
+	elem = *stack;
+	while (elem->next != NULL)
+	{
+		if (elem->data < data)
+			return (1);
+		elem = elem->next;
+	}
+	if (elem->data < data)
+		return (1);
+	return (0);
+}
+
+int	ft_check_sort(t_pile **stack)
+{
+	t_pile	*elem;
+
+	elem = *stack;
+	while (elem->next != NULL)
+	{
+		if (elem->data < elem->next->data)
+			return (0);
+		elem = elem->next;
+	}
+	return (1);
 }
