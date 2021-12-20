@@ -32,8 +32,6 @@ t_pile	*sort_stack_a(t_pile **pa, t_pile *pb, t_swap *env)
 			swap_top_bottom(&*pa);
 		else if (tmp->data > env->half_a)
 			top_to_bottom(&(*pa));
-	//	printf("[%d]\n\n", i);
-		ft_print_list(*pa, env);
 		tmp = tmp->next;
 		i++;
 	}

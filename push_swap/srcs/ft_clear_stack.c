@@ -22,7 +22,7 @@ void	ft_clear_stack(t_pile **stack)
 	}
 }
 
-void	ft_clear_lst(t_pile **stack)
+t_pile	*ft_clear_lst(t_pile **stack)
 {
 	t_pile	*tmp;
 
@@ -38,4 +38,5 @@ void	ft_clear_lst(t_pile **stack)
 	}
 	(*stack) = (*stack)->next;
 	free(tmp);
+	return (*stack);
 }

@@ -28,13 +28,13 @@ int	ft_swap(t_pile **stack)
 }
 
 //function Ra Rb
-int	top_to_bottom(t_pile **stack)
+t_pile	*top_to_bottom(t_pile **stack)
 {
 	if (*stack == NULL)
-		return (-1);
+		return (NULL);
 	ft_push_back(&(*stack), (*stack)->data);
-	ft_clear_lst(&(*stack));
-	return (0);
+	*stack = ft_clear_lst(&(*stack));
+	return (*stack);
 }
 
 //function Rra Rrb
@@ -55,12 +55,12 @@ int	swap_top_bottom(t_pile **stack)
 }
 
 //function Pa pb
-int	push_top(t_pile **stack, t_pile **dstack)
+t_pile	*push_top(t_pile **stack, t_pile **dstack)
 {
 	t_pile	*elem;
 
 	if (*stack == NULL)
-		return (-1);
+		return (NULL);
 	elem = NULL;
 	if (*dstack)
 	{
@@ -71,6 +71,6 @@ int	push_top(t_pile **stack, t_pile **dstack)
 	else
 		elem = ft_create_elem((*stack)->data);
 	*dstack = elem;
-	ft_clear_lst(&(*stack));
+	*stack = ft_clear_lst(&(*stack));
 	return (0);
 }

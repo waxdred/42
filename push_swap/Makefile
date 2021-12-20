@@ -48,35 +48,38 @@ DEPEND		= 	libft/libft.a
 $(PATH_OBJ)%.o : $(PATH_SRC)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
-	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
+	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
 	@sleep 0.1
 
 all: start $(NAME)
 
 $(NAME): $(OBJ_S)
-	@printf "\n[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
+	@printf "\r\t\033[K$(CCYAN)[✅]\t$(EXEC) $(CCPURPLE)--> $(CCYAN) Gen Objs$(CCEND)"
+	@printf "\n$(CCYAN)[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
 	@make -C libft
-	@printf "[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
-	@ar rc $(NAME) $(OBJ_S)
-	@$(CC) $(FLAGS) $(NAME) $(DEPEND) -o $(EXEC)
-	@printf "[✅]\t$(CCPURPLE)Compilation ./$(EXEC)...$(CCEND)\n"
+	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
+	@ar rc $(PATH_OBJ)$(NAME) $(OBJ_S)
+	@$(CC) $(FLAGS) $(PATH_OBJ)$(NAME) $(DEPEND) -o $(EXEC)
+	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Compilation ./$(EXEC)...$(CCEND)\n"
 
 san: $(OBJ_S)
-	@printf "\n[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
+	@printf "\r\t\033[K$(CCYAN)[✅]\t$(EXEC) $(CCPURPLE)--> $(CCYAN)Gen Objs$(CCEND)"
+	@printf "\n$(CCYAN)[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
 	@make -C libft
-	@printf "[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
-	@ar rc $(NAME) $(OBJ_S)
-	@$(CC) $(FLAGS) $(SAN) $(NAME) $(DEPEND) -o $(EXEC)
-	@printf "[✅]\t$(CCPURPLE)Compilation with sanitize $(EXEC)...$(CCEND)\n"
+	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
+	@ar rc $(PATH_OBJ)$(NAME) $(OBJ_S)
+	@$(CC) $(FLAGS) $(SAN) $(PATH_OBJ)$(NAME) $(DEPEND) -o $(PATH_OBJ)$(EXEC)
+	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Compilation with sanitize $(EXEC)...$(CCEND)\n"
 
 clean:
-	@printf "[✅]\t$(CCRED)Removal of $(EXEC) Object...$(CCEND)\n"
-	@-/bin/rm -rf $(PATH_OBJ)
+	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(EXEC) Object...$(CCEND)\n"
+	@-/bin/rm -rf $(PATH_OBJ)*.o
 
 fclean: clean
 	@make fclean -C libft
-	@printf "[✅]\t$(CCRED)Removal of $(NAME)...$(CCEND)\n"
-	@-/bin/rm -f *.a
+	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(NAME)...$(CCEND)\n"
+	@-/bin/rm -f $(PATH_OBJ)*.a
+	@-/bin/rm -rf $(PATH_OBJ)
 	@-/bin/rm -f Tags
 	@-/bin/rm -f $(EXEC)
 norme:
@@ -85,13 +88,14 @@ norme:
 	@norminette $(HEADER)
 
 start:
-	@sleep 1
+	@sleep 0.5
 	@clear
 	@printf "\n\n\n$(CCYAN)"
-	@figlet push_swap
-	@printf "\n\n\n$(CCEND)"
+	@figlet -x push_swap
+	@printf "\n\n\n"
+	@printf "Execution make:\n$(CCEND)"
 
-git:
+git:	fclean
 	@git add .
 	@git commit -m "$(filter-out $@,$(MAKECMDGOALS))"
 	@git push
