@@ -27,17 +27,17 @@ typedef struct	s_swap
 {
 	t_pile	*pa;
 	t_pile	*pb;
-	int	min_a;
-	int	max_a;
-	int	min_b;
-	int	max_b;
-	int	half_a;
-	int	end;
-	int	last;
+	int	*prefix;
+	int	*sum;
 	int	len;
-	int	halflen;
+	int	max;
+	int	min;
+	int	coef;
 }		t_swap;
 
+void	ft_get_env(t_pile **stack, t_swap *env);
+void	ft_count_prefix(t_pile **stack, t_swap *env, int radix);
+int	ft_get_prefix(int data, int coef);
 int	ft_check_doublon(t_pile *stack, int data);
 int	ft_check_sort(t_pile **stack);
 int	ft_get_last(t_pile **stack, int data);

@@ -24,7 +24,19 @@ void	ft_print_list(t_pile *pa, t_swap *env)
 	}
 	printf("[%d]\n", tmp->data);
 	printf("len = %d\n\n", env->len);
-	printf("aflen = %d\n\n", env->halflen);
+}
+
+void	ft_print(t_swap *env)
+{
+	int	i;
+
+	i = 0;
+	while (i < 10)
+	{
+		printf("[%d] = %d ", i, env->prefix[i]);
+		i++;
+	}
+	printf("\n");
 }
 
 int main(int argc, char **argv)
@@ -54,10 +66,16 @@ int main(int argc, char **argv)
 		return (-1);
 	}
 	ft_stack_len(env->pa, env);
+	ft_get_env(&env->pa, env);
+	env->prefix = (int *)ft_memalloc(10);
+	env->sum = (int *)ft_memalloc(10);
 	printf("Entry val \n[A]\n\n");
 	ft_print_list(env->pa, env);
-	push_swap(&env->pa, env);
+	printf("max %d   min %d    coef %d\n\n\n", env->max, env->min, env->coef);
+	ft_count_prefix(&env->pa, env, 1);
+	ft_print(env);
 	ft_clear_stack(&env->pa);
+	free(env->prefix);
 	free(env);
 	return (0);
 }

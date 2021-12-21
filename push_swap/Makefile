@@ -29,6 +29,7 @@ PATH_OBJ	=	./objs/
 SRC 		=   	ft_clear_stack.c		\
 			ft_push.c			\
 			utils.c				\
+			utils1.c				\
 			push_swap.c                     \
 			check_error.c			\
 			ft_sa.c				\
