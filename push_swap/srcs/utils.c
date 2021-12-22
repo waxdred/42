@@ -23,27 +23,64 @@ int	ft_stack_len(t_pile *stack, t_swap *env)
 	return (env->len);
 }
 
-void	ft_count_prefix(t_pile **stack, t_swap *env, int radix)
+void	ft_count_while(t_swap *env)
 {
-	t_pile	*elem;
-	int	prefix;
-	int 	i;
-	
-	i = 1;
-	elem = *stack;
-	while (elem->next != NULL)
-	{
-		// prevoir modif du rad pour augmenter les 10eme
-		prefix = ft_get_prefix(elem->data, radix);
-		env->prefix[prefix] += 1;
-		elem = elem->next;
-	}
-	prefix = ft_get_prefix(elem->data, radix);
-	env->prefix[prefix] += 1;
+	int	i;
+
+	i = 0;
 	while (i < 10)
+	{
+		env->csum += env->sum[i];
+		i++;
+	}
+}
+
+void	ft_sort_prefix(t_swap *env, int coef)
+{
+	int	i;
+	int	prefix;
+
+	i = env->len - 1;
+	while (i >= 0)
+	{
+		prefix = ft_get_prefix(env->input[i], coef);
+		env->prefix[prefix] -= 1;
+		env->output[env->prefix[prefix]] = env->input[i];
+		i--;
+	}
+}
+
+void	ft_transfere(t_swap *env)
+{
+	int	i;
+
+	i = 0;
+	while (i < env->len)
+	{
+		env->input[i] = env->output[i];
+		env->output[i] = 0;
+		if (i < 10)
+			env->prefix[i] = 0;
+		i++;
+	}
+}
+
+void	ft_count_prefix(t_swap *env, int coef)
+{
+	int	i;
+	int	prefix;
+
+	i = 0;
+	while (i < env->len)
+	{
+		prefix = ft_get_prefix(env->input[i], coef);
+		env->prefix[prefix] += 1;
+		i++;
+	}
+	i = 1;
+	while (i < env->len)
 	{
 		env->prefix[i] += env->prefix[i - 1];
 		i++;
 	}
 }
-

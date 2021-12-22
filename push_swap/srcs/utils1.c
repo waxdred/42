@@ -14,23 +14,27 @@
 
 int	ft_get_prefix(int data, int coef)
 {
-	int	res;
-
-	res = data / coef;
-	res = (res >= 0) ? res : -res;
-	res = res % 10;
-	return (res);
+	data = (data >= 0) ? data : -data;
+	while (coef - 1 > 0)
+	{
+		data /= 10;
+		coef--;
+	}
+	data = data % 10;
+	return (data);
 }
 
-int	ft_get_size_value(int data)
+int	ft_get_size_value(int max, int min)
 {
 	int	i;
 
 	i = 0;
-	data = (data >= 0) ? data : -data;
-	while (data > 0)
+	max = (max >= 0) ? max : -max;
+	min = (min >= 0) ? min : -min;
+	max = (max >= min) ? max : min;
+	while (max > 0)
 	{
-		data /= 10;
+		max /= 10;
 		i++;
 	}
 	return (i);
@@ -55,7 +59,5 @@ void	ft_get_env(t_pile **stack, t_swap *env)
 		env->max = elem->data;
 	if (env->min > elem->data)
 		env->min = elem->data;
-	env->coef = ft_get_size_value(env->max);
-	if (env->coef < ft_get_size_value(env->min))
-		env->coef = ft_get_size_value(env->min);
+	env->coef = ft_get_size_value(env->max, env->min);
 }

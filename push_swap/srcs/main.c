@@ -12,7 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-void	ft_print_list(t_pile *pa, t_swap *env)
+void	ft_print_list(t_pile *pa)
 {
 	t_pile *tmp;
 
@@ -23,7 +23,19 @@ void	ft_print_list(t_pile *pa, t_swap *env)
 		tmp = tmp->next;
 	}
 	printf("[%d]\n", tmp->data);
-	printf("len = %d\n\n", env->len);
+}
+
+void	ft_print_tab(t_swap *env)
+{
+	int 	i;
+
+	i = 0;
+	printf("\n\ninput ===========\n\n");
+	while (i < env->len)
+	{
+		printf("[%d] \n", env->input[i]);
+		i++;
+	}
 }
 
 void	ft_print(t_swap *env)
@@ -31,12 +43,42 @@ void	ft_print(t_swap *env)
 	int	i;
 
 	i = 0;
+	printf("Prefix     ");
 	while (i < 10)
 	{
 		printf("[%d] = %d ", i, env->prefix[i]);
 		i++;
 	}
 	printf("\n");
+}
+
+void	ft_print1(t_swap *env)
+{
+	int	i;
+
+	i = 0;
+	printf("Output     ");
+	while (i < 16)
+	{
+		printf("[%d] = %d ", i, env->output[i]);
+		i++;
+	}
+	printf("\n");
+}
+void	ft_get_full_env(t_pile **stack, t_swap *env)
+{
+	int	i;
+
+	i = 0;
+	ft_stack_len(env->pa, env);
+	ft_get_env(&env->pa, env);
+	env->prefix = (int *)ft_memalloc(sizeof(int) * 10);
+	if (!env->prefix)
+		exit (1);
+	env->sum = (int *)ft_memalloc(sizeof(int) * 10);
+	if (!env->sum)
+		exit (1);
+	ft_creat_tab(&(*stack), env);
 }
 
 int main(int argc, char **argv)
@@ -52,12 +94,11 @@ int main(int argc, char **argv)
 	if (argc == 2)
 	{
 		tab = ft_split(argv[1], ' ');
-		printf("%s \n", tab[0]);
-		env->pa = ft_push_param(ft_len_tab(tab), tab, 1);
+		env->pa = ft_push_param(ft_len_tab(tab), tab, env, 1);
 		ft_freetab(tab);
 	}
 	else
-		env->pa = ft_push_param(argc, argv, 0);
+		env->pa = ft_push_param(argc, argv, env, 0);
 	if (env->pa == NULL)
 	{
 		ft_clear_stack(&env->pa);
@@ -65,17 +106,15 @@ int main(int argc, char **argv)
 		ft_putstr_fd("Error", 2);
 		return (-1);
 	}
-	ft_stack_len(env->pa, env);
-	ft_get_env(&env->pa, env);
-	env->prefix = (int *)ft_memalloc(10);
-	env->sum = (int *)ft_memalloc(10);
-	printf("Entry val \n[A]\n\n");
-	ft_print_list(env->pa, env);
+	ft_get_full_env(&env->pa, env);
+	ft_print_list(env->pa);
+	ft_sort_list(env);
+	ft_print_tab(env);
 	printf("max %d   min %d    coef %d\n\n\n", env->max, env->min, env->coef);
-	ft_count_prefix(&env->pa, env, 1);
-	ft_print(env);
 	ft_clear_stack(&env->pa);
 	free(env->prefix);
+	free(env->sum);
+	free(env->input);
 	free(env);
 	return (0);
 }

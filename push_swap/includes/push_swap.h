@@ -29,34 +29,41 @@ typedef struct	s_swap
 	t_pile	*pb;
 	int	*prefix;
 	int	*sum;
+	int	*input;
+	int	*output;
+	int	csum;
 	int	len;
 	int	max;
 	int	min;
 	int	coef;
 }		t_swap;
 
-void	ft_get_env(t_pile **stack, t_swap *env);
-void	ft_count_prefix(t_pile **stack, t_swap *env, int radix);
-int	ft_get_prefix(int data, int coef);
+
+int	fswap(t_pile **stack, int check);
 int	ft_check_doublon(t_pile *stack, int data);
-int	ft_check_sort(t_pile **stack);
-int	ft_get_last(t_pile **stack, int data);
 int	ft_error(char *av);
+int	ft_get_prefix(int data, int coef);
+int	ft_get_size_value(int max, int min);
+int	ft_num(char *av);
 int	ft_stack_len(t_pile *stack, t_swap *env);
-int	ft_swap(t_pile **stack);
-int	ft_check_last(t_pile **stack, int data);
-t_pile	*push_top(t_pile **stack, t_pile **dstack);
-int	swap_top_bottom(t_pile **stack);
-t_pile	*top_to_bottom(t_pile **stack);
-t_pile	*ft_create_elem(int data);
-t_pile	*ft_push_param(int ac, char **av, int check);
+int	ft_stack_max(ssize_t data);
+int	swap_top_bottom(t_pile **stack,int check);
+
 t_pile	*ft_clear_lst(t_pile **stack);
-void	ft_clear_stack(t_pile **list);
-void	ft_print_list(t_pile *pa, t_swap *env);
+t_pile	*ft_create_elem(int data);
+t_pile	*ft_push_param(int ac, char **av, t_swap *env, int check);
+t_pile	*push_top(t_pile **stack, t_pile **dstack, int check);
+t_pile	*top_to_bottom(t_pile **stack, int check);
+
+void	ft_clear_stack(t_pile **stack);
+void	ft_sort_list(t_swap *env);
+void	ft_clear_sum_pref(t_swap *env);
+void	ft_creat_tab(t_pile **stack, t_swap *env);
+void	ft_sort_prefix(t_swap *env, int coef);
+void	ft_count_prefix(t_swap *env, int coef);
+void	ft_count_while(t_swap *env);
+void	ft_get_env(t_pile **stack, t_swap *env);
 void	ft_push_back(t_pile **stack, int data);
-void	push_swap(t_pile **pa, t_swap *env);
-int	ft_end_data(t_pile *stack, t_swap *env);
-int	ft_last_data(t_pile *stack, t_swap *env);
-void	ft_get_env_a(t_pile *stack, t_swap *env);
-void	ft_get_env_b(t_pile *stack, t_swap *env);
+void	ft_get_full_env(t_pile **stack, t_swap *env);
+void	ft_transfere(t_swap *env);
 #endif

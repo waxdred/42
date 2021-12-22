@@ -41,7 +41,29 @@ void	ft_push_back(t_pile **stack, int data)
 		*stack = ft_create_elem(data);
 }
 
-t_pile	*ft_push_param(int ac, char **av, int check)
+void	ft_creat_tab(t_pile **stack, t_swap *env)
+{
+	t_pile	*elem;
+	int	i;
+
+	i = 0;
+	elem = *stack;
+	env->input = (int *)ft_memalloc(sizeof(int) * env->len);
+	if (!env->input)
+		exit (1);
+	env->output = (int *)ft_memalloc(sizeof(int) * env->len);
+	if (!env->output)
+		exit (1);
+	while (elem->next != NULL)
+	{
+		env->input[i] = elem->data;
+		elem = elem->next;
+		i++;
+	}
+	env->input[i] = elem->data;
+}
+
+t_pile	*ft_push_param(int ac, char **av, t_swap *env, int check)
 {
 	int	i;
 	int	data;

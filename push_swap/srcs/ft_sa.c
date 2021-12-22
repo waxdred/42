@@ -12,7 +12,7 @@
 
 #include "../includes/push_swap.h"
 //function Sa Sb
-int	ft_swap(t_pile **stack)
+int	fswap(t_pile **stack, int check)
 {
 	int	tmp;
 
@@ -24,21 +24,29 @@ int	ft_swap(t_pile **stack)
 		(*stack)->data = (*stack)->next->data;
 		(*stack)->next->data = tmp;
 	}
+	if (check == 0)
+		write(1, "sa\n", 3);
+	else
+		write(1, "sb\n", 3);
 	return (0);
 }
 
 //function Ra Rb
-t_pile	*top_to_bottom(t_pile **stack)
+t_pile	*top_to_bottom(t_pile **stack, int check)
 {
 	if (*stack == NULL)
 		return (NULL);
 	ft_push_back(&(*stack), (*stack)->data);
 	*stack = ft_clear_lst(&(*stack));
+	if (check == 0)
+		write(1, "ra\n", 3);
+	else
+		write(1, "rb\n", 3);
 	return (*stack);
 }
 
 //function Rra Rrb
-int	swap_top_bottom(t_pile **stack)
+int	swap_top_bottom(t_pile **stack,int check)
 {
 	t_pile	*elem;
 	int	tmp;
@@ -51,11 +59,15 @@ int	swap_top_bottom(t_pile **stack)
 		elem = elem->next;
 	(*stack)->data = elem->data;
 	elem->data = tmp;
+	if (check == 0)
+		write(1, "rra\n", 3);
+	else
+		write(1, "rrb\n", 3);
 	return (0);
 }
 
 //function Pa pb
-t_pile	*push_top(t_pile **stack, t_pile **dstack)
+t_pile	*push_top(t_pile **stack, t_pile **dstack, int check)
 {
 	t_pile	*elem;
 
@@ -72,5 +84,9 @@ t_pile	*push_top(t_pile **stack, t_pile **dstack)
 		elem = ft_create_elem((*stack)->data);
 	*dstack = elem;
 	*stack = ft_clear_lst(&(*stack));
+	if (check == 0)
+		write(1, "pa\n", 3);
+	else
+		write(1, "pb\n", 3);
 	return (*stack);
 }

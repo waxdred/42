@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2021/12/20 18:50:37 by jmilhas          ###   ########.fr        #
+#    Updated: 2021/12/21 19:52:22 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,9 @@ PATH_OBJ	=	./objs/
 
 SRC 		=   	ft_clear_stack.c		\
 			ft_push.c			\
+			push_swap.c			\
 			utils.c				\
-			utils1.c				\
-			push_swap.c                     \
+			utils1.c			\
 			check_error.c			\
 			ft_sa.c				\
 			main.c
@@ -48,7 +48,7 @@ DEPEND		= 	libft/libft.a
 
 $(PATH_OBJ)%.o : $(PATH_SRC)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
-	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
+	@-$(CC) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
 	@sleep 0.1
 
@@ -60,7 +60,7 @@ $(NAME): $(OBJ_S)
 	@make -C libft
 	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
 	@ar rc $(PATH_OBJ)$(NAME) $(OBJ_S)
-	@$(CC) $(FLAGS) $(PATH_OBJ)$(NAME) $(DEPEND) -o $(EXEC)
+	@$(CC) $(PATH_OBJ)$(NAME) $(DEPEND) -o $(EXEC)
 	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Compilation ./$(EXEC)...$(CCEND)\n"
 
 san: $(OBJ_S)
