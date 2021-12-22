@@ -12,19 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-void	ft_print_tabi(t_swap *env)
-{
-	int 	i;
-
-	i = 0;
-	printf("\n\ninput ===========\n\n");
-	while (i < env->len)
-	{
-		printf("[%d] \n", env->input[i]);
-		i++;
-	}
-}
-
 void	ft_sort_neg(t_swap *env)
 {
 	int	*tmp_max;
@@ -90,6 +77,30 @@ void	ft_sort_neg(t_swap *env)
 	free(tmp_min);
 }
 
+void	ft_add_index(t_pile **stack, t_swap *env)
+{
+	t_pile *elem;
+	int	i;
+	int	tmp;
+
+	elem = *stack;
+	while (elem->next != NULL)
+	{
+		i = 0;
+		tmp = elem->data;
+		while (env->input[i] != tmp)
+			i++;
+		elem->index = i;
+		elem = elem->next;
+	}
+	i = 0;
+	tmp = elem->data;
+	while (env->input[i] != tmp)
+		i++;
+	elem->index = i;
+	free(env->input);
+}
+
 void	ft_sort_list(t_swap *env)
 {
 	int	i;
@@ -101,17 +112,9 @@ void	ft_sort_list(t_swap *env)
 		ft_count_prefix(env, i);
 		ft_sort_prefix(env, i);
 		ft_transfere(env);
-		ft_print_tabi(env);
 		i++;
 	}
 	if (env->min < 0)
 		ft_sort_neg(env);
-}
-
-void	ft_push_swap(t_pile **pa, t_swap *env)
-{
-	t_pile	*pb;
-
-	pb = NULL;
-	ft_count_prefix(env, 1);
+	ft_add_index(&env->pa, env);
 }

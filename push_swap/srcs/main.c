@@ -17,12 +17,13 @@ void	ft_print_list(t_pile *pa)
 	t_pile *tmp;
 
 	tmp = pa;
+	printf("\n");
 	while (tmp->next)
 	{
-		printf("[%d] \n", tmp->data);
+		printf("[%d] ====> [%d] \n",tmp->index, tmp->data);
 		tmp = tmp->next;
 	}
-	printf("[%d]\n", tmp->data);
+	printf("[%d] ====> [%d] \n",tmp->index, tmp->data);
 }
 
 void	ft_print_tab(t_swap *env)
@@ -109,12 +110,11 @@ int main(int argc, char **argv)
 	ft_get_full_env(&env->pa, env);
 	ft_print_list(env->pa);
 	ft_sort_list(env);
-	ft_print_tab(env);
+	ft_print_list(env->pa);
 	printf("max %d   min %d    coef %d\n\n\n", env->max, env->min, env->coef);
 	ft_clear_stack(&env->pa);
 	free(env->prefix);
 	free(env->sum);
-	free(env->input);
 	free(env);
 	return (0);
 }
