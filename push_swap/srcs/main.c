@@ -12,60 +12,35 @@
 
 #include "../includes/push_swap.h"
 
-void	ft_print_list(t_pile *pa)
+void	ft_print_list(t_pile *pa, t_swap *env)
 {
 	t_pile *tmp;
+	int	i;
 
 	tmp = pa;
 	printf("\n");
 	while (tmp->next)
 	{
-		printf("[%d] ====> [%d] \n",tmp->index, tmp->data);
+		i = 0;
+		printf("[");
+		while (i < env->binary_len)
+		{
+			printf("%d", tmp->binary[i]);
+			i++;
+		}
+		printf("]  [%d] ====> [%d] \n",tmp->index, tmp->data);
 		tmp = tmp->next;
 	}
-	printf("[%d] ====> [%d] \n",tmp->index, tmp->data);
-}
-
-void	ft_print_tab(t_swap *env)
-{
-	int 	i;
-
 	i = 0;
-	printf("\n\ninput ===========\n\n");
-	while (i < env->len)
+	printf("[");
+	while (i < env->binary_len)
 	{
-		printf("[%d] \n", env->input[i]);
+		printf("%d", tmp->binary[i]);
 		i++;
 	}
+	printf("]  [%d] ====> [%d] \n",tmp->index, tmp->data);
 }
 
-void	ft_print(t_swap *env)
-{
-	int	i;
-
-	i = 0;
-	printf("Prefix     ");
-	while (i < 10)
-	{
-		printf("[%d] = %d ", i, env->prefix[i]);
-		i++;
-	}
-	printf("\n");
-}
-
-void	ft_print1(t_swap *env)
-{
-	int	i;
-
-	i = 0;
-	printf("Output     ");
-	while (i < 16)
-	{
-		printf("[%d] = %d ", i, env->output[i]);
-		i++;
-	}
-	printf("\n");
-}
 void	ft_get_full_env(t_pile **stack, t_swap *env)
 {
 	int	i;
@@ -108,10 +83,10 @@ int main(int argc, char **argv)
 		return (-1);
 	}
 	ft_get_full_env(&env->pa, env);
-	ft_print_list(env->pa);
 	ft_sort_list(env);
-	ft_print_list(env->pa);
-	printf("max %d   min %d    coef %d\n\n\n", env->max, env->min, env->coef);
+	ft_print_list(env->pa, env);
+	//ft_print_tab(env);
+	printf("max %d   min %d    binary len %d\n\n\n", env->max, env->min, env->binary_len);
 	ft_clear_stack(&env->pa);
 	free(env->prefix);
 	free(env->sum);

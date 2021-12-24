@@ -39,6 +39,8 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		**ft_strsplit(char const *s, char c);
 int			ft_atoi(const char *str);
 int			ft_atoi_base(char *str, char *base);
+int			ft_binary_len(int nbr);
+int			*ft_dec_to_bin(int nbr, int size);
 int			ft_isalnum(int c);
 int			ft_isalpha(int c);
 int			ft_isascii(int c);

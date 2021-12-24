@@ -59,8 +59,12 @@ void	ft_transfere(t_swap *env)
 	{
 		env->input[i] = env->output[i];
 		env->output[i] = 0;
-		if (i < 10)
-			env->prefix[i] = 0;
+		i++;
+	}
+	i = 0;
+	while (i < 10)
+	{
+		env->prefix[i] = 0;
 		i++;
 	}
 }
@@ -78,7 +82,7 @@ void	ft_count_prefix(t_swap *env, int coef)
 		i++;
 	}
 	i = 1;
-	while (i < env->len)
+	while (i < env->len || i < 10)
 	{
 		env->prefix[i] += env->prefix[i - 1];
 		i++;

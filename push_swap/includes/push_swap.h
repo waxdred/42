@@ -20,6 +20,7 @@ typedef struct	s_pile
 {
 	int	data;
 	int	index;
+	int	*binary;
 	struct s_pile	*next;
 	struct s_pile	*prev;
 }		t_pile;
@@ -32,6 +33,11 @@ typedef struct	s_swap
 	int	*sum;
 	int	*input;
 	int	*output;
+	int	*tmp_max;
+	int	*tmp_min;
+	int	t_min;
+	int	t_max;
+	int	binary_len;
 	int	csum;
 	int	len;
 	int	max;

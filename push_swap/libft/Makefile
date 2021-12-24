@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2021/12/19 01:25:16 by jmilhas          ###   ########.fr        #
+#    Updated: 2021/12/23 19:55:13 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ PATH_OBJ	=	./objs/
 
 CONV 		=     	ft_atoi.c			\
 			ft_atoi_base.c			\
+			ft_dec_to_bin.c			\
+			ft_binary_len.c			\
 			ft_itoa.c
 OBJS_CONV	=	$(CONV:.c=.o)
 

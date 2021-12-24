@@ -12,39 +12,39 @@
 
 #include "../includes/push_swap.h"
 
-void	ft_sort_neg(t_swap *env)
+void	ft_count_min_max(t_swap *env)
 {
-	int	*tmp_max;
-	int	*tmp_min;
 	int	i;
-	int	j;
-	int	min;
-	int	max;
 
-	i = 0;
-	j = 0;
-	min = 0;
-	max = 0;
+	env->t_min = 0;
+	env->t_max = 0;
 	while (i < env->len)
 	{
 		if (env->input[i] >= 0)
-			max++;
+			env->t_max++;
 		else
-			min++;
+			env->t_min++;
 		i++;
 	}
-	tmp_max = (int *)ft_memalloc(sizeof(int) * max);
-	if (!tmp_max)
-		exit (1);
-	tmp_min = (int *)ft_memalloc(sizeof(int) * min);
-	if (!tmp_min)
-		exit (1);
+}
+
+int	ft_gen_tmp(t_swap *env)
+{
+	env->tmp_max = (int *)ft_memalloc(sizeof(int) * env->t_max);
+	env->tmp_min = (int *)ft_memalloc(sizeof(int) * env->t_min);
+	if (!env->tmp_max || ! env->tmp_min)
+		return (-1);
+	return (0);
+}
+
+void	ft_complet_tmp(t_swap *env, int i, int j)
+{
 	i = env->len - 1;
 	while (i >= 0)
 	{
 		if (env->input[i] < 0)
 		{
-			tmp_min[j] = env->input[i];
+			env->tmp_min[j] = env->input[i];
 			j++;
 		}
 		i--;
@@ -55,26 +55,37 @@ void	ft_sort_neg(t_swap *env)
 	{
 		if (env->input[i] >= 0)
 		{
-			tmp_max[j] = env->input[i];
+			env->tmp_max[j] = env->input[i];
 			j++;
 		}
 		i++;
 	}
+}
+
+void	ft_sort_neg(t_swap *env)
+{
+	int	i;
+	int	j;
+
 	i = 0;
 	j = 0;
-	while (i < min)
+	ft_count_min_max(env);
+	if (ft_gen_tmp(env) == -1)
+		exit (-1);
+	ft_complet_tmp(env, 0, 0);
+	while (i < env->t_min)
 	{
-		env->input[i] = tmp_min[i];
+		env->input[i] = env->tmp_min[i];
 		i++;
 	}
-	while (j < max)
+	while (j < env->t_max)
 	{
-		env->input[i] = tmp_max[j];
+		env->input[i] = env->tmp_max[j];
 		i++;
 		j++;
 	}
-	free(tmp_max);
-	free(tmp_min);
+	free(env->tmp_max);
+	free(env->tmp_min);
 }
 
 void	ft_add_index(t_pile **stack, t_swap *env)
@@ -84,6 +95,7 @@ void	ft_add_index(t_pile **stack, t_swap *env)
 	int	tmp;
 
 	elem = *stack;
+	env->binary_len = ft_binary_len(env->len - 1);
 	while (elem->next != NULL)
 	{
 		i = 0;
@@ -91,6 +103,7 @@ void	ft_add_index(t_pile **stack, t_swap *env)
 		while (env->input[i] != tmp)
 			i++;
 		elem->index = i;
+		elem->binary = ft_dec_to_bin(i, env->binary_len);
 		elem = elem->next;
 	}
 	i = 0;
@@ -98,7 +111,9 @@ void	ft_add_index(t_pile **stack, t_swap *env)
 	while (env->input[i] != tmp)
 		i++;
 	elem->index = i;
+	elem->binary = ft_dec_to_bin(i, env->binary_len);
 	free(env->input);
+	free(env->output);
 }
 
 void	ft_sort_list(t_swap *env)
