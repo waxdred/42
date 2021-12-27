@@ -57,6 +57,16 @@ void	ft_get_full_env(t_pile **stack, t_swap *env)
 	ft_creat_tab(&(*stack), env);
 }
 
+void	ft_sorting(t_swap *env)
+{
+	ft_get_full_env(&env->pa, env);
+	ft_sort_list(env);
+	if (env->len < 4)
+		ft_sort_tree(env);
+	else
+		ft_radix_sort(env);
+}
+
 int main(int argc, char **argv)
 {
 	t_swap *env;
@@ -82,11 +92,12 @@ int main(int argc, char **argv)
 		ft_putstr_fd("Error", 2);
 		return (-1);
 	}
-	ft_get_full_env(&env->pa, env);
-	ft_sort_list(env);
-	ft_print_list(env->pa, env);
-	//ft_print_tab(env);
-	printf("max %d   min %d    binary len %d\n\n\n", env->max, env->min, env->binary_len);
+	ft_sorting(env);
+//	ft_get_full_env(&env->pa, env);
+//	ft_sort_list(env);
+//	ft_print_list(env->pa, env);
+//	ft_radix_sort(env);
+//	ft_print_tab(env);
 	ft_clear_stack(&env->pa);
 	free(env->prefix);
 	free(env->sum);

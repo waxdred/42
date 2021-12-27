@@ -12,55 +12,50 @@
 
 #include "../includes/push_swap.h"
 
-t_pile	*ft_create_elem(int data)
+void	ft_add_index(t_pile **stack, t_swap *env)
 {
-	t_pile	*stack;
-
-	stack = (t_pile*)malloc(sizeof(*stack));
-	if (!stack)
-		return (NULL);
-	stack->data = data;
-	stack->next = NULL;
-	stack->prev = NULL;
-	return (stack);
-}
-
-void	ft_push_back(t_pile **stack, int data)
-{
-	if (*stack)
-	{
-		if ((*stack)->next)
-			ft_push_back(&(*stack)->next, data);
-		else
-		{
-			(*stack)->next = ft_create_elem(data);
-			(*stack)->next->prev = (*stack);
-		}
-	}
-	else
-		*stack = ft_create_elem(data);
-}
-
-void	ft_creat_tab(t_pile **stack, t_swap *env)
-{
-	t_pile	*elem;
+	t_pile *elem;
 	int	i;
+	int	tmp;
 
-	i = 0;
 	elem = *stack;
-	env->input = (int *)ft_memalloc(sizeof(int) * env->len);
-	if (!env->input)
-		exit (1);
-	env->output = (int *)ft_memalloc(sizeof(int) * env->len);
-	if (!env->output)
-		exit (1);
+	env->binary_len = ft_binary_len(env->len - 1);
 	while (elem->next != NULL)
 	{
-		env->input[i] = elem->data;
+		i = 0;
+		tmp = elem->data;
+		while (env->input[i] != tmp)
+			i++;
+		elem->index = i;
+		elem->binary = ft_dec_to_bin(i, env->binary_len);
 		elem = elem->next;
+	}
+	i = 0;
+	tmp = elem->data;
+	while (env->input[i] != tmp)
+		i++;
+	elem->index = i;
+	elem->binary = ft_dec_to_bin(i, env->binary_len);
+	free(env->input);
+	free(env->output);
+}
+
+void	ft_sort_list(t_swap *env)
+{
+	int	i;
+	int	coef;
+
+	i = 1;
+	while (i <= env->coef)
+	{
+		ft_count_prefix(env, i);
+		ft_sort_prefix(env, i);
+		ft_transfere(env);
 		i++;
 	}
-	env->input[i] = elem->data;
+	if (env->min < 0)
+		ft_sort_neg(env);
+	ft_add_index(&env->pa, env);
 }
 
 t_pile	*ft_push_param(int ac, char **av, t_swap *env, int check)
@@ -83,7 +78,7 @@ t_pile	*ft_push_param(int ac, char **av, t_swap *env, int check)
 			data = ft_atoi(av[i]);
 			if (ft_check_doublon(stack, data) == -1)
 				return (NULL);
-			ft_push_back(&stack, ft_atoi(av[i]));
+			ft_add_back(&stack, ft_create_elem(ft_atoi(av[i])));
 			i++;
 		}
 	}

@@ -22,7 +22,6 @@ typedef struct	s_pile
 	int	index;
 	int	*binary;
 	struct s_pile	*next;
-	struct s_pile	*prev;
 }		t_pile;
 
 typedef struct	s_swap
@@ -45,32 +44,42 @@ typedef struct	s_swap
 	int	coef;
 }		t_swap;
 
-
-int	fswap(t_pile **stack, int check);
 int	ft_check_doublon(t_pile *stack, int data);
+int	ft_countunit(t_pile **stack, int unit);
+int	ft_end_index(t_pile **stack);
+int	ft_saveindex(t_pile *tmp, int unit);
+int	ft_end_sort(t_pile **stack, t_swap *env);
+void	ft_sort_tree(t_swap *env);
+void	ft_radix_sort(t_swap *env);
 int	ft_error(char *av);
+int	ft_gen_tmp(t_swap *env);
 int	ft_get_prefix(int data, int coef);
-int	ft_get_size_value(int max, int min);
 int	ft_num(char *av);
 int	ft_stack_len(t_pile *stack, t_swap *env);
 int	ft_stack_max(ssize_t data);
-int	swap_top_bottom(t_pile **stack,int check);
-
-t_pile	*ft_clear_lst(t_pile **stack);
 t_pile	*ft_create_elem(int data);
+t_pile	*ft_last(t_pile *lst);
 t_pile	*ft_push_param(int ac, char **av, t_swap *env, int check);
-t_pile	*push_top(t_pile **stack, t_pile **dstack, int check);
-t_pile	*top_to_bottom(t_pile **stack, int check);
-
+void	ft_add_back(t_pile **alst, t_pile *ne);
+void	ft_add_front(t_pile **alst, t_pile *ne);
+void	ft_add_index(t_pile **stack, t_swap *env);
 void	ft_clear_stack(t_pile **stack);
-void	ft_sort_list(t_swap *env);
-void	ft_clear_sum_pref(t_swap *env);
-void	ft_creat_tab(t_pile **stack, t_swap *env);
-void	ft_sort_prefix(t_swap *env, int coef);
+void	ft_complet_tmp(t_swap *env, int i, int j);
+void	ft_count_min_max(t_swap *env);
 void	ft_count_prefix(t_swap *env, int coef);
-void	ft_count_while(t_swap *env);
+void	ft_creat_tab(t_pile **stack, t_swap *env);
 void	ft_get_env(t_pile **stack, t_swap *env);
-void	ft_push_back(t_pile **stack, int data);
 void	ft_get_full_env(t_pile **stack, t_swap *env);
+void	ft_pusha(t_pile **pilea, t_pile **pileb);
+void	ft_pushb(t_pile **pilea, t_pile **pileb);
+void	ft_rotatepilea(t_pile **pile);
+void	ft_rotatepileb(t_pile **pile);
+void	ft_rotaterevpilea(t_pile **pile);
+void	ft_rotaterevpileb(t_pile **pile);
+void	ft_sort_list(t_swap *env);
+void	ft_sort_neg(t_swap *env);
+void	ft_sort_prefix(t_swap *env, int coef);
+void	ft_swaptopa(t_pile **stack);
+void	ft_swaptopb(t_pile **alst, t_pile *new);
 void	ft_transfere(t_swap *env);
 #endif

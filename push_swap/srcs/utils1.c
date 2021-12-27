@@ -12,6 +12,61 @@
 
 #include "../includes/push_swap.h"
 
+int	ft_end_sort(t_pile **stack, t_swap *env)
+{
+	t_pile	*elem;
+	int	i;
+
+	i = 0;
+	elem = *stack;
+	while (elem->next != NULL)
+	{
+		if (elem->index < elem->next->index)
+			i++;
+		elem = elem->next;
+	}
+	if (i == env->len - 1)
+		return (1);
+	return (0);
+}
+
+int	ft_end_index(t_pile **stack)
+{
+	t_pile	*elem;
+
+	elem = *stack;
+	while (elem->next != NULL)
+		elem = elem->next;
+	return (elem->index);
+}
+
+int	ft_countunit(t_pile **stack, int unit)
+{
+	t_pile	*tmp;
+	int	i;
+
+	i= 0;
+	tmp = *stack;
+	while (tmp)
+	{
+		
+		if (tmp->binary[unit] == 0)
+		{
+			
+			i++;
+		}
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
+int	ft_saveindex(t_pile *tmp, int unit)
+{
+	while (tmp->binary[unit] != 1)
+		tmp = tmp->next;
+	return (tmp->index);
+}
+
 int	ft_get_prefix(int data, int coef)
 {
 	data = (data >= 0) ? data : -data;
@@ -24,40 +79,53 @@ int	ft_get_prefix(int data, int coef)
 	return (data);
 }
 
-int	ft_get_size_value(int max, int min)
+void	ft_count_min_max(t_swap *env)
 {
 	int	i;
 
-	i = 0;
-	max = (max >= 0) ? max : -max;
-	min = (min >= 0) ? min : -min;
-	max = (max >= min) ? max : min;
-	while (max > 0)
+	env->t_min = 0;
+	env->t_max = 0;
+	while (i < env->len)
 	{
-		max /= 10;
+		if (env->input[i] >= 0)
+			env->t_max++;
+		else
+			env->t_min++;
 		i++;
 	}
-	return (i);
 }
 
-void	ft_get_env(t_pile **stack, t_swap *env)
+int	ft_gen_tmp(t_swap *env)
 {
-	t_pile	*elem;
-
-	elem = *stack;
-	env->min = (*stack)->data;
-	env->max = 0;
-	while (elem->next != NULL)
-	{
-		if (env->max < elem->data)
-			env->max = elem->data;
-		if (env->min > elem->data)
-			env->min = elem->data;
-		elem = elem->next;
-	}
-	if (env->max < elem->data)
-		env->max = elem->data;
-	if (env->min > elem->data)
-		env->min = elem->data;
-	env->coef = ft_get_size_value(env->max, env->min);
+	env->tmp_max = (int *)ft_memalloc(sizeof(int) * env->t_max);
+	env->tmp_min = (int *)ft_memalloc(sizeof(int) * env->t_min);
+	if (!env->tmp_max || ! env->tmp_min)
+		return (-1);
+	return (0);
 }
+
+void	ft_complet_tmp(t_swap *env, int i, int j)
+{
+	i = env->len - 1;
+	while (i >= 0)
+	{
+		if (env->input[i] < 0)
+		{
+			env->tmp_min[j] = env->input[i];
+			j++;
+		}
+		i--;
+	}
+	j = 0;
+	i = 0;
+	while (i < env->len)
+	{
+		if (env->input[i] >= 0)
+		{
+			env->tmp_max[j] = env->input[i];
+			j++;
+		}
+		i++;
+	}
+}
+

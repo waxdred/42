@@ -26,14 +26,16 @@ CC 		= 	 gcc
 PATH_SRC	=	./srcs/
 PATH_OBJ	=	./objs/
 
-SRC 		=   	ft_clear_stack.c		\
-			ft_push.c			\
-			push_swap.c			\
-			utils.c				\
-			utils1.c			\
-			check_error.c			\
-			ft_sa.c				\
-			main.c
+SRC 		=   	ft_push.c		\
+			algo.c			\
+			lst_tools.c		\
+			stackA.c		\
+			stackB.c		\
+			ft_env.c		\
+			check_error.c		\
+			main.c			\
+			utils.c			\
+			utils1.c
 OBJ_SRC		=	$(SRC:.c=.o)
 
 SRC_O		=	$(addprefix $(PATH_SRC), $(SRC))
@@ -46,7 +48,7 @@ FLAGS 		= 	-Wall -Werror -Wextra -ggdb
 LIB		= 	-llibft
 DEPEND		= 	libft/libft.a
 
-$(PATH_OBJ)%.o : $(PATH_SRC)%.c $(HEADER) $(MK)
+$(PATH_OBJ)%.o : $(PATH_SRC)%.c $(HEADER)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
