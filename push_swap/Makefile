@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2021/12/21 19:52:22 by jmilhas          ###   ########.fr        #
+#    Updated: 2021/12/27 23:10:08 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,6 +102,11 @@ git:	fclean
 	@git add .
 	@git commit -m "$(filter-out $@,$(MAKECMDGOALS))"
 	@git push
+auto:	fclean
+	@git add .
+	@git commit -m "Autosave"
+	@git push
+
 
 .PHONY: all clean fclean re san
 .SILENT :

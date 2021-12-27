@@ -47,7 +47,7 @@ void	ft_count_prefix(t_swap *env, int coef)
 		i++;
 	}
 	i = 1;
-	while (i < env->len || i < 10)
+	while (i < 10)
 	{
 		env->prefix[i] += env->prefix[i - 1];
 		i++;
