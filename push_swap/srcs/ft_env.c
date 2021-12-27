@@ -17,9 +17,12 @@ int	ft_get_size_value(int max, int min)
 	int	i;
 
 	i = 0;
-	max = (max >= 0) ? max : -max;
-	min = (min >= 0) ? min : -min;
-	max = (max >= min) ? max : min;
+	if (max < 0)
+		max *= -1;
+	if (min < 0)
+		min *= -1;
+	if (max < min)
+		max = min;
 	while (max > 0)
 	{
 		max /= 10;

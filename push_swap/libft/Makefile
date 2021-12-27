@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2021/12/23 19:55:13 by jmilhas          ###   ########.fr        #
+#    Updated: 2021/12/28 00:49:24 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,6 @@ LST	=		ft_lstadd_back.c 		\
 			ft_lstdelone.c   		\
 			ft_lstiter.c     		\
 			ft_lstlast.c     		\
-			ft_lstmap.c      		\
 			ft_lstnew.c			\
 			ft_lstsize.c
 OBJS_LST	=	$(LST:.c=.o)

@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_binary_len.c                                    :+:      :+:    :+:   */
+/*   lst_tools1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/23 19:54:26 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/12/23 19:54:26 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/12/28 00:20:15 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/12/28 00:20:15 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../includes/push_swap.h"
 
-int	ft_binary_len(int nbr)
+void	ft_add_back(t_pile **alst, t_pile *ne)
 {
-	int	i;
+	t_pile	*elem;
 
-	i = 0;
-	while (nbr > 0)
+	if (ne == NULL || alst == NULL)
+		return ;
+	if (*alst == NULL)
 	{
-		nbr /= 2;
-		i++;
+		*alst = ne;
+		return ;
 	}
-	return (i);
+	elem = ft_last(*alst);
+	elem->next = ne;
 }

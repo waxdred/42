@@ -15,7 +15,7 @@
 void	ft_creat_tab(t_pile **stack, t_swap *env)
 {
 	t_pile	*elem;
-	int	i;
+	int		i;
 
 	i = 0;
 	elem = *stack;
@@ -113,4 +113,3 @@ void	ft_transfere(t_swap *env)
 		i++;
 	}
 }
-

@@ -12,12 +12,10 @@
 
 #include "../includes/push_swap.h"
 
-void	ft_print_list(t_pile *pa, t_swap *env);
-
 void	ft_sort_tree(t_swap *env)
 {
 	t_pile	*tmp;
-	int	end;
+	int		end;
 
 	end = ft_end_index(&env->pa);
 	if (env->pa->index > env->pa->next->index)
@@ -26,20 +24,11 @@ void	ft_sort_tree(t_swap *env)
 		ft_rotatepilea(&env->pa);
 	if (env->pa->index < env->pa->next->index)
 		ft_swaptopa(&env->pa);
-	ft_print_list(env->pa, env);
 }
 
-void	ft_quick_swap(t_pile *pa, t_swap *env)
-{
-
-}
-
-void	ft_radix_sort(t_swap *env)
+void	ft_radix_sort(t_swap *env, int i, int count, int index)
 {
 	t_pile	*tmp;
-	int		i;
-	int		count;
-	int		index;
 
 	i = env->binary_len - 1;
 	while (i + 1 > 0)
@@ -47,16 +36,16 @@ void	ft_radix_sort(t_swap *env)
 		tmp = env->pa;
 		index = ft_saveindex(tmp, i);
 		count = ft_countunit(&env->pa, i);
-			while (count > 0)
+		while (count > 0)
+		{
+			if (env->pa->binary[i] == 0)
 			{
-				if (env->pa->binary[i] == 0)
-				{
-					ft_pushb(&env->pa, &env->pb);
-					count--;
-				}
-				else
-					ft_rotatepilea(&env->pa);
+				ft_pushb(&env->pa, &env->pb);
+				count--;
 			}
+			else
+				ft_rotatepilea(&env->pa);
+		}
 		while (env->pa->index != index)
 			ft_rotatepilea(&env->pa);
 		while (env->pb)

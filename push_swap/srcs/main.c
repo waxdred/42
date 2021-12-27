@@ -12,35 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-void	ft_print_list(t_pile *pa, t_swap *env)
-{
-	t_pile *tmp;
-	int	i;
-
-	tmp = pa;
-	printf("\n");
-	while (tmp->next)
-	{
-		i = 0;
-		printf("[");
-		while (i < env->binary_len)
-		{
-			printf("%d", tmp->binary[i]);
-			i++;
-		}
-		printf("]  [%d] ====> [%d] \n",tmp->index, tmp->data);
-		tmp = tmp->next;
-	}
-	i = 0;
-	printf("[");
-	while (i < env->binary_len)
-	{
-		printf("%d", tmp->binary[i]);
-		i++;
-	}
-	printf("]  [%d] ====> [%d] \n",tmp->index, tmp->data);
-}
-
 void	ft_get_full_env(t_pile **stack, t_swap *env)
 {
 	int	i;
@@ -59,21 +30,28 @@ void	ft_get_full_env(t_pile **stack, t_swap *env)
 
 void	ft_sorting(t_swap *env)
 {
+	if (env->pa == NULL)
+	{
+		ft_clear_stack(&env->pa);
+		free(env);
+		ft_putstr_fd("Error", 2);
+		exit (-1);
+	}
 	ft_get_full_env(&env->pa, env);
 	ft_sort_list(env);
 	if (env->len < 4)
 		ft_sort_tree(env);
 	else
-		ft_radix_sort(env);
+		ft_radix_sort(env, 0, 0, 0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_swap *env;
+	t_swap	*env;
 	char	**tab;
 
 	if (argc == 1)
-		return (-1);	
+		return (-1);
 	env = ft_memalloc(sizeof(t_swap));
 	if (!env)
 		return (-1);
@@ -85,19 +63,7 @@ int main(int argc, char **argv)
 	}
 	else
 		env->pa = ft_push_param(argc, argv, env, 0);
-	if (env->pa == NULL)
-	{
-		ft_clear_stack(&env->pa);
-		free(env);
-		ft_putstr_fd("Error", 2);
-		return (-1);
-	}
 	ft_sorting(env);
-//	ft_get_full_env(&env->pa, env);
-//	ft_sort_list(env);
-//	ft_print_list(env->pa, env);
-//	ft_radix_sort(env);
-//	ft_print_tab(env);
 	ft_clear_stack(&env->pa);
 	free(env->prefix);
 	free(env->sum);

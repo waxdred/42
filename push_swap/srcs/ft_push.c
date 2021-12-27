@@ -14,9 +14,9 @@
 
 void	ft_add_index(t_pile **stack, t_swap *env)
 {
-	t_pile *elem;
-	int	i;
-	int	tmp;
+	t_pile	*elem;
+	int		i;
+	int		tmp;
 
 	elem = *stack;
 	env->binary_len = ft_binary_len(env->len - 1);
@@ -60,9 +60,9 @@ void	ft_sort_list(t_swap *env)
 
 t_pile	*ft_push_param(int ac, char **av, t_swap *env, int check)
 {
-	int	i;
-	int	data;
 	t_pile	*stack;
+	int		i;
+	int		data;
 
 	stack = NULL;
 	if (check == 0)

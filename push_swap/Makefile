@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2021/12/27 23:10:08 by jmilhas          ###   ########.fr        #
+#    Updated: 2021/12/28 00:33:06 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,13 +29,15 @@ PATH_OBJ	=	./objs/
 SRC 		=   	ft_push.c		\
 			algo.c			\
 			lst_tools.c		\
+			lst_tools1.c		\
 			stackA.c		\
 			stackB.c		\
 			ft_env.c		\
 			check_error.c		\
 			main.c			\
 			utils.c			\
-			utils1.c
+			utils1.c			\
+			utils2.c
 OBJ_SRC		=	$(SRC:.c=.o)
 
 SRC_O		=	$(addprefix $(PATH_SRC), $(SRC))

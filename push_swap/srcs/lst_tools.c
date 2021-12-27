@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_tools                                          :+:      :+:    :+:   */
+/*   lst_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -27,7 +27,7 @@ t_pile	*ft_create_elem(int data)
 {
 	t_pile	*stack;
 
-	stack = (t_pile*)malloc(sizeof(*stack));
+	stack = (t_pile *)malloc(sizeof(*stack));
 	if (!stack)
 		return (NULL);
 	stack->data = data;
@@ -60,19 +60,4 @@ t_pile	*ft_last(t_pile *lst)
 	while (lst->next != NULL)
 		lst = lst->next;
 	return (lst);
-}
-
-void	ft_add_back(t_pile **alst, t_pile *ne)
-{
-	t_pile	*elem;
-
-	if (ne == NULL || alst == NULL)
-		return ;
-	if (*alst == NULL)
-	{
-		*alst = ne;
-		return ;
-	}
-	elem = ft_last(*alst);
-	elem->next = ne;
 }
