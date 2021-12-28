@@ -26,3 +26,28 @@ void	ft_add_back(t_pile **alst, t_pile *ne)
 	elem = ft_last(*alst);
 	elem->next = ne;
 }
+
+void	ft_clear_binary(t_swap *env)
+{
+	t_pile	*elem;
+
+	elem = env->pa;
+	while (elem)
+	{
+		free(elem->binary);
+		elem = elem->next;
+	}
+}
+
+int	ft_stack_l(t_pile *stack)
+{
+	int	i;
+
+	i = 0;
+	while (stack != NULL)
+	{
+		stack = stack->next;
+		i++;
+	}
+	return (i);
+}

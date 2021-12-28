@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2021/12/28 00:33:06 by jmilhas          ###   ########.fr        #
+#    Updated: 2021/12/28 23:18:18 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,9 @@ SRC 		=   	ft_push.c		\
 			check_error.c		\
 			main.c			\
 			utils.c			\
-			utils1.c			\
+			utils1.c		\
 			utils2.c
+
 OBJ_SRC		=	$(SRC:.c=.o)
 
 SRC_O		=	$(addprefix $(PATH_SRC), $(SRC))
@@ -56,7 +57,7 @@ $(PATH_OBJ)%.o : $(PATH_SRC)%.c $(HEADER)
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
 	@sleep 0.1
 
-all: start $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJ_S)
 	@printf "\r\t\033[K$(CCYAN)[✅]\t$(EXEC) $(CCPURPLE)--> $(CCYAN) Gen Objs$(CCEND)"

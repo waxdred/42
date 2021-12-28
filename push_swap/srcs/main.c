@@ -41,8 +41,11 @@ void	ft_sorting(t_swap *env)
 	ft_sort_list(env);
 	if (env->len < 4)
 		ft_sort_tree(env);
+	else if (env->len < 20)
+		ft_sort_five(env);
 	else
 		ft_radix_sort(env, 0, 0, 0);
+	ft_clear_binary(env);
 }
 
 int	main(int argc, char **argv)

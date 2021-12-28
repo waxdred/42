@@ -18,10 +18,10 @@
 
 typedef struct s_pile
 {
-	int		data;
-	int		index;
-	int		*binary;
-	struct s_pile			*next;
+	int				data;
+	int				index;
+	int				*binary;
+	struct s_pile	*next;
 }		t_pile;
 
 typedef struct s_swap
@@ -54,6 +54,7 @@ int		ft_get_prefix(int data, int coef);
 int		ft_num(char *av);
 int		ft_saveindex(t_pile *tmp, int unit);
 int		ft_stack_len(t_pile *stack, t_swap *env);
+int		ft_stack_l(t_pile *stack);
 int		ft_stack_max(ssize_t data);
 t_pile	*ft_create_elem(int data);
 t_pile	*ft_last(t_pile *lst);
@@ -63,11 +64,13 @@ void	ft_add_front(t_pile **alst, t_pile *ne);
 void	ft_add_index(t_pile **stack, t_swap *env);
 void	ft_clear_stack(t_pile **stack);
 void	ft_complet_tmp(t_swap *env, int i, int j);
+void	ft_sort_five(t_swap *env);
 void	ft_count_min_max(t_swap *env);
 void	ft_count_prefix(t_swap *env, int coef);
 void	ft_creat_tab(t_pile **stack, t_swap *env);
 void	ft_get_env(t_pile **stack, t_swap *env);
 void	ft_get_full_env(t_pile **stack, t_swap *env);
+void	ft_clear_binary(t_swap *env);
 void	ft_pusha(t_pile **pilea, t_pile **pileb);
 void	ft_pushb(t_pile **pilea, t_pile **pileb);
 void	ft_radix_sort(t_swap *env, int i, int count, int index);
@@ -80,6 +83,6 @@ void	ft_sort_neg(t_swap *env);
 void	ft_sort_prefix(t_swap *env, int coef);
 void	ft_sort_tree(t_swap *env);
 void	ft_swaptopa(t_pile **stack);
-void	ft_swaptopb(t_pile **alst, t_pile *new);
+void	ft_swaptopb(t_pile **stack);
 void	ft_transfere(t_swap *env);
 #endif

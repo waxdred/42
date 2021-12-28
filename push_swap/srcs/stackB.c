@@ -26,14 +26,17 @@ void	ft_pushb(t_pile **pilea, t_pile **pileb)
 	write (1, "pb\n", 3);
 }
 
-void	ft_swaptopb(t_pile **alst, t_pile *new)
+void	ft_swaptopb(t_pile **stack)
 {
-	if (*alst)
-		(*alst)->next = new;
-	else if (!*alst && new)
-		*alst = new;
-	else
-		*alst = NULL;
+	int	tmp;
+	int	itmp;
+
+	tmp = (*stack)->index;
+	itmp = (*stack)->data;
+	(*stack)->index = (*stack)->next->index;
+	(*stack)->data = (*stack)->next->data;
+	(*stack)->next->index = tmp;
+	(*stack)->next->data = itmp;
 	write (1, "sb\n", 3);
 }
 

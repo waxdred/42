@@ -16,6 +16,7 @@ void	ft_count_min_max(t_swap *env)
 {
 	int	i;
 
+	i = 0;
 	env->t_min = 0;
 	env->t_max = 0;
 	while (i < env->len)

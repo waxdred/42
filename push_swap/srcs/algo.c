@@ -14,16 +14,35 @@
 
 void	ft_sort_tree(t_swap *env)
 {
-	t_pile	*tmp;
-	int		end;
+	int	end;
 
 	end = ft_end_index(&env->pa);
-	if (env->pa->index > env->pa->next->index)
-		ft_swaptopa(&env->pa);
-	if (end > env->pa->index)
-		ft_rotatepilea(&env->pa);
 	if (env->pa->index < env->pa->next->index)
 		ft_swaptopa(&env->pa);
+	if (end < env->pa->index)
+		ft_rotatepilea(&env->pa);
+	if (env->pa->index > env->pa->next->index)
+		ft_swaptopa(&env->pa);
+}
+
+void	ft_sort_five(t_swap *env)
+{
+	int	i;
+
+	i = 0;
+	while (i < env->len - 3)
+	{
+		if (env->pa->index == i)
+		{
+			ft_pushb(&env->pa, &env->pb);
+			i++;
+		}
+		else
+			ft_rotatepilea(&env->pa);
+	}
+	ft_sort_tree(env);
+	while (env->pb)
+		ft_pusha(&env->pa, &env->pb);
 }
 
 void	ft_radix_sort(t_swap *env, int i, int count, int index)

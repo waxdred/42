@@ -28,7 +28,7 @@ int	ft_check_doublon(t_pile *stack, int data)
 
 int	ft_stack_max(ssize_t data)
 {
-	if (data < INT_MIN || data > INT_MAX)
+	if (data <= INT_MIN || data >= INT_MAX)
 		return (-1);
 	return (0);
 }
