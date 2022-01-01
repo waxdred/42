@@ -53,7 +53,7 @@ DEPEND		= 	libft/libft.a
 
 $(PATH_OBJ)%.o : $(PATH_SRC)%.c $(HEADER)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
-	@-$(CC) -I ./includes -o $@ -c $<
+	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
 	@sleep 0.1
 

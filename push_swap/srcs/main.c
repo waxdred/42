@@ -32,12 +32,16 @@ void	ft_sorting(t_swap *env)
 {
 	if (env->pa == NULL)
 	{
-		ft_clear_stack(&env->pa);
-		free(env);
 		ft_putstr_fd("Error", 2);
 		exit (-1);
 	}
 	ft_get_full_env(&env->pa, env);
+	if (env->len == 1 || ft_sorted(env) == 1)
+	{
+		ft_clear_stack(&env->pa);
+		free(env);
+		exit (1);
+	}
 	ft_sort_list(env);
 	if (env->len < 4)
 		ft_sort_tree(env);

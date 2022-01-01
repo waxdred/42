@@ -30,6 +30,7 @@ PATH_LST	=	./lst/
 PATH_OBJ	=	./objs/
 
 CONV 		=     	ft_atoi.c			\
+			ft_atoll.c			\
 			ft_atoi_base.c			\
 			ft_dec_to_bin.c			\
 			ft_binary_len.c			\

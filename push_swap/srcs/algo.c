@@ -72,3 +72,21 @@ void	ft_radix_sort(t_swap *env, int i, int count, int index)
 		i--;
 	}
 }
+
+int	ft_sorted(t_swap *env)
+{
+	t_pile	*elem;
+	int		i;
+
+	i = 1;
+	elem = env->pa;
+	while (elem->next != NULL)
+	{
+		if (elem->data < elem->next->data)
+			i++;
+		elem = elem->next;
+	}
+	if (i == env->len)
+		return (1);
+	return (0);
+}

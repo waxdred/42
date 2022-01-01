@@ -12,7 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-int	ft_check_doublon(t_pile *stack, int data)
+int	ft_check_doublon(t_pile *stack, int data, t_swap *env)
 {
 	t_pile	*tmp;
 
@@ -20,7 +20,11 @@ int	ft_check_doublon(t_pile *stack, int data)
 	while (tmp)
 	{
 		if (tmp->data == data)
+		{
+			ft_clear_stack(&env->pa);
+			free(env);
 			return (-1);
+		}
 		tmp = tmp->next;
 	}
 	return (0);
@@ -28,7 +32,7 @@ int	ft_check_doublon(t_pile *stack, int data)
 
 int	ft_stack_max(ssize_t data)
 {
-	if (data <= INT_MIN || data >= INT_MAX)
+	if (data < INT_MIN || data > INT_MAX)
 		return (-1);
 	return (0);
 }
@@ -46,9 +50,13 @@ int	ft_num(char *av)
 	return (0);
 }
 
-int	ft_error(char *av)
+int	ft_error(char *av, t_swap *env)
 {
-	if (ft_num(av) || ft_stack_max(ft_atoi(av)) || ft_strlen(av) > 19)
+	if (ft_num(av) || ft_stack_max(ft_atol(av)) || ft_strlen(av) > 19)
+	{
+		ft_clear_stack(&env->pa);
+		free(env);
 		return (-1);
+	}
 	return (0);
 }

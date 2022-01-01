@@ -44,11 +44,11 @@ typedef struct s_swap
 	int		coef;
 }		t_swap;
 
-int		ft_check_doublon(t_pile *stack, int data);
+int		ft_check_doublon(t_pile *stack, int data, t_swap *env);
 int		ft_countunit(t_pile **stack, int unit);
 int		ft_end_index(t_pile **stack);
 int		ft_end_sort(t_pile **stack, t_swap *env);
-int		ft_error(char *av);
+int		ft_error(char *av, t_swap *env);
 int		ft_gen_tmp(t_swap *env);
 int		ft_get_prefix(int data, int coef);
 int		ft_num(char *av);
@@ -56,6 +56,7 @@ int		ft_saveindex(t_pile *tmp, int unit);
 int		ft_stack_len(t_pile *stack, t_swap *env);
 int		ft_stack_l(t_pile *stack);
 int		ft_stack_max(ssize_t data);
+int		ft_sorted(t_swap *env);
 t_pile	*ft_create_elem(int data);
 t_pile	*ft_last(t_pile *lst);
 t_pile	*ft_push_param(int ac, char **av, t_swap *env, int check);

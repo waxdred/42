@@ -43,7 +43,6 @@ void	ft_add_index(t_pile **stack, t_swap *env)
 void	ft_sort_list(t_swap *env)
 {
 	int	i;
-	int	coef;
 
 	i = 1;
 	while (i <= env->coef)
@@ -73,10 +72,10 @@ t_pile	*ft_push_param(int ac, char **av, t_swap *env, int check)
 	{
 		while (i < ac)
 		{
-			if (ft_error(av[i]) == -1)
+			if (ft_error(av[i], env) == -1)
 				return (NULL);
 			data = ft_atoi(av[i]);
-			if (ft_check_doublon(stack, data) == -1)
+			if (ft_check_doublon(stack, data, env) == -1)
 				return (NULL);
 			ft_add_back(&stack, ft_create_elem(ft_atoi(av[i])));
 			i++;
