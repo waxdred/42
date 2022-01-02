@@ -17,34 +17,22 @@ CGREEN		=   	\033[33m
 CCRED 		=   	\033[31m
 CCPURPLE 	=   	\033[35m
 
-#Get arguments pass
-ARGV		=	$(filter-out $@,$(MAKECMDGOALS))
-NAME 		= 	 push_swap.a
-EXEC 		= 	 push_swap
+EXEC 		= 	 pipex
+NAME 		= 	 $(EXEC).a
 CC 		= 	 gcc
 
 PATH_SRC	=	./srcs/
 PATH_OBJ	=	./objs/
 
-SRC 		=   	ft_push.c		\
-			algo.c			\
-			lst_tools.c		\
-			lst_tools1.c		\
-			stackA.c		\
-			stackB.c		\
-			ft_env.c		\
-			check_error.c		\
-			main.c			\
-			utils.c			\
-			utils1.c		\
-			utils2.c
+SRC 		=   	main.c		\
+			ft_parsing.c
 
 OBJ_SRC		=	$(SRC:.c=.o)
 
 SRC_O		=	$(addprefix $(PATH_SRC), $(SRC))
 OBJ_S		=	$(addprefix $(PATH_OBJ), $(OBJ_SRC))
 
-HEADER 		= 	includes/push_swap.h
+HEADER 		= 	includes/$(EXEC).h
 MK		= 	Makefile
 SAN 		= 	-g3 -fsanitize=address
 FLAGS 		= 	-Wall -Werror -Wextra -ggdb 

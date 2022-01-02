@@ -56,6 +56,7 @@ int			ft_putnbr_unbase(unsigned int nbr, char *base, int res);
 int			ft_putnbr_unsigned(unsigned int n);
 int			ft_putstr(char *str);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
+int			ft_strichr(const char *str, int c);
 int			ft_tolower(int c);
 int			ft_toupper(int c);
 long int	ft_atol(const char *str);
