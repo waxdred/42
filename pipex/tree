@@ -39,7 +39,8 @@
 │   │   ├── ft_memmove.c
 │   │   ├── ft_memset.c
 │   │   ├── ft_strdup.c
-│   │   └── ft_strdupcat.c
+│   │   ├── ft_strdupcat.c
+│   │   └── ft_strndup.c
 │   ├── print
 │   │   ├── ft_putchar.c
 │   │   ├── ft_putchar_fd.c
@@ -81,7 +82,6 @@
 │   ├── output
 │   ├── tes
 │   └── test
-├── tags
 └── tree
 
 10 directories, 74 files
