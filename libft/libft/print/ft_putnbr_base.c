@@ -35,8 +35,8 @@ static int	ft_sort_int_tab(char *str)
 int	ft_putnbr_base(int nbr, char *base, int res)
 {
 	unsigned int	i;
-	int				size;
-	unsigned	int		lnbr;
+	unsigned int	lnbr;
+	unsigned int	size;
 
 	lnbr = nbr;
 	size = ft_strlen(base);

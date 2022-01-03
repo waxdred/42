@@ -44,8 +44,12 @@ static int	ft_splitstr(char **tab, char *s, char c, size_t len)
 		while (s[i] == c && s[i])
 			i++;
 		while (s[i] != c && s[i])
-			wordlen++, i++;
-		if ((tab[count] = ft_substr(&s[i - wordlen], 0, wordlen)) == NULL)
+		{
+			wordlen++;
+			i++;
+		}
+		tab[count] = ft_substr(&s[i - wordlen], 0, wordlen);
+		if (!tab[count])
 			return (0);
 		count++;
 	}
@@ -53,17 +57,18 @@ static int	ft_splitstr(char **tab, char *s, char c, size_t len)
 	return (1);
 }
 
-char		**ft_strsplit(char const *s, char c)
+char	**ft_strsplit(char const *s, char c)
 {
 	char	**ret;
 	int		len;
 
 	if (s)
 	{
-		len = ft_count_word((char*)s, c);
-		if ((ret = (char**)ft_memalloc(sizeof(char*) * len + 1)) == NULL)
+		len = ft_count_word((char *)s, c);
+		ret = (char **)ft_memalloc(sizeof(char *) * len + 1);
+		if (!ret)
 			return (NULL);
-		if (ft_splitstr(ret, (char*)s, c, len))
+		if (ft_splitstr(ret, (char *)s, c, len))
 			return (ret);
 		else
 		{

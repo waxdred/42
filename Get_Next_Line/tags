@@ -1,0 +1,26 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+buf	get_next_line.c	/^	ft_free(*buf);$/;"	v
+ft_free	get_next_line.c	/^void	ft_free(char *ptr)$/;"	f
+ft_free	get_next_line_bonus.c	/^void	ft_free(char *ptr)$/;"	f
+ft_get_line	get_next_line_bonus.c	/^char	*ft_get_line(char **line, char **s_buff)$/;"	f
+ft_read	get_next_line_bonus.c	/^int	ft_read(int fd, char **buf, char **s_buff, char **line)$/;"	f
+ft_strchr	get_next_line_utils.c	/^char	*ft_strchr(const char *s, int c)$/;"	f
+ft_strchr	get_next_line_utils_bonus.c	/^char	*ft_strchr(const char *s, int c)$/;"	f
+ft_strdup	get_next_line_utils.c	/^char	*ft_strdup(const char *s1)$/;"	f
+ft_strdup	get_next_line_utils_bonus.c	/^char	*ft_strdup(const char *s1)$/;"	f
+ft_strjoin	get_next_line_utils.c	/^char	*ft_strjoin(char const *s1, char const *s2)$/;"	f
+ft_strjoin	get_next_line_utils_bonus.c	/^char	*ft_strjoin(char const *s1, char const *s2)$/;"	f
+ft_strlen	get_next_line_utils.c	/^size_t	ft_strlen(const char *s)$/;"	f
+ft_strlen	get_next_line_utils_bonus.c	/^size_t	ft_strlen(const char *s)$/;"	f
+ft_substr	get_next_line_utils.c	/^char	*ft_substr(char const *s, unsigned int start, size_t len)$/;"	f
+ft_substr	get_next_line_utils_bonus.c	/^char	*ft_substr(char const *s, unsigned int start, size_t len)$/;"	f
+get_next_line	get_next_line.c	/^char	*get_next_line(int fd)$/;"	f
+get_next_line	get_next_line_bonus.c	/^char	*get_next_line(int fd)$/;"	f
+main	main.c	/^int main(int argv, char **argc)$/;"	f
+ret	get_next_line.c	/^	int		ret;$/;"	v
+temp	get_next_line.c	/^	char	*temp;$/;"	v

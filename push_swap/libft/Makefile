@@ -1,4 +1,4 @@
-# **************************************************************************** #
+
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -62,6 +62,7 @@ STR		=	ft_split.c       		\
 			ft_len_tab.c       		\
 			ft_strsplit.c       		\
 			ft_strchr.c	 		\
+			ft_strichr.c	 		\
 			ft_strcpy.c	   		\
 			ft_striteri.c    		\
 			ft_strjoin.c			\
