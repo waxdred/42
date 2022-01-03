@@ -2,7 +2,7 @@
 ## Parcour de 42
 
 List des Projet:
-		*![](https://img.shields.io/badge/Libft-125-green)\n
+		*![](https://img.shields.io/static/v1?label=Libft&message=115&color=success)
 	*
 	*
 	*
