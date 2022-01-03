@@ -35,9 +35,12 @@ char	*ft_add_path(char *str)
 
 void	child_one(int f1, char **cmd1, char **env)
 {
-	cmd1[0] = ft_get_path(cmd1[0], env);
+	char	*bin;
+
+	bin  = ft_get_path(cmd1[0], env);
 	dup2(f1, STDOUT_FILENO);
 	execve(cmd1[0], cmd1, NULL);
+	perror("execve() failed");
 }
 
 void	child_two(int f2, char **cmd2, char **env)
@@ -58,11 +61,11 @@ void	pipex(int f1,  int f2, char **cmd1, char **cmd2, char **env)
 	pid_t	child2;
 
 	pipe(end);
-	//child1 = fork();
-	//if (child1 < 0)
-	//	return (perror("Fork: "));
-	//if (child1 == 0)
-	//	child_one(f1, cmd1, env);
+	child1 = fork();
+	if (child1 < 0)
+		return (perror("Fork: "));
+	if (child1 == 0)
+		child_one(f1, cmd1, env);
 	child2 = fork();
 	if (child2 < 0)
 		return (perror("Fork: "));
