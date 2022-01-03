@@ -38,8 +38,7 @@ void	child_one(int f1, char **cmd1, char **env)
 	char	*bin;
 
 	bin  = ft_get_path(cmd1[0], env);
-	dup2(f1, STDOUT_FILENO);
-	execve(cmd1[0], cmd1, NULL);
+	execve(bin, cmd1, NULL);
 	perror("execve() failed");
 }
 
@@ -81,12 +80,15 @@ int main(int argc, char **argv, char **env)
 {
 	int	fd1;
 	int	fd2;
-	//while(*env)
-       	//	printf("%s\n",*env++);
-	fd1 = open(argv[1], O_RDONLY);
-	fd2 = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd1 < 0 || fd2 < 0)
-		return (-1);
-	pipex(fd1, fd2, ft_split(argv[2], ' '), ft_split(argv[3], ' '), env);
+	if (argc == 5)
+	{
+		fd1 = open(argv[1], O_RDONLY);
+		fd2 = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (fd1 < 0 || fd2 < 0)
+			return (-1);
+		pipex(fd1, fd2, ft_split(argv[2], ' '), ft_split(argv[3], ' '), env);
+	}
+	else
+		write(2, "invalid number of arguments.\n", 29);
 	return (0);
 }
