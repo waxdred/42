@@ -20,5 +20,16 @@
 # include <sys/types.h>
 
 char	*ft_get_path(char *cmd, char **env);
+typedef struct	s_env
+{
+	int	fd1;
+	int	fd2;
+	pid_t	child1;
+	pid_t	child2;
+	int	end[2];
+	char	**cmd1;
+	char	**cmd2;
+	char	*bin;
+}		t_env;
 
 #endif
