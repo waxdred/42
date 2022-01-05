@@ -6,41 +6,61 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2021/12/28 23:18:18 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/01/04 23:38:30 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Setting Color
-CCEND 		=   	\033[0m
-CCYAN 		=   	\033[34m
-CGREEN		=   	\033[33m
-CCRED 		=   	\033[31m
-CCPURPLE 	=   	\033[35m
+CCEND 			=   	\033[0m
+CCYAN 			=   	\033[34m
+CGREEN			=   	\033[33m
+CCRED 			=   	\033[31m
+CCPURPLE 		=   	\033[35m
 
-EXEC 		= 	 pipex
-NAME 		= 	 $(EXEC).a
-CC 		= 	 gcc
+EXEC 			= 	 pipex
+NAME 			= 	 $(EXEC).a
+NAMEBONUS 		= 	 $(EXEC)_bonus.a
+CC 			= 	 gcc
 
-PATH_SRC	=	./srcs/
-PATH_OBJ	=	./objs/
+PATH_SRC		=	./srcs/
+PATH_OBJ		=	./objs/
 
-SRC 		=   	main.c		\
-			ft_parsing.c
-
-OBJ_SRC		=	$(SRC:.c=.o)
-
-SRC_O		=	$(addprefix $(PATH_SRC), $(SRC))
-OBJ_S		=	$(addprefix $(PATH_OBJ), $(OBJ_SRC))
-
-HEADER 		= 	includes/$(EXEC).h
-MK		= 	Makefile
-SAN 		= 	-g3 -fsanitize=address
-FLAGS 		= 	-Wall -Werror -Wextra -ggdb 
-LIB		= 	-llibft
-DEPEND		= 	libft/libft.a
+PATH_SRC_BONUS		=	./srcs_bonus/
+PATH_OBJ_BONUS		=	./objs_bonus/
+                	
+SRC 			=   	main.c		\
+				ft_parsing.c
+                	
+OBJ_SRC			=	$(SRC:.c=.o)
+                	
+SRC_O			=	$(addprefix $(PATH_SRC), $(SRC))
+OBJ_S			=	$(addprefix $(PATH_OBJ), $(OBJ_SRC))
+                	
+SRCBONUS 		=   	main_bonus.c		\
+				lst_bonus.c		\
+				ft_parsing_bonus.c
+                	
+OBJ_SRC_BONUS		=	$(SRCBONUS:.c=.o)
+                	
+SRC_BONUS		=	$(addprefix $(PATH_SRC_BONUS), $(SRCBONUS))
+OBJ_BONUS		=	$(addprefix $(PATH_OBJ_BONUS), $(OBJ_SRC_BONUS))
+                	
+HEADER 			= 	includes/$(EXEC).h
+HEADERBONUS 		= 	includes_bonus/$(EXEC)_bonus.h
+MK			= 	Makefile
+SAN 			= 	-g3 -fsanitize=address
+FLAGS 			= 	-Wall -Werror -Wextra -ggdb 
+LIB			= 	-llibft
+DEPEND			= 	libft/libft.a
 
 $(PATH_OBJ)%.o : $(PATH_SRC)%.c $(HEADER)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
+	@-$(CC) -I ./includes -o $@ -c $<
+	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
+	@sleep 0.1
+
+$(PATH_OBJ_BONUS)%.o : $(PATH_SRC_BONUS)%.c $(HEADERBONUS)
+	@mkdir $(PATH_OBJ_BONUS) 2> /dev/null || true
 	@-$(CC) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
 	@sleep 0.1
@@ -55,6 +75,15 @@ $(NAME): $(OBJ_S)
 	@ar rc $(PATH_OBJ)$(NAME) $(OBJ_S)
 	@$(CC) $(PATH_OBJ)$(NAME) $(DEPEND) -o $(EXEC)
 	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Compilation ./$(EXEC)...$(CCEND)\n"
+
+bonus: $(OBJ_BONUS)
+	@printf "\r\t\033[K$(CCYAN)[✅]\t$(EXEC) $(CCPURPLE)--> $(CCYAN) Gen Objs$(CCEND)"
+	@printf "\n$(CCYAN)[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
+	@make -C libft
+	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
+	@ar rc $(PATH_OBJ_BONUS)$(NAMEBONUS) $(OBJ_BONUS)
+	@$(CC) $(PATH_OBJ_BONUS)$(NAMEBONUS) $(DEPEND) -o $(EXEC)_bonus
+	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Compilation ./$(EXEC)_bonus...$(CCEND)\n"
 
 san: $(OBJ_S)
 	@printf "\r\t\033[K$(CCYAN)[✅]\t$(EXEC) $(CCPURPLE)--> $(CCYAN)Gen Objs$(CCEND)"
@@ -83,8 +112,11 @@ fclean: clean
 	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(NAME)...$(CCEND)\n"
 	@-/bin/rm -f $(PATH_OBJ)*.a
 	@-/bin/rm -rf $(PATH_OBJ)
+	@-/bin/rm -f $(PATH_OBJ_BONUS)*.a
+	@-/bin/rm -rf $(PATH_OBJ_BONUS)
 	@-/bin/rm -f Tags
 	@-/bin/rm -f $(EXEC)
+	@-/bin/rm -f $(EXEC)_bonus
 norme:
 	@echo "\033[33mNorme ..."
 	@norminette $(SRC)

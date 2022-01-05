@@ -2,6 +2,8 @@
 ├── Makefile
 ├── includes
 │   └── pipex.h
+├── includes_bonus
+│   └── pipex_bonus.h
 ├── libft
 │   ├── Makefile
 │   ├── conv
@@ -75,13 +77,12 @@
 │   │   └── ft_toupper.c
 │   └── tags
 ├── srcs
-│   ├── COMMAND_MODE=unix2003
-│   ├── a.out
 │   ├── ft_parsing.c
-│   ├── main.c
-│   ├── output
-│   ├── tes
-│   └── test
+│   └── main.c
+├── srcs_bonus
+│   ├── ft_parsing_bonus.c
+│   └── main_bonus.c
+├── test
 └── tree
 
-10 directories, 74 files
+12 directories, 73 files

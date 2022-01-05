@@ -20,49 +20,51 @@ void	ft_free_struct(t_env *env)
 	free(env);
 }
 
-void	child_one(char **envp, t_env *env)
+void	ft_child_one(char **envp, t_env *env)
 {
 	env->bin  = ft_get_path(env->cmd1[0], envp);
+	close(env->pfd[IN]);
+	dup2(env->pfd[OUT], 1);
+	close(env->pfd[OUT]);
 	execve(env->bin, env->cmd1, NULL);
+	ft_free_struct(env);
 	perror("execve() failed");
 }
 
-void	child_two(char **envp, t_env *env)
+void	ft_child_two(char **envp, t_env *env)
 {
 	env->bin = ft_get_path(env->cmd2[0], envp);
-	dup2(env->fd2, STDOUT_FILENO);
+	close(env->pfd[OUT]);
+	dup2(env->pfd[IN], 0);
+	close(env->pfd[IN]);
+	dup2(env->fd2, 1);
 	execve(env->bin, env->cmd2, NULL);
+	ft_free_struct(env);
 	perror("execve() failed");
 }
 
-void	pipex(char **envp, t_env *env)
+void	ft_pipex(char **envp, t_env *env)
 {
 	int	status;
-	int	end[2];
 
-	pipe(end);
+	pipe(env->pfd);
 	env->child1 = fork();
 	if (env->child1 < 0)
 		return (perror("Fork: "));
 	if (env->child1 == 0)
-			child_one(envp, env);
-		env->child2 = fork();
+		ft_child_one(envp, env);
+	env->child2 = fork();
 	if (env->child2 < 0)
 		return (perror("Fork: "));
+	wait(&status);
 	if (env->child2 == 0)
-		child_two(envp, env);
-	close(end[0]);
-	close(end[1]);
-	waitpid(env->child1, &status, 0);
-	waitpid(env->child2, &status, 0);
+		ft_child_two(envp, env);
 }
 
 
 int main(int argc, char **argv, char **envp)
 {
 	t_env	*env;
-	int	fd1;
-	int	fd2;
 
 	env = ft_memalloc(sizeof(t_env));
 	if (argc == 5)
@@ -73,10 +75,12 @@ int main(int argc, char **argv, char **envp)
 			return (-1);
 		env->cmd1 = ft_split(argv[2], ' ');
 		env->cmd2 = ft_split(argv[3], ' ');
-		pipex(envp, env);
+		ft_pipex(envp, env);
 	}
 	else
 		write(2, "invalid number of arguments.\n", 29);
+	if (env->bin)
+		free(env->bin);
 	ft_free_struct(env);
 	return (0);
 }

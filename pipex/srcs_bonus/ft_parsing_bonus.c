@@ -1,17 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parsing.c                                       :+:      :+:    :+:   */
+/*   ft_parsing_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/04 22:36:46 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/04 22:36:46 by jmilhas          ###   ########.fr       */
+/*   Created: 2022/01/04 22:37:50 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/01/04 22:37:50 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes_bonus/pipex_bonus.h"
 
-#include "../includes/pipex.h"
+int ft_parsargv(char **argv, t_pile **list, int argc)
+{
+	int                 *tmpi;
+	int i;
+	i = 2;
+	while (i < argc - 1)
+	{
+		ft_add_back(list, ft_create_elem(ft_split(argv[i], ' ')));
+		i++;
+	}
+	return (0);
+}
 
 char	*ft_cat_path(char *dir, char *cmd)
 {
