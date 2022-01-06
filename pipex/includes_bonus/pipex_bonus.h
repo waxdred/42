@@ -13,47 +13,35 @@
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
 # include "../libft/include/libft.h"
+# include "../Gnl/includes/get_next_line.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/types.h>
 
-#define IN 0
-#define OUT 1
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
 
-# define INFILE 0
-# define OUTFILE 1
-
-
-typedef struct	s_pile
-{
-	char 		**data;
-	struct s_pile	*next;
-}		t_pile;
-
 typedef struct	s_env
 {
-	t_pile	*list;
-	int	fd1;
-	int	fd2;
 	int	pfd[2];
-	pid_t	child1;
-	pid_t	child2;
-	int	end[2];
-	char	**cmd1;
-	char	**cmd2;
+	int	pipefd[2];
+	int	fdin;
+	int	fdout;
+	int	here_doc;
+	pid_t	pid;
 	char	*bin;
+	char	*limiter;
+	char	**cmd;
 }		t_env;
 
-void	ft_add_back(t_pile **alst, t_pile *ne);
-t_pile	*ft_create_elem(char **data);
-void	ft_clear_stack(t_pile **stack);
 char	*ft_get_path(char *cmd, char **env);
-int ft_parsargv(char **argv, t_pile **list, int argc);
-t_pile	*ft_last(t_pile *lst);
-
+void	ft_free_split(t_env *env);
+void	ft_args_check(char **av, t_env *env);
+void	ft_pipex(t_env *env, int ac, char **av, char **envp);
+void	ft_here_doc(t_env *env, char **av, int ac, char **envp);
+void	ft_redir(char *cmd, char **envp, t_env *env);
+void	ft_exec(char *cmd, char **envp, t_env *env);
 #endif

@@ -5,13 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/04 22:36:46 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/04 22:36:46 by jmilhas          ###   ########.fr       */
+/*   Created: 2022/01/05 20:01:13 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/01/05 20:01:13 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes_bonus/pipex_bonus.h"
 
-#include "../includes/pipex.h"
+void	ft_free_split(t_env *env)
+{	
+	if (env->cmd)
+		ft_freetab(env->cmd);
+	if (env->bin)
+		free(env->bin);
+}
 
 char	*ft_cat_path(char *dir, char *cmd)
 {
@@ -39,7 +46,7 @@ char	*ft_get_path(char *cmd, char **env)
 	char	*path;
 	char	*dir;
 	char	*bin;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
@@ -47,7 +54,7 @@ char	*ft_get_path(char *cmd, char **env)
 	if (!env)
 		return (cmd);
 	path = ft_strdup(env[i] + 5);
-	while(path && ft_strichr(path, ':') > -1)
+	while (path && ft_strichr(path, ':') > -1)
 	{
 		dir = ft_strndup(path, ft_strichr(path, ':'));
 		bin = ft_cat_path(dir, cmd);

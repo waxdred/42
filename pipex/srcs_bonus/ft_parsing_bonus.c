@@ -12,17 +12,12 @@
 
 #include "../includes_bonus/pipex_bonus.h"
 
-int ft_parsargv(char **argv, t_pile **list, int argc)
-{
-	int                 *tmpi;
-	int i;
-	i = 2;
-	while (i < argc - 1)
-	{
-		ft_add_back(list, ft_create_elem(ft_split(argv[i], ' ')));
-		i++;
-	}
-	return (0);
+void	ft_free_split(t_env *env)
+{	
+	if (env->cmd)
+		ft_freetab(env->cmd);
+	if (env->bin)
+		free(env->bin);
 }
 
 char	*ft_cat_path(char *dir, char *cmd)
@@ -51,7 +46,7 @@ char	*ft_get_path(char *cmd, char **env)
 	char	*path;
 	char	*dir;
 	char	*bin;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
@@ -59,7 +54,7 @@ char	*ft_get_path(char *cmd, char **env)
 	if (!env)
 		return (cmd);
 	path = ft_strdup(env[i] + 5);
-	while(path && ft_strichr(path, ':') > -1)
+	while (path && ft_strichr(path, ':') > -1)
 	{
 		dir = ft_strndup(path, ft_strichr(path, ':'));
 		bin = ft_cat_path(dir, cmd);

@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2022/01/04 23:38:30 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/01/05 21:19:56 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRC_O			=	$(addprefix $(PATH_SRC), $(SRC))
 OBJ_S			=	$(addprefix $(PATH_OBJ), $(OBJ_SRC))
                 	
 SRCBONUS 		=   	main_bonus.c		\
-				lst_bonus.c		\
+				here_doc.c		\
 				ft_parsing_bonus.c
                 	
 OBJ_SRC_BONUS		=	$(SRCBONUS:.c=.o)
@@ -50,8 +50,8 @@ HEADERBONUS 		= 	includes_bonus/$(EXEC)_bonus.h
 MK			= 	Makefile
 SAN 			= 	-g3 -fsanitize=address
 FLAGS 			= 	-Wall -Werror -Wextra -ggdb 
-LIB			= 	-llibft
-DEPEND			= 	libft/libft.a
+LIB			= 	-llibft -lGnl
+DEPEND			= 	libft/libft.a Gnl/gnl.a
 
 $(PATH_OBJ)%.o : $(PATH_SRC)%.c $(HEADER)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
@@ -80,6 +80,7 @@ bonus: $(OBJ_BONUS)
 	@printf "\r\t\033[K$(CCYAN)[✅]\t$(EXEC) $(CCPURPLE)--> $(CCYAN) Gen Objs$(CCEND)"
 	@printf "\n$(CCYAN)[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
 	@make -C libft
+	@make -C Gnl
 	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
 	@ar rc $(PATH_OBJ_BONUS)$(NAMEBONUS) $(OBJ_BONUS)
 	@$(CC) $(PATH_OBJ_BONUS)$(NAMEBONUS) $(DEPEND) -o $(EXEC)_bonus
