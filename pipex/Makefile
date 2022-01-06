@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2022/01/06 21:25:29 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/01/06 23:17:26 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,8 +105,9 @@ flag: $(OBJ_S)
 	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Compilation with sanitize $(EXEC)...$(CCEND)\n"
 
 clean:
+	@make fclean -C libft
 	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(EXEC) Object...$(CCEND)\n"
-	@-/bin/rm -rf $(PATH_OBJ)*.o
+	@-/bin/rm -rf $(PATH_OBJ)
 
 fclean: clean
 	@make fclean -C libft

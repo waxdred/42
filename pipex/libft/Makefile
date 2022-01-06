@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2022/01/06 19:57:25 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/01/06 23:15:55 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -161,7 +161,7 @@ $(NAME): $(OBJ_C) $(OBJ_ISA) $(OBJ_MEM) $(OBJ_STR) $(OBJ_PRINT) $(OBJ_LST)
 
 clean:
 	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(EXEC) Objects...$(CCEND)\n"
-	@-/bin/rm -rf $(PATH_OBJ)
+	@-/bin/rm -rf $(PATH_OBJ)*.o
 
 fclean: clean
 	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(NAME)...$(CCEND)\n"
