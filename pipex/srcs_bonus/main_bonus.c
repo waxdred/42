@@ -15,20 +15,26 @@
 void	ft_exec(char *cmd, char **envp, t_env *env)
 {
 	env->cmd = ft_split(cmd, ' ');
-	env->bin = ft_get_path(env->cmd[0], envp);
+	env->bin = ft_get_path(env->cmd[0], envp, env);
 	execve(env->bin, env->cmd, envp);
-	perror("execve() failed");
+	write(2, "command not found: ", 19);
+	write(2, env->bin, ft_strlen(env->bin));
+	write(2, "\n", 1);
 }
 
 void	ft_redir(char *cmd, char **envp, t_env *env)
 {
+	int	status;
+
 	pipe(env->pipefd);
 	env->pid = fork();
 	if (env->pid)
 	{
 		close(env->pipefd[1]);
 		dup2(env->pipefd[0], STDIN);
-		waitpid(env->pid, NULL, 0);
+		waitpid(env->pid, &status, 0);
+		if (status > 0)
+			exit (0);
 	}
 	else
 	{
@@ -70,9 +76,9 @@ int	main(int ac, char **av, char **envp)
 	if (!env)
 		return (-1);
 	ft_args_check(av, env);
-	if (env->here_doc == 1)
+	if (env->here_doc == 1 && ac >= 6)
 		ft_here_doc(env, av, ac, envp);
-	else if (ac >= 5 && env->here_doc == 0)
+	if (ac >= 5)
 		ft_pipex(env, ac, av, envp);
 	else
 		write(STDERR, "Invalid number of arguments.\n", 29);

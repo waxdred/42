@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes_bonus/pipex_bonus.h"
+#include "../includes/pipex.h"
 
 void	ft_free_split(t_env *env)
 {	
 	if (env->cmd)
 		ft_freetab(env->cmd);
-	if (env->bin)
+	if (env->bin_check == 0)
 		free(env->bin);
 }
 
@@ -41,7 +41,7 @@ char	*ft_cat_path(char *dir, char *cmd)
 	return (bin);
 }
 
-char	*ft_get_path(char *cmd, char **env)
+char	*ft_get_path(char *cmd, char **env, t_env *envp)
 {
 	char	*path;
 	char	*dir;
@@ -64,5 +64,6 @@ char	*ft_get_path(char *cmd, char **env)
 		free(bin);
 		path += ft_strichr(path, ':') + 1;
 	}
+	envp->bin_check = 1;
 	return (cmd);
 }

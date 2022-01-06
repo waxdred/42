@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   here_doc.c                                         :+:      :+:    :+:   */
+/*   here_doc_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,22 +12,24 @@
 
 #include "../includes_bonus/pipex_bonus.h"
 
-void	ft_loop(t_env *env)
+void	ft_loop(t_env *env, int fd)
 {
 	char	*buff;
 
 	while (1)
 	{
-		write(1, "heredoc> ",9);
+		write(1, "heredoc> ", 9);
 		buff = get_next_line(0);
 		if (!buff)
 			exit(-1);
-		if (ft_strncmp(buff, env->limiter, ft_strlen(env->limiter)) == 0)
+		buff[ft_strlen(buff) - 1] = '\0';
+		if (ft_strcmp(buff, env->limiter) == 0)
 		{
 			free(buff);
 			return ;
 		}
-		write(env->fdin, buff, ft_strlen(buff));
+		buff[ft_strlen(buff)] = '\n';
+		write(fd, buff, ft_strlen(buff));
 		free(buff);
 	}
 }
@@ -37,6 +39,7 @@ void	ft_herepipe(t_env *env, int ac, char **av, char **envp)
 	int	i;
 
 	i = 3;
+	env->fdin = open(env->fn, O_RDONLY);
 	env->fdout = open(av[ac -1], O_CREAT
 			| O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR
 			| S_IRGRP | S_IWGRP | S_IROTH);
@@ -56,17 +59,16 @@ void	ft_herepipe(t_env *env, int ac, char **av, char **envp)
 
 void	ft_here_doc(t_env *env, char **av, int ac, char **envp)
 {
-	char	*fn;
+	int	fd;
 
-	fn = (char *)ft_strdup(".here_doc");
-	env->fdin = open(fn, O_CREAT | O_WRONLY | O_RDONLY | O_TRUNC, 0644);
-	if (env->fdin < 0)
-		return;
-	ft_loop(env);
+	env->fn = (char *)ft_strdup(".here_doc");
+	fd = open(env->fn, O_CREAT | O_WRONLY | O_RDONLY | O_TRUNC, 0644);
+	if (fd < 0)
+		return ;
+	ft_loop(env, fd);
 	ft_herepipe(env, ac, av, envp);
-	unlink(fn);
-	free(fn);
-	printf("End of loops\n");
+	unlink(env->fn);
+	free(env->fn);
 }
 
 void	ft_args_check(char **av, t_env *env)

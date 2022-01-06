@@ -24,20 +24,22 @@
 # define STDOUT 1
 # define STDERR 2
 
-typedef struct	s_env
+typedef struct s_env
 {
-	int	pfd[2];
-	int	pipefd[2];
-	int	fdin;
-	int	fdout;
-	int	here_doc;
-	pid_t	pid;
-	char	*bin;
-	char	*limiter;
 	char	**cmd;
+	char	*bin;
+	char	*fn;
+	char	*limiter;
+	int		bin_check;
+	int		fdin;
+	int		fdout;
+	int		here_doc;
+	int		pfd[2];
+	int		pipefd[2];
+	pid_t	pid;
 }		t_env;
 
-char	*ft_get_path(char *cmd, char **env);
+char	*ft_get_path(char *cmd, char **env, t_env *envp);
 void	ft_free_split(t_env *env);
 void	ft_args_check(char **av, t_env *env);
 void	ft_pipex(t_env *env, int ac, char **av, char **envp);

@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2021/12/28 00:49:24 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/01/06 19:57:25 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ STR		=	ft_split.c       		\
 			ft_strlcpy.c    		\
 			ft_strlen.c	   		\
 			ft_strmapi.c    		\
+			ft_strcmp.c	   		\
 			ft_strncmp.c	   		\
 			ft_strnstr.c	   		\
 			ft_strrchr.c	   		\

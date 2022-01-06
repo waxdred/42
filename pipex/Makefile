@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2022/01/05 21:19:56 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/01/06 21:25:29 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRC_O			=	$(addprefix $(PATH_SRC), $(SRC))
 OBJ_S			=	$(addprefix $(PATH_OBJ), $(OBJ_SRC))
                 	
 SRCBONUS 		=   	main_bonus.c		\
-				here_doc.c		\
+				here_doc_bonus.c	\
 				ft_parsing_bonus.c
                 	
 OBJ_SRC_BONUS		=	$(SRCBONUS:.c=.o)

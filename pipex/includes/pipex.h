@@ -19,21 +19,26 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 
-#define IN 0
-#define OUT 1
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
 
-char	*ft_get_path(char *cmd, char **env);
-typedef struct	s_env
+typedef struct s_env
 {
-	int	fd1;
-	int	fd2;
-	int	pfd[2];
-	pid_t	child1;
-	pid_t	child2;
-	int	end[2];
-	char	**cmd1;
-	char	**cmd2;
+	char	**cmd;
 	char	*bin;
+	char	*fn;
+	char	*limiter;
+	int		bin_check;
+	int		fdin;
+	int		fdout;
+	int		here_doc;
+	int		pfd[2];
+	int		pipefd[2];
+	pid_t	pid;
 }		t_env;
+
+char	*ft_get_path(char *cmd, char **env, t_env *envp);
+void	ft_free_split(t_env *env);
 
 #endif

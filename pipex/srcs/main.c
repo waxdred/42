@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes_bonus/pipex_bonus.h"
+#include "../includes/pipex.h"
 
 void	ft_free_struct(t_env *env)
 {
@@ -21,26 +21,32 @@ void	ft_free_struct(t_env *env)
 void	ft_exec(char *cmd, char **envp, t_env *env)
 {
 	env->cmd = ft_split(cmd, ' ');
-	env->bin = ft_get_path(env->cmd[0], envp);
+	env->bin = ft_get_path(env->cmd[0], envp, env);
 	execve(env->bin, env->cmd, envp);
-	perror("execve() failed");
+	write(STDERR, "command not found: ", 19);
+	write(STDERR, env->bin, ft_strlen(env->bin));
+	write(STDERR, "\n", 1);
 }
 
 void	ft_redir(char *cmd, char **envp, t_env *env)
 {
+	int	status;
+
 	pipe(env->pipefd);
 	env->pid = fork();
 	if (env->pid)
 	{
 		close(env->pipefd[1]);
 		dup2(env->pipefd[0], STDIN);
-		waitpid(env->pid, NULL, 0);
+		waitpid(env->pid, &status, 0);
 	}
 	else
 	{
 		close(env->pipefd[0]);
 		dup2(env->pipefd[1], STDOUT);
 		ft_exec(cmd, envp, env);
+		if (status > 0)
+			exit (0);
 	}
 }
 

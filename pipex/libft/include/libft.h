@@ -60,6 +60,7 @@ int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_strichr(const char *str, int c);
 int			ft_tolower(int c);
 int			ft_toupper(int c);
+int			ft_strcmp(const char *s1, const char *s2);
 long int	ft_atol(const char *str);
 size_t		ft_strlcat(char *dst, const char *src, size_t size);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
