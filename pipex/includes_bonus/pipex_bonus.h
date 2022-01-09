@@ -6,7 +6,7 @@
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 22:38:07 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/09 12:50:00 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/01/09 17:25:41 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,13 @@ typedef struct s_env
 }		t_env;
 
 char	*ft_get_path(char *cmd, char **env, t_env *envp);
+char	*ft_get_pipe(t_env *env, char *cmd);
 void	ft_free_split(t_env *env);
 void	ft_args_check(char **av, t_env *env);
 void	ft_pipex(t_env *env, int ac, char **av, char **envp);
 void	ft_here_doc(t_env *env, char **av, int ac, char **envp);
 void	ft_redir(char *cmd, char **envp, t_env *env);
 void	ft_exec(char *cmd, char **envp, t_env *env);
+int		ft_check_parsing(char *av);
+int		ft_fd(char **av, int ac, t_env *env);
 #endif

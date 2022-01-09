@@ -6,13 +6,14 @@
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 19:23:20 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/09 13:44:00 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/01/09 17:10:14 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 # include "../libft/include/libft.h"
+# include "../Gnl/includes/get_next_line.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -42,6 +43,8 @@ typedef struct s_env
 }		t_env;
 
 char	*ft_get_path(char *cmd, char **env, t_env *envp);
+char	*ft_get_pipe(t_env *env, char *cmd);
 void	ft_free_split(t_env *env);
+int		ft_check_parsing(char *av, t_env *env);
 
 #endif

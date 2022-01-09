@@ -6,7 +6,7 @@
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 22:37:50 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/07 19:43:53 by jmilhas          ###   ########lyon.fr   */
+/*   Updated: 2022/01/09 17:25:15 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	ft_free_split(t_env *env)
 char	*ft_cat_path(char *dir, char *cmd)
 {
 	char	*bin;
-	int		i;
 	int		len;
 	int		full_len;
 
@@ -83,4 +82,11 @@ char	*ft_get_path(char *cmd, char **env, t_env *envp)
 		path += ft_strichr(path, ':') + 1;
 	}
 	return (cmd);
+}
+
+int	ft_check_parsing(char *av)
+{
+	if (av[0] == '\0')
+		return (-1);
+	return (0);
 }

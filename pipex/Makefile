@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2022/01/06 23:17:26 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/01/09 15:27:12 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ PATH_SRC_BONUS		=	./srcs_bonus/
 PATH_OBJ_BONUS		=	./objs_bonus/
                 	
 SRC 			=   	main.c		\
+				ft_pipe.c	\
 				ft_parsing.c
                 	
 OBJ_SRC			=	$(SRC:.c=.o)
@@ -38,6 +39,7 @@ OBJ_S			=	$(addprefix $(PATH_OBJ), $(OBJ_SRC))
                 	
 SRCBONUS 		=   	main_bonus.c		\
 				here_doc_bonus.c	\
+				ft_pipe_bonus.c		\
 				ft_parsing_bonus.c
                 	
 OBJ_SRC_BONUS		=	$(SRCBONUS:.c=.o)
@@ -55,13 +57,13 @@ DEPEND			= 	libft/libft.a Gnl/gnl.a
 
 $(PATH_OBJ)%.o : $(PATH_SRC)%.c $(HEADER)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
-	@-$(CC) -I ./includes -o $@ -c $<
+	@-$(CC) -I ./includes -o $@ -c $< $(FLAGS)
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
 	@sleep 0.1
 
 $(PATH_OBJ_BONUS)%.o : $(PATH_SRC_BONUS)%.c $(HEADERBONUS)
 	@mkdir $(PATH_OBJ_BONUS) 2> /dev/null || true
-	@-$(CC) -I ./includes -o $@ -c $<
+	@-$(CC) -I ./includes -o $@ -c $< $(FLAGS)
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
 	@sleep 0.1
 
@@ -71,6 +73,7 @@ $(NAME): $(OBJ_S)
 	@printf "\r\t\033[K$(CCYAN)[✅]\t$(EXEC) $(CCPURPLE)--> $(CCYAN) Gen Objs$(CCEND)"
 	@printf "\n$(CCYAN)[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
 	@make -C libft
+	@make -C Gnl
 	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
 	@ar rc $(PATH_OBJ)$(NAME) $(OBJ_S)
 	@$(CC) $(PATH_OBJ)$(NAME) $(DEPEND) -o $(EXEC)

@@ -6,7 +6,7 @@
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 22:38:00 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/09 13:39:21 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/01/09 17:32:38 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ void	ft_exec(char *cmd, char **envp, t_env *env)
 	free(env->bin);
 	ft_putstr_fd("\n", 1);
 	dup2(env->fdout, STDOUT);
-	exit (0);
+	exit (-1);
 }
 
 void	ft_redir(char *cmd, char **envp, t_env *env)
 {
 	int	status;
 
+	if (ft_check_parsing(cmd) == -1)
+		ft_get_pipe(env, cmd);
 	pipe(env->pipefd);
 	env->pid = fork();
 	if (env->pid)
@@ -55,15 +57,8 @@ void	ft_pipex(t_env *env, int ac, char **av, char **envp)
 	int	i;
 
 	i = 3;
-	if (env->here_doc == 0)
-		env->fdin = open(av[1], O_RDONLY);
-	env->fdout = open(av[ac -1], O_CREAT
-			| O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR
-			| S_IRGRP | S_IWGRP | S_IROTH);
-	env->save_fdin = dup(STDIN);
-	env->save_fdout = dup(STDOUT);
-	dup2(env->fdin, STDIN);
-	dup2(env->fdout, STDOUT);
+	if (ft_fd(av, ac, env) == -1)
+		return ;
 	ft_redir(av[2], envp, env);
 	while (i < ac - 2)
 	{

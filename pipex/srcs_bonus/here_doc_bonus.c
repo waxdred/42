@@ -6,7 +6,7 @@
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 21:10:21 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/05 21:10:21 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/01/09 17:02:29 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,29 @@ void	ft_here_doc(t_env *env, char **av, int ac, char **envp)
 	unlink(env->fn);
 	free(env->fn);
 	close(fd);
+}
+
+int	ft_fd(char **av, int ac, t_env *env)
+{		
+	if (env->here_doc == 0)
+	{
+		env->fdin = open(av[1], O_RDONLY, 0644);
+		if (env->fdin < 0)
+		{
+			ft_putstr_fd("Infile not found: \n", 1);
+			return (-1);
+		}
+	}
+	env->fdout = open(av[ac -1], O_CREAT
+			| O_WRONLY | O_TRUNC, S_IRUSR
+			| S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH, 0644);
+	if (env->fdout < 0)
+		return (-1);
+	env->save_fdin = dup(STDIN);
+	env->save_fdout = dup(STDOUT);
+	dup2(env->fdin, STDIN);
+	dup2(env->fdout, STDOUT);
+	return (0);
 }
 
 void	ft_args_check(char **av, t_env *env)
