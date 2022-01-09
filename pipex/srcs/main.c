@@ -6,7 +6,7 @@
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 22:38:00 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/04 22:38:00 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/01/09 13:45:13 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,15 @@ void	ft_exec(char *cmd, char **envp, t_env *env)
 	env->cmd = ft_split(cmd, ' ');
 	env->bin = ft_get_path(env->cmd[0], envp, env);
 	execve(env->bin, env->cmd, envp);
-	write(STDERR, "command not found: ", 19);
-	write(STDERR, env->bin, ft_strlen(env->bin));
-	write(STDERR, "\n", 1);
+	dup2(env->save_fdout, STDOUT);
+	ft_putstr_fd(env->shell, 1);
+	free(env->shell);
+	ft_putstr_fd("command not found: ", 1);
+	ft_putstr_fd(env->bin, 1);
+	free(env->bin);
+	ft_putstr_fd("\n", 1);
+	dup2(env->fdout, STDOUT);
+	exit (0);
 }
 
 void	ft_redir(char *cmd, char **envp, t_env *env)
@@ -63,6 +69,8 @@ int	main(int ac, char **av, char **envp)
 		env->fdout = open(av[ac -1], O_CREAT
 				| O_WRONLY | O_TRUNC, S_IRUSR
 				| S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+		env->save_fdin = dup(STDIN);
+		env->save_fdout = dup(STDOUT);
 		dup2(env->fdin, STDIN);
 		dup2(env->fdout, STDOUT);
 		ft_redir(av[2], envp, env);

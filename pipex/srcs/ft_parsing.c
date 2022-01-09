@@ -41,6 +41,23 @@ char	*ft_cat_path(char *dir, char *cmd)
 	return (bin);
 }
 
+char	*ft_get_shell(char **env)
+{
+	char	*shell;
+	int		i;
+
+	i = 0;
+	while (env[i])
+		i++;
+	if (i == 38)
+		shell = ft_strdup("bash: ");
+	else
+		shell = ft_strdup("zsh: ");
+	if (!shell)
+		return (NULL);
+	return (shell);
+}
+
 char	*ft_get_path(char *cmd, char **env, t_env *envp)
 {
 	char	*path;
@@ -49,6 +66,7 @@ char	*ft_get_path(char *cmd, char **env, t_env *envp)
 	int		i;
 
 	i = 0;
+	envp->shell = ft_get_shell(env);
 	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
 		i++;
 	if (!env)
@@ -64,6 +82,5 @@ char	*ft_get_path(char *cmd, char **env, t_env *envp)
 		free(bin);
 		path += ft_strichr(path, ':') + 1;
 	}
-	envp->bin_check = 1;
 	return (cmd);
 }

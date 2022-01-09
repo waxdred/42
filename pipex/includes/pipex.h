@@ -6,7 +6,7 @@
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 19:23:20 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/12/16 19:23:20 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/01/09 13:44:00 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@ typedef struct s_env
 {
 	char	**cmd;
 	char	*bin;
+	char	*shell;
 	char	*fn;
 	char	*limiter;
 	int		bin_check;
+	int		save_fdin;
+	int		save_fdout;
 	int		fdin;
 	int		fdout;
 	int		here_doc;

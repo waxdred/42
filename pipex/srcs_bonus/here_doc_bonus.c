@@ -43,6 +43,8 @@ void	ft_herepipe(t_env *env, int ac, char **av, char **envp)
 	env->fdout = open(av[ac -1], O_CREAT
 			| O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR
 			| S_IRGRP | S_IWGRP | S_IROTH);
+	env->save_fdin = dup(STDIN);
+	env->save_fdout = dup(STDOUT);
 	dup2(env->fdin, STDIN);
 	dup2(env->fdout, STDOUT);
 	ft_redir(av[3], envp, env);
@@ -69,6 +71,7 @@ void	ft_here_doc(t_env *env, char **av, int ac, char **envp)
 	ft_herepipe(env, ac, av, envp);
 	unlink(env->fn);
 	free(env->fn);
+	close(fd);
 }
 
 void	ft_args_check(char **av, t_env *env)
