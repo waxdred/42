@@ -36,6 +36,8 @@ typedef struct s_env
 	int		save_fdout;
 	int		fdin;
 	int		fdout;
+	int		save_fdin;
+	int		save_fdout;
 	int		here_doc;
 	int		pfd[2];
 	int		pipefd[2];
@@ -45,6 +47,11 @@ typedef struct s_env
 char	*ft_get_path(char *cmd, char **env, t_env *envp);
 char	*ft_get_pipe(t_env *env, char *cmd);
 void	ft_free_split(t_env *env);
+<<<<<<< HEAD
 int		ft_check_parsing(char *av, t_env *env);
+=======
+char	*ft_loop_pipe(t_env *env);
+
+>>>>>>> 23546124416ddbcd391e1cb2673b331cf2900ecd
 
 #endif

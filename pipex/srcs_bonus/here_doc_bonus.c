@@ -54,7 +54,7 @@ void	ft_herepipe(t_env *env, int ac, char **av, char **envp)
 		ft_redir(av[i++], envp, env);
 	}
 	ft_free_split(env);
-	ft_exec(av[i], envp, env);
+	ft_exec(av[i], envp, env, 1);
 	close(env->fdin);
 	close(env->fdout);
 }

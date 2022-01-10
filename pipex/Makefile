@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2022/01/09 15:27:12 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/01/10 18:39:33 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,6 @@ OBJ_S			=	$(addprefix $(PATH_OBJ), $(OBJ_SRC))
                 	
 SRCBONUS 		=   	main_bonus.c		\
 				here_doc_bonus.c	\
-				ft_pipe_bonus.c		\
-				ft_parsing_bonus.c
                 	
 OBJ_SRC_BONUS		=	$(SRCBONUS:.c=.o)
                 	
@@ -109,11 +107,13 @@ flag: $(OBJ_S)
 
 clean:
 	@make fclean -C libft
+	@make fclean -C Gnl
 	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(EXEC) Object...$(CCEND)\n"
 	@-/bin/rm -rf $(PATH_OBJ)
 
 fclean: clean
 	@make fclean -C libft
+	@make fclean -C Gnl	
 	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(NAME)...$(CCEND)\n"
 	@-/bin/rm -f $(PATH_OBJ)*.a
 	@-/bin/rm -rf $(PATH_OBJ)

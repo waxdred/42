@@ -81,6 +81,11 @@ char	*ft_get_path(char *cmd, char **env, t_env *envp)
 		free(bin);
 		path += ft_strichr(path, ':') + 1;
 	}
+<<<<<<< HEAD
+=======
+	envp->bin_check = 1;
+	ft_get_errors(cmd, envp);
+>>>>>>> 23546124416ddbcd391e1cb2673b331cf2900ecd
 	return (cmd);
 }
 
