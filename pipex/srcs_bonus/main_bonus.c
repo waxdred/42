@@ -12,14 +12,21 @@
 
 #include "../includes_bonus/pipex_bonus.h"
 
-void	ft_exec(char *cmd, char **envp, t_env *env)
+void	ft_exec(char *cmd, char **envp, t_env *env, int check)
 {
-	env->cmd = ft_split(cmd, ' ');
-	env->bin = ft_get_path(env->cmd[0], envp, env);
-	execve(env->bin, env->cmd, envp);
-	write(2, "command not found: ", 19);
-	write(2, env->bin, ft_strlen(env->bin));
-	write(2, "\n", 1);
+	if (check == 0)
+	{
+		env->cmd = ft_split(cmd, ' ');
+		env->bin = ft_get_path(env->cmd[0], envp, env);
+		execve(env->bin, env->cmd, envp);
+	}
+	if (check == 1)
+	{
+		env->cmd = ft_split(cmd, ' ');
+		env->bin = ft_get_path(env->cmd[0], envp, env);
+		ft_print_error(env);
+		execve(env->bin, env->cmd, envp);
+	}
 }
 
 void	ft_redir(char *cmd, char **envp, t_env *env)
@@ -33,14 +40,12 @@ void	ft_redir(char *cmd, char **envp, t_env *env)
 		close(env->pipefd[1]);
 		dup2(env->pipefd[0], STDIN);
 		waitpid(env->pid, &status, 0);
-		if (status > 0)
-			exit (0);
 	}
 	else
 	{
 		close(env->pipefd[0]);
 		dup2(env->pipefd[1], STDOUT);
-		ft_exec(cmd, envp, env);
+		ft_exec(cmd, envp, env, 0);
 	}
 }
 
@@ -54,6 +59,7 @@ void	ft_pipex(t_env *env, int ac, char **av, char **envp)
 	env->fdout = open(av[ac -1], O_CREAT
 			| O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR
 			| S_IRGRP | S_IWGRP | S_IROTH);
+	env->save_fdout = dup(STDOUT);
 	dup2(env->fdin, STDIN);
 	dup2(env->fdout, STDOUT);
 	ft_redir(av[2], envp, env);
@@ -63,7 +69,7 @@ void	ft_pipex(t_env *env, int ac, char **av, char **envp)
 		ft_redir(av[i++], envp, env);
 	}
 	ft_free_split(env);
-	ft_exec(av[i], envp, env);
+	ft_exec(av[i], envp, env, 1);
 	close(env->fdin);
 	close(env->fdout);
 }
@@ -75,6 +81,7 @@ int	main(int ac, char **av, char **envp)
 	env = ft_memalloc(sizeof(t_env));
 	if (!env)
 		return (-1);
+	env->argc = ac;
 	ft_args_check(av, env);
 	if (env->here_doc == 1 && ac >= 6)
 		ft_here_doc(env, av, ac, envp);

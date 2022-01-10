@@ -65,5 +65,6 @@ char	*ft_get_path(char *cmd, char **env, t_env *envp)
 		path += ft_strichr(path, ':') + 1;
 	}
 	envp->bin_check = 1;
+	ft_get_errors(cmd, envp);
 	return (cmd);
 }

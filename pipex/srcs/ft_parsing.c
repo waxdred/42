@@ -23,7 +23,6 @@ void	ft_free_split(t_env *env)
 char	*ft_cat_path(char *dir, char *cmd)
 {
 	char	*bin;
-	int		i;
 	int		len;
 	int		full_len;
 

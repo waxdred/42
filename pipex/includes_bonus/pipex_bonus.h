@@ -27,12 +27,16 @@
 typedef struct s_env
 {
 	char	**cmd;
+	char	**error;
 	char	*bin;
 	char	*fn;
 	char	*limiter;
+	int		argc;
 	int		bin_check;
 	int		fdin;
 	int		fdout;
+	int		save_fdin;
+	int		save_fdout;
 	int		here_doc;
 	int		pfd[2];
 	int		pipefd[2];
@@ -45,5 +49,7 @@ void	ft_args_check(char **av, t_env *env);
 void	ft_pipex(t_env *env, int ac, char **av, char **envp);
 void	ft_here_doc(t_env *env, char **av, int ac, char **envp);
 void	ft_redir(char *cmd, char **envp, t_env *env);
-void	ft_exec(char *cmd, char **envp, t_env *env);
+void	ft_exec(char *cmd, char **envp, t_env *env, int check);
+void	ft_print_error(t_env *env);
+void	ft_get_errors(char *cmd, t_env *env);
 #endif

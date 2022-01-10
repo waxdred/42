@@ -13,6 +13,7 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 # include "../libft/include/libft.h"
+# include "../Gnl/includes/get_next_line.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -32,6 +33,8 @@ typedef struct s_env
 	int		bin_check;
 	int		fdin;
 	int		fdout;
+	int		save_fdin;
+	int		save_fdout;
 	int		here_doc;
 	int		pfd[2];
 	int		pipefd[2];
@@ -40,5 +43,7 @@ typedef struct s_env
 
 char	*ft_get_path(char *cmd, char **env, t_env *envp);
 void	ft_free_split(t_env *env);
+char	*ft_loop_pipe(t_env *env);
+
 
 #endif

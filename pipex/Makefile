@@ -38,6 +38,7 @@ OBJ_S			=	$(addprefix $(PATH_OBJ), $(OBJ_SRC))
                 	
 SRCBONUS 		=   	main_bonus.c		\
 				here_doc_bonus.c	\
+				ft_error.c		\
 				ft_parsing_bonus.c
                 	
 OBJ_SRC_BONUS		=	$(SRCBONUS:.c=.o)
@@ -55,13 +56,13 @@ DEPEND			= 	libft/libft.a Gnl/gnl.a
 
 $(PATH_OBJ)%.o : $(PATH_SRC)%.c $(HEADER)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
-	@-$(CC) -I ./includes -o $@ -c $<
+	@-$(CC) -I ./includes -o $@ -c $< $(FLAGS)
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
 	@sleep 0.1
 
 $(PATH_OBJ_BONUS)%.o : $(PATH_SRC_BONUS)%.c $(HEADERBONUS)
 	@mkdir $(PATH_OBJ_BONUS) 2> /dev/null || true
-	@-$(CC) -I ./includes -o $@ -c $<
+	@-$(CC) -I ./includes -o $@ -c $< $(FLAGS)
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
 	@sleep 0.1
 
@@ -106,11 +107,13 @@ flag: $(OBJ_S)
 
 clean:
 	@make fclean -C libft
+	@make fclean -C Gnl
 	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(EXEC) Object...$(CCEND)\n"
 	@-/bin/rm -rf $(PATH_OBJ)
 
 fclean: clean
 	@make fclean -C libft
+	@make fclean -C Gnl	
 	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(NAME)...$(CCEND)\n"
 	@-/bin/rm -f $(PATH_OBJ)*.a
 	@-/bin/rm -rf $(PATH_OBJ)
