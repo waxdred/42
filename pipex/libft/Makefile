@@ -123,32 +123,32 @@ $(PATH_OBJ)%.o : $(PATH_CONV)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.03
+	@sleep 0.02
 $(PATH_OBJ)%.o : $(PATH_ISA)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.03
+	@sleep 0.02
 $(PATH_OBJ)%.o : $(PATH_MEM)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.03
+	@sleep 0.02
 $(PATH_OBJ)%.o : $(PATH_STR)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.03
+	@sleep 0.02
 $(PATH_OBJ)%.o : $(PATH_PRINT)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.03
+	@sleep 0.02
 $(PATH_OBJ)%.o : $(PATH_LST)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.03
+	@sleep 0.02
 
 all: $(NAME)
 
