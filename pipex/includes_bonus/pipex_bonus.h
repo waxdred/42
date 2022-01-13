@@ -33,6 +33,7 @@ typedef struct s_env
 	char	*bin;
 	char	*fn;
 	char	*limiter;
+	int		count;
 	int		argc;
 	int		bin_check;
 	int		fdin;
@@ -43,7 +44,7 @@ typedef struct s_env
 	int		error_pipe;
 	int		pfd[2];
 	int		pipefd[2];
-	pid_t	pid;
+	pid_t	*pid;
 }		t_env;
 
 char	*ft_get_line(char **line, char **s_buff);
@@ -57,11 +58,12 @@ char	*get_next_line(int fd);
 int		ft_read(int fd, char **buffer, char **s_buff, char **line);
 int		ft_check_empty(char **av, int ac);
 void	ft_args_check(char **av, t_env *env);
-void	ft_exec(char *cmd, char **envp, t_env *env);
+void	ft_exec_cmd(char **envp, t_env *env, int check);
 void	ft_free_split(t_env *env);
 void	ft_get_errors(char *cmd, t_env *env);
 void	ft_here_doc(t_env *env, char **av, int ac, char **envp);
 void	ft_pipex(t_env *env, int ac, char **av, char **envp);
 void	ft_print_error(int error, char **av, t_env *env);
-void	ft_redir(char *cmd, char **envp, t_env *env);
+void	ft_redir(char *cmd, char **envp, t_env *env, int count);
+void	ft_get_cmd(char *cmd, char **envp, t_env *env);
 #endif

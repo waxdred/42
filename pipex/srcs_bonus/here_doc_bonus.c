@@ -41,22 +41,22 @@ void	ft_herepipe(t_env *env, int ac, char **av, char **envp)
 
 	i = 3;
 	stop = 2;
+	env->count = -1;
 	if (env->error_pipe == 1)
 		stop = 3;
 	env->fdin = open(env->fn, O_RDONLY);
 	env->fdout = open(av[ac -1], O_CREAT | O_WRONLY | O_APPEND, 0644);
 	dup2(env->fdin, STDIN);
 	dup2(env->fdout, STDOUT);
-	ft_redir(av[i], envp, env);
+	ft_redir(av[i], envp, env, env->count++);
 	unlink(env->fn);
 	free(env->fn);
 	while (i < ac - stop)
-	{
-		ft_free_split(env);
-		ft_redir(av[i++], envp, env);
-	}
+		ft_redir(av[i++], envp, env, env->count++);
+	ft_get_cmd(av[i], envp, env);
+	ft_exec_cmd(envp, env, 1);
+	env->count++;
 	ft_free_split(env);
-	ft_exec(av[i++], envp, env);
 	close(env->fdin);
 	close(env->fdout);
 }

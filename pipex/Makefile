@@ -29,6 +29,8 @@ PATH_SRC_BONUS		=	./srcs_bonus/
 PATH_OBJ_BONUS		=	./objs_bonus/
                 	
 SRC 			=   	main.c		\
+				ft_exec.c	\
+				ft_error.c	\
 				ft_parsing.c
                 	
 OBJ_SRC			=	$(SRC:.c=.o)
@@ -39,6 +41,7 @@ OBJ_S			=	$(addprefix $(PATH_OBJ), $(OBJ_SRC))
 SRCBONUS 		=   	main_bonus.c		\
 				here_doc_bonus.c	\
 				ft_error.c		\
+				ft_exec_bonus.c		\
 				utils1_bonus.c		\
 				utils_bonus.c		\
 				ft_parsing_bonus.c
@@ -52,7 +55,7 @@ HEADER 			= 	includes/$(EXEC).h
 HEADERBONUS 		= 	includes_bonus/$(EXEC)_bonus.h
 MK			= 	Makefile
 SAN 			= 	-g3 -fsanitize=address
-FLAGS 			= 	-Wall -Werror -Wextra -ggdb 
+FLAGS 			= 	-Wall -Werror -Wextra -g 
 LIB			= 	-llibft
 DEPEND			= 	libft/libft.a
 

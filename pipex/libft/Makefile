@@ -40,6 +40,7 @@ OBJS_CONV	=	$(CONV:.c=.o)
 ISA		=	ft_isalnum.c	   		\
 			ft_isalpha.c	   		\
 			ft_isascii.c	   		\
+			ft_isa_white_space.c		\
 			ft_isdigit.c	   		\
 			ft_isprint.c
 OBJS_ISA	=	$(ISA:.c=.o)

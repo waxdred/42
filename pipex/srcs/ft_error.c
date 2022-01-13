@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error_bonus.c                                   :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes_bonus/pipex_bonus.h"
+#include "../includes/pipex.h"
 
 int	ft_check_empty(char **av, int ac)
 {
@@ -54,49 +54,4 @@ int	ft_check_empty_string(char *cmd)
 	return (0);
 }
 
-void	ft_print_error(int error, char **av, t_env *env)
-{
-	if (error == 0)
-	{
-		ft_putstr_fd(av[2], STDERR);
-		ft_putstr_fd(": ", STDERR);
-		ft_putstr_fd(av[1], STDERR);
-		ft_putstr_fd(": No such file or directory\n", STDERR);
-		exit(-1);
-	}
-	if (error == 1)
-	{
-		ft_putstr_fd("pipex: parse error near `|'\n", STDERR);
-		exit (-1);
-	}
-	if (error == 2)
-	{
-		ft_putstr_fd("pipex: command not found ", STDERR);
-		ft_putstr_fd(env->bin, 2);
-		ft_putstr_fd("\n", 2);
-		exit(-1);
-	}
-}
 
-void	ft_get_errors(char *cmd, t_env *env)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	if (!env->error)
-		env->error = (char **)ft_memalloc(sizeof(char *) * env->argc);
-	if (!env->error)
-		return ;
-	while (env->error[i])
-		i++;
-	env->error[i] = (char *)ft_memalloc(sizeof(char) * ft_strlen(cmd) + 1);
-	if (env->error[i])
-	{
-		ft_freetab(env->error);
-		return ;
-	}
-	while (*cmd)
-		env->error[i][j++] = *cmd++;
-}
