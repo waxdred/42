@@ -1,0 +1,95 @@
+drwxr-xr-x    - wax 13 jan 14:44  .
+drwxr-xr-x    - wax 13 jan 13:56 ├──  includes
+.rw-r--r-- 1,7k wax 13 jan 13:56 │  └──  pipex.h
+drwxr-xr-x    - wax 13 jan 14:42 ├──  includes_bonus
+.rw-r--r-- 2,5k wax 13 jan 14:42 │  └──  pipex_bonus.h
+drwxr-xr-x    - wax 13 jan 14:43 ├──  libft
+drwxr-xr-x    - wax 12 jan 21:39 │  ├──  conv
+.rw-r--r-- 1,3k wax 12 jan 21:39 │  │  ├──  ft_atoi.c
+.rw-r--r-- 2,3k wax 12 jan 21:39 │  │  ├──  ft_atoi_base.c
+.rw-r--r-- 1,4k wax 12 jan 21:39 │  │  ├──  ft_atoll.c
+.rw-r--r-- 1,0k wax 12 jan 21:39 │  │  ├──  ft_binary_len.c
+.rw-r--r-- 1,2k wax 12 jan 21:39 │  │  ├──  ft_dec_to_bin.c
+.rw-r--r-- 1,6k wax 12 jan 21:39 │  │  └──  ft_itoa.c
+drwxr-xr-x    - wax 13 jan 12:12 │  ├──  include
+.rw-r--r-- 3,9k wax 13 jan 12:12 │  │  └──  libft.h
+drwxr-xr-x    - wax 13 jan 12:13 │  ├──  isa
+.rw-r--r-- 1,1k wax 13 jan 12:13 │  │  ├──  ft_isa_white_space.c
+.rw-r--r-- 1,0k wax 12 jan 21:39 │  │  ├──  ft_isalnum.c
+.rw-r--r-- 1,0k wax 12 jan 21:39 │  │  ├──  ft_isalpha.c
+.rw-r--r--  970 wax 12 jan 21:39 │  │  ├──  ft_isascii.c
+.rw-r--r--  972 wax 12 jan 21:39 │  │  ├──  ft_isdigit.c
+.rw-r--r--  970 wax 12 jan 21:39 │  │  └──  ft_isprint.c
+drwxr-xr-x    - wax 12 jan 21:39 │  ├──  lst
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_lstadd_back.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_lstadd_front.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_lstclear.c
+.rw-r--r-- 1,0k wax 12 jan 21:39 │  │  ├──  ft_lstdelone.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_lstiter.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_lstlast.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_lstnew.c
+.rw-r--r-- 1,0k wax 12 jan 21:39 │  │  └──  ft_lstsize.c
+.rw-r--r-- 5,2k wax 13 jan 12:12 │  ├──  Makefile
+drwxr-xr-x    - wax 12 jan 21:39 │  ├──  mem
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_bzero.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_calloc.c
+.rw-r--r-- 1,0k wax 12 jan 21:39 │  │  ├──  ft_freetab.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_memalloc.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_memchr.c
+.rw-r--r-- 1,2k wax 12 jan 21:39 │  │  ├──  ft_memcmp.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_memcpy.c
+.rw-r--r-- 1,3k wax 12 jan 21:39 │  │  ├──  ft_memmove.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_memset.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_strdup.c
+.rw-r--r-- 1,3k wax 12 jan 21:39 │  │  ├──  ft_strdupcat.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  └──  ft_strndup.c
+drwxr-xr-x    - wax 13 jan 14:43 │  ├──  objs
+drwxr-xr-x    - wax 12 jan 21:39 │  ├──  print
+.rw-r--r--  976 wax 12 jan 21:39 │  │  ├──  ft_putchar.c
+.rw-r--r--  981 wax 12 jan 21:39 │  │  ├──  ft_putchar_fd.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_putendl_fd.c
+.rw-r--r-- 1,3k wax 12 jan 21:39 │  │  ├──  ft_putnbr.c
+.rw-r--r-- 1,6k wax 12 jan 21:39 │  │  ├──  ft_putnbr_base.c
+.rw-r--r-- 1,3k wax 12 jan 21:39 │  │  ├──  ft_putnbr_fd.c
+.rw-r--r-- 1,5k wax 12 jan 21:39 │  │  ├──  ft_putnbr_unbase.c
+.rw-r--r-- 1,2k wax 12 jan 21:39 │  │  ├──  ft_putnbr_unsigned.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_putstr.c
+.rw-r--r-- 1,0k wax 12 jan 21:39 │  │  └──  ft_putstr_fd.c
+drwxr-xr-x    - wax 12 jan 21:39 │  ├──  str
+.rw-r--r--  976 wax 12 jan 21:39 │  │  ├──  ft_len_tab.c
+.rw-r--r-- 1,6k wax 12 jan 21:39 │  │  ├──  ft_split.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_strchr.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_strcmp.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_strcpy.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_strichr.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_striteri.c
+.rw-r--r-- 1,5k wax 12 jan 21:39 │  │  ├──  ft_strjoin.c
+.rw-r--r-- 1,4k wax 12 jan 21:39 │  │  ├──  ft_strlcat.c
+.rw-r--r-- 1,2k wax 12 jan 21:39 │  │  ├──  ft_strlcpy.c
+.rw-r--r-- 1,0k wax 12 jan 21:39 │  │  ├──  ft_strlen.c
+.rw-r--r-- 1,3k wax 12 jan 21:39 │  │  ├──  ft_strmapi.c
+.rw-r--r-- 1,2k wax 12 jan 21:39 │  │  ├──  ft_strncmp.c
+.rw-r--r-- 1,4k wax 12 jan 21:39 │  │  ├──  ft_strnstr.c
+.rw-r--r-- 1,1k wax 12 jan 21:39 │  │  ├──  ft_strrchr.c
+.rw-r--r-- 1,9k wax 12 jan 21:39 │  │  ├──  ft_strsplit.c
+.rw-r--r-- 1,3k wax 12 jan 21:39 │  │  ├──  ft_strsub.c
+.rw-r--r-- 1,2k wax 12 jan 21:39 │  │  ├──  ft_strtrim.c
+.rw-r--r-- 1,2k wax 12 jan 21:39 │  │  ├──  ft_substr.c
+.rw-r--r-- 1,0k wax 12 jan 21:39 │  │  ├──  ft_tolower.c
+.rw-r--r-- 1,0k wax 12 jan 21:39 │  │  └──  ft_toupper.c
+.rw-r--r-- 8,7k wax 12 jan 21:39 │  └──  tags
+.rw-r--r-- 5,2k wax 13 jan 13:33 ├──  Makefile
+drwxr-xr-x    - wax 13 jan 13:55 ├──  srcs
+.rw-r--r-- 1,4k wax 13 jan 13:49 │  ├──  ft_error.c
+.rw-r--r-- 2,1k wax 13 jan 11:57 │  ├──  ft_exec.c
+.rw-r--r-- 2,1k wax 13 jan 13:55 │  ├──  ft_parsing.c
+.rw-r--r-- 2,6k wax 13 jan 13:43 │  └──  main.c
+drwxr-xr-x    - wax 13 jan 14:42 ├──  srcs_bonus
+.rw-r--r-- 2,5k wax 13 jan 14:42 │  ├──  ft_error.c
+.rw-r--r-- 1,6k wax 13 jan 14:42 │  ├──  ft_exec_bonus.c
+.rw-r--r-- 2,1k wax 13 jan 14:42 │  ├──  ft_parsing_bonus.c
+.rw-r--r-- 2,5k wax 13 jan 14:42 │  ├──  here_doc_bonus.c
+.rw-r--r-- 2,8k wax 13 jan 14:42 │  ├──  main_bonus.c
+.rw-r--r-- 2,3k wax 13 jan 00:35 │  ├──  utils1_bonus.c
+.rw-r--r-- 2,2k wax 13 jan 00:35 │  └──  utils_bonus.c
+.rw-r--r--    0 wax 13 jan 14:44 └──  tree

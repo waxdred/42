@@ -56,7 +56,6 @@ char	*ft_strncat(char *dest, char *src, int size);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*get_next_line(int fd);
 int		ft_read(int fd, char **buffer, char **s_buff, char **line);
-int		ft_check_empty(char **av, int ac);
 void	ft_args_check(char **av, t_env *env);
 void	ft_exec_cmd(char **envp, t_env *env, int check);
 void	ft_free_split(t_env *env);
@@ -66,4 +65,7 @@ void	ft_pipex(t_env *env, int ac, char **av, char **envp);
 void	ft_print_error(int error, char **av, t_env *env);
 void	ft_redir(char *cmd, char **envp, t_env *env, int count);
 void	ft_get_cmd(char *cmd, char **envp, t_env *env);
+void	*ft_error_malloc(void	*mem, t_env *env);
+int		ft_check_empty_string(char *cmd);
+int		ft_check_empty(char **av, int ac, int st);
 #endif

@@ -53,5 +53,3 @@ int	ft_check_empty_string(char *cmd)
 		return (-1);
 	return (0);
 }
-
-

@@ -65,7 +65,7 @@ void	ft_here_doc(t_env *env, char **av, int ac, char **envp)
 {
 	int	fd;
 
-	if (ft_check_empty(av, ac) == -1)
+	if (ft_check_empty(av, ac, 1) == -1)
 	{
 		ft_putstr_fd("pipex: parse error near `|'\n", 1);
 		exit (-1);

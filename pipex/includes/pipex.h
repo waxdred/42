@@ -44,10 +44,10 @@ typedef struct s_env
 
 char	*ft_get_path(char *cmd, char **env, t_env *envp);
 char	*ft_loop_pipe(t_env *env);
-void	ft_free_split(t_env *env);
+int		ft_check_empty(char **av, int ac);
+int		ft_check_empty_string(char *cmd);
 void	ft_exec_cmd(char **envp, t_env *env, int check);
+void	ft_free_split(t_env *env);
 void	ft_get_cmd(char *cmd, char **envp, t_env *env);
-int	ft_check_empty(char **av, int ac);
-int	ft_check_empty_string(char *cmd);
 
 #endif

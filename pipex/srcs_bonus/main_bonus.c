@@ -55,9 +55,9 @@ void	ft_pipex(t_env *env, int ac, char **av, char **envp)
 		if (env->fdin < 0)
 			ft_print_error(0, av, env);
 	}
-	if (ft_check_empty(av, ac) == -1)
+	if (ft_check_empty(av, ac, 0) == -1)
 		ft_print_error(1, av, env);
-	if (av[ac - 2][0] == '\0')
+	if (av[ac - 2][0] == '\0' || (ft_check_empty_string(av[ac - 2]) == -1))
 		stop = 3;
 	ft_fd(env, av, ac);
 	ft_redir(av[i], envp, env, env->count++);
@@ -90,23 +90,16 @@ int	main(int ac, char **av, char **envp)
 		return (-1);
 	env->argc = ac;
 	ft_args_check(av, env);
-	env->pid = (int *)malloc(sizeof(int) * ac - 2);
-	if (!env->pid)
-	{
-		free(env);
-		return (-1);
-	}
+	env->pid = ft_error_malloc((int *)malloc(sizeof(int) * ac - 2), env);
 	if (env->here_doc == 1 && ac >= 6)
 		ft_here_doc(env, av, ac, envp);
 	else if (ac >= 5)
-	{
 		ft_pipex(env, ac, av, envp);
-		close(env->fdin);
-		close(env->fdout);
-	}
 	else
 		ft_putstr_fd("Invalid number of arguments.\n", STDERR);
 	ft_wait_fork(env);
+	close(env->fdin);
+	close(env->fdout);
 	free(env->pid);
 	free(env);
 	return (0);

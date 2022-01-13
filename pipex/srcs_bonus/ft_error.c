@@ -12,13 +12,16 @@
 
 #include "../includes_bonus/pipex_bonus.h"
 
-int	ft_check_empty(char **av, int ac)
+int	ft_check_empty(char **av, int ac, int st)
 {
 	int	i;
 	int	j;
 	int	count;
 
-	i = 1;
+	if (st == 0)
+		i = 2;
+	else
+		i = 3;
 	while (i < ac - 2)
 	{
 		count = 0;
@@ -47,7 +50,6 @@ int	ft_check_empty_string(char *cmd)
 	{
 		if (ft_isa_white_space(cmd[i]) == 0)
 			count++;
-		i++;
 	}
 	if (count == 0)
 		return (-1);
@@ -99,4 +101,15 @@ void	ft_get_errors(char *cmd, t_env *env)
 	}
 	while (*cmd)
 		env->error[i][j++] = *cmd++;
+}
+
+void	*ft_error_malloc(void	*mem, t_env *env)
+{
+	if (!mem)
+	{
+		free(env);
+		ft_putendl_fd("Error allocation: ", 2);
+		exit (EXIT_FAILURE);
+	}
+	return (mem);
 }

@@ -42,18 +42,28 @@ char	*ft_cat_path(char *dir, char *cmd)
 	return (bin);
 }
 
+static char	*ft_path(char **env)
+{
+	char	*path;
+	int		i;
+
+	i = 0;
+	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
+		i++;
+	if (!env)
+		return (NULL);
+	path = ft_strdup(env[i] + 5);
+	return (path);
+}
+
 char	*ft_get_path(char *cmd, char **env, t_env *envp)
 {
 	char	*path;
 	char	*ptr;
 	char	*dir;
 	char	*bin;
-	int		i;
 
-	i = 0;
-	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
-		i++;
-	path = ft_strdup(env[i] + 5);
+	path = ft_path(env);
 	ptr = path;
 	while (path && ft_strichr(path, ':') > -1)
 	{
