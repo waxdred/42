@@ -12,18 +12,6 @@
 
 #include "../include/libft.h"
 
-static char	*ft_strndup(const char *s, size_t size)
-{
-	char	*res;
-
-	res = malloc(sizeof(char) * (size + 1));
-	if (!res)
-		return (0);
-	ft_memcpy(res, s, size);
-	res[size] = 0;
-	return (res);
-}
-
 static int	split_len(const char *str, char c)
 {
 	int	i;

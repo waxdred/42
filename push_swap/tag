@@ -1,0 +1,35 @@
+" Press <F1>, ? for help
+
+▶ macros
+
+▶ prototypes
+
+▼ typedefs
+    t_pile
+    t_swap
+
+▼ s_pile : struct
+    [members]
+   +binary
+   +data
+   +index
+   +next
+
+▼ s_swap : struct
+    [members]
+   +binary_len
+   +coef
+   +csum
+   +input
+   +len
+   +max
+   +min
+   +output
+   +pa
+   +pb
+   +prefix
+   +sum
+   +t_max
+   +t_min
+   +tmp_max
+   +tmp_min

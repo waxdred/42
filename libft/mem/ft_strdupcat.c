@@ -14,9 +14,9 @@
 
 char	*ft_strdupcat(char *dest, const char *src)
 {
-	char *str;
-	int	i;
-	int	j;
+	char	*str;
+	int		i;
+	int		j;
 
 	str = NULL;
 	str = (char *)ft_memalloc(ft_strlen(dest) + ft_strlen(src) + 1);

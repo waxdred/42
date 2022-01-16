@@ -1,0 +1,86 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	Development	//
+A	fdf_define.h	/^# define A /;"	d
+C	fdf_define.h	/^# define C /;"	d
+CUBE	fdf_define.h	/^# define CUBE /;"	d
+D	fdf_define.h	/^# define D /;"	d
+DOWN	fdf_define.h	/^# define DOWN /;"	d
+ESC	fdf_define.h	/^# define ESC /;"	d
+FDF_DEFINE_H	fdf_define.h	/^# define FDF_DEFINE_H$/;"	d
+FDF_H	fdf.h	/^# define FDF_H$/;"	d
+FDF_STRUCT_H	fdf_struct.h	/^# define FDF_STRUCT_H$/;"	d
+ISO	fdf_define.h	/^# define ISO /;"	d
+LEFT	fdf_define.h	/^# define LEFT /;"	d
+M	fdf_define.h	/^# define M /;"	d
+MULT	fdf_define.h	/^# define MULT /;"	d
+PROJECT	fdf_define.h	/^# define PROJECT /;"	d
+R	fdf_define.h	/^# define R /;"	d
+RIGHT	fdf_define.h	/^# define RIGHT /;"	d
+S	fdf_define.h	/^# define S /;"	d
+UNZOOM	fdf_define.h	/^# define UNZOOM /;"	d
+UP	fdf_define.h	/^# define UP /;"	d
+W	fdf_define.h	/^# define W /;"	d
+ZOOM	fdf_define.h	/^# define ZOOM /;"	d
+angle	fdf_struct.h	/^	float	angle;$/;"	m	struct:s_mov
+b_x	fdf_struct.h	/^	float	b_x;$/;"	m	struct:s_point
+b_x1	fdf_struct.h	/^	float	b_x1;$/;"	m	struct:s_point
+b_y	fdf_struct.h	/^	float	b_y;$/;"	m	struct:s_point
+b_y1	fdf_struct.h	/^	float	b_y1;$/;"	m	struct:s_point
+coef	fdf_struct.h	/^	float	coef;$/;"	m	struct:s_color
+color	fdf_struct.h	/^	int		color;$/;"	m	struct:s_env
+color_on	fdf_struct.h	/^	int		color_on;$/;"	m	struct:s_env
+colors	fdf_struct.h	/^	t_color	colors;$/;"	m	struct:s_env
+dhigh	fdf_struct.h	/^	int	dhigh;$/;"	m	struct:s_map
+end	fdf_struct.h	/^	int		end;$/;"	m	struct:s_color
+high	fdf_struct.h	/^	int	high;$/;"	m	struct:s_map
+i	fdf_struct.h	/^	int		i;$/;"	m	struct:s_env
+j	fdf_struct.h	/^	int		j;$/;"	m	struct:s_env
+map	fdf_struct.h	/^	int	**map;$/;"	m	struct:s_map
+map	fdf_struct.h	/^	t_map	map;$/;"	m	struct:s_env
+max	fdf_struct.h	/^	int		max;$/;"	m	struct:s_point
+max	fdf_struct.h	/^	int	max;$/;"	m	struct:s_map
+menu	fdf_struct.h	/^	int		menu;$/;"	m	struct:s_env
+mlx_ptr	fdf_struct.h	/^	void	*mlx_ptr;$/;"	m	struct:s_env
+mov	fdf_struct.h	/^	t_mov	mov;$/;"	m	struct:s_env
+name	fdf_struct.h	/^	char	*name;$/;"	m	struct:s_env
+nbcol	fdf_struct.h	/^	int	nbcol;$/;"	m	struct:s_map
+nblin	fdf_struct.h	/^	int	nblin;$/;"	m	struct:s_map
+p	fdf_struct.h	/^	t_point	p;$/;"	m	struct:s_env
+pad	fdf_struct.h	/^	int	pad;$/;"	m	struct:s_map
+pos	fdf_struct.h	/^	int		pos;$/;"	m	struct:s_point
+posx	fdf_struct.h	/^	int	posx;$/;"	m	struct:s_map
+posy	fdf_struct.h	/^	int	posy;$/;"	m	struct:s_map
+proj	fdf_struct.h	/^	int		proj;$/;"	m	struct:s_env
+s_color	fdf_struct.h	/^typedef struct s_color$/;"	s
+s_env	fdf_struct.h	/^typedef struct s_env$/;"	s
+s_map	fdf_struct.h	/^typedef struct s_map$/;"	s
+s_mov	fdf_struct.h	/^typedef struct s_mov$/;"	s
+s_point	fdf_struct.h	/^typedef struct s_point$/;"	s
+s_x	fdf_struct.h	/^	double	s_x;$/;"	m	struct:s_mov
+s_y	fdf_struct.h	/^	double	s_y;$/;"	m	struct:s_mov
+spc	fdf_struct.h	/^	int		spc;$/;"	m	struct:s_point
+start	fdf_struct.h	/^	int		start;$/;"	m	struct:s_color
+t_color	fdf_struct.h	/^}		t_color;$/;"	t	typeref:struct:s_color
+t_env	fdf_struct.h	/^}		t_env;$/;"	t	typeref:struct:s_env
+t_map	fdf_struct.h	/^}		t_map;$/;"	t	typeref:struct:s_map
+t_mov	fdf_struct.h	/^}		t_mov;$/;"	t	typeref:struct:s_mov
+t_point	fdf_struct.h	/^}		t_point;$/;"	t	typeref:struct:s_point
+up	fdf_struct.h	/^	int		up;$/;"	m	struct:s_mov
+win_length	fdf_struct.h	/^	int		win_length;$/;"	m	struct:s_env
+win_ptr	fdf_struct.h	/^	void	*win_ptr;$/;"	m	struct:s_env
+win_width	fdf_struct.h	/^	int		win_width;$/;"	m	struct:s_env
+x	fdf_struct.h	/^	double	x;$/;"	m	struct:s_mov
+x	fdf_struct.h	/^	int		x;$/;"	m	struct:s_point
+x	fdf_struct.h	/^	int	x;$/;"	m	struct:s_map
+x_step	fdf_struct.h	/^	float	x_step;$/;"	m	struct:s_point
+y	fdf_struct.h	/^	double	y;$/;"	m	struct:s_mov
+y	fdf_struct.h	/^	int		y;$/;"	m	struct:s_point
+y	fdf_struct.h	/^	int	y;$/;"	m	struct:s_map
+y_step	fdf_struct.h	/^	float	y_step;$/;"	m	struct:s_point
+z	fdf_struct.h	/^	int		z;$/;"	m	struct:s_point
+z1	fdf_struct.h	/^	int		z1;$/;"	m	struct:s_point
+zoom	fdf_struct.h	/^	int		zoom;$/;"	m	struct:s_point

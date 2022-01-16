@@ -1,4 +1,4 @@
-# **************************************************************************** #
+
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2021/12/19 01:25:16 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/01/06 23:15:55 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,13 +30,17 @@ PATH_LST	=	./lst/
 PATH_OBJ	=	./objs/
 
 CONV 		=     	ft_atoi.c			\
+			ft_atoll.c			\
 			ft_atoi_base.c			\
+			ft_dec_to_bin.c			\
+			ft_binary_len.c			\
 			ft_itoa.c
 OBJS_CONV	=	$(CONV:.c=.o)
 
 ISA		=	ft_isalnum.c	   		\
 			ft_isalpha.c	   		\
 			ft_isascii.c	   		\
+			ft_isa_white_space.c		\
 			ft_isdigit.c	   		\
 			ft_isprint.c
 OBJS_ISA	=	$(ISA:.c=.o)
@@ -44,6 +48,7 @@ OBJS_ISA	=	$(ISA:.c=.o)
 MEM		=	ft_bzero.c	   		\
 			ft_calloc.c      		\
 			ft_strdup.c	   		\
+			ft_strndup.c	   		\
 			ft_strdupcat.c			\
 			ft_memalloc.c   		\
 			ft_memchr.c	   		\
@@ -51,7 +56,8 @@ MEM		=	ft_bzero.c	   		\
 			ft_memcpy.c	   		\
 			ft_memmove.c	  		\
 			ft_memset.c	   	        \
-			ft_memset.c	   	        \
+			ft_add_mal.c	   	        \
+			ft_error_mal.c	   	        \
 			ft_freetab.c
 OBJS_MEM	=	$(MEM:.c=.o)
 	
@@ -59,6 +65,7 @@ STR		=	ft_split.c       		\
 			ft_len_tab.c       		\
 			ft_strsplit.c       		\
 			ft_strchr.c	 		\
+			ft_strichr.c	 		\
 			ft_strcpy.c	   		\
 			ft_striteri.c    		\
 			ft_strjoin.c			\
@@ -67,6 +74,7 @@ STR		=	ft_split.c       		\
 			ft_strlcpy.c    		\
 			ft_strlen.c	   		\
 			ft_strmapi.c    		\
+			ft_strcmp.c	   		\
 			ft_strncmp.c	   		\
 			ft_strnstr.c	   		\
 			ft_strrchr.c	   		\
@@ -89,7 +97,6 @@ LST	=		ft_lstadd_back.c 		\
 			ft_lstdelone.c   		\
 			ft_lstiter.c     		\
 			ft_lstlast.c     		\
-			ft_lstmap.c      		\
 			ft_lstnew.c			\
 			ft_lstsize.c
 OBJS_LST	=	$(LST:.c=.o)
@@ -117,49 +124,49 @@ MK 		= 	Makefile
 $(PATH_OBJ)%.o : $(PATH_CONV)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
-	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.03
+	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
+	@sleep 0.02
 $(PATH_OBJ)%.o : $(PATH_ISA)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
-	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.03
+	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
+	@sleep 0.02
 $(PATH_OBJ)%.o : $(PATH_MEM)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
-	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.03
+	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
+	@sleep 0.02
 $(PATH_OBJ)%.o : $(PATH_STR)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
-	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.03
+	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
+	@sleep 0.02
 $(PATH_OBJ)%.o : $(PATH_PRINT)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
-	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.03
+	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
+	@sleep 0.02
 $(PATH_OBJ)%.o : $(PATH_LST)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
-	@printf "\r\t\033[K$(CCYAN)[✅]\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.03
+	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
+	@sleep 0.02
 
 all: $(NAME)
 
 $(NAME): $(OBJ_C) $(OBJ_ISA) $(OBJ_MEM) $(OBJ_STR) $(OBJ_PRINT) $(OBJ_LST)
-	@printf "\n[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
-	@printf "[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
+	@printf "\r\t\033[K$(CCYAN)[✅]\t$(EXEC) $(CCPURPLE)--> $(CCYAN)Gen Objs$(CCEND)"
+	@printf "\n$(CCYAN)[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
+	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
 	@ar rc $(NAME) $(OBJ_ISA) $(OBJ_MEM) $(OBJ_STR) $(OBJ_PRINT) $(OBJ_LST) $(OBJ_C)
 
 
 clean:
-	@printf "[✅]\t$(CCRED)Removal of $(EXEC) Objects...$(CCEND)\n"
-	@-/bin/rm -rf $(PATH_OBJ)
+	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(EXEC) Objects...$(CCEND)\n"
+	@-/bin/rm -rf $(PATH_OBJ)*.o
 
 fclean: clean
-	@printf "[✅]\t$(CCRED)Removal of $(NAME)...$(CCEND)\n"
+	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(NAME)...$(CCEND)\n"
 	@-/bin/rm -f $(NAME)
-	@-/bin/rm -f Tags
 
 re: fclean all 
