@@ -58,6 +58,8 @@ MEM		=	ft_bzero.c	   		\
 			ft_memset.c	   	        \
 			ft_add_mal.c	   	        \
 			ft_error_mal.c	   	        \
+			ft_track_free_all.c  	        \
+			ft_track_free_tab.c 	        \
 			ft_freetab.c
 OBJS_MEM	=	$(MEM:.c=.o)
 	

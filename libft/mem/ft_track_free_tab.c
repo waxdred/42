@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_track_free_all.c                                :+:      :+:    :+:   */
+/*   ft_track_free_tab.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,60 +12,54 @@
 
 #include "../include/libft.h"
 
-static int	ft_check_track(t_track *track, void *mem, int *check)
-{
+static int	ft_check_track(t_track *track, void **mem, int *check, int *size)
+{	
 	*check = 0;
-	if (track->len == 2)
+	*size = 0;
+	while (track->mem[*check] != mem[0])
+		(*check)++;
+	while (mem[*size] != NULL)
+		(*size)++;
+	(*size)++;
+	if (track->len == *size)
 	{
 		ft_track_free_all(track);
 		return (-1);
 	}
-	while (track->mem[*check] != mem)
-		(*check)++;
 	return (0);
 }
 
-void	**ft_track_free(t_track *track, void *mem)
+static void	**ft_tmp_free(t_track *track, void **dest, int size)
 {
-	void	**dest;
-	int		i;
-	int		j;
-	int		check;
-
-	i = 0;
-	j = 0;
-	if (ft_check_track(track, mem, &check) == -1)
-		return (NULL);
-	dest = ft_error_mal(malloc(sizeof(void *) * (track->len - 1)), track);
-	ft_bzero(dest, sizeof(dest) * (track->len - 1));
-	while (track->mem[i] != NULL)
-	{
-		if (i != check)
-			dest[j++] = track->mem[i];
-		i++;
-	}
-	free(track->mem[check]);
-	free(track->mem);
-	track->mem = dest;
-	track->len--;
+	dest = ft_error_mal(malloc(sizeof(void *) * (track->len - size)), track);
+	ft_bzero(dest, sizeof(dest) * (track->len - size));
+	track->len -= size;
 	return (dest);
 }
 
-void	**ft_track_free_all(t_track *track)
+void	**ft_track_free_tab(t_track *track, void **mem)
 {
-	int	i;
+	void	**dest;
+	int		var[3];
+	int		check;
+	int		size;
 
-	i = 0;
-	if (track->mem == NULL)
+	dest = NULL;
+	ft_bzero(var, sizeof(int) * 3);
+	if (ft_check_track(track, mem, &check, &size) == -1)
 		return (NULL);
-	while (track->mem[i])
+	dest = ft_tmp_free(track, dest, size);
+	while (track->mem[var[0]] != NULL)
 	{
-		free(track->mem[i]);
-		track->len--;
-		i++;
+		if (var[0] == check)
+			while (var[2]++ < size)
+				var[0]++;
+		else
+			dest[var[1]++] = track->mem[var[0]++];
 	}
+	while (check <= size)
+		free(track->mem[check++]);
 	free(track->mem);
-	track->len--;
-	track->mem = NULL;
+	track->mem = dest;
 	return (NULL);
 }

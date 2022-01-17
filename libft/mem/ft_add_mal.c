@@ -12,7 +12,7 @@
 
 #include "../include/libft.h"
 
-void    **ft_add_malloc(t_track *track,int len)
+void	**ft_add_malloc(t_track *track, int len)
 {
 	void	**dest;
 	int		i;
@@ -22,26 +22,26 @@ void    **ft_add_malloc(t_track *track,int len)
 		len = 1;
 	if (track->len == 0)
 	{
-		dest = ft_error_mal((void **)malloc(sizeof(void *) * (len + 1)));
+		dest = ft_error_mal((void **)malloc(sizeof(void *) * (len + 1)), track);
 		ft_bzero(dest, sizeof(dest) * (len + 1));
-		track->len = 2;
+		track->len += len + 1;
 		return (dest);
 	}
-	dest = ft_error_mal(malloc(sizeof(void *) * (track->len + len)));
+	dest = ft_error_mal(malloc(sizeof(void *) * (track->len + len)), track);
 	ft_bzero(dest, sizeof(dest) * (track->len + len));
-	while(track->mem[i] != NULL)
+	while (track->mem[i] != NULL)
 	{
 		dest[i] = track->mem[i];
 		i++;
 	}
-	track->len++;
+	track->len += len;
 	free(track->mem);
 	return (dest);
 }
 
-void    *ft_track(void  *src, t_track *track)
+void	*ft_track(void *src, t_track *track)
 {
-	int   i;
+	int	i;
 
 	i = 0;
 	track->mem = ft_add_malloc(track, 0);
@@ -51,21 +51,21 @@ void    *ft_track(void  *src, t_track *track)
 	return (src);
 }
 
-void  **ft_track_tab(void **src, t_track *track)
+void	**ft_track_tab(void **src, t_track *track)
 {
 	int	i;
 	int	len;
 
 	i = 0;
 	len = 0;
-	while(src[len] != NULL)
+	while (src[len] != NULL)
 		len++;
 	track->mem = ft_add_malloc(track, len + 1);
 	while (track->mem[i] != NULL)
 		i++;
 	len = 0;
-	while(src[len] != NULL)
+	while (src[len] != NULL)
 		track->mem[i++] = src[len++];
-	track->mem[i]= src;
+	track->mem[i] = src;
 	return (src);
 }

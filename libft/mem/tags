@@ -1,0 +1,24 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	Development	//
+ft_add_malloc	ft_add_mal.c	/^void    **ft_add_malloc(t_track *track,int len)$/;"	f
+ft_bzero	ft_bzero.c	/^void	ft_bzero(void *s, size_t n)$/;"	f
+ft_calloc	ft_calloc.c	/^void	*ft_calloc(size_t count, size_t size)$/;"	f
+ft_error_mal	ft_error_mal.c	/^void	*ft_error_mal(void *mem)$/;"	f
+ft_freetab	ft_freetab.c	/^void	ft_freetab(char **tab)$/;"	f
+ft_memalloc	ft_memalloc.c	/^void	*ft_memalloc(size_t size)$/;"	f
+ft_memchr	ft_memchr.c	/^void	*ft_memchr(const void *s, int c, size_t n)$/;"	f
+ft_memcmp	ft_memcmp.c	/^int	ft_memcmp(const void *s1, const void *s2, size_t n)$/;"	f
+ft_memcpy	ft_memcpy.c	/^void	*ft_memcpy(void *dst, const void *src, size_t n)$/;"	f
+ft_memmove	ft_memmove.c	/^void	*ft_memmove(void *dst, const void *src, size_t len)$/;"	f
+ft_memset	ft_memset.c	/^void	*ft_memset(void *b, int c, size_t len)$/;"	f
+ft_strdup	ft_strdup.c	/^char	*ft_strdup(const char *s1)$/;"	f
+ft_strdupcat	ft_strdupcat.c	/^char	*ft_strdupcat(char *dest, const char *src)$/;"	f
+ft_strndup	ft_strndup.c	/^char	*ft_strndup(const char *s, size_t size)$/;"	f
+ft_track	ft_add_mal.c	/^void    *ft_track(void  *src, t_track *track)$/;"	f
+ft_track_free	ft_track_free_all.c	/^void	**ft_track_free(t_track *track, void *mem)$/;"	f
+ft_track_free_all	ft_track_free_all.c	/^void	**ft_track_free_all(t_track *track)$/;"	f
+ft_track_tab	ft_add_mal.c	/^void  **ft_track_tab(void **src, t_track *track)$/;"	f

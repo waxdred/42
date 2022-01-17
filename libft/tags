@@ -48,7 +48,7 @@ PRINT_O	Makefile	/^PRINT_O		=	$(addprefix $(PATH_PRINT), $(PRINT))$/;"	m
 STR	Makefile	/^STR		=	ft_split.c       		\\$/;"	m
 STR_O	Makefile	/^STR_O		=	$(addprefix $(PATH_STR), $(STR))$/;"	m
 content	include/libft.h	/^	void			*content;$/;"	m	struct:s_list
-ft_add_malloc	mem/ft_add_mal.c	/^void    **ft_add_malloc(t_track *track,int len)$/;"	f
+ft_add_malloc	mem/ft_add_mal.c	/^void	**ft_add_malloc(t_track *track, int len)$/;"	f
 ft_atoi	conv/ft_atoi.c	/^int	ft_atoi(const char *str)$/;"	f
 ft_atoi_base	conv/ft_atoi_base.c	/^int	ft_atoi_base(char *str, char *base)$/;"	f
 ft_atol	conv/ft_atoll.c	/^long int	ft_atol(const char *str)$/;"	f
@@ -57,10 +57,12 @@ ft_bzero	mem/ft_bzero.c	/^void	ft_bzero(void *s, size_t n)$/;"	f
 ft_calloc	mem/ft_calloc.c	/^void	*ft_calloc(size_t count, size_t size)$/;"	f
 ft_check_base	conv/ft_atoi_base.c	/^int	ft_check_base(int len_base, char *base)$/;"	f
 ft_check_end	conv/ft_atoi_base.c	/^int	ft_check_end(char c, char *base)$/;"	f
+ft_check_track	mem/ft_track_free_all.c	/^static int	ft_check_track(t_track *track, void *mem, int *check)$/;"	f	file:
+ft_check_track	mem/ft_track_free_tab.c	/^static int	ft_check_track(t_track *track, void **mem, int *check, int *size)$/;"	f	file:
 ft_complet	conv/ft_itoa.c	/^static char	*ft_complet(char *str, long long int n, int len)$/;"	f	file:
 ft_count_word	str/ft_strsplit.c	/^static int	ft_count_word(char *s, char c)$/;"	f	file:
 ft_dec_to_bin	conv/ft_dec_to_bin.c	/^int	*ft_dec_to_bin(int nbr, int size)$/;"	f
-ft_error_mal	mem/ft_error_mal.c	/^void	*ft_error_mal(void *mem)$/;"	f
+ft_error_mal	mem/ft_error_mal.c	/^void	*ft_error_mal(void *mem, t_track *track)$/;"	f
 ft_freetab	mem/ft_freetab.c	/^void	ft_freetab(char **tab)$/;"	f
 ft_get_nb	conv/ft_atoi_base.c	/^int	ft_get_nb(char c, char *base)$/;"	f
 ft_isa_white_space	isa/ft_isa_white_space.c	/^int	ft_isa_white_space(int c)$/;"	f
@@ -122,13 +124,16 @@ ft_strsplit	str/ft_strsplit.c	/^char	**ft_strsplit(char const *s, char c)$/;"	f
 ft_strsub	str/ft_strsub.c	/^char	*ft_strsub(char const *s, unsigned int start, size_t len)$/;"	f
 ft_strtrim	str/ft_strtrim.c	/^char	*ft_strtrim(char const *s1, char const *set)$/;"	f
 ft_substr	str/ft_substr.c	/^char	*ft_substr(char const *s, unsigned int start, size_t len)$/;"	f
+ft_tmp_free	mem/ft_track_free_tab.c	/^static void	**ft_tmp_free(t_track *track, void **dest, int size)$/;"	f	file:
 ft_tolower	str/ft_tolower.c	/^int	ft_tolower(int c)$/;"	f
 ft_toupper	str/ft_toupper.c	/^int	ft_toupper(int c)$/;"	f
-ft_track	mem/ft_add_mal.c	/^void    *ft_track(void  *src, t_track *track)$/;"	f
+ft_track	mem/ft_add_mal.c	/^void	*ft_track(void *src, t_track *track)$/;"	f
 ft_track_free	mem/ft_track_free_all.c	/^void	**ft_track_free(t_track *track, void *mem)$/;"	f
 ft_track_free_all	mem/ft_track_free_all.c	/^void	**ft_track_free_all(t_track *track)$/;"	f
-ft_track_tab	mem/ft_add_mal.c	/^void  **ft_track_tab(void **src, t_track *track)$/;"	f
+ft_track_free_tab	mem/ft_track_free_tab.c	/^void	**ft_track_free_tab(t_track *track, void **mem)$/;"	f
+ft_track_tab	mem/ft_add_mal.c	/^void	**ft_track_tab(void **src, t_track *track)$/;"	f
 len	include/libft.h	/^	int		len;$/;"	m	struct:s_track
+main	main.c	/^int	main(int ac, char **av)$/;"	f
 mem	include/libft.h	/^	void	**mem;$/;"	m	struct:s_track
 next	include/libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list::s_list
 s_list	include/libft.h	/^typedef struct s_list$/;"	s
