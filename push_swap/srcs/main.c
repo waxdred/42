@@ -14,9 +14,6 @@
 
 void	ft_get_full_env(t_pile **stack, t_swap *env)
 {
-	int	i;
-
-	i = 0;
 	ft_stack_len(env->pa, env);
 	ft_get_env(&env->pa, env);
 	ft_track(env->prefix = (int *)ft_memalloc(sizeof(int) * 10), env->t);
@@ -30,9 +27,11 @@ void	ft_sorting(t_swap *env)
 	if (env->len == 1 || ft_sorted(env) == 1)
 		return ;
 	ft_sort_list(env);
-	if (env->len < 4)
+	if (env->len < 2)
+		ft_sort_two(env);
+	else if (env->len < 4)
 		ft_sort_tree(env);
-	else if (env->len < 20)
+	else if (env->len == 5)
 		ft_sort_five(env);
 	else
 		ft_radix_sort(env, 0, 0, 0);

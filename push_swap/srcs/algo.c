@@ -12,6 +12,12 @@
 
 #include "../includes/push_swap.h"
 
+void	ft_sort_two(t_swap *env)
+{
+	if (env->pa->index > env->pa->next->index)
+		ft_rotatepilea(&env->pa);
+}
+
 void	ft_sort_tree(t_swap *env)
 {
 	int	end;
