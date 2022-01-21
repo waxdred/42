@@ -27,7 +27,7 @@ void	ft_add_index(t_pile **stack, t_swap *env)
 		while (env->input[i] != tmp)
 			i++;
 		elem->index = i;
-		elem->binary = ft_dec_to_bin(i, env->binary_len);
+		elem->binary = ft_track(ft_dec_to_bin(i, env->binary_len), env->t);
 		elem = elem->next;
 	}
 	i = 0;
@@ -35,9 +35,9 @@ void	ft_add_index(t_pile **stack, t_swap *env)
 	while (env->input[i] != tmp)
 		i++;
 	elem->index = i;
-	elem->binary = ft_dec_to_bin(i, env->binary_len);
-	free(env->input);
-	free(env->output);
+	elem->binary = ft_track(ft_dec_to_bin(i, env->binary_len), env->t);
+	ft_track_free(env->t, env->input);
+	ft_track_free(env->t, env->output);
 }
 
 void	ft_sort_list(t_swap *env)
@@ -77,7 +77,8 @@ t_pile	*ft_push_param(int ac, char **av, t_swap *env, int check)
 			data = ft_atoi(av[i]);
 			if (ft_check_doublon(stack, data, env) == -1)
 				return (NULL);
-			ft_add_back(&stack, ft_create_elem(ft_atoi(av[i])));
+			ft_add_back(&stack, ft_track(
+					ft_create_elem(ft_atoi(av[i])), env->t));
 			i++;
 		}
 	}

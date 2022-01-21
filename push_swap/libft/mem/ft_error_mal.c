@@ -1,41 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_tools1.c                                       :+:      :+:    :+:   */
+/*   ft_error_mal.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/28 00:20:15 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/12/28 00:20:15 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/11/03 18:12:31 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/11/03 18:48:52 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../include/libft.h"
 
-void	ft_add_back(t_pile **alst, t_pile *ne)
+void	*ft_error_mal(void *mem, t_track *track)
 {
-	t_pile	*elem;
-
-	if (ne == NULL || alst == NULL)
-		return ;
-	if (*alst == NULL)
+	if (!mem)
 	{
-		*alst = ne;
-		return ;
+		ft_putstr_fd("Error allocation\n..", 2);
+		if (track->len > 0)
+			ft_track_free_all(track);
+		exit (EXIT_FAILURE);
 	}
-	elem = ft_last(*alst);
-	elem->next = ne;
+	return (mem);
 }
 
-int	ft_stack_l(t_pile *stack)
+void	**ft_error_malt(void **mem, t_track *track)
 {
-	int	i;
-
-	i = 0;
-	while (stack != NULL)
+	if (!mem)
 	{
-		stack = stack->next;
-		i++;
+		ft_putstr_fd("Error allocation\n..", 2);
+		if (track->len > 0)
+			ft_track_free_all(track);
+		exit (EXIT_FAILURE);
 	}
-	return (i);
+	return (mem);
 }

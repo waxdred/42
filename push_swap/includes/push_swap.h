@@ -28,6 +28,7 @@ typedef struct s_swap
 {
 	t_pile	*pa;
 	t_pile	*pb;
+	t_track	*t;
 	int		*prefix;
 	int		*sum;
 	int		*input;

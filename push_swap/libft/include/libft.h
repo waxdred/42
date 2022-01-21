@@ -16,6 +16,20 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+/*for use tracking malloc
+ 	- for protecte malloc use ft_error_mal(void *mem, track); 
+	- for *  use ft_track: ex: str = ft_track(malloc(sizeof(type) * nb), track);
+	- for **  use ft_track_tab: exemple = str = ft_track_tab(tab, track);
+	- for free all alloc use: ft_track_free_all(track);
+	- for free * use : ft_track_free(track, *mem);
+	- for free ** use : ft_track_free_tab(track, **mem);
+*/
+typedef struct s_track
+{
+	void	**mem;
+	int		len;
+}			t_track;
+
 typedef struct s_list
 {
 	void			*content;
@@ -47,6 +61,7 @@ int			ft_isalpha(int c);
 int			ft_isascii(int c);
 int			ft_isdigit(int c);
 int			ft_isprint(int c);
+int			ft_isa_white_space(int c);
 int			ft_len_tab(char **tab);
 int			ft_lstsize(t_list *lst);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -68,12 +83,20 @@ size_t		ft_strlen(const char *str);
 t_list		*ft_lstlast(t_list *lst);
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list		*ft_lstnew(void *content);
+void		**ft_add_mal(void **mem);
+void		**ft_track_free(t_track *track, void *mem);
+void		**ft_track_free_all(t_track *track);
+void		**ft_track_free_tab(t_track *track, void **mem);
+void		**ft_track_tab(void **src, t_track *track);
 void		*ft_calloc(size_t count, size_t size);
+void		*ft_error_mal(void *mem, t_track *track);
+void		**ft_error_malt(void **mem, t_track *track);
 void		*ft_memalloc(size_t size);
 void		*ft_memchr(const void *s, int c, size_t n);
 void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		*ft_memmove(void *dst, const void *src, size_t len);
 void		*ft_memset(void *b, int c, size_t len);
+void		*ft_track(void *src, t_track *track);
 void		ft_bzero(void *s, size_t n);
 void		ft_freetab(char **tab);
 void		ft_lstadd_back(t_list **alst, t_list *ne);

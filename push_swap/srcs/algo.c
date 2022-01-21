@@ -15,34 +15,48 @@
 void	ft_sort_tree(t_swap *env)
 {
 	int	end;
+	int	middle;
 
 	end = ft_end_index(&env->pa);
-	if (env->pa->index < env->pa->next->index)
-		ft_swaptopa(&env->pa);
-	if (end < env->pa->index)
+	middle = env->pa->next->index;
+	if (env->pa->index < middle && env->pa->index > end)
+		ft_rotaterevpilea(&env->pa);
+	else if (env->pa->index > middle && env->pa->index > end && middle < end)
 		ft_rotatepilea(&env->pa);
-	if (env->pa->index > env->pa->next->index)
+	else if (env->pa->index > middle && env->pa->index < end && middle < end)
 		ft_swaptopa(&env->pa);
+	else if (env->pa->index < middle && env->pa->index < end && middle > end)
+	{
+		ft_swaptopa(&env->pa);
+		ft_rotatepilea(&env->pa);
+	}
+	else if (env->pa->index > middle && env->pa->index > end && middle > end)
+	{
+		ft_rotatepilea(&env->pa);
+		ft_swaptopa(&env->pa);
+	}
 }
 
 void	ft_sort_five(t_swap *env)
 {
-	int	i;
+	int	count;
 
-	i = 0;
-	while (i < env->len - 3)
+	count = 0;
+	while (count < 2)
 	{
-		if (env->pa->index == i)
+		if (env->pa->index == 0 || env->pa->index == 1)
 		{
 			ft_pushb(&env->pa, &env->pb);
-			i++;
+			count++;
 		}
 		else
 			ft_rotatepilea(&env->pa);
 	}
 	ft_sort_tree(env);
-	while (env->pb)
-		ft_pusha(&env->pa, &env->pb);
+	if (env->pb->index < env->pb->next->index)
+		ft_rotatepileb(&env->pb);
+	ft_pusha(&env->pa, &env->pb);
+	ft_pusha(&env->pa, &env->pb);
 }
 
 void	ft_radix_sort(t_swap *env, int i, int count, int index)

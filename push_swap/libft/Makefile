@@ -40,6 +40,7 @@ OBJS_CONV	=	$(CONV:.c=.o)
 ISA		=	ft_isalnum.c	   		\
 			ft_isalpha.c	   		\
 			ft_isascii.c	   		\
+			ft_isa_white_space.c		\
 			ft_isdigit.c	   		\
 			ft_isprint.c
 OBJS_ISA	=	$(ISA:.c=.o)
@@ -55,7 +56,10 @@ MEM		=	ft_bzero.c	   		\
 			ft_memcpy.c	   		\
 			ft_memmove.c	  		\
 			ft_memset.c	   	        \
-			ft_memset.c	   	        \
+			ft_add_mal.c	   	        \
+			ft_error_mal.c	   	        \
+			ft_track_free_all.c  	        \
+			ft_track_free_tab.c 	        \
 			ft_freetab.c
 OBJS_MEM	=	$(MEM:.c=.o)
 	

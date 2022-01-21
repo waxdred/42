@@ -26,18 +26,19 @@ CC 		= 	 gcc
 PATH_SRC	=	./srcs/
 PATH_OBJ	=	./objs/
 
-SRC 		=   	ft_push.c		\
+SRC 		=   	main.c			\
+			ft_push.c		\
 			algo.c			\
+			ft_env.c		\
+			utils.c			\
+			utils1.c		\
+			utils2.c		\
+			check_error.c		\
 			lst_tools.c		\
 			lst_tools1.c		\
 			stackA.c		\
-			stackB.c		\
-			ft_env.c		\
-			check_error.c		\
-			main.c			\
-			utils.c			\
-			utils1.c		\
-			utils2.c
+			stackB.c		
+
 
 OBJ_SRC		=	$(SRC:.c=.o)
 

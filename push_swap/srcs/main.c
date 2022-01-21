@@ -19,30 +19,16 @@ void	ft_get_full_env(t_pile **stack, t_swap *env)
 	i = 0;
 	ft_stack_len(env->pa, env);
 	ft_get_env(&env->pa, env);
-	env->prefix = (int *)ft_memalloc(sizeof(int) * 10);
-	if (!env->prefix)
-		exit (1);
-	env->sum = (int *)ft_memalloc(sizeof(int) * 10);
-	if (!env->sum)
-		exit (1);
+	ft_track(env->prefix = (int *)ft_memalloc(sizeof(int) * 10), env->t);
+	ft_track(env->sum = (int *)ft_memalloc(sizeof(int) * 10), env->t);
 	ft_creat_tab(&(*stack), env);
 }
 
 void	ft_sorting(t_swap *env)
 {
-	if (env->pa == NULL)
-	{
-		ft_putstr_fd("Error", 2);
-		free(env);
-		exit (-1);
-	}
 	ft_get_full_env(&env->pa, env);
 	if (env->len == 1 || ft_sorted(env) == 1)
-	{
-		ft_clear_stack(&env->pa);
-		free(env);
-		exit (1);
-	}
+		return ;
 	ft_sort_list(env);
 	if (env->len < 4)
 		ft_sort_tree(env);
@@ -50,31 +36,32 @@ void	ft_sorting(t_swap *env)
 		ft_sort_five(env);
 	else
 		ft_radix_sort(env, 0, 0, 0);
-	ft_clear_binary(env);
 }
 
-int	main(int argc, char **argv)
+int	main(int ac, char **av)
 {
 	t_swap	*env;
 	char	**tab;
 
-	if (argc == 1)
-		return (-1);
+	if (ac < 2)
+		return (0);
 	env = ft_memalloc(sizeof(t_swap));
-	if (!env)
+	env->t = ft_memalloc(sizeof(t_track));
+	if (!env || !env->t)
 		return (-1);
-	if (argc == 2)
+	if (ac == 2)
 	{
-		tab = ft_split(argv[1], ' ');
+		tab = ft_split(av[1], ' ');
+		ft_track_tab((void **)tab, env->t);
 		env->pa = ft_push_param(ft_len_tab(tab), tab, env, 1);
-		ft_freetab(tab);
 	}
 	else
-		env->pa = ft_push_param(argc, argv, env, 0);
-	ft_sorting(env);
-	ft_clear_stack(&env->pa);
-	free(env->prefix);
-	free(env->sum);
+		env->pa = ft_push_param(ac, av, env, 0);
+	if (env->pa != NULL)
+		ft_sorting(env);
+	else
+		ft_putstr_fd("Error\n", 2);
+	ft_track_free_all(env->t);
 	free(env);
 	return (0);
 }

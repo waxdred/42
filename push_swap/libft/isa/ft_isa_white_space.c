@@ -1,41 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_tools1.c                                       :+:      :+:    :+:   */
+/*   ft_isa_white_space.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/28 00:20:15 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/12/28 00:20:15 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/11/03 18:12:42 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/11/03 18:12:46 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../include/libft.h"
 
-void	ft_add_back(t_pile **alst, t_pile *ne)
+int	ft_isa_white_space(int c)
 {
-	t_pile	*elem;
-
-	if (ne == NULL || alst == NULL)
-		return ;
-	if (*alst == NULL)
-	{
-		*alst = ne;
-		return ;
-	}
-	elem = ft_last(*alst);
-	elem->next = ne;
-}
-
-int	ft_stack_l(t_pile *stack)
-{
-	int	i;
-
-	i = 0;
-	while (stack != NULL)
-	{
-		stack = stack->next;
-		i++;
-	}
-	return (i);
+	if (c == '\t' || c == '\n' || c == '\r' || c == '\v'
+		|| c == '\f' || c == ' ' )
+		return (1);
+	return (0);
 }

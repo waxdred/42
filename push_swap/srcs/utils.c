@@ -12,28 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-void	ft_creat_tab(t_pile **stack, t_swap *env)
-{
-	t_pile	*elem;
-	int		i;
-
-	i = 0;
-	elem = *stack;
-	env->input = (int *)ft_memalloc(sizeof(int) * env->len);
-	if (!env->input)
-		exit (1);
-	env->output = (int *)ft_memalloc(sizeof(int) * env->len);
-	if (!env->output)
-		exit (1);
-	while (elem->next != NULL)
-	{
-		env->input[i] = elem->data;
-		elem = elem->next;
-		i++;
-	}
-	env->input[i] = elem->data;
-}
-
 void	ft_count_prefix(t_swap *env, int coef)
 {
 	int	i;
@@ -69,6 +47,24 @@ void	ft_sort_prefix(t_swap *env, int coef)
 	}
 }
 
+void	ft_creat_tab(t_pile **stack, t_swap *env)
+{
+	t_pile	*elem;
+	int		i;
+
+	i = 0;
+	elem = *stack;
+	ft_track(env->input = (int *)ft_memalloc(sizeof(int) * env->len), env->t);
+	ft_track(env->output = (int *)ft_memalloc(sizeof(int) * env->len), env->t);
+	while (elem->next != NULL)
+	{
+		env->input[i] = elem->data;
+		elem = elem->next;
+		i++;
+	}
+	env->input[i] = elem->data;
+}
+
 void	ft_sort_neg(t_swap *env)
 {
 	int	i;
@@ -77,8 +73,10 @@ void	ft_sort_neg(t_swap *env)
 	i = 0;
 	j = 0;
 	ft_count_min_max(env);
-	if (ft_gen_tmp(env) == -1)
-		exit (-1);
+	ft_track(env->tmp_max = (int *)ft_memalloc(sizeof(int) * env->t_max),
+		env->t);
+	ft_track(env->tmp_min = (int *)ft_memalloc(sizeof(int) * env->t_min),
+		env->t);
 	ft_complet_tmp(env, 0, 0);
 	while (i < env->t_min)
 	{
@@ -91,8 +89,8 @@ void	ft_sort_neg(t_swap *env)
 		i++;
 		j++;
 	}
-	free(env->tmp_max);
-	free(env->tmp_min);
+	ft_track_free(env->t, env->tmp_max);
+	ft_track_free(env->t, env->tmp_min);
 }
 
 void	ft_transfere(t_swap *env)

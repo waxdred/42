@@ -29,15 +29,6 @@ void	ft_count_min_max(t_swap *env)
 	}
 }
 
-int	ft_gen_tmp(t_swap *env)
-{
-	env->tmp_max = (int *)ft_memalloc(sizeof(int) * env->t_max);
-	env->tmp_min = (int *)ft_memalloc(sizeof(int) * env->t_min);
-	if (!env->tmp_max || ! env->tmp_min)
-		return (-1);
-	return (0);
-}
-
 void	ft_complet_tmp(t_swap *env, int i, int j)
 {
 	i = env->len - 1;

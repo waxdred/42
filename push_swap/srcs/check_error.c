@@ -22,7 +22,6 @@ int	ft_check_doublon(t_pile *stack, int data, t_swap *env)
 		if (tmp->data == data)
 		{
 			ft_clear_stack(&env->pa);
-			free(env);
 			return (-1);
 		}
 		tmp = tmp->next;
@@ -55,7 +54,6 @@ int	ft_error(char *av, t_swap *env)
 	if (ft_num(av) || ft_stack_max(ft_atol(av)) || ft_strlen(av) > 19)
 	{
 		ft_clear_stack(&env->pa);
-		free(env);
 		return (-1);
 	}
 	return (0);
