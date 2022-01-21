@@ -3,4 +3,5 @@
 objs
 .out
 .DS_store
+.ccls-cache
 tags
