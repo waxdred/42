@@ -1,6 +1,7 @@
 
 #include "../includes/philo.h"
 
+int 	ft_
 int	ft_check_pars(char **av, int ac)
 {
 	int	i;
@@ -13,7 +14,8 @@ int	ft_check_pars(char **av, int ac)
 	}
 	while (i < ac)
 	{
-		if (ft_atouin(av[i]) > ULONG_MAX || ft_atouin(av[i]) == 0)
+		if (ft_strlen(av[i]) > 20 || ft_atouin(av[i]) > ULLONG_MAX ||
+				ft_atouin(av[i]) == 0)
 		{
 			ft_putstr_fd("Error: entry lowler value\n", 2);
 			return (-1);
