@@ -1,19 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_time.c                                      :+:      :+:    :+:   */
+/*   ft_strdupcat.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/24 18:00:59 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/24 18:00:59 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/12/17 18:07:17 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/12/17 18:07:17 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include ".././include/libft.h"
 
-unsigned long long time_ms(struct timeval *start, struct timeval *end)
+char	*ft_strdupcat(char *dest, const char *src)
 {
-	gettimeofday(end, NULL);
-	return ((end->tv_sec - start->tv_sec) * 1000 + (end->tv_usec - start->tv_usec) / 1000);
+	char	*str;
+	int		i;
+	int		j;
+
+	str = NULL;
+	str = (char *)ft_memalloc(ft_strlen(dest) + ft_strlen(src) + 1);
+	i = 0;
+	j = 0;
+	while (dest[i])
+	{
+		str[j] = dest[i];
+		i++;
+		j++;
+	}
+	i = 0;
+	while (src[i])
+	{
+		str[j] = src[i];
+		i++;
+		j++;
+	}
+	free(dest);
+	free((char *)src);
+	return (str);
 }

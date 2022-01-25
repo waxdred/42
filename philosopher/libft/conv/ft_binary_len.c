@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_time.c                                      :+:      :+:    :+:   */
+/*   ft_binary_len.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/24 18:00:59 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/24 18:00:59 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/12/23 19:54:26 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/12/23 19:54:26 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../include/libft.h"
 
-unsigned long long time_ms(struct timeval *start, struct timeval *end)
+int	ft_binary_len(int nbr)
 {
-	gettimeofday(end, NULL);
-	return ((end->tv_sec - start->tv_sec) * 1000 + (end->tv_usec - start->tv_usec) / 1000);
+	int	i;
+
+	i = 0;
+	while (nbr > 0)
+	{
+		nbr /= 2;
+		i++;
+	}
+	return (i);
 }

@@ -1,19 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_time.c                                      :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/24 18:00:59 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/24 18:00:59 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/11/03 18:12:13 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/11/06 18:54:36 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../include/libft.h"
 
-unsigned long long time_ms(struct timeval *start, struct timeval *end)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	gettimeofday(end, NULL);
-	return ((end->tv_sec - start->tv_sec) * 1000 + (end->tv_usec - start->tv_usec) / 1000);
+	size_t	i;
+	size_t	j;
+	char	*str;
+
+	i = 0;
+	j = 0;
+	str = (char *)ft_memalloc(len + 1);
+	if (!s)
+		return (NULL);
+	if (!str)
+		return (NULL);
+	while (s[i])
+	{
+		if (i >= start && j < len)
+		{
+			str[j] = s[i];
+			j++;
+		}
+		i++;
+	}
+	return (str);
 }

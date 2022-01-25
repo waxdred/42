@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_time.c                                      :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/24 18:00:59 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/24 18:00:59 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/11/03 18:12:34 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/11/03 18:48:14 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../include/libft.h"
 
-unsigned long long time_ms(struct timeval *start, struct timeval *end)
+void	*ft_calloc(size_t count, size_t size)
 {
-	gettimeofday(end, NULL);
-	return ((end->tv_sec - start->tv_sec) * 1000 + (end->tv_usec - start->tv_usec) / 1000);
+	char	*new;
+
+	new = malloc(size * count);
+	if (!new)
+		return (NULL);
+	ft_memset(new, 0, count * size);
+	return (new);
 }

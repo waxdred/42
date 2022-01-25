@@ -1,18 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 18:02:08 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/01/25 01:53:37 by jmilhas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philo.h"
 
 void	*try(void* param)
 {
-	int	i;
+	t_env	*env;
 	t_philo	*philo;
 
-	i = 0;
-	philo = param;
-	while (i < 500)
+	philo = (t_philo *)param;
+	env = (t_env *)philo->env;
+	while (1)
 	{
-		usleep(100);
-		printf("thread nb %d and need to eat %d\n",philo->philo_nb, 
-				philo->env->nb_time_eat);
-		i++;
+		if (philo->philo_nb % 2 == 0)
+			usleep(100);
+		if (env->forks[philo->rfork] == 1 && env->forks[philo->rfork] == 1)
+		{
+			pthread_mutex_lock(&env->m_forks);
+			ft_eat(philo, env);
+			pthread_mutex_unlock(&env->m_forks);
+			ft_sleep(philo, env);
+		}
+		usleep(10);
 	}
 	return (0);
 }
@@ -21,19 +39,24 @@ void	ft_allocation_thread(t_env *env, t_track *t)
 {
 	long	i;
 
-	i = 0;
+	i = 1;
 	ft_track(env->forks = ft_memalloc(sizeof(pthread_mutex_t) 
 			* (env->nb_philo + 1)), t);
 	env->philo = ft_memalloc(sizeof(t_philo) * (env->nb_philo + 1));
-	while (i < env->nb_philo)
+	pthread_mutex_init(&env->m_forks, NULL);
+	pthread_mutex_init(&env->m_death, NULL);
+	while (i <= env->nb_philo)
 	{
 		env->philo[i] = malloc(sizeof(t_philo));
 		env->philo[i]->env = env; 
 		env->philo[i]->philo_nb = i;
+		ft_add_forks(env->philo[i], env, i);
+		gettimeofday(&env->philo[i]->start, NULL);
+		env->philo[i]->reset = env->philo[i]->start;
 		pthread_create(&env->t_philo[i], NULL, try, (void *)env->philo[i]);
+		usleep(1000);
 		i++;
 	}
-	pthread_create(&env->t_philo[i], NULL, ft_timer, (void *)env);
 	ft_track_tab((void **)env->philo, t);
 }
 
@@ -45,7 +68,6 @@ int	ft_pilo(t_env *env, char **av, int ac)
 	if (ft_init(env, av, ac))
 		return (-1);
 	ft_allocation_thread(env, env->t);
-	ft_putstr_fd("ok\n", 2);
 	i = 0;
 	while (i <= env->nb_philo)
 	{
@@ -71,6 +93,8 @@ int	main(int ac, char **av)
 			free(env);
 			return (-1);
 		}
+		pthread_mutex_destroy(&env->m_forks);
+		pthread_mutex_destroy(&env->m_death);
 		ft_track_free_all(env->t);
 	}
 	else

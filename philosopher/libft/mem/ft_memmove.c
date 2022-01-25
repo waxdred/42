@@ -1,19 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_time.c                                      :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/24 18:00:59 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/24 18:00:59 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/11/03 18:13:23 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/11/05 15:46:53 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../include/libft.h"
 
-unsigned long long time_ms(struct timeval *start, struct timeval *end)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	gettimeofday(end, NULL);
-	return ((end->tv_sec - start->tv_sec) * 1000 + (end->tv_usec - start->tv_usec) / 1000);
+	size_t			i;
+	unsigned char	*a;
+	unsigned char	*b;
+
+	i = 0;
+	a = (unsigned char *)dst;
+	b = (unsigned char *)src;
+	if (a > b)
+	{
+		while (i < len)
+		{
+			a[len - 1] = b[len - 1];
+			len--;
+		}
+	}
+	else
+	{
+		while (i < len)
+		{
+			a[i] = b[i];
+			i++;
+		}
+	}
+	return (dst);
 }

@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_time.c                                      :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/24 18:00:59 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/24 18:00:59 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/11/04 21:38:16 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/11/04 21:47:34 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../include/libft.h"
 
-unsigned long long time_ms(struct timeval *start, struct timeval *end)
+void	ft_lstadd_back(t_list **alst, t_list *ne)
 {
-	gettimeofday(end, NULL);
-	return ((end->tv_sec - start->tv_sec) * 1000 + (end->tv_usec - start->tv_usec) / 1000);
+	t_list	*elem;
+
+	if (ne == NULL || alst == NULL)
+		return ;
+	if (*alst == NULL)
+	{
+		*alst = ne;
+		return ;
+	}
+	elem = ft_lstlast(*alst);
+	elem->next = ne;
 }

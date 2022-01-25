@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_time.c                                      :+:      :+:    :+:   */
+/*   ft_dec_to_bin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/24 18:00:59 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/24 18:00:59 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/12/23 18:30:54 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/12/23 18:30:54 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../include/libft.h"
 
-unsigned long long time_ms(struct timeval *start, struct timeval *end)
+int	*ft_dec_to_bin(int nbr, int size)
 {
-	gettimeofday(end, NULL);
-	return ((end->tv_sec - start->tv_sec) * 1000 + (end->tv_usec - start->tv_usec) / 1000);
+	int	*binary;
+
+	binary = (int *)malloc(sizeof(int) * size);
+	if (!binary)
+		return (NULL);
+	while (nbr > 0)
+	{
+		size--;
+		binary[size] = nbr % 2;
+		nbr /= 2;
+	}
+	while (size > 0)
+	{
+		size--;
+		binary[size] = 0;
+	}
+	return (binary);
 }

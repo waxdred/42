@@ -20,10 +20,12 @@ typedef struct s_env
 
 	int			nb_philo;
 	int			nb_time_eat;
+	int			died;
+	int			*forks;
 	struct s_philo  	**philo;
 	pthread_t		t_philo[200];
-	pthread_mutex_t		*forks;
-	pthread_mutex_t 	death;
+	pthread_mutex_t		m_forks;
+	pthread_mutex_t 	m_death;
 	t_track			*t;
 }		t_env;
 
@@ -32,6 +34,9 @@ typedef struct	s_philo
 	int			philo_nb;
 	unsigned long int	limit;
 	unsigned long int	last_eat;
+	struct timeval 		start;
+	struct timeval 		reset;
+	struct timeval 		end;
 	int			lfork;
 	int			rfork;
 	int			eat_count;
@@ -40,5 +45,10 @@ typedef struct	s_philo
 
 void 	*ft_timer(void *param);
 int	ft_init(t_env * env, char **av, int ac);
+void	ft_add_forks(t_philo *philo, t_env *env, int i);
+unsigned long long time_ms(struct timeval *start, struct timeval *end);
+void	ft_eat(t_philo *philo, t_env *env);
+void	ft_sleep(t_philo *philo, t_env *env);
+int	ft_check_death(t_philo *philo, t_env *env);
 
 #endif

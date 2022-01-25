@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_time.c                                      :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/24 18:00:59 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/24 18:00:59 by jmilhas          ###   ########.fr       */
+/*   Created: 2021/11/03 18:11:58 by jmilhas           #+#    #+#             */
+/*   Updated: 2021/11/03 18:26:47 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../include/libft.h"
 
-unsigned long long time_ms(struct timeval *start, struct timeval *end)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	gettimeofday(end, NULL);
-	return ((end->tv_sec - start->tv_sec) * 1000 + (end->tv_usec - start->tv_usec) / 1000);
+	size_t	i;
+
+	i = 0;
+	while ((unsigned char)s1[i] == (unsigned char)s2[i]
+		&& s1[i] != '\0' && s2[i] != '\0' && i < n - 1)
+		i++;
+	if (n > 0)
+		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	else
+		return (0);
 }

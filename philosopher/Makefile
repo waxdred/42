@@ -28,6 +28,7 @@ PATH_OBJ	=	./objs/
 
 SRC 		=   	philo.c		\
 			ft_parsing.c	\
+			ft_params.c	\
 			ft_get_time.c
 
 
@@ -39,7 +40,7 @@ OBJ_S		=	$(addprefix $(PATH_OBJ), $(OBJ_SRC))
 HEADER 		= 	includes/philo.h
 MK		= 	Makefile
 SAN 		= 	-g3 -fsanitize=address
-FLAGS 		= 	-Wall -Werror -Wextra -ggdb 
+FLAGS 		= 	-Wall -Werror -Wextra -g3 
 DEPEND		=	libft/libft.a
 
 $(PATH_OBJ)%.o : $(PATH_SRC)%.c $(HEADER) $(MK)

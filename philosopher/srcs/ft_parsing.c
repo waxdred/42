@@ -1,7 +1,6 @@
 
 #include "../includes/philo.h"
 
-int 	ft_
 int	ft_check_pars(char **av, int ac)
 {
 	int	i;
@@ -14,8 +13,8 @@ int	ft_check_pars(char **av, int ac)
 	}
 	while (i < ac)
 	{
-		if (ft_strlen(av[i]) > 20 || ft_atouin(av[i]) > ULLONG_MAX ||
-				ft_atouin(av[i]) == 0)
+		if (ft_strlen(av[i]) > 12 || ft_atol(av[i]) > ULLONG_MAX ||
+				ft_atol(av[i]) == 0)
 		{
 			ft_putstr_fd("Error: entry lowler value\n", 2);
 			return (-1);
@@ -30,11 +29,11 @@ int	ft_init(t_env * env, char **av, int ac)
 	if (ft_check_pars(av, ac))
 		return (-1);
 	env->nb_philo = ft_atoi(av[1]);
-	env->time_to_die = ft_atouin(av[2]);
-	env->time_to_eat = ft_atouin(av[3]);
-	env->time_to_sleep = ft_atouin(av[4]);
+	env->time_to_die = ft_atol(av[2]);
+	env->time_to_eat = ft_atol(av[3]);
+	env->time_to_sleep = ft_atol(av[4]);
 	if (ac == 6)
-		env->nb_time_eat = ft_atouin(av[5]);
+		env->nb_time_eat = ft_atol(av[5]);
 	else
 		env->nb_time_eat = -1;
 	return (0);
