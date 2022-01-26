@@ -49,10 +49,10 @@ void 	*ft_timer(void *param);
 int	ft_init(t_env * env, char **av, int ac);
 void	ft_add_forks(t_philo *philo, t_env *env, int i);
 unsigned long long time_ms(struct timeval *start, struct timeval *end);
-void	ft_eat(t_philo *philo, t_env *env);
-void	ft_sleep(t_philo *philo, t_env *env);
+int	ft_eat(t_philo *philo, t_env *env);
+int	ft_sleep(t_philo *philo, t_env *env);
 int	ft_check_death(t_philo *philo, t_env *env);
 void	ft_mutex_fork(t_philo *philo, t_env *env, int check);
-void	ft_write(t_philo *philo, t_env *env, int check);
+int	ft_write(t_philo *philo, t_env *env, int check);
 
 #endif

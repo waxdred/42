@@ -14,60 +14,60 @@
 
 int	ft_check_death(t_philo *philo, t_env *env)
 {
-	if (time_ms(&philo->reset, &philo->end) >= env->time_to_die)
+	if (env->eat_stop == 0 && env->died == 0)
 	{
-		env->died = 1;
-		pthread_mutex_lock(&env->m_write);
-		dprintf(1, "%llu: philo %d dead\n", 
-		time_ms(&philo->start, &philo->end) ,philo->philo_nb);
-		pthread_mutex_unlock(&env->m_write);
-		pthread_mutex_unlock(&env->m_death);
-		return (-1);
-	}
-	return (0);
-}
-
-int	ft_check_eat(t_philo *philo, t_env *env, int check)
-{
-	if (check == 0)
-	{
-		if (env->nb_time_eat > -1)
+		if (time_ms(&philo->reset, &philo->end) >= env->time_to_die)
 		{
-			if (env->nb_time_eat == philo->eat_count)
-				env->eat_stop = 1;
+			env->died = 1;
+			pthread_mutex_lock(&env->m_write);
+			dprintf(1, "%llu: philo %d dead\n", 
+			time_ms(&philo->start, &philo->end) ,philo->philo_nb);
+			pthread_mutex_unlock(&env->m_write);
+			pthread_mutex_unlock(&env->m_death);
+			return (-1);
+		}
+		if (philo->eat_count >= env->nb_time_eat)
+		{
+			env->eat_stop = 1;
+			pthread_mutex_lock(&env->m_write);
+			dprintf(1, "%llu: philo %d finish to eat\n", 
+			time_ms(&philo->start, &philo->end) ,philo->philo_nb);
+			pthread_mutex_unlock(&env->m_write);
+			pthread_mutex_unlock(&env->m_death);
+			return (-1);
 		}
 	}
-	else if (check == 1)
-	{
-		ft_write(philo, env, 3);
-		ft_track_free_all(env->t);
-	}
 	return (0);
 }
 
-void	ft_sleep(t_philo *philo, t_env *env)
+int	ft_sleep(t_philo *philo, t_env *env)
 {
 	struct timeval		sleep;
 
 	gettimeofday(&sleep, NULL);
+	usleep(10);
 	pthread_mutex_lock(&env->m_write);
-	ft_write(philo, env, 1);
+	if (ft_write(philo, env, 1) == -1)
+	{
+		pthread_mutex_unlock(&env->m_write);
+		return (-1);
+	}
 	pthread_mutex_unlock(&env->m_write);
 	while (time_ms(&sleep, &philo->end) < env->time_to_sleep)
 		usleep(env->time_to_sleep);
 	pthread_mutex_lock(&env->m_write);
 	ft_write(philo, env, 1);
 	pthread_mutex_unlock(&env->m_write);
+	return (0);
 }
 
-void	ft_write(t_philo *philo, t_env *env, int check)
+int	ft_write(t_philo *philo, t_env *env, int check)
 {
 	pthread_mutex_lock(&env->m_death);
-	if (env->died == 1)
+	if (env->died == 1 || env->eat_stop == 1)
 	{
 		pthread_mutex_unlock(&env->m_death);
-		ft_track_free_all(env->t);
-		exit (-1);
+		return (-1);
 	}
 	if (check == 0)
 	{
@@ -87,6 +87,7 @@ void	ft_write(t_philo *philo, t_env *env, int check)
 		time_ms(&philo->start, &philo->end) ,philo->philo_nb);
 	}
 	pthread_mutex_unlock(&env->m_death);
+	return (0);
 }
 
 void	ft_mutex_fork(t_philo *philo, t_env *env, int check)
@@ -108,15 +109,20 @@ void	ft_mutex_fork(t_philo *philo, t_env *env, int check)
 
 }
 
-void	ft_eat(t_philo *philo, t_env *env)
+int	ft_eat(t_philo *philo, t_env *env)
 {
 	gettimeofday(&philo->reset, NULL);
 	pthread_mutex_lock(&env->m_write);
-	ft_write(philo, env, 0);
+	if (ft_write(philo, env, 0) == -1)
+	{
+		pthread_mutex_unlock(&env->m_write);
+		return (-1);
+	}
 	pthread_mutex_unlock(&env->m_write);
 	philo->eat_count++;
 	while (time_ms(&philo->reset, &philo->end) <= env->time_to_eat)
 		usleep(env->time_to_eat);
+	return (0);
 }
 
 void	ft_add_forks(t_philo *philo, t_env *env, int i)

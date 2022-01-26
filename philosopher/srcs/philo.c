@@ -23,7 +23,7 @@ void	*routine(void* param)
 	{
 		pthread_mutex_lock(&env->m_death);
 		ft_check_death(philo, env);
-		if (env->died == 1)
+		if (env->died == 1 || env->eat_stop == 1)
 		{
 			pthread_mutex_unlock(&env->m_death);
 			return (0);
@@ -32,9 +32,11 @@ void	*routine(void* param)
 		if (env->forks[philo->rfork] == 1 && env->forks[philo->rfork] == 1)
 		{
 			ft_mutex_fork(philo, env, 0);
-			ft_eat(philo, env);
+			if (ft_eat(philo, env) == -1)
+				return (0);
 			ft_mutex_fork(philo, env, 1);
-			ft_sleep(philo, env);
+			if (ft_sleep(philo, env) == -1)
+				return (0);
 		}
 		usleep(10);
 	}
@@ -46,7 +48,7 @@ void	ft_allocation_thread(t_env *env, t_track *t)
 	long	i;
 
 	i = 1;
-	ft_track(env->forks = ft_memalloc(sizeof(pthread_mutex_t) 
+	env->forks = ft_track(ft_memalloc(sizeof(pthread_mutex_t) 
 			* (env->nb_philo + 1)), t);
 	env->philo = ft_memalloc(sizeof(t_philo) * (env->nb_philo + 1));
 	pthread_mutex_init(&env->m_forks, NULL);
@@ -54,7 +56,7 @@ void	ft_allocation_thread(t_env *env, t_track *t)
 	pthread_mutex_init(&env->m_write, NULL);
 	while (i <= env->nb_philo)
 	{
-		env->philo[i] = malloc(sizeof(t_philo));
+		env->philo[i] = ft_track(malloc(sizeof(t_philo)), t);
 		env->philo[i]->env = env; 
 		env->philo[i]->philo_nb = i;
 		ft_add_forks(env->philo[i], env, i);
@@ -102,6 +104,7 @@ int	main(int ac, char **av)
 		}
 		pthread_mutex_destroy(&env->m_forks);
 		pthread_mutex_destroy(&env->m_death);
+		pthread_mutex_destroy(&env->m_write);
 		ft_track_free_all(env->t);
 	}
 	else
