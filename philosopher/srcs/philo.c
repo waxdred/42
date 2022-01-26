@@ -12,7 +12,7 @@
 
 #include "../includes/philo.h"
 
-void	*try(void* param)
+void	*routine(void* param)
 {
 	t_env	*env;
 	t_philo	*philo;
@@ -21,13 +21,19 @@ void	*try(void* param)
 	env = (t_env *)philo->env;
 	while (1)
 	{
-		if (philo->philo_nb % 2 == 0)
-			usleep(100);
+		pthread_mutex_lock(&env->m_death);
+		ft_check_death(philo, env);
+		if (env->died == 1)
+		{
+			pthread_mutex_unlock(&env->m_death);
+			return (0);
+		}
+		pthread_mutex_unlock(&env->m_death);
 		if (env->forks[philo->rfork] == 1 && env->forks[philo->rfork] == 1)
 		{
-			pthread_mutex_lock(&env->m_forks);
+			ft_mutex_fork(philo, env, 0);
 			ft_eat(philo, env);
-			pthread_mutex_unlock(&env->m_forks);
+			ft_mutex_fork(philo, env, 1);
 			ft_sleep(philo, env);
 		}
 		usleep(10);
@@ -45,6 +51,7 @@ void	ft_allocation_thread(t_env *env, t_track *t)
 	env->philo = ft_memalloc(sizeof(t_philo) * (env->nb_philo + 1));
 	pthread_mutex_init(&env->m_forks, NULL);
 	pthread_mutex_init(&env->m_death, NULL);
+	pthread_mutex_init(&env->m_write, NULL);
 	while (i <= env->nb_philo)
 	{
 		env->philo[i] = malloc(sizeof(t_philo));
@@ -53,7 +60,7 @@ void	ft_allocation_thread(t_env *env, t_track *t)
 		ft_add_forks(env->philo[i], env, i);
 		gettimeofday(&env->philo[i]->start, NULL);
 		env->philo[i]->reset = env->philo[i]->start;
-		pthread_create(&env->t_philo[i], NULL, try, (void *)env->philo[i]);
+		pthread_create(&env->t_philo[i], NULL, routine, (void *)env->philo[i]);
 		usleep(1000);
 		i++;
 	}

@@ -21,11 +21,13 @@ typedef struct s_env
 	int			nb_philo;
 	int			nb_time_eat;
 	int			died;
+	int			eat_stop;
 	int			*forks;
 	struct s_philo  	**philo;
 	pthread_t		t_philo[200];
 	pthread_mutex_t		m_forks;
 	pthread_mutex_t 	m_death;
+	pthread_mutex_t 	m_write;
 	t_track			*t;
 }		t_env;
 
@@ -50,5 +52,7 @@ unsigned long long time_ms(struct timeval *start, struct timeval *end);
 void	ft_eat(t_philo *philo, t_env *env);
 void	ft_sleep(t_philo *philo, t_env *env);
 int	ft_check_death(t_philo *philo, t_env *env);
+void	ft_mutex_fork(t_philo *philo, t_env *env, int check);
+void	ft_write(t_philo *philo, t_env *env, int check);
 
 #endif
