@@ -6,7 +6,7 @@
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 19:05:19 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/25 01:56:59 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/01/27 01:11:11 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,23 @@ int	ft_check_death(t_philo *philo, t_env *env)
 {
 	if (env->eat_stop == 0 && env->died == 0)
 	{
-		if (time_ms(&philo->reset, &philo->end) >= env->time_to_die)
+		if (time_ms(&philo->reset) >= env->time_to_die)
 		{
 			env->died = 1;
 			pthread_mutex_lock(&env->m_write);
 			dprintf(1, "%llu: philo %d dead\n", 
-			time_ms(&philo->start, &philo->end) ,philo->philo_nb);
+			time_ms(&philo->start) ,philo->philo_nb);
 			pthread_mutex_unlock(&env->m_write);
 			pthread_mutex_unlock(&env->m_death);
 			return (-1);
 		}
-		if (philo->eat_count >= env->nb_time_eat)
+		if (philo->eat_count >= env->nb_time_eat && 
+			env->nb_time_eat != -1)
 		{
 			env->eat_stop = 1;
 			pthread_mutex_lock(&env->m_write);
 			dprintf(1, "%llu: philo %d finish to eat\n", 
-			time_ms(&philo->start, &philo->end) ,philo->philo_nb);
+			time_ms(&philo->start) ,philo->philo_nb);
 			pthread_mutex_unlock(&env->m_write);
 			pthread_mutex_unlock(&env->m_death);
 			return (-1);
@@ -53,7 +54,7 @@ int	ft_sleep(t_philo *philo, t_env *env)
 		return (-1);
 	}
 	pthread_mutex_unlock(&env->m_write);
-	while (time_ms(&sleep, &philo->end) < env->time_to_sleep)
+	while (time_ms(&sleep) < env->time_to_sleep)
 		usleep(env->time_to_sleep);
 	pthread_mutex_lock(&env->m_write);
 	ft_write(philo, env, 1);
@@ -72,19 +73,19 @@ int	ft_write(t_philo *philo, t_env *env, int check)
 	if (check == 0)
 	{
 		dprintf(1, "%llu: philo %d take the forks\n", 
-		time_ms(&philo->start, &philo->end) ,philo->philo_nb);
+		time_ms(&philo->start) ,philo->philo_nb);
 		dprintf(1, "%llu: philo %d eat\n", 
-		time_ms(&philo->start, &philo->end) ,philo->philo_nb);
+		time_ms(&philo->start) ,philo->philo_nb);
 	}
 	else if (check == 1)
 	{
 		dprintf(1, "%llu: philo %d sleep\n", 
-		time_ms(&philo->start, &philo->end) ,philo->philo_nb);
+		time_ms(&philo->start) ,philo->philo_nb);
 	}
 	else if (check == 2)
 	{
 		dprintf(1, "%llu: philo %d think\n", 
-		time_ms(&philo->start, &philo->end) ,philo->philo_nb);
+		time_ms(&philo->start) ,philo->philo_nb);
 	}
 	pthread_mutex_unlock(&env->m_death);
 	return (0);
@@ -119,9 +120,10 @@ int	ft_eat(t_philo *philo, t_env *env)
 		return (-1);
 	}
 	pthread_mutex_unlock(&env->m_write);
-	philo->eat_count++;
-	while (time_ms(&philo->reset, &philo->end) <= env->time_to_eat)
-		usleep(env->time_to_eat);
+	if (env->nb_time_eat != -1)
+		philo->eat_count++;
+	while (time_ms(&philo->reset) <= env->time_to_eat)
+		usleep(10);
 	return (0);
 }
 
@@ -132,7 +134,8 @@ void	ft_add_forks(t_philo *philo, t_env *env, int i)
 	j = 0;
 	if (i == 1)
 	{
-		env->forks = ft_track(ft_memalloc(sizeof(int) * (env->nb_philo + 1)), env->t);
+		env->forks = ft_track(ft_memalloc(sizeof(int)
+			* (env->nb_philo + 1)), env->t);
 		while (j <= env->nb_philo)
 			env->forks[j++] = 1;
 		philo->rfork = philo->philo_nb;

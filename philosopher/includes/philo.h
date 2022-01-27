@@ -38,7 +38,7 @@ typedef struct	s_philo
 	unsigned long int	last_eat;
 	struct timeval 		start;
 	struct timeval 		reset;
-	struct timeval 		end;
+	//struct timeval 		end;
 	int			lfork;
 	int			rfork;
 	int			eat_count;
@@ -48,7 +48,7 @@ typedef struct	s_philo
 void 	*ft_timer(void *param);
 int	ft_init(t_env * env, char **av, int ac);
 void	ft_add_forks(t_philo *philo, t_env *env, int i);
-unsigned long long time_ms(struct timeval *start, struct timeval *end);
+unsigned long long time_ms(struct timeval *start);
 int	ft_eat(t_philo *philo, t_env *env);
 int	ft_sleep(t_philo *philo, t_env *env);
 int	ft_check_death(t_philo *philo, t_env *env);

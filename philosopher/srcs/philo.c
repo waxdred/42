@@ -6,7 +6,7 @@
 /*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:02:08 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/01/25 01:53:37 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/01/27 01:27:31 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_allocation_thread(t_env *env, t_track *t)
 		gettimeofday(&env->philo[i]->start, NULL);
 		env->philo[i]->reset = env->philo[i]->start;
 		pthread_create(&env->t_philo[i], NULL, routine, (void *)env->philo[i]);
-		usleep(1000);
+		usleep(100);
 		i++;
 	}
 	ft_track_tab((void **)env->philo, t);
