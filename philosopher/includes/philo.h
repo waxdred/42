@@ -1,58 +1,76 @@
-#ifndef 	PHILO_H
-#include <pthread.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/time.h>
-#include <unistd.h>
-#include <stdint.h>
-#include <limits.h>
-#include <string.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 18:02:08 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/01/27 01:27:31 by jmilhas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#ifndef PHILO_H
+# define PHILO_H
+# include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/time.h>
+# include <unistd.h>
+# include <stdint.h>
+# include <limits.h>
+# include <string.h>
 
-#include "../libft/include/libft.h"
+struct	s_philo;
 
-struct s_philo;
-typedef struct s_env
+typedef struct s_philo
 {
-	unsigned long int	time_to_die;	
-	unsigned long int	time_to_eat;
-	unsigned long int	time_to_sleep;
-
-	int			nb_philo;
-	int			nb_time_eat;
-	int			died;
-	int			eat_stop;
-	int			*forks;
-	struct s_philo  	**philo;
-	pthread_t		t_philo[200];
-	pthread_mutex_t		m_forks;
-	pthread_mutex_t 	m_death;
-	pthread_mutex_t 	m_write;
-	t_track			*t;
-}		t_env;
-
-typedef struct	s_philo
-{
-	int			philo_nb;
-	unsigned long int	limit;
-	unsigned long int	last_eat;
-	struct timeval 		start;
-	struct timeval 		reset;
-	//struct timeval 		end;
-	int			lfork;
-	int			rfork;
-	int			eat_count;
-	t_env			*env;
+	int					id;
+	int					x_ate;
+	int					l_fork;
+	int					r_fork;
+	long long			t_last_meal;
+	struct s_env		*env;
+	pthread_t			thread_id;
 }		t_philo;
 
-void 	*ft_timer(void *param);
-int	ft_init(t_env * env, char **av, int ac);
-void	ft_add_forks(t_philo *philo, t_env *env, int i);
-unsigned long long time_ms(struct timeval *start);
-int	ft_eat(t_philo *philo, t_env *env);
-int	ft_sleep(t_philo *philo, t_env *env);
-int	ft_check_death(t_philo *philo, t_env *env);
-void	ft_mutex_fork(t_philo *philo, t_env *env, int check);
-int	ft_write(t_philo *philo, t_env *env, int check);
+typedef struct s_env
+{
+	int					nb_philo;
+	int					time_death;
+	int					time_eat;
+	int					time_sleep;
+	int					nb_eat;
+	int					dieded;
+	int					all_ate;
+	long long			first_timestamp;
+	pthread_mutex_t		meal_check;
+	pthread_mutex_t		forks[250];
+	pthread_mutex_t		writing;
+	t_philo				philo[250];
+}		t_env;
 
+/* fonction in utils.c */
+int			ft_atoi(const char *str);
+long long	dif_time(long long time_start, long long time_end);
+long long	timestamps(void);
+void		check_sleep(long long time, t_env *env);
+
+/* fonction in thread.c */
+int			init_mutex(t_env *env);
+int			init_env(t_env *env, char **av);
+int			init_philo(t_env *env);
+
+/* fonction in ft_print.c */
+int			print_error(char *str);
+int			set_error(int error);
+void		print_action(t_env *env, int id, int check);
+void		ft_alone(t_env *env, t_philo *philo);
+
+/* fonction in ft_routine.c */
+int			run_philo(t_env *env);
+void		*routine(void *args);
+void		ft_check_death(t_env *e, t_philo *p);
+void		ft_eat(t_philo *philo);
+void		start_exit(t_env *env, t_philo *philo);
 #endif

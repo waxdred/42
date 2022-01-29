@@ -26,11 +26,11 @@ CC 		= 	 gcc
 PATH_SRC	=	./srcs/
 PATH_OBJ	=	./objs/
 
-SRC 		=   	philo.c		\
-			ft_parsing.c	\
-			ft_params.c	\
-			ft_get_time.c
-
+SRC 		=   	main.c		\
+			ft_routine.c	\
+			thread.c	\
+			ft_print.c	\
+			utils.c
 
 OBJ_SRC		=	$(SRC:.c=.o)
 
@@ -41,7 +41,6 @@ HEADER 		= 	includes/philo.h
 MK		= 	Makefile
 SAN 		= 	-g3 -fsanitize=address
 FLAGS 		= 	-Wall -Werror -Wextra -g3 
-DEPEND		=	libft/libft.a
 
 $(PATH_OBJ)%.o : $(PATH_SRC)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
@@ -54,10 +53,9 @@ all: $(NAME)
 $(NAME): $(OBJ_S)
 	@printf "\r\t\033[K$(CCYAN)[✅]\t$(EXEC) $(CCPURPLE)--> $(CCYAN) Gen Objs$(CCEND)"
 	@printf "\n$(CCYAN)[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
-	@make -C libft
 	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
 	@ar rc $(PATH_OBJ)$(NAME) $(OBJ_S)
-	@$(CC) $(PATH_OBJ)$(NAME) $(DEPEND) -o $(EXEC)
+	@$(CC) $(PATH_OBJ)$(NAME) -o $(EXEC)
 	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Compilation ./$(EXEC)...$(CCEND)\n"
 
 clean:
@@ -66,7 +64,6 @@ clean:
 
 fclean: clean
 	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(NAME)...$(CCEND)\n"
-	@make fclean -C libft
 	@-/bin/rm -f $(PATH_OBJ)*.a
 	@-/bin/rm -rf $(PATH_OBJ)
 	@-/bin/rm -f Tags
