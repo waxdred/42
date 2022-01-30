@@ -74,8 +74,8 @@ int	init_env(t_env *env, char **av)
 		return (1);
 	if (av[5])
 	{
-		env->nb_eat = ft_atoi(av[5]);
-		if (env->nb_eat <= 0)
+		env->nb_eat = (ft_atoi(av[5]) - 1);
+		if (env->nb_eat < 0)
 			return (1);
 	}
 	else

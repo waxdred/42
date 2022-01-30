@@ -28,8 +28,8 @@ char	*ft_strdup(const char *s1)
 	int		i;
 
 	s2 = (char *) malloc(ft_strlen((char *)s1) + 1);
-	if (!s2)
-		return (0);
+	/* if (!s2) */
+	/* 	return (0); */
 	i = 0;
 	while (s1[i] != 0)
 	{

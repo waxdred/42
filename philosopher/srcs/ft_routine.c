@@ -37,11 +37,9 @@ void	ft_eat(t_philo *philo)
 /* return: (void); */
 void	*routine(void *args)
 {
-	int		i;
 	t_env	*env;
 	t_philo	*philo;
 
-	i = 0;
 	philo = (t_philo *)args;
 	env = philo->env;
 	if (philo->id % 2)
@@ -54,12 +52,11 @@ void	*routine(void *args)
 	while (!(env->dieded) || env->all_ate < 1)
 	{
 		ft_eat(philo);
-		if (env->all_ate)
+		if (env->all_ate || env->dieded)
 			break ;
 		print_action(env, philo->id, 2);
 		check_sleep(env->time_sleep, env);
 		print_action(env, philo->id, 3);
-		i++;
 	}
 	return (NULL);
 }

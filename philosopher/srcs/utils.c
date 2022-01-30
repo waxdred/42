@@ -61,7 +61,7 @@ void	check_sleep(long long time, t_env *env)
 	long long	i;
 
 	i = timestamps();
-	while (!(env->dieded))
+	while (!(env->dieded) || !(env->all_ate))
 	{
 		if (dif_time(i, timestamps()) >= time)
 			break ;
