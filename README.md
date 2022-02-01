@@ -7,5 +7,5 @@ List des Projet:<br />
 - [x] ![](https://img.shields.io/static/v1?label=Push_swap&message=85&color=success&style=?style=for-the-badge&logo=appveyor)<br />
 - [X] ![](https://img.shields.io/static/v1?label=Pipex&message=116&color=success&style=?style=for-the-badge&logo=appveyor)<br />
 - [X] ![](https://img.shields.io/static/v1?label=Fdf&message=118&color=success&style=?style=for-the-badge&logo=appveyor)<br />
-- [X] ![](https://img.shields.io/static/v1?label=Philosophers&message=118&color=success&style=?style=for-the-badge&logo=appveyor)<br />
+- [ ] ![](https://img.shields.io/static/v1?label=Philosophers&message=0&color=success&style=?style=for-the-badge&logo=appveyor)<br />
 
