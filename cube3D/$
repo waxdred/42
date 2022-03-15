@@ -1,0 +1,41 @@
+
+#include "../includes/cube.h"
+
+static void	put_pixel_player(t_cube *cube, int x, int y, int color)
+{
+	int	i;
+
+	i = (int)(SCALE * cube->mlx->wd_width) * y + x;
+	cube->player->data[i] = color;
+}
+
+void	ft_init_player(t_cube *cube)
+{
+	cube->player = ft_track(ft_memalloc(sizeof(t_player)), &cube->track);
+	cube->player->pos_x = 400;
+	cube->player->pos_y = 400;
+	cube->player->scale = 8;
+	cube->player->speed = 1;
+}
+
+void	ft_player(t_cube *cube, t_player *player)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	player->data = (int *)mlx_get_data_addr(cube->img, &(cube->bpp),
+			&(cube->line_size), &(cube->endian));
+	while (i < player->scale)
+	{
+		j = 0;
+		while (j < player->scale)
+		{
+			put_pixel_player(cube, i, j, 0x66ffff);
+			j++;
+		}
+		i++;
+	}
+	
+
+}
