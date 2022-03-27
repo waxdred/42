@@ -4,4 +4,7 @@ objs
 .out
 .DS_store
 .ccls-cache
+.ccls
+CMakeList.txt
+build
 tags
