@@ -19,7 +19,7 @@ CCPURPLE 	=   	\033[35m
 
 #Get arguments pass
 ARGV		=	$(filter-out $@,$(MAKECMDGOALS))
-NAME 		= 	 megaphone.a
+NAME 		= 	 pho.a
 EXEC 		= 	 megaphone
 CC 		= 	 clang++
 
