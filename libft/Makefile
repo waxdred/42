@@ -1,12 +1,12 @@
-
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: aartiges <aartiges@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2022/01/06 23:15:55 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/02/04 01:16:56 by aartiges         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ OBJS_ISA	=	$(ISA:.c=.o)
 
 MEM		=	ft_bzero.c	   		\
 			ft_calloc.c      		\
+			ft_create_tab_int.c		\
 			ft_strdup.c	   		\
 			ft_strndup.c	   		\
 			ft_strdupcat.c			\
@@ -64,15 +65,16 @@ MEM		=	ft_bzero.c	   		\
 OBJS_MEM	=	$(MEM:.c=.o)
 	
 STR		=	ft_split.c       		\
-			ft_len_tab.c       		\
 			ft_strsplit.c       		\
 			ft_strchr.c	 		\
 			ft_strichr.c	 		\
 			ft_strcpy.c	   		\
+			ft_strncat.c	   		\
 			ft_striteri.c    		\
 			ft_strjoin.c			\
 			ft_strjoin.c	   		\
 			ft_strlcat.c	   		\
+			ft_strcat.c	   		\
 			ft_strlcpy.c    		\
 			ft_strlen.c	   		\
 			ft_strmapi.c    		\
@@ -84,6 +86,7 @@ STR		=	ft_split.c       		\
 			ft_substr.c   			\
 			ft_tolower.c	   		\
 			ft_toupper.c	   		\
+			ft_join.c	   		\
       			ft_strcpy.c
 OBJS_STR	=	$(STR:.c=.o)
 
@@ -127,32 +130,32 @@ $(PATH_OBJ)%.o : $(PATH_CONV)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.02
+#	@sleep 0.02
 $(PATH_OBJ)%.o : $(PATH_ISA)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.02
+#	@sleep 0.02
 $(PATH_OBJ)%.o : $(PATH_MEM)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.02
+#	@sleep 0.02
 $(PATH_OBJ)%.o : $(PATH_STR)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.02
+#	@sleep 0.02
 $(PATH_OBJ)%.o : $(PATH_PRINT)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.02
+#	@sleep 0.02
 $(PATH_OBJ)%.o : $(PATH_LST)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
 	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.02
+#	@sleep 0.02
 
 all: $(NAME)
 
@@ -165,10 +168,13 @@ $(NAME): $(OBJ_C) $(OBJ_ISA) $(OBJ_MEM) $(OBJ_STR) $(OBJ_PRINT) $(OBJ_LST)
 
 clean:
 	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(EXEC) Objects...$(CCEND)\n"
-	@-/bin/rm -rf $(PATH_OBJ)*.o
+	@-/bin/rm -rf $(PATH_OBJ)
 
 fclean: clean
 	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(NAME)...$(CCEND)\n"
 	@-/bin/rm -f $(NAME)
 
 re: fclean all 
+
+norm:
+	@norminette || true

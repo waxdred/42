@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aartiges <aartiges@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 20:37:57 by jmilhas           #+#    #+#             */
-/*   Updated: 2021/11/05 13:37:53 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/03/02 23:09:34 by aartiges         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,12 @@ char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char		*ft_strncat(char *dest, const char *src, size_t n);
+char		*ft_strcat(char *dest, const char *src);
 char		*ft_strrchr(const char *str, int c);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		*ft_join(const char *str, ...);
 int			*ft_dec_to_bin(int nbr, int size);
 int			ft_atoi(const char *str);
 int			ft_atoi_base(char *str, char *base);
@@ -62,7 +65,6 @@ int			ft_isascii(int c);
 int			ft_isdigit(int c);
 int			ft_isprint(int c);
 int			ft_isa_white_space(int c);
-int			ft_len_tab(char **tab);
 int			ft_lstsize(t_list *lst);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 int			ft_putchar(int c);
@@ -79,26 +81,26 @@ int			ft_strcmp(const char *s1, const char *s2);
 long int	ft_atol(const char *str);
 size_t		ft_strlcat(char *dst, const char *src, size_t size);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
+int			**ft_create_tab_int(int nb_all, int size_all);
 size_t		ft_strlen(const char *str);
 t_list		*ft_lstlast(t_list *lst);
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list		*ft_lstnew(void *content);
 void		**ft_add_mal(void **mem);
-void		**ft_track_free(t_track *track, void *mem);
-void		**ft_track_free_all(t_track *track);
-void		**ft_track_free_tab(t_track *track, void **mem);
-void		**ft_track_tab(void **src, t_track *track);
+void		**ft_track_free(t_track **track, void *mem);
+void		**ft_track_free_all(t_track **track);
+void		**ft_track_free_tab(t_track **track, void **mem);
+void		**ft_track_tab(void **src, t_track **track);
 void		*ft_calloc(size_t count, size_t size);
-void		*ft_error_mal(void *mem, t_track *track);
-void		**ft_error_malt(void **mem, t_track *track);
+void		*ft_error_mal(void *mem, t_track **track);
+void		**ft_error_malt(void **mem, t_track **track);
 void		*ft_memalloc(size_t size);
 void		*ft_memchr(const void *s, int c, size_t n);
 void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		*ft_memmove(void *dst, const void *src, size_t len);
 void		*ft_memset(void *b, int c, size_t len);
-void		*ft_track(void *src, t_track *track);
+void		*ft_track(void *src, t_track **track);
 void		ft_bzero(void *s, size_t n);
-void		ft_freetab(char **tab);
 void		ft_lstadd_back(t_list **alst, t_list *ne);
 void		ft_lstadd_front(t_list **alst, t_list *ne);
 void		ft_lstclear(t_list **lst, void (*del)(void*));

@@ -1,4 +1,4 @@
-# **************************************************************************** #
+
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -6,147 +6,169 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2022/01/06 23:17:26 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/01/06 23:15:55 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Setting Color
-CCEND 			=   	\033[0m
-CCYAN 			=   	\033[34m
-CGREEN			=   	\033[33m
-CCRED 			=   	\033[31m
-CCPURPLE 		=   	\033[35m
+CCEND 		=   	\033[0m
+CCYAN 		=   	\033[34m
+CGREEN		=   	\033[33m
+CCRED 		=   	\033[31m
+CCPURPLE 	=   	\033[35m
 
-EXEC 			= 	 pipex
-NAME 			= 	 $(EXEC).a
-NAMEBONUS 		= 	 $(EXEC)_bonus.a
-CC 			= 	 gcc
+NAME 		=	libft.a
+EXEC 		= 	libft
+CC 		= 	gcc
 
-PATH_SRC		=	./srcs/
-PATH_OBJ		=	./objs/
+PATH_CONV	=	./conv/
+PATH_ISA	=	./isa/
+PATH_MEM	=	./mem/
+PATH_STR	=	./str/
+PATH_PRINT	=	./print/
+PATH_LST	=	./lst/
+PATH_OBJ	=	./objs/
 
-PATH_SRC_BONUS		=	./srcs_bonus/
-PATH_OBJ_BONUS		=	./objs_bonus/
-                	
-SRC 			=   	main.c		\
-				ft_exec.c	\
-				ft_error.c	\
-				ft_parsing.c
-                	
-OBJ_SRC			=	$(SRC:.c=.o)
-                	
-SRC_O			=	$(addprefix $(PATH_SRC), $(SRC))
-OBJ_S			=	$(addprefix $(PATH_OBJ), $(OBJ_SRC))
-                	
-SRCBONUS 		=   	main_bonus.c		\
-				here_doc_bonus.c	\
-				ft_error.c		\
-				ft_exec_bonus.c		\
-				utils1_bonus.c		\
-				utils_bonus.c		\
-				ft_parsing_bonus.c
-                	
-OBJ_SRC_BONUS		=	$(SRCBONUS:.c=.o)
-                	
-SRC_BONUS		=	$(addprefix $(PATH_SRC_BONUS), $(SRCBONUS))
-OBJ_BONUS		=	$(addprefix $(PATH_OBJ_BONUS), $(OBJ_SRC_BONUS))
-                	
-HEADER 			= 	includes/$(EXEC).h
-HEADERBONUS 		= 	includes_bonus/$(EXEC)_bonus.h
-MK			= 	Makefile
-SAN 			= 	-g3 -fsanitize=address
-FLAGS 			= 	-Wall -Werror -Wextra -g 
-LIB			= 	-llibft
-DEPEND			= 	libft/libft.a
+CONV 		=     	ft_atoi.c			\
+			ft_atoll.c			\
+			ft_atoi_base.c			\
+			ft_dec_to_bin.c			\
+			ft_binary_len.c			\
+			ft_itoa.c
+OBJS_CONV	=	$(CONV:.c=.o)
 
-$(PATH_OBJ)%.o : $(PATH_SRC)%.c $(HEADER)
+ISA		=	ft_isalnum.c	   		\
+			ft_isalpha.c	   		\
+			ft_isascii.c	   		\
+			ft_isa_white_space.c		\
+			ft_isdigit.c	   		\
+			ft_isprint.c
+OBJS_ISA	=	$(ISA:.c=.o)
+
+MEM		=	ft_bzero.c	   		\
+			ft_calloc.c      		\
+			ft_strdup.c	   		\
+			ft_strndup.c	   		\
+			ft_strdupcat.c			\
+			ft_memalloc.c   		\
+			ft_memchr.c	   		\
+			ft_memcmp.c	   		\
+			ft_memcpy.c	   		\
+			ft_memmove.c	  		\
+			ft_memset.c	   	        \
+			ft_add_mal.c	   	        \
+			ft_error_mal.c	   	        \
+			ft_track_free_all.c  	        \
+			ft_track_free_tab.c 	        \
+			ft_freetab.c
+OBJS_MEM	=	$(MEM:.c=.o)
+	
+STR		=	ft_split.c       		\
+			ft_len_tab.c       		\
+			ft_strsplit.c       		\
+			ft_strchr.c	 		\
+			ft_strichr.c	 		\
+			ft_strcpy.c	   		\
+			ft_striteri.c    		\
+			ft_strjoin.c			\
+			ft_strjoin.c	   		\
+			ft_strlcat.c	   		\
+			ft_strlcpy.c    		\
+			ft_strlen.c	   		\
+			ft_strmapi.c    		\
+			ft_strcmp.c	   		\
+			ft_strncmp.c	   		\
+			ft_strnstr.c	   		\
+			ft_strrchr.c	   		\
+			ft_strtrim.c     		\
+			ft_substr.c   			\
+			ft_tolower.c	   		\
+			ft_toupper.c	   		\
+      			ft_strcpy.c
+OBJS_STR	=	$(STR:.c=.o)
+
+PRINT		=	ft_putchar_fd.c  	        \
+			ft_putendl_fd.c  		\
+			ft_putnbr_fd.c   		\
+			ft_putstr_fd.c
+OBJS_PRINT	=	$(PRINT:.c=.o)
+
+LST	=		ft_lstadd_back.c 		\
+			ft_lstadd_front.c		\
+			ft_lstclear.c    		\
+			ft_lstdelone.c   		\
+			ft_lstiter.c     		\
+			ft_lstlast.c     		\
+			ft_lstnew.c			\
+			ft_lstsize.c
+OBJS_LST	=	$(LST:.c=.o)
+
+#dir .o
+CONV_O		=	$(addprefix $(PATH_CONV), $(CONV))
+ISA_O		=	$(addprefix $(PATH_ISA), $(ISA))
+MEM_O		=	$(addprefix $(PATH_MEM), $(MEM))
+STR_O		=	$(addprefix $(PATH_STR), $(STR))
+PRINT_O		=	$(addprefix $(PATH_PRINT), $(PRINT))
+LST_O		=	$(addprefix $(PATH_LST), $(LST))
+
+#dir obj/.o
+OBJ_ISA		=	$(addprefix $(PATH_OBJ), $(OBJS_ISA))
+OBJ_MEM		=	$(addprefix $(PATH_OBJ), $(OBJS_MEM))
+OBJ_STR		=	$(addprefix $(PATH_OBJ), $(OBJS_STR))
+OBJ_PRINT	=	$(addprefix $(PATH_OBJ), $(OBJS_PRINT))
+OBJ_LST		=	$(addprefix $(PATH_OBJ), $(OBJS_LST))
+OBJ_C		=	$(addprefix $(PATH_OBJ), $(OBJS_CONV))
+
+HEADER 		= 	include/libft.h
+FLAGS 		= 	-Wall -Werror -Wextra
+MK 		= 	Makefile
+
+$(PATH_OBJ)%.o : $(PATH_CONV)%.c $(HEADER) $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
-	@-$(CC) -I ./includes -o $@ -c $< $(FLAGS)
+	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.1
-
-$(PATH_OBJ_BONUS)%.o : $(PATH_SRC_BONUS)%.c $(HEADERBONUS)
-	@mkdir $(PATH_OBJ_BONUS) 2> /dev/null || true
-	@-$(CC) -I ./includes -o $@ -c $< $(FLAGS)
+	@sleep 0.02
+$(PATH_OBJ)%.o : $(PATH_ISA)%.c $(HEADER) $(MK)
+	@mkdir $(PATH_OBJ) 2> /dev/null || true
+	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
-	@sleep 0.1
+	@sleep 0.02
+$(PATH_OBJ)%.o : $(PATH_MEM)%.c $(HEADER) $(MK)
+	@mkdir $(PATH_OBJ) 2> /dev/null || true
+	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
+	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
+	@sleep 0.02
+$(PATH_OBJ)%.o : $(PATH_STR)%.c $(HEADER) $(MK)
+	@mkdir $(PATH_OBJ) 2> /dev/null || true
+	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
+	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
+	@sleep 0.02
+$(PATH_OBJ)%.o : $(PATH_PRINT)%.c $(HEADER) $(MK)
+	@mkdir $(PATH_OBJ) 2> /dev/null || true
+	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
+	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
+	@sleep 0.02
+$(PATH_OBJ)%.o : $(PATH_LST)%.c $(HEADER) $(MK)
+	@mkdir $(PATH_OBJ) 2> /dev/null || true
+	@-$(CC) $(FLAGS) -I ./includes -o $@ -c $<
+	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
+	@sleep 0.02
 
 all: $(NAME)
 
-$(NAME): $(OBJ_S)
-	@printf "\r\t\033[K$(CCYAN)[✅]\t$(EXEC) $(CCPURPLE)--> $(CCYAN) Gen Objs$(CCEND)"
-	@printf "\n$(CCYAN)[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
-	@make -C libft
-	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
-	@ar rc $(PATH_OBJ)$(NAME) $(OBJ_S)
-	@$(CC) $(PATH_OBJ)$(NAME) $(DEPEND) -o $(EXEC)
-	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Compilation ./$(EXEC)...$(CCEND)\n"
-
-bonus: $(OBJ_BONUS)
-	@printf "\r\t\033[K$(CCYAN)[✅]\t$(EXEC) $(CCPURPLE)--> $(CCYAN) Gen Objs$(CCEND)"
-	@printf "\n$(CCYAN)[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
-	@make -C libft
-	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
-	@ar rc $(PATH_OBJ_BONUS)$(NAMEBONUS) $(OBJ_BONUS)
-	@$(CC) $(PATH_OBJ_BONUS)$(NAMEBONUS) $(DEPEND) -o $(EXEC)_bonus
-	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Compilation ./$(EXEC)_bonus...$(CCEND)\n"
-
-san: $(OBJ_S)
+$(NAME): $(OBJ_C) $(OBJ_ISA) $(OBJ_MEM) $(OBJ_STR) $(OBJ_PRINT) $(OBJ_LST)
 	@printf "\r\t\033[K$(CCYAN)[✅]\t$(EXEC) $(CCPURPLE)--> $(CCYAN)Gen Objs$(CCEND)"
 	@printf "\n$(CCYAN)[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
-	@make -C libft
 	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
-	@ar rc $(PATH_OBJ)$(NAME) $(OBJ_S)
-	@$(CC) $(FLAGS) $(SAN) $(PATH_OBJ)$(NAME) $(DEPEND) -o $(PATH_OBJ)$(EXEC)
-	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Compilation with sanitize $(EXEC)...$(CCEND)\n"
+	@ar rc $(NAME) $(OBJ_ISA) $(OBJ_MEM) $(OBJ_STR) $(OBJ_PRINT) $(OBJ_LST) $(OBJ_C)
 
-flag: $(OBJ_S)
-	@printf "\r\t\033[K$(CCYAN)[✅]\t$(EXEC) $(CCPURPLE)--> $(CCYAN)Gen Objs$(CCEND)"
-	@printf "\n$(CCYAN)[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
-	@make -C libft
-	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
-	@ar rc $(PATH_OBJ)$(NAME) $(OBJ_S)
-	@$(CC) $(FLAGS) $(PATH_OBJ)$(NAME) $(DEPEND) -o $(PATH_OBJ)$(EXEC)
-	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Compilation with sanitize $(EXEC)...$(CCEND)\n"
 
 clean:
-	@make fclean -C libft
-	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(EXEC) Object...$(CCEND)\n"
-	@-/bin/rm -rf $(PATH_OBJ)
+	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(EXEC) Objects...$(CCEND)\n"
+	@-/bin/rm -rf $(PATH_OBJ)*.o
 
 fclean: clean
-	@make fclean -C libft
 	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(NAME)...$(CCEND)\n"
-	@-/bin/rm -f $(PATH_OBJ)*.a
-	@-/bin/rm -rf $(PATH_OBJ)
-	@-/bin/rm -f $(PATH_OBJ_BONUS)*.a
-	@-/bin/rm -rf $(PATH_OBJ_BONUS)
-	@-/bin/rm -f Tags
-	@-/bin/rm -f $(EXEC)
-	@-/bin/rm -f $(EXEC)_bonus
-norme:
-	@echo "\033[33mNorme ..."
-	@norminette $(SRC)
-	@norminette $(HEADER)
+	@-/bin/rm -f $(NAME)
 
-start:
-	@sleep 0.5
-	@clear
-	@printf "\n\n\n$(CCYAN)"
-	@printf "\t\t$(EXEC)"
-	@printf "\n\n\n"
-	@printf "Execution make:\n$(CCEND)"
-
-git:	fclean
-	@git add .
-	@git commit -m "$(filter-out $@,$(MAKECMDGOALS))"
-	@git push
-auto:	fclean
-	@git add .
-	@git commit -m "Autosave"
-	@git push
-
-
-.PHONY: all clean fclean re san
-.SILENT :
-re: fclean all
+re: fclean all 

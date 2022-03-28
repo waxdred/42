@@ -53,7 +53,7 @@ static int	ft_splitstr(char **tab, char *s, char c, size_t len)
 			return (0);
 		count++;
 	}
-	tab[count] = 0;
+	tab[count] = NULL;
 	return (1);
 }
 
@@ -65,7 +65,7 @@ char	**ft_strsplit(char const *s, char c)
 	if (s)
 	{
 		len = ft_count_word((char *)s, c);
-		ret = (char **)ft_memalloc(sizeof(char *) * len + 1);
+		ret = (char **)ft_memalloc(sizeof(char *) * (len + 1));
 		if (!ret)
 			return (NULL);
 		if (ft_splitstr(ret, (char *)s, c, len))

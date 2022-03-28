@@ -26,9 +26,9 @@ static void	ray_horizontal(t_cube *cube, t_player *p, t_ray *ray)
 	{
 		ray->rx = p->pos_x;
 		ray->ry = p->pos_y;
-		ray->dof = 5;
+		ray->dof = 8;
 	}
-	while (ray->dof < 5)
+	while (ray->dof < 8)
 	{
 		ray->mx = (int)(ray->rx) >> 6;
 		ray->my = (int)(ray->ry) >> 6;
@@ -38,7 +38,7 @@ static void	ray_horizontal(t_cube *cube, t_player *p, t_ray *ray)
 			ray->hx = ray->rx;
 			ray->hy = ray->ry;
 			ray->disH = distance(p->pos_x, p->pos_y, ray->hx, ray->hy);
-			ray->dof = 5;
+			ray->dof = 8;
 		}
 		else
 		{
@@ -73,9 +73,9 @@ static void	ray_vertical(t_cube *cube, t_player *p, t_ray *ray)
 	{
 		ray->rx = p->pos_x;
 		ray->ry = p->pos_y;
-		ray->dof = 5;
+		ray->dof = 8;
 	}
-	while (ray->dof < 5)
+	while (ray->dof < 8)
 	{
 		ray->mx = (int)(ray->rx) >> 6;
 		ray->my = (int)(ray->ry) >> 6;
@@ -85,7 +85,7 @@ static void	ray_vertical(t_cube *cube, t_player *p, t_ray *ray)
 			ray->vx = ray->rx;
 			ray->vy = ray->ry;
 			ray->disV = distance(p->pos_x, p->pos_y, ray->vx, ray->vy);
-			ray->dof = 5;
+			ray->dof = 8;
 		}
 		else
 		{
@@ -139,6 +139,7 @@ void	draw_ray_3d(t_cube *cube, t_player *p)
 
 		size = (int)(cube->mlx->wd_width / DOF) + 1;
 		i = 0;
+		printf("x0  %d  y0  %d  x1  %d   y1 %d                     %d\n", ray.r *size + size-i, ray.lineO, ray.r *size + size-i, ray.lineH + ray.lineO, color);
 		while (i++ < size)
 		{
 			ft_bresenham(cube, ray.r * size + size - i, ray.lineO,
