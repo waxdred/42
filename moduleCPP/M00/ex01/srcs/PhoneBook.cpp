@@ -10,7 +10,7 @@ static bool	ft_check_entry(std::string &buff, int count)
 		return (false);
 	}
 	buf = stoi(buff);
-	if (buf < 0 || buf >= count)
+	if (buf < 1 || buf > count)
 	{
 		std::cout << "Error index not found:" << std::endl;
 		return (false);
@@ -50,7 +50,7 @@ static int ft_display_index(Contact *C)
 		buff = C[i].getFirstName();
 		if (!buff.empty())
 		{
-			std::cout << "|" << std::setw(10) << std::right << i;
+			std::cout << "|" << std::setw(10) << std::right << i + 1;
 			std::cout << "|" << std::setw(10) << std::right << ft_format_char(C[i].getFirstName());
 			std::cout << "|" << std::setw(10) << ft_format_char(C[i].getLastName());
 			std::cout << "|" << std::setw(10) << ft_format_char(C[i].getNickname()) << "|" << std::endl;
@@ -79,7 +79,7 @@ void	ft_search(Contact *C)
 		std::cout << "Entry index of search:" << std::endl;
 		getline(std::cin, buff, '\n');
 	}
-	ft_display_search(C, stoi(buff));
+	ft_display_search(C, stoi(buff) - 1);
 }
 
 void	ft_add_contact(Contact *C)

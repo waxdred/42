@@ -7,6 +7,7 @@ static  void	ft_menu(void)
 	std::cout << "\tSEARCH" << std::endl;
 	std::cout << "\tEXIT" << std::endl;
 	std::cout << std::endl;
+	std::cout << "--> ";
 }
 
 

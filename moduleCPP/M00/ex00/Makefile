@@ -36,7 +36,7 @@ OBJ_S		=	$(addprefix $(PATH_OBJ), $(OBJ_SRC))
 # HEADER 		= 	includes/
 MK		= 	Makefile
 SAN 		= 	-g3 -fsanitize=address
-FLAGS 		= 	-Wall -Werror -Wextra 
+FLAGS 		= 	-Wall -Werror -Wextra -std=c++98
 
 $(PATH_OBJ)%.o : $(PATH_SRC)%.cpp $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true

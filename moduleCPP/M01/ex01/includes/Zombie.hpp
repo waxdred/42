@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <algorithm>
 
 #ifndef ZOMBIE_HPP
 # define ZOMBIE_HPP
