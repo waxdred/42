@@ -1,17 +1,14 @@
 
 #include "../includes/HumanA.hpp"
 
-std::string HumanA::get_name(void) const
-{
-	return (this->_name);
+HumanA::HumanA(std::string name, Weapon &weapon) : _name(name), _weapon(weapon){
+	return;
 }
 
-void HumanA::set_name(std::string name)
-{
-	this->_name = name;
+HumanA::~HumanA(void){
+	return ;
 }
 
-HumanA::HumanA(std::string name)
-{
-	this->set_name(name);
+void	HumanA::attack(void){
+	std::cout << _name << " Attack with " << _weapon.getType() << std::endl;
 }

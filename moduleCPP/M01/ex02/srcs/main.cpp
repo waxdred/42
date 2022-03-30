@@ -9,7 +9,7 @@ int  main(void)
 
 	std::cout << "Memory adress of string: " << &A << std::endl;
 	std::cout << "Memory adress held stringPTR: " << stringPTR << std::endl;
-	std::cout << "Memory adress held stringREF: " << stringREF << std::endl << std:endl;
+	std::cout << "Memory adress held stringREF: " << stringREF << std::endl << std::endl;
 	std::cout << "Value pointed of string: " << A << std::endl;
 	std::cout << "Value pointed of stringPTR: " << stringPTR << std::endl;
 	std::cout << "Value pointed of stringREF: " << stringREF << std::endl;
