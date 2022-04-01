@@ -14,7 +14,7 @@ Sed::~Sed(void){
 
 void	Sed::sed_file(void)
 {
-	std::ofstream fileout;
+	std::ofstream fileout("../test");
 	std::string line;
 
 	while(std::getline(_ifs, line))
@@ -24,7 +24,8 @@ void	Sed::sed_file(void)
 			std::cout << line << std::endl;
 			line = "test";
 		}
-		fileout << line;
+		line = "test";
+		_ifs << line << std::endl;
 	}
 	fileout.close();
 

@@ -7,7 +7,7 @@ int	main(void)
 {
 	std::fstream ifs;
 
-	ifs.open("../test");
+	ifs.open("../test", );
 	if (ifs.is_open())
 	{
 		Sed sed = Sed(ifs, "git", "test");
