@@ -1,4 +1,4 @@
-#include "../includes/Contact.hpp"
+#include "Contact.hpp"
 
 static bool	ft_check_entry(std::string &buff, int count)
 {

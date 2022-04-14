@@ -1,4 +1,4 @@
-#include "../includes/Contact.hpp"
+#include "Contact.hpp"
 
 void	ft_add_firstname(Contact *C, std::string buff)
 {

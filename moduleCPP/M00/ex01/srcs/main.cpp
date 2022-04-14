@@ -1,4 +1,4 @@
-#include "../includes/Contact.hpp"
+#include "Contact.hpp"
 
 static  void	ft_menu(void)
 {
@@ -14,6 +14,7 @@ static  void	ft_menu(void)
 int	main(void)
 {
 	int	index;
+	int	ret;
 	Contact	phone[NB_CONTACT];
 	std::string	command;
 
@@ -23,7 +24,9 @@ int	main(void)
 		ft_menu();
 		if (index == NB_CONTACT)
 			index = 0;
-		getline(std::cin, command, '\n');
+		std::getline(std::cin, command, '\n');
+		if (std::cin.eof())
+			return (1);
 		for (int i = 0; i < (int)command.length(); i++)
 			command[i] = toupper(command[i]);
 		if (command == "ADD")

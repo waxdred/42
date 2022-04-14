@@ -36,7 +36,7 @@ OBJ_S		=	$(addprefix $(PATH_OBJ), $(OBJ_SRC))
 # HEADER 		= 	includes/
 MK		= 	Makefile
 SAN 		= 	-g3 -fsanitize=address
-FLAGS 		= 	-Wall -Werror -Wextra -std=c++98
+FLAGS 		= 	-Wall -Werror -Wextra 
 
 $(PATH_OBJ)%.o : $(PATH_SRC)%.cpp $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
@@ -62,8 +62,8 @@ fclean: clean
 	@printf "$(CCYAN)[✅]\t$(CCRED)Removal of $(NAME)...$(CCEND)\n"
 	@-/bin/rm -f $(PATH_OBJ)*.a
 	@-/bin/rm -rf $(PATH_OBJ)
-	@-/bin/rm -rf .ccls-cache
 	@-/bin/rm -f Tags
+	@-/bin/rm -rf .ccls-cache
 	@-/bin/rm -f $(EXEC)
 
 test:	$(NAME)

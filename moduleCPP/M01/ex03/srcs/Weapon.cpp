@@ -1,5 +1,5 @@
 
-#include "../includes/Weapon.hpp"
+#include "Weapon.hpp"
 
 std::string Weapon::getType(void) const{
 	return (this->_weapon);

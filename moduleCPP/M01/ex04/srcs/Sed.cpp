@@ -1,32 +1,56 @@
-#include "../includes/Sed.hpp"
-#include <string>
+#include "Sed.hpp"
+#include <limits>
 
-Sed::Sed(std::fstream &ifs, std::string s1, std::string s2):
-	_ifs(ifs), _s1(s1), _s2(s2){
-	std::cout << "File found !!!" << std::endl;
+Sed::Sed(std::fstream &file, std::string name): _file(file), _name(name){
+	_file.open(_name, std::fstream::in | std::fstream::out);
+	if (file.is_open())
+		std::cout << "File found !!!" << std::endl;
+	else
+	{
+		std::cout << "File not found !!!" << std::endl;
+		exit(-1);
+	}
 	return;
+}
+
+std::string	Sed::getName(void) const{
+	return (this->_name);
 }
 
 Sed::~Sed(void){
-	_ifs.close();
+	_file.close();
 	return;
 }
 
-void	Sed::sed_file(void)
+std::string	Sed::ft_sed_line(std::string line, std::string s1, std::string s2)
 {
-	std::ofstream fileout("../test");
-	std::string line;
+	std::string	sed;
+	std::size_t	pos;
 
-	while(std::getline(_ifs, line))
+	while ((pos = line.find(s1)) != std::string::npos)
 	{
-		if (line.find(_s1) != std::string::npos)
-		{
-			std::cout << line << std::endl;
-			line = "test";
-		}
-		line = "test";
-		_ifs << line << std::endl;
+		sed.append(line, 0, pos);
+		sed.append(s2);
+		line.erase(0, pos + s1.length());
 	}
-	fileout.close();
+	sed.append(line);
+	return (sed);
+}
 
+void	Sed::sed_file(std::string s1, std::string s2)
+{
+	std::string	line;
+	std::size_t	found;
+
+	while (_file)
+	{
+		std::getline(_file, line);
+		found = line.find(s1);
+		if (found != std::string::npos)
+		{
+			_file << ft_sed_line(line, s1, s2) << std::endl;
+		}
+		else
+			_file << line << std::endl;
+	}
 }

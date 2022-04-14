@@ -1,19 +1,12 @@
-
-#include "../includes/Sed.hpp"
+#include "Sed.hpp"
 #include <iostream>
 #include <fstream>
 
 int	main(void)
 {
-	std::fstream ifs;
+	std::fstream file;
+	Sed sed(file, "test");
 
-	ifs.open("../test", );
-	if (ifs.is_open())
-	{
-		Sed sed = Sed(ifs, "git", "test");
-		sed.sed_file();
-	}
-	else
-		std::cerr << "Error file not found" << std::endl;
+	sed.sed_file("make", "test");
 	return (0);
 }

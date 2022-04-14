@@ -1,23 +1,22 @@
 
 #ifndef SED_HPP
 # define SED_HPP
-#include <algorithm>
 # include <iostream>
+# include <limits>
 # include <fstream>
-#include <string_view>
+
 
 class	Sed
 {
 	private:
-		std::fstream &_ifs;
-		std::string _s1;
-		std::string _s2;
+		std::fstream &_file;
+		std::string _name;
 	public:
-		Sed(std::fstream &ifs, std::string s1, std::string s2);
+		Sed(std::fstream &file, std::string name);
+		std::string getName(void) const;
 		~Sed(void);
-		void	sed_file(void);
-		
-
+		void	sed_file(std::string s1, std::string s2);
+		std::string ft_sed_line(std::string line, std::string s1, std::string s2);
 };
 
 #endif
