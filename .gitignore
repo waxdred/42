@@ -8,3 +8,6 @@ objs
 CMakeLists.txt
 build
 tags
+cmake_install.cmake
+.cache 
+compile_commands.json
