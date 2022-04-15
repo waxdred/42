@@ -12,10 +12,13 @@ class	Sed
 		std::fstream &_file;
 		std::string _name;
 	public:
-		Sed(std::fstream &file, std::string name);
+		Sed(void);
 		std::string getName(void) const;
 		~Sed(void);
-		void	sed_file(std::string s1, std::string s2);
+		Sed(std::fstream &file);
+		bool	setSed(std::string name);
+		void	sedFile(std::string s1, std::string s2);
+		void    setName(std::string name);
 		std::string ft_sed_line(std::string line, std::string s1, std::string s2);
 };
 

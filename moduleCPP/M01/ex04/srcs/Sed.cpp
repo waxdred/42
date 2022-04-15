@@ -1,16 +1,25 @@
 #include "Sed.hpp"
+#include <fstream>
 #include <limits>
 
-Sed::Sed(std::fstream &file, std::string name): _file(file), _name(name){
-	_file.open(_name, std::fstream::in | std::fstream::out);
-	if (file.is_open())
+Sed::Sed(std::fstream &file) : _file(file){
+}
+
+bool	Sed::setSed(std::string name){
+	setName(name);
+	_file.open(_name, std::fstream::in);
+	if (_file.is_open())
 		std::cout << "File found !!!" << std::endl;
 	else
 	{
 		std::cout << "File not found !!!" << std::endl;
-		exit(-1);
+		return (false);
 	}
-	return;
+	return (true);
+}
+
+void Sed::setName(std::string name){
+	this->_name = name;
 }
 
 std::string	Sed::getName(void) const{
@@ -19,6 +28,7 @@ std::string	Sed::getName(void) const{
 
 Sed::~Sed(void){
 	_file.close();
+	std::cout << "close fd and kill constructor" << std::endl;
 	return;
 }
 
@@ -37,9 +47,10 @@ std::string	Sed::ft_sed_line(std::string line, std::string s1, std::string s2)
 	return (sed);
 }
 
-void	Sed::sed_file(std::string s1, std::string s2)
+void	Sed::sedFile(std::string s1, std::string s2)
 {
 	std::string	line;
+	std::string	tmp;
 	std::size_t	found;
 
 	while (_file)
@@ -47,10 +58,12 @@ void	Sed::sed_file(std::string s1, std::string s2)
 		std::getline(_file, line);
 		found = line.find(s1);
 		if (found != std::string::npos)
-		{
-			_file << ft_sed_line(line, s1, s2) << std::endl;
-		}
+			tmp.append(ft_sed_line(line, s1, s2));
 		else
-			_file << line << std::endl;
+			tmp.append(line);
+		tmp += "\n";
 	}
+	_file.close();
+	_file.open(_name, std::fstream::out | std::fstream::trunc);
+	_file << tmp;
 }
