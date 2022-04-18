@@ -11,3 +11,6 @@ tags
 cmake_install.cmake
 .cache 
 compile_commands.json
+.vimspector.json
+a.out
+.DSYM
