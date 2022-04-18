@@ -14,4 +14,5 @@ class	Zombie
 		std::string	get_name(void) const;
 };
 Zombie* zombieHorde(int N, std::string name);
+void	annonce(Zombie z, int N);
 #endif

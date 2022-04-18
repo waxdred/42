@@ -12,6 +12,7 @@ class	Zombie
 		Zombie(std::string name);
 		void		set_name(std::string name);
 		std::string	get_name(void) const;
+		void	annonce(void);
 		~Zombie(void);
 };
 void	randomChump(std::string name);

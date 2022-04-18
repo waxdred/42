@@ -1,17 +1,15 @@
 
 #include "Zombie.hpp"
 
-int	main(int ac, char **av)
+int	main(void)
 {
-	Zombie	*z[ac - 1];
-	if (ac < 1)
-		return (0);
-	for (int i = 1; i < ac; i++)
-	{
-		z[i - 1] = newZombie(av[i]);
-		randomChump(av[i]);
-	}
-	for (int i = 1; i < ac; i++)
-		delete z[i - 1];
+	Zombie	*z = new Zombie("Yolo");
+
+	z->annonce();
+	delete z;
+	z = newZombie("Todo");
+	z->annonce();
+	delete z;
+	randomChump("Zoulou");
 	return (0);
 }
