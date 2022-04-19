@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2021/12/28 23:18:18 by jmilhas          ###   ########.fr        #
+#    Created: 2022/04/19 09:59:58 by jmilhas           #+#    #+#              #
+#    Updated: 2022/04/19 10:18:48 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CCPURPLE 	=   	\033[35m
 ARGV		=	$(filter-out $@,$(MAKECMDGOALS))
 NAME 		= 	 megaphone.a
 EXEC 		= 	 megaphone
-CC 		= 	 clang++
+CC 		= 	 c++
 
 PATH_SRC	=	./srcs/
 PATH_OBJ	=	./objs/
@@ -33,10 +33,10 @@ OBJ_SRC		=	$(SRC:.cpp=.o)
 SRC_O		=	$(addprefix $(PATH_SRC), $(SRC))
 OBJ_S		=	$(addprefix $(PATH_OBJ), $(OBJ_SRC))
 
-# HEADER 		= 	includes/
+HEADER 		= 	./includes/
 MK		= 	Makefile
 SAN 		= 	-g3 -fsanitize=address
-FLAGS 		= 	-Wall -Werror -Wextra 
+FLAGS 		= 	-Wall -Werror -Wextra -std=c++98 
 
 $(PATH_OBJ)%.o : $(PATH_SRC)%.cpp $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
@@ -66,11 +66,6 @@ fclean: clean
 	@-/bin/rm -rf .ccls-cache
 	@-/bin/rm -f $(EXEC)
 
-test:	$(NAME)
-	./megaphone "shhhhh... I think the students are asleep..."
-	./megaphone Damnit " ! " "Sorry students, I thought this thing was off."
-	./megaphone
-
 norme:
 	@echo "\033[33mNorme ..."
 	@norminette $(SRC)
@@ -85,7 +80,6 @@ auto:	fclean
 	@git add .
 	@git commit -m "Autosave"
 	@git push
-
 
 .PHONY: all clean fclean re san
 .SILENT :
