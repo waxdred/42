@@ -1,8 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/19 10:39:12 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/04/19 10:39:19 by jmilhas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie::Zombie(std::string name) : _Name(name)
-{
+Zombie::Zombie(std::string name) : _Name(name){
 }
 
 Zombie::~Zombie(void)
