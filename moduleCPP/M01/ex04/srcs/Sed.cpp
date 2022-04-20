@@ -1,14 +1,13 @@
 #include "Sed.hpp"
-#include <fstream>
-#include <limits>
 
-Sed::Sed(std::fstream &file) : _file(file){
+Sed::Sed(std::fstream &fdin, std::fstream &fdout) : _fdin(fdin), _fdout(fdout){
 }
 
 bool	Sed::setSed(std::string name){
 	setName(name);
-	_file.open(_name, std::fstream::in);
-	if (_file.is_open())
+	_fdin.open(_name, std::fstream::in);
+	_fdout.open(_nameReplace, std::fstream::out | std::fstream::trunc);
+	if (_fdin.is_open())
 		std::cout << "File found !!!" << std::endl;
 	else
 	{
@@ -20,6 +19,7 @@ bool	Sed::setSed(std::string name){
 
 void Sed::setName(std::string name){
 	this->_name = name;
+	this->_nameReplace = name.append(".Replace");
 }
 
 std::string	Sed::getName(void) const{
@@ -27,7 +27,7 @@ std::string	Sed::getName(void) const{
 }
 
 Sed::~Sed(void){
-	_file.close();
+	_fdin.close();
 	std::cout << "close fd and kill constructor" << std::endl;
 	return;
 }
@@ -50,20 +50,28 @@ std::string	Sed::ft_sed_line(std::string line, std::string s1, std::string s2)
 void	Sed::sedFile(std::string s1, std::string s2)
 {
 	std::string	line;
-	std::string	tmp;
-	std::size_t	found;
 
-	while (_file)
+	while (_fdin)
 	{
-		std::getline(_file, line);
-		found = line.find(s1);
-		if (found != std::string::npos)
-			tmp.append(ft_sed_line(line, s1, s2));
+		std::getline(_fdin, line);
+		if (line.find(s1) != std::string::npos)
+			_fdout << ft_sed_line(line, s1, s2);
 		else
-			tmp.append(line);
-		tmp += "\n";
+			_fdout << line;
+		_fdout << "\n";
 	}
-	_file.close();
-	_file.open(_name, std::fstream::out | std::fstream::trunc);
-	_file << tmp;
+	_fdout.close();
+}
+
+void	Sed::readFile(void)const{
+	
+	std::string	line;
+	_fdout.open(_nameReplace, std::fstream::in);
+
+	while (_fdout)
+	{
+		std::getline(_fdout, line);
+		std::cout << line << std::endl;
+	}
+	_fdout.close();
 }

@@ -7,7 +7,7 @@ class	Animal{
 	protected:	
 		std::string _type;
 	public:
-		Animal(void)const;
+		Animal(void);
 		Animal(const Animal &Animal);
 		virtual ~Animal(void);
 

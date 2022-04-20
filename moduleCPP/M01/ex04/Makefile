@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/04/19 10:52:20 by jmilhas           #+#    #+#              #
-#    Updated: 2022/04/19 11:41:52 by jmilhas          ###   ########.fr        #
+#    Created: 2022/04/20 11:46:30 by jmilhas           #+#    #+#              #
+#    Updated: 2022/04/20 11:47:33 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ CCPURPLE 	=   	\033[35m
 
 #Get arguments pass
 ARGV		=	$(filter-out $@,$(MAKECMDGOALS))
-NAME 		= 	 sed.a
-EXEC 		= 	 sed
+NAME 		= 	 ex04.a
+EXEC 		= 	 ex04
 CC 		= 	 c++
 
 PATH_SRC	=	./srcs/
@@ -82,10 +82,6 @@ auto:	fclean
 	@git commit -m "Autosave"
 	@git push
 
-test:
-	echo "Execute sed in text file replace clean by [ salut comment cava?]"
-	cp Makefile test
-	./sed test clean "salut comment cava?"
 
 .PHONY: all clean fclean re san
 .SILENT :
