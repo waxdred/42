@@ -1,9 +1,14 @@
 #include "Sed.hpp"
 
-Sed::Sed(std::fstream &fdin, std::fstream &fdout) : _fdin(fdin), _fdout(fdout){
+Sed::Sed(void){
 }
 
 bool	Sed::setSed(std::string name){
+	if (name.empty())
+	{
+		std::cout << "Error Name file is empty" << std::endl;
+		return (false);
+	}
 	setName(name);
 	_fdin.open(_name, std::fstream::in);
 	_fdout.open(_nameReplace, std::fstream::out | std::fstream::trunc);
@@ -19,7 +24,7 @@ bool	Sed::setSed(std::string name){
 
 void Sed::setName(std::string name){
 	this->_name = name;
-	this->_nameReplace = name.append(".Replace");
+	this->_nameReplace = name.append(".replace");
 }
 
 std::string	Sed::getName(void) const{
@@ -27,7 +32,6 @@ std::string	Sed::getName(void) const{
 }
 
 Sed::~Sed(void){
-	_fdin.close();
 	std::cout << "close fd and kill constructor" << std::endl;
 	return;
 }
@@ -54,7 +58,7 @@ void	Sed::sedFile(std::string s1, std::string s2)
 	while (_fdin)
 	{
 		std::getline(_fdin, line);
-		if (line.find(s1) != std::string::npos)
+		if (!s1.empty() && line.find(s1) != std::string::npos)
 			_fdout << ft_sed_line(line, s1, s2);
 		else
 			_fdout << line;
@@ -63,7 +67,7 @@ void	Sed::sedFile(std::string s1, std::string s2)
 	_fdout.close();
 }
 
-void	Sed::readFile(void)const{
+void	Sed::readFile(void){
 	
 	std::string	line;
 	_fdout.open(_nameReplace, std::fstream::in);
