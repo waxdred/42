@@ -7,15 +7,14 @@
 
 class	Dog : public Animal{
 	private:	
-		std::string _type;
-		Brain *Brain;
+		Brain *_brain;
 	public:
 		Dog(void);
 		Dog(const Dog &Dog);
 		~Dog(void);
 
 		Dog &operator = (const Dog &dog);
-		void	makeSound(void);
+		void	makeSound(void)const;
 		std::string	getType(void)const;
 };
 #endif

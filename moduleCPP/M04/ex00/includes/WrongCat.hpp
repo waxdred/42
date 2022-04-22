@@ -5,8 +5,6 @@
 # include <iostream>
 
 class	WrongCat : public WrongAnimal{
-	private:	
-		std::string _type;
 	public:
 		WrongCat(void);
 		WrongCat(const WrongCat &wrongCat);

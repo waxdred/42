@@ -1,12 +1,15 @@
 #include "Dog.hpp"
 
-Dog::Dog(void): _type("Dog"){
+Dog::Dog(void){
 	std::cout << "[Dog] Default constructor called" << std::endl;
+	this->_type = "Dog";
+	this->_brain = new Brain();
 	return ;
 }
 
 Dog::~Dog(void){
 	std::cout << "[Dog] Destructor called" << std::endl;
+	delete this->_brain;
 	return ;
 }
 
@@ -19,12 +22,13 @@ Dog::Dog(const Dog &dog){
 Dog &Dog::operator = (const Dog &dog){
 	if (&dog != this)
 	{
-		_type = dog._type;
+		this->_type = dog._type;
+		*(this)->_brain = *(dog)._brain;
 	}
 	return (*this);
 }
 
-void Dog::makeSound(void){
+void Dog::makeSound(void)const{
 	std::cout << _type << " Whafffffffffffff" << std::endl;
 }
 

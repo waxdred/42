@@ -1,12 +1,15 @@
 #include "Cat.hpp"
 
-Cat::Cat(void): _type("WrongCat"){
+Cat::Cat(void){
 	std::cout << "[Cat] Default constructor called" << std::endl;
+	this->_type = "Cat";
+	this->_brain = new Brain();
 	return ;
 }
 
 Cat::~Cat(void){
 	std::cout << "[Cat] Destructor called" << std::endl;
+	delete this->_brain;
 	return ;
 }
 
@@ -19,12 +22,13 @@ Cat::Cat(const Cat &cat){
 Cat &Cat::operator = (const Cat &cat){
 	if (&cat != this)
 	{
-		_type = cat._type;
+		this->_type = cat._type;
+		*(this)->_brain = *(cat)._brain;
 	}
 	return (*this);
 }
 
-void	Cat::makeSound(void){
+void	Cat::makeSound(void)const{
 	std::cout << _type << " Miaaaaaaaaaaaouuuuuuuu!!!!" << std::endl;
 }
 

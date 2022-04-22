@@ -1,7 +1,8 @@
 #include "WrongCat.hpp"
 
-WrongCat::WrongCat(void): _type("WrongCat"){
+WrongCat::WrongCat(void){
 	std::cout << "[WrongCat] Default constructor called" << std::endl;
+	this->_type = "WrongCat";
 	return ;
 }
 

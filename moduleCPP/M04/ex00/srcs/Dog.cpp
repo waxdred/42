@@ -1,7 +1,8 @@
 #include "Dog.hpp"
 
-Dog::Dog(void): _type("Dog"){
+Dog::Dog(void){
 	std::cout << "[Dog] Default constructor called" << std::endl;
+	this->_type = "Dog";
 	return ;
 }
 

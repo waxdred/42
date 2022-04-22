@@ -1,7 +1,8 @@
 #include "Cat.hpp"
 
-Cat::Cat(void): _type("WrongCat"){
+Cat::Cat(void){
 	std::cout << "[Cat] Default constructor called" << std::endl;
+	this->_type = "Cat";
 	return ;
 }
 
@@ -18,9 +19,7 @@ Cat::Cat(const Cat &cat){
 
 Cat &Cat::operator = (const Cat &cat){
 	if (&cat != this)
-	{
-		_type = cat._type;
-	}
+		this->_type = cat._type;
 	return (*this);
 }
 
