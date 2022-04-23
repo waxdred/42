@@ -86,6 +86,13 @@ std::ostream &operator << (std::ostream &o, const Bureaucrat &s){
 	return (o);
 }
 
+void Bureaucrat::signForm(Form &f){
+	if (f.getSign())
+		std::cout << this->_name << " cannot sign " << f.getName() << "because " << std::endl;
+	else
+		std::cout << this->_name << " couldn't sign" << f.getName() << "because is grade is to low" << std::endl;
+}
+
 void Bureaucrat::decrementeGrade(void){
 	if (this->_grade > 149)
 		throw Bureaucrat::GradeTooHightExeption();
