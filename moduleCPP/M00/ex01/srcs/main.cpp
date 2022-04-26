@@ -1,43 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/26 20:03:22 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/04/26 20:31:38 by jmilhas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Contact.hpp"
-
-static  void	ft_menu(void)
-{
-	std::cout << "Available commands:" << std::endl;
-	std::cout << "\tADD" << std::endl;
-	std::cout << "\tSEARCH" << std::endl;
-	std::cout << "\tEXIT" << std::endl;
-	std::cout << std::endl;
-	std::cout << "--> ";
-}
-
+#include "PhoneBook.hpp"
 
 int	main(void)
 {
-	int	index;
-	int	ret;
 	Contact	phone[NB_CONTACT];
-	std::string	command;
 
-	index = 0;
-	while (1)
-	{
-		ft_menu();
-		if (index == NB_CONTACT)
-			index = 0;
-		std::getline(std::cin, command, '\n');
-		if (std::cin.eof())
-			return (1);
-		for (int i = 0; i < (int)command.length(); i++)
-			command[i] = toupper(command[i]);
-		if (command == "ADD")
-		{
-			ft_add_contact(&phone[index]);
-			index++;
-		}
-		else if (command == "SEARCH")
-			ft_search(phone);
-		else if (command == "EXIT")
-			return(0);
-	}
-	return (0);
+	return (PhoneBook::ft_add_contact(phone));
 }

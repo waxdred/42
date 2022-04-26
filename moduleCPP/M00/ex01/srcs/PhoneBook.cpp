@@ -1,4 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/26 20:02:42 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/04/26 20:30:59 by jmilhas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Contact.hpp"
+#include "PhoneBook.hpp"
 
 static bool	ft_check_entry(std::string &buff, int count)
 {
@@ -60,7 +73,7 @@ static int ft_display_index(Contact *C)
 	return (ret);
 }
 
-void	ft_search(Contact *C)
+void	PhoneBook::ft_search(Contact *C)
 {
 	std::string	buff;
 	int	count;
@@ -82,13 +95,109 @@ void	ft_search(Contact *C)
 	ft_display_search(C, stoi(buff) - 1);
 }
 
-void	ft_add_contact(Contact *C)
+void	PhoneBook::ft_add_firstname(Contact *C, std::string buff)
+{
+	std::cout << "First name:" << std::endl;
+	getline(std::cin, buff, '\n');
+	while (buff.empty())
+	{
+		std::cerr << "Error entry empty" << std::endl;
+		std::cout << "First name:" << std::endl;
+		getline(std::cin, buff, '\n');
+	}
+	C->setFirstName(buff);
+}
+
+void	PhoneBook::ft_add_lastname(Contact *C, std::string buff)
+{
+	std::cout << "Last name:" << std::endl;
+	getline(std::cin, buff, '\n');
+	while (buff.empty())
+	{
+		std::cerr << "Error entry empty" << std::endl;
+		std::cout << "Last name:" << std::endl;
+		getline(std::cin, buff, '\n');
+	}
+	C->setLastName(buff);
+}
+
+void	PhoneBook::ft_add_nickname(Contact *C, std::string buff)
+{
+	std::cout << "Nickname:" << std::endl;
+	getline(std::cin, buff, '\n');
+	while (buff.empty())
+	{
+		std::cerr << "Error entry empty" << std::endl;
+		std::cout << "Nickname:" << std::endl;
+		getline(std::cin, buff, '\n');
+	}
+	C->setNickname(buff);
+}
+
+void	PhoneBook::ft_add_numberphone(Contact *C, std::string buff)
+{
+	std::cout << "Number phone:" << std::endl;
+	getline(std::cin, buff, '\n');
+	while (buff.empty())
+	{
+		std::cerr << "Error entry empty" << std::endl;
+		std::cout << "Number phone:" << std::endl;
+		getline(std::cin, buff, '\n');
+	}
+	C->setNumberPhone(buff);
+}
+
+void	PhoneBook::ft_add_darkest(Contact *C, std::string buff)
+{
+	std::cout << "Darkest:" << std::endl;
+	getline(std::cin, buff, '\n');
+	while (buff.empty())
+	{
+		std::cerr << "Error entry empty" << std::endl;
+		std::cout << "Darkest:" << std::endl;
+		getline(std::cin, buff, '\n');
+	}
+	C->setDarkest(buff);
+}
+
+static  void	ft_menu(void)
+{
+	std::cout << "Available commands:" << std::endl;
+	std::cout << "\tADD" << std::endl;
+	std::cout << "\tSEARCH" << std::endl;
+	std::cout << "\tEXIT" << std::endl;
+	std::cout << std::endl;
+	std::cout << "--> ";
+}
+
+int	PhoneBook::ft_add_contact(Contact *C)
 {
 	std::string	buff;
+	std::string 	cmd;
+	int		index = 0;
+	int 		ret = 0;
 
-	ft_add_firstname(C, buff);
-	ft_add_lastname(C, buff);
-	ft_add_nickname(C, buff);
-	ft_add_numberphone(C, buff);
-	ft_add_darkest(C, buff);
+
+	while (!ret){
+		ft_menu();
+		if (index == NB_CONTACT)
+			index = 0;
+		std::getline(std::cin, cmd, '\n');
+		if (std::cin.eof())
+			return (-1);
+		for (int i = 0; i < (int)cmd.length(); i++)
+			cmd[i] = toupper(cmd[i]);
+		if (cmd == "ADD"){
+			ft_add_firstname(&C[index], buff);
+			ft_add_lastname(C, buff);
+			ft_add_nickname(C, buff);
+			ft_add_numberphone(C, buff);
+			ft_add_darkest(C, buff);
+		}
+		else if (cmd == "SEARCH")
+			ft_search(C);
+		else if (cmd == "EXIT")
+			ret = 1;
+	}
+	return (0);
 }

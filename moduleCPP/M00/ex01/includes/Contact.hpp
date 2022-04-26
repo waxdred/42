@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/26 20:02:48 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/04/26 20:06:35 by jmilhas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
@@ -28,12 +40,5 @@ class	Contact
 		std::string	_Darkest;
 };
 
-void	ft_add_contact(Contact *C);
-void	ft_add_darkest(Contact *C, std::string buff);
-void	ft_add_firstname(Contact *C, std::string buff);
-void	ft_add_lastname(Contact *C, std::string buff);
-void	ft_add_nickname(Contact *C, std::string buff);
-void	ft_add_numberphone(Contact *C, std::string buff);
-void	ft_search(Contact *C);
 
 #endif

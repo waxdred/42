@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 11:20:14 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/04/22 14:29:16 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/04/23 14:11:56 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,106 @@
 
 int main(void)
 {
-	Bureaucrat b0("Michel", 1);
+	Bureaucrat francis("Francis", 100);
+	std::cout << francis << std::endl;
 
-	try{
-		Form form1("Form1", 1, 120);
-		form1.beSigned(b0);
-		b0.signForm(form1);
-		std::cout << form1;
+	Form form1("Taxes", 100, 50);
+	std::cout << form1 << std::endl;
+	form1.beSigned(francis);
+	std::cout << form1 << std::endl;
 
-	}catch(const std::exception &e){
-		std::cerr << e.what();
+	std::cout << "---" << std::endl;
+
+	Form form2("NDA", 99, 50);
+	std::cout << francis << std::endl;
+	std::cout << form2 << std::endl;
+	try
+	{
+		francis.signForm(form2);
 	}
+	catch(std::exception const &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << form2 << std::endl;
+
+	std::cout << "---" << std::endl;
+
+	Form form3("Other Paper", 101, 50);
+	std::cout << francis << std::endl;
+	std::cout << form3 << std::endl;
+	francis.signForm(form3);
+	std::cout << form3 << std::endl;
+	try
+	{
+		francis.signForm(form3);
+	}
+	catch(std::exception const &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << form3 << std::endl;
+
+	std::cout << "---" << std::endl;
+
+	try
+	{
+		Form formException("NDA", 99, 50);
+		std::cout << francis << std::endl;
+		std::cout << formException << std::endl;
+		formException.beSigned(francis);
+		std::cout << formException << std::endl;
+	}
+	catch(std::exception const &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	std::cout << "---" << std::endl;
+	try
+	{
+		Form formException("Important Form", 1000, 50);
+		std::cout << formException << std::endl;
+	}
+	catch(std::exception const &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+
+	std::cout << "---" << std::endl;
+
+	try
+	{
+		Form formException("Important Form", 0, 50);
+		std::cout << formException << std::endl;
+	}
+	catch(std::exception const &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+
+	std::cout << "---" << std::endl;
+
+	try
+	{
+		Form formException("Important Form", 100, 1000);
+		std::cout << formException << std::endl;
+	}
+	catch(std::exception const &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+
+	std::cout << "---" << std::endl;
+
+	try
+	{
+		Form formException("Important Form", 100, 0);
+		std::cout << formException << std::endl;
+	}
+	catch(std::exception const &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+
 	return 0;
 }

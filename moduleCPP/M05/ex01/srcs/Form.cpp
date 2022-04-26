@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:53:18 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/04/22 15:02:41 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/04/23 14:09:51 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ const char *Form::GradeTooLowExeption::what() const throw(){
 }
 std::ostream &operator<<(std::ostream &o, Form const &form)
 {
-	o << "( " << form.getName() << " )[ " << ((form.getSign()) ? "Signed" : "Unsigned")
-		<< " ] < Sign:" << form.getSignGrade() << ",Execute:"
-		<< form.getExecGrade() << ">";
+	o << "( " << form.getName() << " )[ " << ((form.getSign()) ? " Signed" : " Unsigned")
+		<< " ] < Sign: " << form.getSignGrade() << " ,Execute: "
+		<< form.getExecGrade() << " >";
 	return (o);
 }
