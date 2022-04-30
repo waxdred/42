@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:02:48 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/04/26 20:06:35 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/04/28 00:34:49 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
 
-# include <string>
 # include <iostream>
-# include <iomanip>
 
 #define NB_CONTACT 8
 class	Contact

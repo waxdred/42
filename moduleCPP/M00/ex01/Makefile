@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2022/04/26 20:35:33 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/04/28 01:25:22 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CCPURPLE 	=   	\033[35m
 ARGV		=	$(filter-out $@,$(MAKECMDGOALS))
 NAME 		= 	 ex01.a
 EXEC 		= 	 ex01
-CC 		= 	 clang++
+CC 		= 	 c++
 
 PATH_SRC	=	./srcs/
 PATH_OBJ	=	./objs/
@@ -35,15 +35,14 @@ OBJ_SRC		=	$(SRC:.cpp=.o)
 SRC_O		=	$(addprefix $(PATH_SRC), $(SRC))
 OBJ_S		=	$(addprefix $(PATH_OBJ), $(OBJ_SRC))
 
-HEADER 		= 	./includes/Contact.hpp		\
-			./includes/PhoneBook.hpp
+HEADER 		= 	./includes/
 MK		= 	Makefile
 SAN 		= 	-g3 -fsanitize=address
 FLAGS 		= 	-Wall -Werror -Wextra 
 
 $(PATH_OBJ)%.o : $(PATH_SRC)%.cpp $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
-	@-$(CC) -I $(HEADER) -o $@ -c $<
+	@-$(CC) -I includes -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
 	@sleep 0.1
 
