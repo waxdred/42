@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/30 17:48:41 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/04/30 18:37:09 by jmilhas          ###   ########.fr       */
+/*   Created: 2022/04/30 12:52:30 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/04/30 13:10:17 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "class.hpp"
-#include <exception>
+#ifndef ITER_HPP
+# define ITER_HPP
 
-int main(void)
-{
-	Perso p1("todo", 43, true);
+# include <iostream>
 
-	std::cout << p1;
-	try{
-		p1 + p1;
-
-	}catch(std::exception const &e){
-		std::cerr << e.what() << std::endl;
-	}
-	std::cout << p1;
-	return 0;
+template<typename T>
+void	printValue(const T &arr){
+	std::cout << arr << std::endl;
 }
+
+template <typename T>
+void decrement(T &arr){
+	arr--;
+}
+
+template <typename T>
+void increment(T &arr){
+	arr++;
+}
+
+template<typename T, typename U>
+void	iter(T array[],const size_t size, U fn){
+	for (size_t i = 0; i < size; i++){
+		fn(array[i]);		
+	}
+}
+
+#endif
+
+

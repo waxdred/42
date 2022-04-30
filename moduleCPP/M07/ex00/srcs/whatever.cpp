@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   whatever.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/30 17:48:41 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/04/30 18:37:09 by jmilhas          ###   ########.fr       */
+/*   Created: 2022/04/30 11:10:11 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/04/30 11:20:20 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "class.hpp"
-#include <exception>
+#include "whatever.hpp"
 
-int main(void)
-{
-	Perso p1("todo", 43, true);
+Perso::Perso(const std::string name, const int ages, const bool genre)
+	:_name(name), _ages(ages), _genre(genre){
+			return; };
 
-	std::cout << p1;
-	try{
-		p1 + p1;
+void Perso::printClass(void)const{
+	std::cout << "name: "<< _name << "\nages: " << _ages << "\ngenre: " << (_genre ? "Male" : "Female") << std::endl;
+};
 
-	}catch(std::exception const &e){
-		std::cerr << e.what() << std::endl;
-	}
-	std::cout << p1;
-	return 0;
+Perso::Perso(void){
+	return;
+}
+
+Perso::~Perso(void){
+	return;
 }
