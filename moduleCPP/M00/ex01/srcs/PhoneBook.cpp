@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:02:42 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/04/28 00:41:59 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/02 13:01:39 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ PhoneBook::PhoneBook(void){
 PhoneBook::~PhoneBook(void){
 	return;
 }
+
 static bool	ft_check_entry(std::string &buff, int count)
 {
 	int	buf;
