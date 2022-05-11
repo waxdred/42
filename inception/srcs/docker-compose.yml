@@ -1,0 +1,52 @@
+version: "3.7"
+
+networks:
+    localhost:
+        name: inet
+
+volumes:
+    workpress:
+      name: workpress
+      driver: local 
+
+    mariadb:
+      name: mariadb
+      driver: local 
+
+
+services:
+        nginx:
+          depends_on:
+            - workpress
+          container_name: nginx
+          build: ./nginx 
+          image: nginx
+          ports: 
+            - "8080:80"
+          volumes:
+            - workpress:/var/www/workpress
+          networks:
+            - localhost
+          restart: always
+
+        mariadb:
+          container_name: mariadb
+          build: ./mariadb 
+          volumes:
+            - mariadb:/var/www/mysql
+          networks:
+            - localhost
+          image: mariadb 
+          restart: always
+
+        workpress:
+          depends_on:
+            - mariadb
+          container_name: workpress
+          build: ./workpress 
+          volumes:
+            - workpress:/var/www/workpress
+          networks:
+            - localhost
+          image: workpress
+          restart: always

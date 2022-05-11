@@ -6,11 +6,13 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 15:38:50 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/01 19:56:01 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/07 10:00:44 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MutantStack.cpp"
+#include <queue>
+//iterator std::list
 
 int main(void)
 {
@@ -25,15 +27,15 @@ int main(void)
 	mstack.push(737);
 	/* //[...] */
 	mstack.push(0);
-	/* MutantStack<int>::iterator it = mstack.begin(); */
-	/* MutantStack<int>::iterator ite = mstack.end(); */
-	/* /1* ++it; *1/ */
-	/* /1* --it; *1/ */
-	/* /1* while (it != ite) *1/ */
-	/* /1* { *1/ */
-	/* /1* std::cout << *it << std::endl; *1/ */
-	/* /1* ++it; *1/ */
-	/* /1* } *1/ */
+	MutantStack<int>::iterator it = mstack.begin();
+	MutantStack<int>::iterator ite = mstack.end();
+	++it;
+	--it;
+	while (it != ite)
+	{
+	std::cout << *it << std::endl;
+	++it;
+	}
 	std::stack<int> s(mstack);
 	
 	return 0;

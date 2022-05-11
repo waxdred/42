@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 20:03:22 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/04/28 00:46:12 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/07 14:55:41 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,5 @@ int8_t	ft_while(PhoneBook &phone){
 int	main(void)
 {
 	PhoneBook phone;
-
 	return (ft_while(phone));
 }
