@@ -17,6 +17,7 @@ Animal::Animal(const Animal &animal){
 }
 
 Animal &Animal::operator = (const Animal &animal){
+	std::cout << "TYololo" << std::endl;
 	if (&animal != this)
 	{
 		_type = animal._type;

@@ -6,15 +6,16 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 15:39:35 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/01 19:55:45 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/03 08:48:06 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MutantStack.hpp"
+#include <iterator>
 
 template<typename T>
 MutantStack<T>::MutantStack() : MutantStack<T>::stack(){
-	std::cout << "Default constructor called" << std::endl;
+	/* std::cout << "Default constructor called" << std::endl; */
 	return ;
 }
 
@@ -31,11 +32,10 @@ MutantStack<T>::MutantStack(const MutantStack<T> &name): MutantStack<T>::stack(n
 	return;
 }
 
-/* template<typename T> */
-/* MutantStack<T> &MutantStack<T>::operator = (const MutantStack<T> &other){ */
-/* 	if (&other != this) */
-/* 	{ */
-/* 		MutantStack<T>::stack::operator=(other); */
-/* 	} */
-/* 	return (*this); */
-/* } */
+template<typename T>
+MutantStack<T> &MutantStack<T>::operator = (const MutantStack &mutant){
+	if (&mutant != this){
+		MutantStack<T>::stack::operator=(mutant);
+	}
+	return (*this);
+}
