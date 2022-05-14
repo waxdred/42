@@ -5,15 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/22 11:20:14 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/04/27 13:42:18 by jmilhas          ###   ########.fr       */
+/*   Created: 2022/05/14 08:50:01 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/05/14 08:50:06 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "Bureaucrat.hpp"
-# include "ShrubberyCreationForm.hpp"
-# include "RobotomyRequestForm.hpp"
-# include "PresidentialPardonForm.hpp"
+#include <iostream>
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 void	test_ok_all() {
 	Bureaucrat bureaucrat("Philip", 1);

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Intern.cpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/27 13:57:38 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/04/27 15:41:52 by jmilhas          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Intern.hpp"
 
 #define FORM_PRES "Presidential Pardon Form"
@@ -52,17 +40,14 @@ Form *Intern::makeForm(const std::string &formName, const std::string &target)
 		&Intern::MakeRobotomyRequestForm,
 		&Intern::MakeShrubberyCreationForm
 	};
-	if (formName == FORM_PRES)
-		form = (this->*arr_functions[T_FORM_PRES])(target);
-	else if (formName == FORM_ROBO)
-		form = (this->*arr_functions[T_FORM_ROBO])(target);
-	else if (formName == FORM_SHRU)
-		form = (this->*arr_functions[T_FORM_SHRU])(target);
 
-	if (form)
-		std::cout << "Intern created a " << formName << std::endl;
-	else if (!form)
-		std::cout << "You should fire this intern! " << formName << " never ever EVER existed!" << std::endl;
+    (formName == FORM_PRES) && (form = (this->*arr_functions[T_FORM_PRES])(target));
+    (formName == FORM_ROBO) && (form = (this->*arr_functions[T_FORM_ROBO])(target));
+    (formName == FORM_SHRU) && (form = (this->*arr_functions[T_FORM_SHRU])(target));
+
+	form && std::cout << "Intern created a " << formName << std::endl;
+	!form && std::cout << "You should fire this intern! " << formName << " never ever EVER existed!" << std::endl;
+
 	return (form);
 }
 
@@ -79,4 +64,4 @@ Form *Intern::MakeRobotomyRequestForm(const std::string &target)
 Form *Intern::MakeShrubberyCreationForm(const std::string &target)
 {
 	return (new ShrubberyCreationForm(target));
-}	
+}

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/27 13:35:56 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/04/27 13:50:55 by jmilhas          ###   ########.fr       */
+/*   Created: 2022/05/14 09:10:02 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/05/14 09:10:14 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # define SIGN_GRADE 25
 # define EXEC_GRADE 5
 # define FORM_NAME "presidentialPardon"
-
 
 PresidentialPardonForm::PresidentialPardonForm() :
 	Form (FORM_NAME, SIGN_GRADE, EXEC_GRADE),
@@ -41,7 +40,7 @@ PresidentialPardonForm::~PresidentialPardonForm() {
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &presidentialPardonForm) :
 	Form (FORM_NAME, SIGN_GRADE, EXEC_GRADE)
 {
-	//std::cout << "[RESIDENTIALPARDONFORM] Copy constructor called" << std::endl;
+	//std::cout << "[PRESIDENTIALPARDONFORM] Copy constructor called" << std::endl;
 	*this = presidentialPardonForm;
 	return;
 }
@@ -54,10 +53,10 @@ PresidentialPardonForm & PresidentialPardonForm::operator= (const PresidentialPa
 	return (*this);
 }
 
-std::string PresidentialPardonForm::getTarget(void) const {
+std::string PresidentialPardonForm::getTarget() const {
 	return (this->_target);
 }
 
-void PresidentialPardonForm::executeAction(void) const {
-	std::cout << getTarget() << " has pardoned by Zaphod Beeblebrox!" << std::endl;
+void PresidentialPardonForm::executeAction() const {
+	std::cout << getTarget() << " has pardoned " << std::endl;
 }

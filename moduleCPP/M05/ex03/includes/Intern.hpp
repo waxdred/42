@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Intern.hpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/27 13:58:04 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/04/27 15:17:01 by jmilhas          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef INTERN_HPP
 # define INTERN_HPP
 
@@ -28,17 +16,20 @@ enum t_form {
 };
 
 class Intern {
-	private:
-		Form* MakePresidentialPardonForm(const std::string &target);
-		Form* MakeRobotomyRequestForm(const std::string &target);
-		Form* MakeShrubberyCreationForm(const std::string &target);
-	public:
-		Intern();
-		~Intern();
-		Intern(const Intern &intern);
-		Intern & operator= (const Intern &intern);
 
-		Form* makeForm(const std::string &formName, const std::string &target);
+public:
+	Intern();
+	~Intern();
+	Intern(const Intern &intern);
+	Intern & operator= (const Intern &intern);
+
+	Form* makeForm(const std::string &formName, const std::string &target);
+
+private:
+	Form* MakePresidentialPardonForm(const std::string &target);
+	Form* MakeRobotomyRequestForm(const std::string &target);
+	Form* MakeShrubberyCreationForm(const std::string &target);
 };
 
 #endif
+

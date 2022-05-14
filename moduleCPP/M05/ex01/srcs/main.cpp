@@ -5,115 +5,53 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/22 11:20:14 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/04/23 14:11:56 by jmilhas          ###   ########.fr       */
+/*   Created: 2022/05/14 08:48:46 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/05/14 08:48:49 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "Bureaucrat.hpp"
+#include <iostream>
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
-int main(void)
-{
-	Bureaucrat francis("Francis", 100);
-	std::cout << francis << std::endl;
+int main () {
 
-	Form form1("Taxes", 100, 50);
-	std::cout << form1 << std::endl;
-	form1.beSigned(francis);
-	std::cout << form1 << std::endl;
+	std::cout << "===== DECLARATIONS =====" << std::endl;
+	Bureaucrat bureaucrat("Philip", 120);
+	Form form("G12", 150, 150);
+	Form form2("F28", 64, 150);
 
-	std::cout << "---" << std::endl;
-
-	Form form2("NDA", 99, 50);
-	std::cout << francis << std::endl;
-	std::cout << form2 << std::endl;
-	try
-	{
-		francis.signForm(form2);
-	}
-	catch(std::exception const &e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
+	std::cout << "\n===== PRINTING =====" << std::endl;
+	std::cout << bureaucrat << std::endl;
+	std::cout << form << std::endl;
 	std::cout << form2 << std::endl;
 
-	std::cout << "---" << std::endl;
+	std::cout << "\n===== SIGNING =====" << std::endl;
+	try {
+		bureaucrat.signForm(form);
+		bureaucrat.signForm(form2);
+	} catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
+	
+	std::cout << "\n===== PRINTING =====" << std::endl;
+	std::cout << bureaucrat << std::endl;
+	std::cout << form << std::endl;
+	std::cout << form2 << std::endl;
 
-	Form form3("Other Paper", 101, 50);
-	std::cout << francis << std::endl;
-	std::cout << form3 << std::endl;
-	francis.signForm(form3);
-	std::cout << form3 << std::endl;
-	try
-	{
-		francis.signForm(form3);
-	}
-	catch(std::exception const &e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-	std::cout << form3 << std::endl;
-
-	std::cout << "---" << std::endl;
-
-	try
-	{
-		Form formException("NDA", 99, 50);
-		std::cout << francis << std::endl;
-		std::cout << formException << std::endl;
-		formException.beSigned(francis);
-		std::cout << formException << std::endl;
-	}
-	catch(std::exception const &e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-	std::cout << "---" << std::endl;
-	try
-	{
-		Form formException("Important Form", 1000, 50);
-		std::cout << formException << std::endl;
-	}
-	catch(std::exception const &e)
-	{
-		std::cerr << e.what() << std::endl;
+	std::cout << "\n===== INCREMENT AND SIGNING =====" << std::endl;
+	try {
+		bureaucrat.incrementGrade(110);
+		bureaucrat.signForm(form);
+		bureaucrat.signForm(form2);
+	} catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
 	}
 
-	std::cout << "---" << std::endl;
+	std::cout << "\n===== PRINTING =====" << std::endl;
+	std::cout << bureaucrat << std::endl;
+	std::cout << form << std::endl;
+	std::cout << form2 << std::endl;
 
-	try
-	{
-		Form formException("Important Form", 0, 50);
-		std::cout << formException << std::endl;
-	}
-	catch(std::exception const &e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-
-	std::cout << "---" << std::endl;
-
-	try
-	{
-		Form formException("Important Form", 100, 1000);
-		std::cout << formException << std::endl;
-	}
-	catch(std::exception const &e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-
-	std::cout << "---" << std::endl;
-
-	try
-	{
-		Form formException("Important Form", 100, 0);
-		std::cout << formException << std::endl;
-	}
-	catch(std::exception const &e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-
-	return 0;
+	std::cout << "\n===== END =====" << std::endl;
 }

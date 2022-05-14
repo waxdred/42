@@ -3,38 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: acanterg <acanterg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/22 11:20:14 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/04/27 15:29:06 by jmilhas          ###   ########.fr       */
+/*   Created: 2022/03/02 10:37:56 by acanterg          #+#    #+#             */
+/*   Updated: 2022/05/14 09:11:06 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "Bureaucrat.hpp"
-# include "ShrubberyCreationForm.hpp"
-# include "RobotomyRequestForm.hpp"
-# include "PresidentialPardonForm.hpp"
-# include "Intern.hpp"
+#include <iostream>
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
 
-int main (void) {
 
-	Bureaucrat bureaucrat("Foo", 1);
+int main () {
+
+	Bureaucrat bureaucrat("Theo", 1);
 	Intern erick;
 	Form *formPres;
 	Form *formRobo;
 	Form *formShru;
-	Form *formWrong;
 
 	std::cout << "\n===== INTERN CREATE FORMS =====" << std::endl;
-	formPres = erick.makeForm("Presidential Pardon Form", "Todo");
-	formRobo = erick.makeForm("Robotomy Request Form", "foo");
+	formPres = erick.makeForm("Presidential Pardon Form", "Philip");
+	formRobo = erick.makeForm("Robotomy Request Form", "Sheldon");
 	formShru = erick.makeForm("Shrubbery Creation Form", "Garden");
-	try{
-		formWrong = erick.makeForm("Wrong Creation Form", "WrongGuy");
-	}catch(std::exception const &e){
-		std::cout << e.what() << std::endl;
-		delete formWrong;
-	}
 
 	std::cout << "\n===== TESTING =====" << std::endl;
 	bureaucrat.signForm(*formPres);
@@ -47,5 +43,6 @@ int main (void) {
 	delete formPres;
 	delete formRobo;
 	delete formShru;
+
 	return (0);
 }

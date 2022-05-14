@@ -5,77 +5,56 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/22 11:20:14 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/04/27 11:52:51 by jmilhas          ###   ########.fr       */
+/*   Created: 2022/05/14 08:49:09 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/05/14 08:49:15 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
 #include "Bureaucrat.hpp"
 
-int main(void)
-{
-	std::string	p1 = "Jean";
-	std::string	p2 = "Robert";
-	std::string	p3 = "Chirstine";
-	std::string	p4 = "Claire";
-	Bureaucrat b1;
-	Bureaucrat b2(p1);
+int main () {
 
-	std::cout << b1 << std::endl;
-	std::cout << b2 << std::endl;
-	std::cout << "\nNew try:" << std::endl;
-	try{
-		std::cout << b1 << std::endl;
-		std::cout << "decremente" << std::endl;
-		b1.decrementGrade();
-		std::cout << b1 << std::endl;
-	}catch(std::exception const &e){
-		std::cerr << e.what() << std::endl;
-	}
-	std::cout << "\nNew try:" << std::endl;
-	try{
-		std::cout << b2 << std::endl;
-		std::cout << "incremente" << std::endl;
-		b2.incrementGrade();
-		std::cout << b2 << std::endl;
-	}catch(std::exception const &e){
-		std::cerr << e.what() << std::endl;
-	}
-	std::cout << "\nNew try:" << std::endl;
+	std::cout << "===== DECLARATIONS =====" << std::endl;
+	Bureaucrat bure1;
+	Bureaucrat bure2("Theo");
+	Bureaucrat bure3(49);
+	Bureaucrat bure4("Philip", 150);
+
+	std::cout << "\n===== PRINTING =====" << std::endl;
+	std::cout << bure1 << std::endl;
+	std::cout << bure2 << std::endl;
+	std::cout << bure3 << std::endl;
+	std::cout << bure4 << std::endl;
+
+	std::cout << "\n===== ERROR's =====" << std::endl;
 	try {
-		std::cout << "Try creation Bureaucrat avec une grade de -1" << std::endl;
-		Bureaucrat b3(p2, -1);
-		std::cout << b3 << std::endl;
-	}catch(std::exception const &e){
-		std::cerr << p2 << " " << e.what() << std::endl;
+		bure1.decrementGrade(100);
+		bure2.incrementGrade(50);
+	} catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
 	}
-	std::cout << "\nNew try:" << std::endl;
+
 	try {
-		std::cout << "Try creation Bureaucrat avec une grade de 151" << std::endl;
-		Bureaucrat b4(151);
-		std::cout << b4 << std::endl;
-	}catch(std::exception const &e){
-		std::cerr << "Anonymous" << " " << e.what() << std::endl;
+		bure4.decrementGrade();
+	} catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
 	}
-	std::cout << "\nNew try:" << std::endl;
-	try{
-		std::cout << "Try creation Bureaucrat avec grade 150 et update" << std::endl;
-		Bureaucrat b5(150);
-		std::cout << b5 << std::endl;
-		b5.decrementGrade();
-		std::cout << b5 << std::endl;
-	}catch(std::exception const &e){
-		std::cerr << "Anonymous " << e.what() << std::endl;
+
+	try {
+		Bureaucrat bure5("Arnold", -50);
+	} catch (std::exception & e)
+	{
+		std::cout << e.what() << std::endl;
 	}
-	std::cout << "\nNew try:" << std::endl;
-	try{
-		std::cout << "Try creation Bureaucrat avec grade 150 et update" << std::endl;
-		Bureaucrat b5(0);
-		std::cout << b5 << std::endl;
-		b5.incrementGrade();
-		std::cout << b5 << std::endl;
-	}catch(std::exception const &e){
-		std::cerr << "Anonymous " << e.what() << std::endl;
-	}
-	return 0;
+
+	std::cout << "\n===== PRINTING =====" << std::endl;
+	std::cout << bure1 << std::endl;
+	std::cout << bure2 << std::endl;
+	std::cout << bure3 << std::endl;
+	std::cout << bure4 << std::endl;
+
+	std::cout << "\n===== END =====" << std::endl;
 }

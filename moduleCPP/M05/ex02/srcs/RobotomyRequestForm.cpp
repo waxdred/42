@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/27 13:30:12 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/04/27 13:51:32 by jmilhas          ###   ########.fr       */
+/*   Created: 2022/05/14 08:51:08 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/05/14 08:51:21 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "RobotomyRequestForm.hpp"
+#include "RobotomyRequestForm.hpp"
+
 # define SIGN_GRADE 72
 # define EXEC_GRADE 45
 # define FORM_NAME "robotomyRequest"
@@ -39,7 +40,7 @@ RobotomyRequestForm::~RobotomyRequestForm() {
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &robotomyRequestForm) :
 	Form (FORM_NAME, SIGN_GRADE, EXEC_GRADE)
 {
-	//std::cout << "[ROBOTOMYREQUESTFORM] Copy constructor clled" << std::endl;
+	//std::cout << "[ROBOTOMYREQUESTFORM] Copy constructor called" << std::endl;
 	*this = robotomyRequestForm;
 	return;
 }
@@ -62,7 +63,7 @@ void RobotomyRequestForm::executeAction() const {
 
 	std::cout << "* zZzzzZZZZzzZZZz PIIIIII PPOOOO TUCTUCTZZZZZZZ *" << std::endl;
 	if (success)
-		std::cout << getTarget() << " has been robotomized successfully!" << std::endl;
+		std::cout << C_GREEN << getTarget() << " has been robotomized successfully!" << C_END << std::endl;
 	else
-		std::cout << getTarget() << " died in the operation!" << std::endl;
+		std::cout << C_RED << getTarget() << " died in the operation!" << C_END << std::endl;
 }
