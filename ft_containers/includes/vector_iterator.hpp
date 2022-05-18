@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 20:40:13 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/11 21:13:22 by jmilhas          ###   ########.fr       */
+/*   Created: 2022/05/14 14:34:49 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/05/18 15:27:37 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,38 @@
 * ------------------------------------------------------------- *
 */
 
+#define ADD 0
+#define SUB 1
+
 namespace ft {
 	template<typename T>
 	class	vector_iterator{
 		/* ------------------------------------------------------------- */
             	/* -------------------------- ALIASES -------------------------- */
-		typedef std::ptrdiff_t 	difference_type;
-		typedef T 		value_type;
-		typedef value_type&	reference;
+		typedef std::ptrdiff_t 		difference_type;
+		typedef T 			value_type;
+		typedef T* 			elemPtr;
+		typedef value_type&		reference;
 		typedef const value_type&	const_reference;
-		typedef value_type*	pointer;
+		typedef value_type*		pointer;
 		typedef const value_type*	const_pointer;
 
 		private:	
-		  	pointer _ptr;
+		  	elemPtr _ptr;
 			
 		public:
 			vector_iterator(void): _ptr(0){};
-			vector_iterator(pointer ptr): _ptr(ptr){};
+			vector_iterator(const vector_iterator &copy) { _ptr = copy.get_ptr(); }
 			~vector_iterator(void){};
 			vector_iterator& operator=(const vector_iterator& assign){
 				if (this != &assign)
 					_ptr = assign._ptr;
 				return (*this);
 			}
+
+		vector_iterator get_ptr(void){
+			return (this->_ptr);
+		}
 		/* ------------------------------------------------------------- */
             	/* --------------------- BOOL OPERATOR ------------------------- */
 
@@ -76,16 +84,54 @@ namespace ft {
 
 		/* ------------------------------------------------------------- */
             	/* --------------------- OPERATOR OVERLOAD --------------------- */
-		vector_iterator operator ++(int){
-			vector_iterator res(*this);
-			++(*this);
-			return (res);
+		reference operator*() const{ return (_ptr); }
+
+		/* Incrementate iterator n pos*/
+		vector_iterator &operator+=(int n){
+			this->move_ptr(this->_ptr, n, ADD);
+			return (*this);
 		}
-		vector_iterator operator --(int){
-			vector_iterator res(*this);
-			--(*this);
-			return (res);
+
+		/* Incrementate iterator n pos */
+		vector_iterator &operator+(int n){
+			this->move_ptr(this->_ptr, n, ADD);
+			return (*this);
 		}
+		/* Incrementate iterator ++*/
+		vector_iterator &operator++(int){
+			this->move_ptr(this->*_ptr, 1, ADD);
+			return (*this);
+		}
+
+		/* Decrementate iterator n pos*/
+		vector_iterator &operator-=(int n){
+			this->move_ptr(this->_ptr, n, SUB);
+			return (*this);
+		}
+		/* Decrementate iterator n pos*/
+		vector_iterator &operator-(int n){
+			this->move_ptr(this->_ptr, n, SUB);
+			return (*this);
+		}
+		/* Decrementate iterator --*/
+		vector_iterator &operator--(int){
+			this->move_ptr(this->_ptr, 1, SUB);
+			return (*this);
+		}
+		private:
+			void move_ptr(elemPtr &elem, size_t n, bool sign){
+				int mov;
+
+				if (!sign)
+					mov = n > 0 ? mov = 1 : mov = -1;
+				else 
+					mov = n > 0 ? mov = -1 : mov = 1;
+				if (n < 0)
+					n *= -1;
+				for (; n > 0; n--)
+					elem += mov;
+			}
+
 	};
 }
 #endif

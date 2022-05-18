@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2021/12/28 23:18:18 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/05/18 09:46:12 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,28 +19,29 @@ CCPURPLE 	=   	\033[35m
 
 #Get arguments pass
 ARGV		=	$(filter-out $@,$(MAKECMDGOALS))
-NAME 		= 	 megaphone.a
-EXEC 		= 	 megaphone
-CC 		= 	 clang++
+NAME 		= 	 span.a
+EXEC 		= 	 span
+CC 		= 	 c++
 
 PATH_SRC	=	./srcs/
 PATH_OBJ	=	./objs/
 
-SRC 		=   	megaphone.cpp
+SRC 		=   	Span.cpp			\
+			main.cpp
 
 OBJ_SRC		=	$(SRC:.cpp=.o)
 
 SRC_O		=	$(addprefix $(PATH_SRC), $(SRC))
 OBJ_S		=	$(addprefix $(PATH_OBJ), $(OBJ_SRC))
 
-# HEADER 		= 	includes/
+HEADER 		= 	./includes/Span.hpp
 MK		= 	Makefile
 SAN 		= 	-g3 -fsanitize=address
-FLAGS 		= 	-Wall -Werror -Wextra 
+FLAGS 		= 	-Wall -Werror -Wextra -std=c++98 
 
 $(PATH_OBJ)%.o : $(PATH_SRC)%.cpp $(MK)
 	@mkdir $(PATH_OBJ) 2> /dev/null || true
-	@-$(CC) -o $@ -c $<
+	@-$(CC) -I ./includes/ -o $@ -c $<
 	@printf "\r\t\033[K$(CCYAN)\t$< $(CCPURPLE)--> $(CCYAN)$@ $(CCEND)"
 	@sleep 0.1
 
@@ -51,7 +52,7 @@ $(NAME): $(OBJ_S)
 	@printf "\n$(CCYAN)[✅]\t$(CCPURPLE)Creation of Objs $(EXEC)...$(CCEND)\n"
 	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Creation of $(NAME)...$(CCEND)\n"
 	@ar rc $(PATH_OBJ)$(NAME) $(OBJ_S)
-	@$(CC) $(PATH_OBJ)$(NAME) -o $(EXEC)
+	@$(CC) -I ./includes $(PATH_OBJ)$(NAME) -o $(EXEC)
 	@printf "$(CCYAN)[✅]\t$(CCPURPLE)Compilation ./$(EXEC)...$(CCEND)\n"
 
 clean:
@@ -65,11 +66,6 @@ fclean: clean
 	@-/bin/rm -f Tags
 	@-/bin/rm -rf .ccls-cache
 	@-/bin/rm -f $(EXEC)
-
-test:	$(NAME)
-	./megaphone "shhhhh... I think the students are asleep..."
-	./megaphone Damnit " ! " "Sorry students, I thought this thing was off."
-	./megaphone
 
 norme:
 	@echo "\033[33mNorme ..."

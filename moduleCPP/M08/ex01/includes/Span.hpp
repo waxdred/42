@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 09:33:23 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/01 15:08:01 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/18 10:27:32 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,26 @@ class	Span{
 		~Span(void);
 
 		void addNumber(int n);
-		void addNumber(const std::initializer_list<int> &list);
-		void addNumber(const std::vector<int> &v);
 		long longestSpan(void);
 		long shortestSpan(void);
+		unsigned int	size() const;
 
+		template<class It>
+		void	addNumber(It begin, It end)
+		{
+			if ((end - begin) + this->_v.size() <= this->_n)
+			{
+				std::copy(begin, end, std::back_inserter(this->_v));
+				std::sort(this->_v.begin(), this->_v.end());
+				return ;
+			}
+			else if (this->_v.size() <= this->_n)
+			{
+				std::copy(begin, begin + (this->_n - this->_v.size()), std::back_inserter(this->_v));
+				std::sort(this->_v.begin(), this->_v.end()); 
+			}
+			throw OutofRangeException();
+		};
 		Span &operator = (const Span &span);
 		class OutofRangeException : public std::exception{
 			public:

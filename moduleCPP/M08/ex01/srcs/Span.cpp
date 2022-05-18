@@ -6,11 +6,12 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 09:33:22 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/01 15:11:15 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/18 10:29:03 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
+#include <iostream>
 #include <algorithm>
 #include <vector>
 
@@ -41,24 +42,6 @@ void	Span::addNumber(int n){
 	this->_v.push_back(n);
 }
 
-void 	Span::addNumber(const std::initializer_list<int> &list){
-	if (_v.size() + list.size() >= this->_n)
-		throw Span::FullBufferException();
-	for (auto it = list.begin(); it != list.end(); it++){
-		this->_v.push_back(*it);
-	}
-}
-
-void	Span::addNumber(const std::vector<int> &vect){
-	if (_v.size() + (long)vect.size() >= this->_n)
-		throw Span::FullBufferException();
-	for (auto it = vect.begin(); it != vect.end(); it++){
-		this->_v.push_back(*it);
-	}
-
-}
-
-
 long	Span::shortestSpan(void){
 	if (this->_v.size() < 2)
 		throw Span::CantSearchException();
@@ -87,7 +70,10 @@ long	Span::longestSpan(void){
 	return ((long)copy.back() - (long)copy.front());	
 }
 
-
+unsigned int	Span::size() const
+{
+	return (this->_v.size());
+}
 
 Span &Span::operator = (const Span &span){
 	if (&span != this)

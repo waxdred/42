@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Form.hpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/16 13:50:10 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/05/16 13:50:23 by jmilhas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FORM_HPP
 # define FORM_HPP
 
@@ -19,9 +31,9 @@ private:
 public:
 	Form();
 	virtual ~Form();
-    Form (const Form &form);
-    Form (const std::string &name, const int &gradeToSign, const int &gradeToExecute);
-    Form & operator= (const Form &form);
+	Form (const Form &form);
+	Form (const std::string &name, const int &gradeToSign, const int &gradeToExecute);
+	Form & operator= (const Form &form);
 
 	const std::string getName() const;
 	int getGradeToSign() const;

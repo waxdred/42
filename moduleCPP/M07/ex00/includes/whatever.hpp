@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 09:50:44 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/04/30 11:31:42 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/16 18:07:31 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ class Perso{
 		Perso(void);
 		~Perso(void);
 		Perso(const std::string name, const int ages, const bool genre);
-		std::string getName(void){return (this->_name);};
-		int getAges(void){return (this->_ages);};
-		bool getGenre(void){return (this->_genre);};
+		std::string getName(void)const {return (this->_name);};
+		int getAges(void) const{return (this->_ages);};
+		bool getGenre(void) const{return (this->_genre);};
 		void printClass(void)const;
 };
 
@@ -41,14 +41,14 @@ void	swap(T&a, T&b){
 }
 
 template<typename T>
-T	min(T a, T b){
+const T	min(const T a, const T b){
 	if (a >= b)
 		return (b);
 	return (a);
 }
 
 template<typename T>
-T	max(T a, T b){
+const T	max(const T a, const T b){
 	if (a <= b)
 		return (b);
 	return (a);

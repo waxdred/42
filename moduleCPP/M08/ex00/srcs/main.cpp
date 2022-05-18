@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:22:43 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/01 09:30:14 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/18 09:40:09 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ int main(void)
 	addVector(v, 10);
 
 	try{
-		std::cout << *easyfind(v, 9) << std::endl;
-		std::cout << *easyfind(v, 10)<< std::endl;
-		std::cout << *easyfind(v, 42)<< std::endl;
+		for (int i = 0; i < 1000; i++)
+			std::cout << *easyfind(v, i) << std::endl;
 	}catch(std::exception &e){
 		std::cout << e.what() << std::endl;
 	}

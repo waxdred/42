@@ -6,58 +6,113 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 09:32:51 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/01 15:16:45 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/18 10:32:51 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 #include <exception>
 
-int main(void)
+#define TEST 50000
+int main()
 {
-	Span sp = Span(5);
-	Span vp(10);
-	std::vector<int> vec{1, 2, 2, 3, 4, 5, 8};
-	Span vect(10);
-	
-	std::cout << "===Test main 42 ===" << std::endl;
 	{
 		Span sp = Span(5);
 		sp.addNumber(6);
 		sp.addNumber(3);
 		sp.addNumber(17);
 		sp.addNumber(9);
-		sp.addNumber(11);
-		std::cout << sp.shortestSpan() << std::endl;
-		std::cout << sp.longestSpan() << std::endl;
+		sp.addNumber(-111);
+		//sp.addNumber(11);
+		std::cout << "shortestSpan: "<< sp.shortestSpan() << std::endl;
+		std::cout << "longestSpan: "<< sp.longestSpan() << std::endl;
+		Span	span2(TEST);
+		/* Span	span2(500); */
+		for (size_t i = 0; i < TEST; i++)
+		{
+			span2.addNumber(3);
+		}
+		try
+		{
+			span2.addNumber(3);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
+		Span	span3;
+		try
+		{
+			span3.addNumber(3);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
 	}
-	try{
-		std::cout << "\n=== Add vector in addNumber ===" << std::endl;
-	        vect.addNumber(vec);
-		std::cout << "test if span full size" << std::endl;
-	        vect.addNumber(vec);
-	}catch(std::exception &e){
-		std::cout << "Exception: " << e.what() << std::endl;
+	{
+		std::cout << "addNumber 5x add -- add (5000) == 5000 add" << std::endl;
+		Span span = Span(50000);
+		std::vector<int> range(5000, 10);
+		range[48] = 40;
+		span.addNumber(5);
+		span.addNumber(2);
+		span.addNumber(5);
+		span.addNumber(5);
+		span.addNumber(2);
+		try
+		{
+			span.addNumber(range.begin(), range.end());
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
+		std::cout << span.shortestSpan() << std::endl;
+		std::cout << span.longestSpan() << std::endl;
+		std::cout << span.size() << std::endl << std::endl;
 	}
-	try{
-		std::cout << "\n=== Add int in addNumber ===" << std::endl;
-		sp.addNumber(5);
-		sp.addNumber(3);
-		sp.addNumber(17);
-		sp.addNumber(9);
-		sp.addNumber(11);
-		std::cout << "test if span full size" << std::endl;
-		sp.addNumber(11);
-	}catch(std::exception &e){
-		std::cout << "Exception: " << e.what() << std::endl;
+	{
+		std::cout << "addNumber 5x add -- add (50) == Exception 0 add" << std::endl;
+		Span span = Span(5);
+		std::vector<int> range(50, 10);
+		range[48] = 40;
+		span.addNumber(5);
+		span.addNumber(2);
+		span.addNumber(5);
+		span.addNumber(5);
+		span.addNumber(2);
+		try
+		{
+			span.addNumber(range.begin(), range.end());
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
+		std::cout << span.shortestSpan() << std::endl;
+		std::cout << span.longestSpan() << std::endl;
+		std::cout << span.size() << std::endl << std::endl;
 	}
-	try{
-		std::cout << "\n=== Add list in addNumber ===" << std::endl;
-		vp.addNumber({1, 42, 45, 56, 48, 86, 56});
-		std::cout << "test if span full size" << std::endl;
-		vp.addNumber({1, 42, 45, 56, 48, 86, 56});
-	}catch(std::exception &e){
-		std::cout << "Exception: " << e.what() << std::endl;
+	{
+		std::cout << "addNumber 2x add -- add (50) == Exception 48 add" << std::endl;
+		Span span = Span(50);
+		std::vector<int> range(50, 10);
+		range[48] = 40;
+		span.addNumber(5);
+		span.addNumber(2);
+		try
+		{
+			span.addNumber(range.begin(), range.end());
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
+		std::cout << span.shortestSpan() << std::endl;
+		std::cout << span.longestSpan() << std::endl;
+		std::cout << span.size() << std::endl << std::endl;
 	}
 	return 0;
 }
+
