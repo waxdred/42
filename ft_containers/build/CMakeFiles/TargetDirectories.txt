@@ -1,0 +1,12 @@
+/Users/wax/42/ft_containers/build/CMakeFiles/exec.dir
+/Users/wax/42/ft_containers/build/CMakeFiles/v_erase.dir
+/Users/wax/42/ft_containers/build/CMakeFiles/v_iterator.dir
+/Users/wax/42/ft_containers/build/CMakeFiles/v_assign.dir
+/Users/wax/42/ft_containers/build/CMakeFiles/v_push_back.dir
+/Users/wax/42/ft_containers/build/CMakeFiles/v_swap.dir
+/Users/wax/42/ft_containers/build/CMakeFiles/v_resize.dir
+/Users/wax/42/ft_containers/build/CMakeFiles/v_clear.dir
+/Users/wax/42/ft_containers/build/CMakeFiles/v_access.dir
+/Users/wax/42/ft_containers/build/CMakeFiles/test.dir
+/Users/wax/42/ft_containers/build/CMakeFiles/edit_cache.dir
+/Users/wax/42/ft_containers/build/CMakeFiles/rebuild_cache.dir

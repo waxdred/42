@@ -1,0 +1,329 @@
+Start testing: May 25 00:29 CEST
+----------------------------------------------------------
+1/8 Testing: Test_Vector_Erase
+1/8 Test: Test_Vector_Erase
+Command: "/Users/wax/42/ft_containers/build/v_erase"
+Directory: /Users/wax/42/ft_containers/build
+"Test_Vector_Erase" start time: May 25 00:29 CEST
+Output:
+----------------------------------------------------------
+ 1 2 3 4 5 6 7 8 9 10
+ 4 5 7 8 9 10
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Failed.
+"Test_Vector_Erase" end time: May 25 00:29 CEST
+"Test_Vector_Erase" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/8 Testing: Test_Vector_Iterator
+2/8 Test: Test_Vector_Iterator
+Command: "/Users/wax/42/ft_containers/build/v_iterator"
+Directory: /Users/wax/42/ft_containers/build
+"Test_Vector_Iterator" start time: May 25 00:29 CEST
+Output:
+----------------------------------------------------------
+Iterator empty
+
+My vector test
+salut: 1 salut: 12 salut: 123 salut: 1234 salut: 12345 salut: 123456 salut: 1234567 salut: 12345678 salut: 123456789 salut: 12345678910 
+vector test
+salut: 1 salut: 12 salut: 123 salut: 1234 salut: 12345 salut: 123456 salut: 1234567 salut: 12345678 salut: 123456789 salut: 12345678910 
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"Test_Vector_Iterator" end time: May 25 00:29 CEST
+"Test_Vector_Iterator" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/8 Testing: Test_Vector_Assign
+3/8 Test: Test_Vector_Assign
+Command: "/Users/wax/42/ft_containers/build/v_assign"
+Directory: /Users/wax/42/ft_containers/build
+"Test_Vector_Assign" start time: May 25 00:29 CEST
+Output:
+----------------------------------------------------------
+Size of first: 7
+Size of second: 4
+Size of third: 3
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"Test_Vector_Assign" end time: May 25 00:29 CEST
+"Test_Vector_Assign" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/8 Testing: Test_Vector_Push_back
+4/8 Test: Test_Vector_Push_back
+Command: "/Users/wax/42/ft_containers/build/v_push_back"
+Directory: /Users/wax/42/ft_containers/build
+"Test_Vector_Push_back" start time: May 25 00:29 CEST
+Output:
+----------------------------------------------------------
+check vector empty: false
+size of vector: 0
+capacity of vector: 0
+check vector empty: false
+size of vector: 0
+capacity of vector: 0
+
+
+0 push_back: 
+size of vector: 1
+capacity of vector: 1
+size of vector: 1
+capacity of vector: 1
+
+push_back: 
+
+
+1 push_back: 
+size of vector: 2
+capacity of vector: 2
+size of vector: 2
+capacity of vector: 2
+
+push_back: 
+
+
+2 push_back: 
+size of vector: 3
+capacity of vector: 4
+size of vector: 3
+capacity of vector: 4
+
+push_back: 
+
+
+3 push_back: 
+size of vector: 4
+capacity of vector: 4
+size of vector: 4
+capacity of vector: 4
+
+push_back: 
+
+size of vector: 4
+capacity of vector: 4
+size of vector: 4
+capacity of vector: 4
+1
+{salut, a, toi, 
+comment va tu?, 
+comment va tu?}
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"Test_Vector_Push_back" end time: May 25 00:29 CEST
+"Test_Vector_Push_back" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/8 Testing: Test_Vector_Swap
+5/8 Test: Test_Vector_Swap
+Command: "/Users/wax/42/ft_containers/build/v_swap"
+Directory: /Users/wax/42/ft_containers/build
+"Test_Vector_Swap" start time: May 25 00:29 CEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Failed.
+"Test_Vector_Swap" end time: May 25 00:29 CEST
+"Test_Vector_Swap" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/8 Testing: Test_Vector_Resize
+6/8 Test: Test_Vector_Resize
+Command: "/Users/wax/42/ft_containers/build/v_resize"
+Directory: /Users/wax/42/ft_containers/build
+"Test_Vector_Resize" start time: May 25 00:29 CEST
+Output:
+----------------------------------------------------------
+5
+5
+ 1 2 3 4 5 100 100 100 0 0 0 0
+ 1 2 3 4 5 100 100 100 0 0 0 0
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"Test_Vector_Resize" end time: May 25 00:29 CEST
+"Test_Vector_Resize" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/8 Testing: Test_Vector_Clear
+7/8 Test: Test_Vector_Clear
+Command: "/Users/wax/42/ft_containers/build/v_clear"
+Directory: /Users/wax/42/ft_containers/build
+"Test_Vector_Clear" start time: May 25 00:29 CEST
+Output:
+----------------------------------------------------------
+salut
+salut
+salut
+salut
+salut
+salut
+salut
+salut
+salut
+salut
+vector: salut
+vector: salut
+vector: salut
+vector: salut
+vector: salut
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: salut
+vector: salut
+vector: salut
+vector: salut
+vector: salut
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+vector: test
+size of vector: 50
+capacity of vector: 64
+clear of vector: 
+size of vector: 50
+capacity of vector: 50
+clear of vector: 
+size of vector: 0
+capacity of vector: 64
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Failed.
+"Test_Vector_Clear" end time: May 25 00:29 CEST
+"Test_Vector_Clear" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/8 Testing: Test_Vector_Access
+8/8 Test: Test_Vector_Access
+Command: "/Users/wax/42/ft_containers/build/v_access"
+Directory: /Users/wax/42/ft_containers/build
+"Test_Vector_Access" start time: May 25 00:29 CEST
+Output:
+----------------------------------------------------------
+test last]: 12
+test v.at(0)): 0
+test v.front()): 0
+test v[1]]: 1
+test v.at(1)): 1
+test v[2]]: 2
+test v.at(2)): 2
+test v.back): 12
+test v.size(): 11
+test v.capacity(): 16
+test v.max_size(): 4611686018427387903
+test last]: 12
+test vec.at(0)): 0
+test vec.front()): 0
+test vec[1]]: 1
+test vec.at(1)): 1
+test vec[2]]: 2
+test vec.at(2)): 2
+test vec.back): 12
+test vec.size(): 11
+test vec.capacity(): 16
+test vec.max_size(): 4611686018427387903
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"Test_Vector_Access" end time: May 25 00:29 CEST
+"Test_Vector_Access" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: May 25 00:29 CEST

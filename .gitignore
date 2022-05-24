@@ -5,8 +5,6 @@ objs
 .DS_store
 .ccls-cache
 .ccls
-CMakeLists.txt
-build
 tags
 cmake_install.cmake
 .cache 

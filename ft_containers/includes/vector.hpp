@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:08:46 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/18 15:22:20 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/25 00:12:54 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,8 @@
 
 # include <iostream>
 # include <memory>
-#include <sys/_types/_size_t.h>
-# include <vector>
-# include <cstddef>
-# include <sstream>
 # include "vector_iterator.hpp"
+# include "tools.hpp"
 /**
     * ------------------------ TODO ------------------------------- *
     * ------------------------ FT::VECTOR ------------------------- *
@@ -38,7 +35,7 @@
     * - Capacity:
     * [x]size:                 Return size
     * [x]max_size:             Return maximum size
-    * [ ]resize:               Change size
+    * [x]resize:               Change size
     * [x]capacity:             Return size of allocated storage capacity
     * [x]empty:                Test whether vector is empty
     * [x]reserve:              Request a change in capacity
@@ -49,18 +46,18 @@
     * [x]front:                Access first element
     * [x]back:                 Access last element
     *
-    * - Modifiers:git@vogsphere-v2.42lyon.fr:vogsphere/intra-uuid-8450a018-c342-4076-9d6d-ae599c91cca5-4136842-jmilhas
-    * [ ]assign:               Assign vector content
+    * - Modifiers:
+    * [x]assign:               Assign vector content
     * [x]push_back:            Add element at the end
     * [x]pop_back:             Delete last element
     * [ ]insert:               Insert elements
-    * [ ]erase:                Erase elements
-    * [ ]swap:                 Swap content
+    * [x]erase:                Erase elements
+    * [x]swap:                 Swap content
     * [x]clear:                Clear content
     * 
     * - Non-member function overloads:
     * [ ]relational operators: Relational operators for vector
-    * [ ]swap:                 Exchange contents of two vectors
+    * [x]swap:                 Exchange contents of two vectors
     * ------------------------------------------------------------- *
     */
 
@@ -82,10 +79,11 @@ namespace ft{
 
 
 		private:
-			Allocator 	_alloc;
-			T 		*_ptr;
+			allocator_type 	_alloc;
+			value_type	*_ptr;
 			size_type	_size_alloc;
 			size_type	_capacity;
+
 		public:
 			/* @Brief Default consturctor,*/
 			/* Create a vector with a size at 0*/
@@ -107,15 +105,15 @@ namespace ft{
 			
 			 /* @Brief Range constructor, creates a vector with a size equal to the range between two */
 			 /* iterators and copy the values of this range to the new elements created. */
-			
 			 /* @param first    An iterator representing first element of the range. */
 			 /* @param last     An iterator indicating end of the range (will be excluded and not copied). */
 			 /* @param alloc    The template param used for the allocation. */
-			template <class InputIterator>
-			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
-			: _alloc(alloc), _ptr(0), _size_alloc(0), _capacity(0){
+			 template <class InputIterator>
+            		 vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
+                    		typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0) :
+                    			_alloc(alloc), _size_alloc(0){
 				while (first != last){
-					this->push_back(*first);
+					push_back(*first);
 					first++;
 				}
 			};
@@ -148,7 +146,6 @@ namespace ft{
 			     swap(tmp);
 			     return *this;
 			 }
-
 
 			 /* ------------------------------------------------------------- */
 			 /* ------------------------- OPERATOR -------------------------- */  
@@ -257,27 +254,35 @@ namespace ft{
 
 			 void clear(void){
 				 for (size_type i = 0; i < _size_alloc; i++){
-					 this->pop_back();
+					 pop_back();
 				 }
+				 this->_alloc.deallocate(_ptr, _size_alloc);
+				 this->_ptr = 0;
 				 this->_size_alloc = 0;
 			 }
 
 			 void pop_back(void){
 				this->_size_alloc--;
-				_alloc.destroy(&_ptr[_size_alloc]);
+				if (!this->_size_alloc)
+					_alloc.destroy(&_ptr[_size_alloc - 1]);
 			 }
 
 			 void resize (size_type n, value_type val = value_type()){
 				 if (n < _size_alloc){
-					 std::cout << "n < size" << std::endl;
 					 for (size_type i = 1; i < n; i++)
-						 this->pop_back();
+						 pop_back();
 				 }
 				 else if (n >= _size_alloc){
-					 std::cout << "n > size" << std::endl;
 					for (size_type i = _size_alloc; i < n; i++)
-						this->push_back(val);
+						push_back(val);
 				 }
+			 }
+
+			 void swap (vector& x){
+				 swap(x._alloc, _alloc);
+				 swap(x._ptr, _ptr);
+				 swap(x._capacity, _capacity);
+				 swap(x._size_alloc, _size_alloc);
 			 }
 
 			 /* Request a change in capacity */
@@ -297,14 +302,105 @@ namespace ft{
 					 T *tmp = t_alloc.allocate(n);
 					 for (size_t i = 0; i < this->size(); i++){
 						 t_alloc.construct(tmp + i, _ptr[i]);
-						 _alloc.destroy(&_ptr[i]);
+						 this->_alloc.destroy(&_ptr[i]);
 					 }
-					 _alloc.deallocate(_ptr, _size_alloc);
-					 _alloc = t_alloc;
-					 _ptr = tmp;
-					 _capacity = n;
+					 this->_alloc.deallocate(_ptr, _size_alloc);
+					 this->_alloc = t_alloc;
+					 this->_ptr = tmp;
+					 this->_capacity = n;
 				 }
 			 }
+
+			 template <class InputIterator>
+  			 void assign (InputIterator first, InputIterator last,
+			 	typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0){
+				 size_t n = ft::lenght_it(first, last);
+				 this->clear();
+				 if (this->_capacity < n)
+					 this->reserve(n);
+				 else
+				 for (; n > 0; n--)
+		 		 	this->push_back(*first++);
+				 this->_size_alloc = n;
+			 };
+
+			 void assign (size_type n, const value_type& val){
+				 this->clear();
+				 if (n > this->_capacity){
+					 this->reserve(n);
+				 }
+				 for (size_type i = 0; i < n; i++)
+					 this->push_back(val);
+				 this->_size_alloc = n;
+
+			 };
+
+			 iterator erase (iterator position){
+				 return (this->erase(position, position + 1));
+			 };
+
+		 	 iterator erase (iterator first, iterator last){
+				if (first == this->end() || first == last)
+					return (first);
+				size_type index = first - this->begin();
+				if (last < this->end()){
+					moveleft(first, last);
+					_size_alloc -= static_cast<size_type>(last - first);
+				}
+				else{
+					size_type new_size = static_cast<size_type>(last - first);
+					while (_size_alloc < new_size)
+						this->pop_back();
+				}
+				return (&_ptr[index]);
+			 };
+			 /* iterator insert (iterator position, const value_type& val){ */
+			 /* size_type index = position - this->begin(); */
+				 /* this->insert(position, 1, val); */
+				 /* return (iterator(&(_ptr[index]))); */
+
+			 /* } */
+    			 /* void insert (iterator position, size_type n, const value_type& val){ */
+				 /* size_type index = position - this->begin(); */
+				 /* if (_size_alloc + n > _capacity) */
+					 /* this->reserve(_capacity + n); */
+			 /* } */
+			 /* template <class InputIterator> */
+    			 /* void insert (iterator position, InputIterator first, InputIterator last, */
+				/* typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0){ */
+
+			 /* } */
+
+			 /* ------------------------------------------------------------- */
+            		 /* --------------- NON-MEMBER FUNCTION OVERLOADS --------------- */
+  			 friend bool operator== (const vector& lhs, const vector& rhs);
+  			 friend bool operator!= (const vector& lhs, const vector& rhs);
+  			 friend bool operator<  (const vector& lhs, const vector& rhs);
+  			 friend bool operator<= (const vector& lhs, const vector& rhs);
+  			 friend bool operator>  (const vector& lhs, const vector& rhs);
+  			 friend bool operator>= (const vector& lhs, const vector& rhs);
+  			 void swap (vector &x, vector &y){
+				 x.swap(y);
+			 }
+
+		private:
+			template <typename U>
+		   	void swap(U& a, U&b)
+		    	{
+				U tmp = a;
+				a = b;
+				b = tmp;
+		    	}
+			void moveleft(iterator first, iterator last){
+				for(; first != this->end(); first++){
+					_alloc.destroy(&(*first));
+				}
+				if (last < this->end()){
+					_alloc.construct(&(*first), *last);
+				}
+
+			}
+
 };
 
 template < class T >
