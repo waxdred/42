@@ -6,9 +6,11 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 00:15:27 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/25 00:20:04 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/25 20:06:14 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+# include "header.hpp"
 
 # include "header.hpp"
 
@@ -17,59 +19,50 @@ int main(void)
 	std::stringstream my;
 	std::stringstream origine;
 	
-	ft::vector<std::string> vector_str;
-	std::vector<std::string> vector;
+	std::vector<int> vector;
+	ft::vector<int> myvector;
 
-	for (int i = 0; i < 5; i++){
-		vector_str.push_back("salut");
-		vector.push_back("salut");
-		std::cout << vector_str[i] << std::endl;
-		my << vector_str[i] << std::endl;
-		std::cout << vector[i] << std::endl;
-		origine << vector[i] << std::endl;
+  	vector.push_back (100);
+  	vector.push_back (200);
+  	vector.push_back (300);
+  	myvector.push_back (100);
+  	myvector.push_back (200);
+  	myvector.push_back (300);
+
+  	std::cout << "myvector contains:";
+  	for (unsigned i=0; i < myvector.size(); i++){
+  		std::cout << ' ' << myvector[i];
+  		my << ' ' << myvector[i];
 	}
 
-	vector_str.resize(50, "test");
-	vector.resize(50, "test");
-	for (size_t i = 0; i < vector_str.size(); i++){
-		std::cout << "vector: " << vector_str[i] << std::endl;
-		my << "vector: " << vector_str[i] << std::endl;
+  	std::cout << '\n';
+  	for (unsigned i=0; i < vector.size(); i++){
+  		std::cout << ' ' << vector[i];
+  		origine << ' ' << vector[i];
 	}
-	for (size_t i = 0; i < vector.size(); i++){
-		std::cout << "vector: " << vector[i] << std::endl;
-		origine << "vector: " << vector[i] << std::endl;
+  	std::cout << '\n';
+
+  	myvector.clear();
+  	myvector.push_back (1101);
+  	myvector.push_back (2202);
+  	vector.clear();
+  	vector.push_back (1101);
+  	vector.push_back (2202);
+
+  	std::cout << "myvector contains:";
+  	for (unsigned i=0; i<myvector.size(); i++){
+  		std::cout << ' ' << myvector[i];
+		my << ' ' << myvector[i];
 	}
+  	std::cout << '\n';
+  	
+	std::cout << "vector contains:";
+  	for (unsigned i=0; i < vector.size(); i++){
+  		std::cout << ' ' << vector[i];
+		origine << ' ' << vector[i];
+	}
+  	std::cout << '\n';
 
-	std::cout << "size of vector: " << vector_str.size() << std::endl;
-	std::cout << "capacity of vector: " << vector_str.capacity() << std::endl;
-	std::cout << "clear of vector: " << std::endl;
-	my << "size of vector: " << vector_str.size() << std::endl;
-	my << "capacity of vector: " << vector_str.capacity() << std::endl;
-	my << "clear of vector: " << std::endl;
-
-	std::cout << "size of vector: " << vector.size() << std::endl;
-	std::cout << "capacity of vector: " << vector.capacity() << std::endl;
-	std::cout << "clear of vector: " << std::endl;
-	origine << "size of vector: " << vector.size() << std::endl;
-	origine << "capacity of vector: " << vector.capacity() << std::endl;
-	origine << "clear of vector: " << std::endl;
-
-	vector_str.clear();
-	vector.clear();
-
-	std::cout << "size of vector: " << vector_str.size() << std::endl;
-	std::cout << "capacity of vector: " << vector_str.capacity() << std::endl;
-	std::cout << vector_str.front();
-	my << "size of vector: " << vector_str.size() << std::endl;
-	my << "capacity of vector: " << vector_str.capacity() << std::endl;
-	my << vector_str.front();
-
-	std::cout << "size of vector: " << vector_str.size() << std::endl;
-	std::cout << "capacity of vector: " << vector_str.capacity() << std::endl;
-	std::cout << vector_str.front();
-	origine << "size of vector: " << vector.size() << std::endl;
-	origine << "capacity of vector: " << vector.capacity() << std::endl;
-	origine << vector.front();
 	std::string my_vector = my.str();
 	std::string origine_vector = origine.str();
 	if (my_vector != origine_vector)

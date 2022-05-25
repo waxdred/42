@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:08:46 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/25 00:12:54 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/25 20:42:29 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include <iostream>
 # include <memory>
+#include <strings.h>
 # include "vector_iterator.hpp"
+# include "rev_vector_iterator.hpp"
 # include "tools.hpp"
 /**
     * ------------------------ TODO ------------------------------- *
@@ -29,8 +31,8 @@
     * - Iterators:
     * [x]begin:                Return iterator to beginning
     * [x]end:                  Return iterator to end
-    * [ ]rbegin:               Return reverse iterator to reverse beginning
-    * [ ]rend:                 Return reverse iterator to reverse end
+    * [x]rbegin:               Return reverse iterator to reverse beginning
+    * [x]rend:                 Return reverse iterator to reverse end
     *
     * - Capacity:
     * [x]size:                 Return size
@@ -74,8 +76,10 @@ namespace ft{
 			typedef typename Allocator::const_reference 	const_reference;
 			typedef typename Allocator::pointer 		pointer;
 			typedef typename Allocator::const_pointer 	const_pointer;
-			typedef typename ft::vector_iterator<T>      	iterator;
-            		typedef typename ft::vector_iterator<T>       	const_iterator;
+			typedef typename ft::iterator<T>      	iterator;
+            		typedef typename ft::iterator<T>       	const_iterator;
+			typedef typename ft::reverse_iterator<T>      	rev_iterator;
+            		typedef typename ft::reverse_iterator<T>       	rev_const_iterator;
 
 
 		private:
@@ -99,6 +103,7 @@ namespace ft{
 			/* @param alloc    The template param used for the allocation. */
 			explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
 				: _alloc(alloc), _size_alloc(n), _capacity(n){
+					this->_ptr = _alloc.allocate(_capacity);
 					for (size_type i = 0; i < n; i++)
 						_alloc.construct(_ptr + i, val);
 				};
@@ -122,7 +127,7 @@ namespace ft{
 			/* all x values to the new area allocated. */
 			/* @param x        The vector that will be copied. */
 			vector(const vector& x)
-				: _alloc(allocator_type()), _ptr(0), _size_alloc(0), _capacity(0){
+				: _alloc(allocator_type()), _ptr(NULL), _size_alloc(0), _capacity(0){
 				*this = x;
 			};
 			
@@ -130,11 +135,9 @@ namespace ft{
 			/* ressources. */
 			~vector(){
 				this->clear();
-				if (this->_size_alloc > 0){
-					this->_alloc.deallocate(_ptr, _size_alloc);
-					this->_size_alloc = 0;
-					this->_capacity = 0;
-				}
+				this->_alloc.deallocate(_ptr, _capacity);
+				this->_size_alloc = 0;
+				this->_capacity = 0;
 			};
 			
 			 /* @Brief Assigns a vector to this vector. Calls the copy constructor to do the */
@@ -170,10 +173,15 @@ namespace ft{
 			 /* ------------------------------------------------------------- */
 			 /* ------------------------- ITERATORS ------------------------- */
 			 iterator	begin(void){return (iterator(_ptr));}
-			 const_iterator	begin(void)const {return (const_iterator(_ptr));}
+			 const_iterator	cbegin(void)const {return (const_iterator(_ptr));}
 			 iterator	end(void){return (iterator(_ptr + _size_alloc));}
-			 const_iterator	end(void)const {return (const_iterator(_ptr + _size_alloc));}
+			 const_iterator	cend(void)const {return (const_iterator(_ptr + _size_alloc));}
 			
+			 rev_iterator	rbegin(void){return (rev_iterator(_ptr + _size_alloc - 1));}
+			 rev_const_iterator	crbegin(void)const {return (rev_const_iterator(_ptr + _size_alloc - 1));}
+			 rev_iterator	rend(void){return (rev_iterator(_ptr - 1));}
+			 rev_const_iterator	crend(void)const {return (rev_const_iterator(_ptr - 1));}
+
 			 /* ------------------------------------------------------------- */
 			 /* -------------------------- CAPACITY ------------------------- */
 			 /* ------------------------------------------------------------- */
@@ -187,7 +195,7 @@ namespace ft{
 			 /* This function does not modify the container in any way. */
 			 /* To clear the content of a vector, see vector::clear. */
 			 /* @Return  Bool*/
-			 bool      	empty() const{ return (_size_alloc < 1 ? false : true);}
+			 bool      	empty() const{ return (_size_alloc < 1 ? true : false);}
 
 			 /* @Brief Returns the size of the storage space currently allocated for the vector, */ 
 		  	 /* expressed in terms of elements. */
@@ -257,14 +265,13 @@ namespace ft{
 					 pop_back();
 				 }
 				 this->_alloc.deallocate(_ptr, _size_alloc);
-				 this->_ptr = 0;
+				 this->_ptr = _alloc.allocate(_capacity);
 				 this->_size_alloc = 0;
 			 }
 
 			 void pop_back(void){
-				this->_size_alloc--;
-				if (!this->_size_alloc)
-					_alloc.destroy(&_ptr[_size_alloc - 1]);
+				 if (_size_alloc)
+                    			_alloc.destroy(&_ptr[_size_alloc-- - 1]);
 			 }
 
 			 void resize (size_type n, value_type val = value_type()){
@@ -319,8 +326,8 @@ namespace ft{
 				 if (this->_capacity < n)
 					 this->reserve(n);
 				 else
-				 for (; n > 0; n--)
-		 		 	this->push_back(*first++);
+				 	for (; n > 0; n--)
+		 		 		this->push_back(*first++);
 				 this->_size_alloc = n;
 			 };
 
@@ -392,13 +399,13 @@ namespace ft{
 				b = tmp;
 		    	}
 			void moveleft(iterator first, iterator last){
-				for(; first != this->end(); first++){
+				size_t i = 0;
+				for(; first != this->end(); first++, i++){
 					_alloc.destroy(&(*first));
 				}
 				if (last < this->end()){
 					_alloc.construct(&(*first), *last);
 				}
-
 			}
 
 };
@@ -410,7 +417,7 @@ std::ostream& operator <<(std::ostream &s, ft::vector<T> &v)
 		return (s);
 	std::cout << v.empty() << std::endl;
 	s << "{";
-	for (ft::vector_iterator<T> it = v.begin(); it != v.end(); it++){
+	for (ft::iterator<T> it = v.begin(); it != v.end(); it++){
 		s << *it << ", ";
 	}
 	s << v[v.size() - 1] << "}";

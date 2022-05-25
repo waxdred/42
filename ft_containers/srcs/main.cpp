@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:33:06 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/25 09:19:15 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/25 20:38:51 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,33 +23,42 @@ int main(void)
 {
 	std::stringstream my;
 	std::stringstream origine;
+
+	std::vector<int> myvector;
+	ft::vector<int> vector;
+  	int sum (0);
+  	int m_sum (0);
+
+  	myvector.push_back (100);
+  	myvector.push_back (200);
+  	myvector.push_back (300);
+
+  	vector.push_back (100);
+  	vector.push_back (200);
+  	vector.push_back (300);
+
+  	while (!myvector.empty())
+  	{
+  		sum += myvector.back();
+  		myvector.pop_back();
+  	}
+  	while (!vector.empty())
+  	{
+  		m_sum += vector.back();
+  		vector.pop_back();
+  	}
+
+  	std::cout << "The elements of vector add up to " << sum << '\n';
+  	origine << "The elements add up to " << sum << '\n';
+
+  	std::cout << "The elements of myvector add up to " << m_sum << '\n';
+  	my << "The elements add up to " << m_sum << '\n';
 	
-	char foo[]="Apple";
-  	char bar[]="apartment";
-
-  	std::cout << std::boolalpha;
-
-  	std::cout << "Comparing foo and bar lexicographically (foo<bar):\n";
-
-  	std::cout << "Using default comparison (operator<): ";
-  	std::cout << std::lexicographical_compare(foo,foo+5,bar,bar+9);
-  	std::cout << ft::lexicographical_compare(foo,foo+5,bar,bar+9);
-  	my << ft::lexicographical_compare(foo,foo+5,bar,bar+9);
-  	origine << std::lexicographical_compare(foo,foo+5,bar,bar+9);
-  	std::cout << '\n';
-
-  	std::cout << "Using mycomp as comparison object: ";
-  	std::cout << std::lexicographical_compare(foo,foo+5,bar,bar+9,mycomp);
-  	std::cout << ft::lexicographical_compare(foo,foo+5,bar,bar+9,mycomp);
-  	my << ft::lexicographical_compare(foo,foo+5,bar,bar+9,mycomp);
-  	origine << std::lexicographical_compare(foo,foo+5,bar,bar+9,mycomp);
-  	std::cout << '\n';
 	std::string my_vector = my.str();
 	std::string origine_vector = origine.str();
-	std::cout << "my: " << my_vector << std::endl;
-	std::cout << "origine: " << origine_vector << std::endl;
 	if (my_vector != origine_vector)
 		return (1);
+	return 0;
 	return 0;
 }
 

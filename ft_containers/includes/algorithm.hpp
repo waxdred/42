@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 08:02:32 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/25 09:21:40 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/25 18:22:49 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 	* ------------------------ ALGORITHM -------------------------- *
 	*
 	* - Equal:
-	* [ ]equality:
-	* [ ]predicate:
+	* [x]equality:
+	* [x]predicate:
 	*
 	* -lexicographical_compare
-	*  [ ]default:
-	*  [ ]custom:
+	*  [x]default:
+	*  [x]custom:
 	*
 	* ------------------------------------------------------------- *
 	*/
@@ -87,8 +87,6 @@ namespace ft{
   			return (first2!=last2);
 
 	}
-
-
 }//namespace
 	
 #endif

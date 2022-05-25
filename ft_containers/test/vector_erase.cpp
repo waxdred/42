@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 22:13:31 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/24 23:15:04 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/25 18:16:29 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,19 @@ int main(void)
   	myvector.erase (myvector.begin(),myvector.begin()+3);
   	vector.erase (vector.begin(),vector.begin()+3);
   	
-  	for (unsigned i=0; i<myvector.size(); ++i)
-  	  my << ' ' << myvector[i];
+	std::cout << "My vector: "<< std::endl;
+  	for (unsigned i=0; i<myvector.size(); ++i){
+  	  	my << ' ' << myvector[i];
+		std::cout << ' ' << myvector[i];
+	}
+	std::cout << std::endl;
   	
-	for (unsigned i=0; i < vector.size(); ++i)
-  	  origine << ' ' << vector[i];
+	std::cout << "vector: "<< std::endl;
+	for (unsigned i=0; i < vector.size(); ++i){
+  	  	origine << ' ' << vector[i];
+		std::cout << ' ' << vector[i];
+	}
+	std::cout << std::endl;
 
 	std::string my_vector = my.str();
 	std::string origine_vector = origine.str();

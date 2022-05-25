@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_iterator.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   by: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   created: 2022/05/11 20:24:28 by jmilhas           #+#    #+#             */
-/*   updated: 2022/05/11 20:24:28 by jmilhas          ###   ########.fr       */
+/*   Created: 2022/05/25 15:47:38 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/05/25 15:47:51 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 * ------------------------ TODO ------------------------------- *
 * ------------------------ FT_VECTOR_ITERATOR ----------------- *
 * - Coplien form:
-* [x](constructor):        Construct vector_iterator
+* [x](constructor):        Construct iterator
 * [x](destructor):         Vector_iterator destructor
 * [x]operator=:            Assign content
 *
 * - Operators
-* [ ]operators:            Operators for vector_iterator
-* [ ]non-member operators: Operators for vector_iterator
+* [x]operators:            Operators for iterator
+* [x]non-member operators: Operators for iterator
 * ------------------------------------------------------------- *
 */
 
@@ -33,7 +33,7 @@
 
 namespace ft {
 	template<typename T>
-	class	vector_iterator{
+	class	iterator{
 		/* ------------------------------------------------------------- */
             	/* -------------------------- ALIASES -------------------------- */
 		typedef std::ptrdiff_t 		difference_type;
@@ -47,13 +47,13 @@ namespace ft {
 		  	value_type *_ptr;
 			
 		public:
-			vector_iterator(void): _ptr(0){};
-			vector_iterator(value_type *ptr = 0):_ptr(ptr) {}
-			vector_iterator(const vector_iterator &copy) {
+			iterator(void): _ptr(0){};
+			iterator(value_type *ptr = 0):_ptr(ptr) {}
+			iterator(const iterator &copy) {
 				_ptr = copy._ptr;
 			}
-			~vector_iterator(void){};
-			vector_iterator& operator=(const vector_iterator& assign){
+			~iterator(void){};
+			iterator& operator=(const iterator& assign){
 				if (this != &assign)
 					_ptr = assign._ptr;
 				return (*this);
@@ -61,73 +61,73 @@ namespace ft {
 			/* ------------------------------------------------------------- */
 			/* --------------------- BOOL OPERATOR ------------------------- */
 
-			bool operator ==(const vector_iterator &it)const{return (it._ptr == _ptr);}
-			bool operator !=(const vector_iterator &it)const{return (it._ptr != _ptr);}
-			bool operator <(const vector_iterator &it)const{return (it._ptr < _ptr);}
-			bool operator >(const vector_iterator &it)const{return (it._ptr > _ptr);}
-			bool operator <=(const vector_iterator &it)const{return (it._ptr <= _ptr);}
-			bool operator >=(const vector_iterator &it)const{return (it._ptr >= _ptr);}
+			bool operator ==(const iterator &it)const{return (it._ptr == _ptr);}
+			bool operator !=(const iterator &it)const{return (it._ptr != _ptr);}
+			bool operator <(const iterator &it)const{return (it._ptr < _ptr);}
+			bool operator >(const iterator &it)const{return (it._ptr > _ptr);}
+			bool operator <=(const iterator &it)const{return (it._ptr <= _ptr);}
+			bool operator >=(const iterator &it)const{return (it._ptr >= _ptr);}
 
 			/* ------------------------------------------------------------- */
 			/* --------------------- OPERATOR OVERLOAD --------------------- */
 			reference operator*() const{ return (*_ptr); }
 
 			/* Incrementate iterator n pos*/
-			vector_iterator &operator+=(int n){
+			iterator &operator+=(int n){
 				this->move_ptr(this->_ptr, n, ADD);
 				return (*this);
 			}
 
 			/* Incrementate iterator n pos */
-			vector_iterator operator+(int n){
-				vector_iterator it(*this);
+			iterator operator+(int n){
+				iterator it(*this);
 				this->move_ptr(it._ptr, n, ADD);
 				return (it);
 			}
 			/* Incrementate iterator ++*/
-			vector_iterator &operator++(int){
+			iterator &operator++(int){
 				/* this->move_ptr(this->_ptr, 1, ADD); */
 				this->_ptr++;
 				return (*this);
 			}
 
 			/* Decrementate iterator n pos*/
-			vector_iterator &operator-=(int n){
+			iterator &operator-=(int n){
 				this->move_ptr(this->_ptr, n, SUB);
 				return (*this);
 			}
 			/* Decrementate iterator n pos*/
-			vector_iterator operator-(int n)const{
-				vector_iterator it(*this);
+			iterator operator-(int n)const{
+				iterator it(*this);
 				this->move_ptr(it._ptr, n, SUB);
 				return (it);
 			}
 			/* Decrementate iterator --*/
-			vector_iterator &operator--(int){
+			iterator &operator--(int){
 				this->_ptr--;
 				/* this->move_ptr(this->_ptr, 1, SUB); */
 				return (*this);
 			}
 			
-			size_t operator-(vector_iterator it) const
+			size_t operator-(iterator it) const
             		{
                 		return (this->_ptr - it._ptr);
             		}
 			
-			size_t operator+(vector_iterator it) const
+			size_t operator+(iterator it) const
             		{
                 		return (this->_ptr + it._ptr);
             		}
 
-			friend vector_iterator operator+(const vector_iterator& it, int nb)
+			friend iterator operator+(const iterator& it, int nb)
         	        {
-        	            	vector_iterator newIt(it);
+        	            	iterator newIt(it);
         	            	return (newIt += nb);
         	        }
         	    
-        	        friend vector_iterator operator-(const vector_iterator& it, int nb)
+        	        friend iterator operator-(const iterator& it, int nb)
         	        {
-        	            	vector_iterator newIt(it);
+        	            	iterator newIt(it);
         	            	return (newIt -= nb);
         	        }
 

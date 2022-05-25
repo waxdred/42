@@ -1,19 +1,20 @@
-Tester 5 0
 Test_Vector_Erase 0 0
-Test_Vector_Iterator 44 0.000155179
-Test_Vector_Assign 39 0.000163957
-Test_Vector_Push_back 38 0.000175364
-Test_Vector_Swap 0 0
-Test_Vector_Resize 26 0.000242524
-Test_Vector_Clear 0 0
-Test_Vector_Access 18 0.000321479
-Test_Vector_Equal 0 0
-Test_Vector_Lex 10 0.000608646
-Test_Vector_enalble_if 4 0.00162655
-Test_Vector_integral 3 0.00198389
-Test_Pair 2 0.00442987
+Test_Vector_Iterator 53 4.74611e-05
+Test_Vector_Assign 53 9.60306e-05
+Test_Vector_Push_back 53 7.05933e-05
+Test_Vector_Swap 50 5.56002e-05
+Test_Vector_Resize 53 5.54527e-05
+Test_Vector_Clear 13 0.000340431
+Test_Vector_Access 53 9.56786e-05
+Test_Vector_Equal 53 5.71314e-05
+Test_Vector_Lex 53 5.67982e-05
+Test_Vector_enalble_if 53 5.03281e-05
+Test_Vector_integral 53 0.000112085
+Test_Pair 53 5.79573e-05
+Test_Rev_iterator 44 6.34929e-05
+Test_Pop_Back 3 0.000891771
+Test_Back 23 0.000219854
+Test_Empty 2 0.00193661
+Test_Capacity 1 0.0034353
 ---
 Test_Vector_Erase
-Test_Vector_Swap
-Test_Vector_Clear
-Test_Vector_Equal

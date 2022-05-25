@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 22:50:14 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/24 23:15:29 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/25 15:54:56 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main(void)
 		vt.push_back(val);
 	}
 	std::cout << "My vector test" << std::endl;
-	for (ft::vector_iterator i = v.begin(); i != v.end(); i++){
+	for (ft::iterator i = v.begin(); i != v.end(); i++){
 		std::cout << *i << ' ';
 		my << *i << ' ';
 	}
