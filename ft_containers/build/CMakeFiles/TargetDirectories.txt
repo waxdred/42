@@ -7,6 +7,10 @@
 /Users/wax/42/ft_containers/build/CMakeFiles/v_resize.dir
 /Users/wax/42/ft_containers/build/CMakeFiles/v_clear.dir
 /Users/wax/42/ft_containers/build/CMakeFiles/v_access.dir
+/Users/wax/42/ft_containers/build/CMakeFiles/v_equal.dir
+/Users/wax/42/ft_containers/build/CMakeFiles/v_lex.dir
+/Users/wax/42/ft_containers/build/CMakeFiles/v_enable.dir
+/Users/wax/42/ft_containers/build/CMakeFiles/v_is_integral.dir
 /Users/wax/42/ft_containers/build/CMakeFiles/test.dir
 /Users/wax/42/ft_containers/build/CMakeFiles/edit_cache.dir
 /Users/wax/42/ft_containers/build/CMakeFiles/rebuild_cache.dir

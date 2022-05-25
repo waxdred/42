@@ -243,6 +243,58 @@ v_access/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_access.dir/build.make CMakeFiles/v_access.dir/build
 .PHONY : v_access/fast
 
+#=============================================================================
+# Target rules for targets named v_equal
+
+# Build rule for target.
+v_equal: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 v_equal
+.PHONY : v_equal
+
+# fast build rule for target.
+v_equal/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_equal.dir/build.make CMakeFiles/v_equal.dir/build
+.PHONY : v_equal/fast
+
+#=============================================================================
+# Target rules for targets named v_lex
+
+# Build rule for target.
+v_lex: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 v_lex
+.PHONY : v_lex
+
+# fast build rule for target.
+v_lex/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_lex.dir/build.make CMakeFiles/v_lex.dir/build
+.PHONY : v_lex/fast
+
+#=============================================================================
+# Target rules for targets named v_enable
+
+# Build rule for target.
+v_enable: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 v_enable
+.PHONY : v_enable
+
+# fast build rule for target.
+v_enable/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_enable.dir/build.make CMakeFiles/v_enable.dir/build
+.PHONY : v_enable/fast
+
+#=============================================================================
+# Target rules for targets named v_is_integral
+
+# Build rule for target.
+v_is_integral: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 v_is_integral
+.PHONY : v_is_integral
+
+# fast build rule for target.
+v_is_integral/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_is_integral.dir/build.make CMakeFiles/v_is_integral.dir/build
+.PHONY : v_is_integral/fast
+
 srcs/main.o: srcs/main.cpp.o
 .PHONY : srcs/main.o
 
@@ -339,6 +391,54 @@ test/vector_clear.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_clear.dir/build.make CMakeFiles/v_clear.dir/test/vector_clear.cpp.s
 .PHONY : test/vector_clear.cpp.s
 
+test/vector_enable_if.o: test/vector_enable_if.cpp.o
+.PHONY : test/vector_enable_if.o
+
+# target to build an object file
+test/vector_enable_if.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_enable.dir/build.make CMakeFiles/v_enable.dir/test/vector_enable_if.cpp.o
+.PHONY : test/vector_enable_if.cpp.o
+
+test/vector_enable_if.i: test/vector_enable_if.cpp.i
+.PHONY : test/vector_enable_if.i
+
+# target to preprocess a source file
+test/vector_enable_if.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_enable.dir/build.make CMakeFiles/v_enable.dir/test/vector_enable_if.cpp.i
+.PHONY : test/vector_enable_if.cpp.i
+
+test/vector_enable_if.s: test/vector_enable_if.cpp.s
+.PHONY : test/vector_enable_if.s
+
+# target to generate assembly for a file
+test/vector_enable_if.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_enable.dir/build.make CMakeFiles/v_enable.dir/test/vector_enable_if.cpp.s
+.PHONY : test/vector_enable_if.cpp.s
+
+test/vector_equal.o: test/vector_equal.cpp.o
+.PHONY : test/vector_equal.o
+
+# target to build an object file
+test/vector_equal.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_equal.dir/build.make CMakeFiles/v_equal.dir/test/vector_equal.cpp.o
+.PHONY : test/vector_equal.cpp.o
+
+test/vector_equal.i: test/vector_equal.cpp.i
+.PHONY : test/vector_equal.i
+
+# target to preprocess a source file
+test/vector_equal.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_equal.dir/build.make CMakeFiles/v_equal.dir/test/vector_equal.cpp.i
+.PHONY : test/vector_equal.cpp.i
+
+test/vector_equal.s: test/vector_equal.cpp.s
+.PHONY : test/vector_equal.s
+
+# target to generate assembly for a file
+test/vector_equal.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_equal.dir/build.make CMakeFiles/v_equal.dir/test/vector_equal.cpp.s
+.PHONY : test/vector_equal.cpp.s
+
 test/vector_erase.o: test/vector_erase.cpp.o
 .PHONY : test/vector_erase.o
 
@@ -363,6 +463,30 @@ test/vector_erase.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_erase.dir/build.make CMakeFiles/v_erase.dir/test/vector_erase.cpp.s
 .PHONY : test/vector_erase.cpp.s
 
+test/vector_is_integral.o: test/vector_is_integral.cpp.o
+.PHONY : test/vector_is_integral.o
+
+# target to build an object file
+test/vector_is_integral.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_is_integral.dir/build.make CMakeFiles/v_is_integral.dir/test/vector_is_integral.cpp.o
+.PHONY : test/vector_is_integral.cpp.o
+
+test/vector_is_integral.i: test/vector_is_integral.cpp.i
+.PHONY : test/vector_is_integral.i
+
+# target to preprocess a source file
+test/vector_is_integral.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_is_integral.dir/build.make CMakeFiles/v_is_integral.dir/test/vector_is_integral.cpp.i
+.PHONY : test/vector_is_integral.cpp.i
+
+test/vector_is_integral.s: test/vector_is_integral.cpp.s
+.PHONY : test/vector_is_integral.s
+
+# target to generate assembly for a file
+test/vector_is_integral.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_is_integral.dir/build.make CMakeFiles/v_is_integral.dir/test/vector_is_integral.cpp.s
+.PHONY : test/vector_is_integral.cpp.s
+
 test/vector_iterator.o: test/vector_iterator.cpp.o
 .PHONY : test/vector_iterator.o
 
@@ -386,6 +510,30 @@ test/vector_iterator.s: test/vector_iterator.cpp.s
 test/vector_iterator.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_iterator.dir/build.make CMakeFiles/v_iterator.dir/test/vector_iterator.cpp.s
 .PHONY : test/vector_iterator.cpp.s
+
+test/vector_lexicographical.o: test/vector_lexicographical.cpp.o
+.PHONY : test/vector_lexicographical.o
+
+# target to build an object file
+test/vector_lexicographical.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_lex.dir/build.make CMakeFiles/v_lex.dir/test/vector_lexicographical.cpp.o
+.PHONY : test/vector_lexicographical.cpp.o
+
+test/vector_lexicographical.i: test/vector_lexicographical.cpp.i
+.PHONY : test/vector_lexicographical.i
+
+# target to preprocess a source file
+test/vector_lexicographical.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_lex.dir/build.make CMakeFiles/v_lex.dir/test/vector_lexicographical.cpp.i
+.PHONY : test/vector_lexicographical.cpp.i
+
+test/vector_lexicographical.s: test/vector_lexicographical.cpp.s
+.PHONY : test/vector_lexicographical.s
+
+# target to generate assembly for a file
+test/vector_lexicographical.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_lex.dir/build.make CMakeFiles/v_lex.dir/test/vector_lexicographical.cpp.s
+.PHONY : test/vector_lexicographical.cpp.s
 
 test/vector_push_back.o: test/vector_push_back.cpp.o
 .PHONY : test/vector_push_back.o
@@ -472,8 +620,12 @@ help:
 	@echo "... v_access"
 	@echo "... v_assign"
 	@echo "... v_clear"
+	@echo "... v_enable"
+	@echo "... v_equal"
 	@echo "... v_erase"
+	@echo "... v_is_integral"
 	@echo "... v_iterator"
+	@echo "... v_lex"
 	@echo "... v_push_back"
 	@echo "... v_resize"
 	@echo "... v_swap"
@@ -489,12 +641,24 @@ help:
 	@echo "... test/vector_clear.o"
 	@echo "... test/vector_clear.i"
 	@echo "... test/vector_clear.s"
+	@echo "... test/vector_enable_if.o"
+	@echo "... test/vector_enable_if.i"
+	@echo "... test/vector_enable_if.s"
+	@echo "... test/vector_equal.o"
+	@echo "... test/vector_equal.i"
+	@echo "... test/vector_equal.s"
 	@echo "... test/vector_erase.o"
 	@echo "... test/vector_erase.i"
 	@echo "... test/vector_erase.s"
+	@echo "... test/vector_is_integral.o"
+	@echo "... test/vector_is_integral.i"
+	@echo "... test/vector_is_integral.s"
 	@echo "... test/vector_iterator.o"
 	@echo "... test/vector_iterator.i"
 	@echo "... test/vector_iterator.s"
+	@echo "... test/vector_lexicographical.o"
+	@echo "... test/vector_lexicographical.i"
+	@echo "... test/vector_lexicographical.s"
 	@echo "... test/vector_push_back.o"
 	@echo "... test/vector_push_back.i"
 	@echo "... test/vector_push_back.s"
