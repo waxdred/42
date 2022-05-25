@@ -420,12 +420,15 @@ CMakeFiles/v_push_back.dir/test/vector_push_back.cpp.o: ../test/vector_push_back
   ../includes/vector_iterator.hpp \
   ../includes/tools.hpp \
   ../includes/algorithm.hpp \
+  ../includes/pair.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/vector \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__split_buffer \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/sstream
 
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__split_buffer:
+
+../includes/pair.hpp:
 
 ../includes/algorithm.hpp:
 

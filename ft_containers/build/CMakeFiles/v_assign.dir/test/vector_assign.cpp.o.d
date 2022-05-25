@@ -418,6 +418,7 @@ CMakeFiles/v_assign.dir/test/vector_assign.cpp.o: \
   /Users/wax/42/ft_containers/test/../includes/vector_iterator.hpp \
   /Users/wax/42/ft_containers/test/../includes/tools.hpp \
   /Users/wax/42/ft_containers/test/../includes/algorithm.hpp \
+  /Users/wax/42/ft_containers/test/../includes/pair.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/vector \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__split_buffer \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/sstream

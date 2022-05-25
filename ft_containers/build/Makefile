@@ -295,6 +295,19 @@ v_is_integral/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_is_integral.dir/build.make CMakeFiles/v_is_integral.dir/build
 .PHONY : v_is_integral/fast
 
+#=============================================================================
+# Target rules for targets named v_pair
+
+# Build rule for target.
+v_pair: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 v_pair
+.PHONY : v_pair
+
+# fast build rule for target.
+v_pair/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_pair.dir/build.make CMakeFiles/v_pair.dir/build
+.PHONY : v_pair/fast
+
 srcs/main.o: srcs/main.cpp.o
 .PHONY : srcs/main.o
 
@@ -535,6 +548,30 @@ test/vector_lexicographical.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_lex.dir/build.make CMakeFiles/v_lex.dir/test/vector_lexicographical.cpp.s
 .PHONY : test/vector_lexicographical.cpp.s
 
+test/vector_pair.o: test/vector_pair.cpp.o
+.PHONY : test/vector_pair.o
+
+# target to build an object file
+test/vector_pair.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_pair.dir/build.make CMakeFiles/v_pair.dir/test/vector_pair.cpp.o
+.PHONY : test/vector_pair.cpp.o
+
+test/vector_pair.i: test/vector_pair.cpp.i
+.PHONY : test/vector_pair.i
+
+# target to preprocess a source file
+test/vector_pair.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_pair.dir/build.make CMakeFiles/v_pair.dir/test/vector_pair.cpp.i
+.PHONY : test/vector_pair.cpp.i
+
+test/vector_pair.s: test/vector_pair.cpp.s
+.PHONY : test/vector_pair.s
+
+# target to generate assembly for a file
+test/vector_pair.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_pair.dir/build.make CMakeFiles/v_pair.dir/test/vector_pair.cpp.s
+.PHONY : test/vector_pair.cpp.s
+
 test/vector_push_back.o: test/vector_push_back.cpp.o
 .PHONY : test/vector_push_back.o
 
@@ -626,6 +663,7 @@ help:
 	@echo "... v_is_integral"
 	@echo "... v_iterator"
 	@echo "... v_lex"
+	@echo "... v_pair"
 	@echo "... v_push_back"
 	@echo "... v_resize"
 	@echo "... v_swap"
@@ -659,6 +697,9 @@ help:
 	@echo "... test/vector_lexicographical.o"
 	@echo "... test/vector_lexicographical.i"
 	@echo "... test/vector_lexicographical.s"
+	@echo "... test/vector_pair.o"
+	@echo "... test/vector_pair.i"
+	@echo "... test/vector_pair.s"
 	@echo "... test/vector_push_back.o"
 	@echo "... test/vector_push_back.i"
 	@echo "... test/vector_push_back.s"

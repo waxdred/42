@@ -1,16 +1,17 @@
 Tester 5 0
 Test_Vector_Erase 0 0
-Test_Vector_Iterator 42 0.000153971
-Test_Vector_Assign 37 0.000171885
-Test_Vector_Push_back 36 0.000172222
+Test_Vector_Iterator 44 0.000155179
+Test_Vector_Assign 39 0.000163957
+Test_Vector_Push_back 38 0.000175364
 Test_Vector_Swap 0 0
-Test_Vector_Resize 24 0.00027392
+Test_Vector_Resize 26 0.000242524
 Test_Vector_Clear 0 0
-Test_Vector_Access 16 0.000407943
+Test_Vector_Access 18 0.000321479
 Test_Vector_Equal 0 0
-Test_Vector_Lex 8 0.000757719
-Test_Vector_enalble_if 2 0.0032456
-Test_Vector_integral 1 0.0090565
+Test_Vector_Lex 10 0.000608646
+Test_Vector_enalble_if 4 0.00162655
+Test_Vector_integral 3 0.00198389
+Test_Pair 2 0.00442987
 ---
 Test_Vector_Erase
 Test_Vector_Swap

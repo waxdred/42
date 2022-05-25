@@ -28,6 +28,7 @@ add_executable(v_equal ./test/vector_equal.cpp)
 add_executable(v_lex ./test/vector_lexicographical.cpp)
 add_executable(v_enable ./test/vector_enable_if.cpp)
 add_executable(v_is_integral ./test/vector_is_integral.cpp)
+add_executable(v_pair ./test/vector_pair.cpp)
 
 
 add_test(Test_Vector_Erase v_erase)
@@ -42,3 +43,4 @@ add_test(Test_Vector_Equal v_equal)
 add_test(Test_Vector_Lex v_lex)
 add_test(Test_Vector_enalble_if v_enable)
 add_test(Test_Vector_integral v_is_integral)
+add_test(Test_Pair v_pair)
