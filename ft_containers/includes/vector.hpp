@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:08:46 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/25 20:42:29 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/26 15:24:26 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <memory>
 #include <strings.h>
 # include "vector_iterator.hpp"
-# include "rev_vector_iterator.hpp"
+/* # include "rev_vector_iterator.hpp" */
 # include "tools.hpp"
 /**
     * ------------------------ TODO ------------------------------- *
@@ -78,8 +78,8 @@ namespace ft{
 			typedef typename Allocator::const_pointer 	const_pointer;
 			typedef typename ft::iterator<T>      	iterator;
             		typedef typename ft::iterator<T>       	const_iterator;
-			typedef typename ft::reverse_iterator<T>      	rev_iterator;
-            		typedef typename ft::reverse_iterator<T>       	rev_const_iterator;
+			/* typedef typename ft::reverse_iterator<T>      	rev_iterator; */
+            		/* typedef typename ft::reverse_iterator<T>       	rev_const_iterator; */
 
 
 		private:
@@ -127,8 +127,13 @@ namespace ft{
 			/* all x values to the new area allocated. */
 			/* @param x        The vector that will be copied. */
 			vector(const vector& x)
-				: _alloc(allocator_type()), _ptr(NULL), _size_alloc(0), _capacity(0){
-				*this = x;
+				: _alloc(x._alloc), _size_alloc(x._size_alloc), _capacity(x._capacity){
+				_ptr = _alloc.allocate(_capacity);
+				size_t i = 0;
+				for (iterator it = x.cbegin(); it != x.cend(); it++){
+					_alloc.construct(&_ptr[i], *it);
+					i++;
+				}
 			};
 			
 			/* @Brief Destructor, destroys all the vector's elements and then deallocates vector's */
@@ -177,10 +182,10 @@ namespace ft{
 			 iterator	end(void){return (iterator(_ptr + _size_alloc));}
 			 const_iterator	cend(void)const {return (const_iterator(_ptr + _size_alloc));}
 			
-			 rev_iterator	rbegin(void){return (rev_iterator(_ptr + _size_alloc - 1));}
-			 rev_const_iterator	crbegin(void)const {return (rev_const_iterator(_ptr + _size_alloc - 1));}
-			 rev_iterator	rend(void){return (rev_iterator(_ptr - 1));}
-			 rev_const_iterator	crend(void)const {return (rev_const_iterator(_ptr - 1));}
+			 /* rev_iterator	rbegin(void){return (rev_iterator(_ptr + _size_alloc - 1));} */
+			 /* rev_const_iterator	crbegin(void)const {return (rev_const_iterator(_ptr + _size_alloc - 1));} */
+			 /* rev_iterator	rend(void){return (rev_iterator(_ptr - 1));} */
+			 /* rev_const_iterator	crend(void)const {return (rev_const_iterator(_ptr - 1));} */
 
 			 /* ------------------------------------------------------------- */
 			 /* -------------------------- CAPACITY ------------------------- */
@@ -343,23 +348,23 @@ namespace ft{
 			 };
 
 			 iterator erase (iterator position){
-				 return (this->erase(position, position + 1));
+				 if (position == this->end())
+					 this->pop_back();
+				 _alloc.destructor(&*position);
+				 for (iterator it = position; it != this->end(); it++){
+					 _alloc.construct(&*it, *(it + 1));
+					 _alloc.destroy(&*(it + 1));
+				 }
+				 _size_alloc--;
+				 return (position);
 			 };
 
 		 	 iterator erase (iterator first, iterator last){
-				if (first == this->end() || first == last)
-					return (first);
-				size_type index = first - this->begin();
-				if (last < this->end()){
-					moveleft(first, last);
-					_size_alloc -= static_cast<size_type>(last - first);
-				}
-				else{
-					size_type new_size = static_cast<size_type>(last - first);
-					while (_size_alloc < new_size)
-						this->pop_back();
-				}
-				return (&_ptr[index]);
+				 for (; first != last; first++){
+					 _alloc.destroy(&*first);
+				 }
+				_size_alloc = last - first;
+				return (first);
 			 };
 			 /* iterator insert (iterator position, const value_type& val){ */
 			 /* size_type index = position - this->begin(); */

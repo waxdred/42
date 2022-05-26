@@ -15,6 +15,7 @@ target_compile_options(exec PUBLIC -g3 -Wall -Wextra -Werror -Weffc++ -std=c++98
 
 
 # Testing file 
+# Vector 
 enable_testing()
 add_executable(v_erase ./test/vector_erase.cpp)
 add_executable(v_iterator ./test/vector_iterator.cpp)
@@ -29,12 +30,12 @@ add_executable(v_lex ./test/vector_lexicographical.cpp)
 add_executable(v_enable ./test/vector_enable_if.cpp)
 add_executable(v_is_integral ./test/vector_is_integral.cpp)
 add_executable(v_pair ./test/vector_pair.cpp)
-add_executable(v_rev_iterator ./test/rev_iterator.cpp)
-add_executable(v_pop_back ./test/vector_pop_back.cpp)
-add_executable(v_back ./test/vector_back.cpp)
-add_executable(v_empty ./test/vector_empty.cpp)
-add_executable(v_capacity ./test/vector_capacity.cpp)
-
+add_executable(v_iterator_traits ./test/vector_iterator_traits.cpp)
+# add_executable(v_rev_iterator ./test/rev_iterator.cpp)
+# add_executable(v_pop_back ./test/vector_pop_back.cpp)
+# add_executable(v_back ./test/vector_back.cpp)
+# add_executable(v_empty ./test/vector_empty.cpp)
+# add_executable(v_capacity ./test/vector_capacity.cpp)
 
 add_test(Test_Vector_Erase v_erase)
 add_test(Test_Vector_Iterator v_iterator)
@@ -49,8 +50,23 @@ add_test(Test_Vector_Lex v_lex)
 add_test(Test_Vector_enalble_if v_enable)
 add_test(Test_Vector_integral v_is_integral)
 add_test(Test_Pair v_pair)
-add_test(Test_Rev_iterator v_rev_iterator)
-add_test(Test_Pop_Back v_pop_back)
-add_test(Test_Back v_back)
-add_test(Test_Empty v_empty)
-add_test(Test_Capacity v_capacity)
+add_test(Test_Vector_Iterator_Trais v_iterator_traits)
+# add_test(Test_Rev_iterator v_rev_iterator)
+# add_test(Test_Pop_Back v_pop_back)
+# add_test(Test_Back v_back)
+# add_test(Test_Empty v_empty)
+# add_test(Test_Capacity v_capacity)
+
+# stack
+add_executable(v_stack_empty ./test/stack_empty.cpp)
+add_executable(v_stack_size ./test/stack_size.cpp)
+add_executable(v_stack_top ./test/stack_top.cpp)
+add_executable(v_stack_push ./test/stack_push.cpp)
+add_executable(v_stack_pop ./test/stack_pop.cpp)
+add_executable(v_stack_swap ./test/stack_swap.cpp)
+
+
+add_test(Test_Stack_empty v_stack_empty)
+add_test(Test_Stack_size v_stack_size)
+add_test(Test_Stack_push v_stack_push)
+add_test(Test_Stack_swap v_stack_swap)
