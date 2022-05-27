@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:52:48 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/26 14:41:45 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/27 15:21:18 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,25 @@ namespace ft{
 	class stack{
     		/* ------------------------------------------------------------- */
     		/* ------------------------ ALLIAS ----------------------------- */
+		public:
 			typedef T		value_type;
 			typedef Container	container_type;
 			typedef size_t		size_type;
 
-		private:
-			container_type		_ctnr;
+		protected:
+			container_type		c;
 		public:
     		/* ------------------------------------------------------------- */
     		/* ------------------------ CONSTRUCTOR ------------------------ */
 
 			/* @Brief default constructor */
 			/* @Param Container ft::vector */
-			explicit stack (const container_type& ctnr = container_type()): _ctnr(ctnr){};
+			explicit stack (const container_type& ctnr = container_type()): c(ctnr){};
 
 			/* @brief Copy constructor */
 			/* @param const stack */
 			stack(const stack &st){
-				this->_swap(this->_ctnr, st._ctnr);
+				this->_swap(this->c, st.c);
 				return (*this);
 			};
 
@@ -78,31 +79,31 @@ namespace ft{
 
 			/* @brief Test whether container is empty */
 			/* @return true if the underlying container's size is 0, false otherwise. */
-			bool empty() const{return(this->_ctnr.empty());};
+			bool empty() const{return(this->c.empty());};
 
 			/* @brief Return size */  
 			/* @return The number of elements in the underlying container. */
-			size_type size() const{return (this->_ctnr.size());};
+			size_type size() const{return (this->c.size());};
 
 			/* @brief Access next element */
 			/* @return A reference to the top element in the stack. */
-			value_type& top(){return (this->_ctnr.back());};
+			value_type& top(){return (this->c.back());};
 
 			/* @brief const Access next element*/
 			/* @return A reference to the top element in the stack. */
-			const value_type& top() const{return (this->_ctnr.back());};
+			const value_type& top() const{return (this->c.back());};
 
 			/* @brief Insert element */
 			/* @param Value to Insert */
-			void push (const value_type& val){this->_ctnr.push_back(val);};
+			void push (const value_type& val){this->c.push_back(val);};
 
 			/* @brief Remove top element */
-			void pop(){this->_ctnr.pop_back();};
+			void pop(){this->c.pop_back();};
 			
 			/* @brief Swap content */
 			/* @param Another stack */
 			void swap (stack& x){
-				this->_swap(this->_ctnr, x._ctnr);
+				this->_swap(this->c, x.c);
 			}
 
 		private:
@@ -135,27 +136,27 @@ namespace ft{
 	};//stack
 	template <class T, class Container>
   	bool operator== (const stack<T,Container>& lhs, const stack<T,Container>& rhs){
-		return (lhs._ctnr == rhs._ctnr);
+		return (lhs.c == rhs.c);
 	}
 	template <class T, class Container>
   	bool operator!= (const stack<T,Container>& lhs, const stack<T,Container>& rhs){
-		return (lhs._ctnr != rhs._ctnr);
+		return (lhs.c != rhs.c);
 	}
 	template <class T, class Container>
   	bool operator<  (const stack<T,Container>& lhs, const stack<T,Container>& rhs){
-		return (lhs._ctnr < rhs._ctnr);
+		return (lhs.c < rhs.c);
 	}
 	template <class T, class Container>
   	bool operator<= (const stack<T,Container>& lhs, const stack<T,Container>& rhs){
-		return (lhs._ctnr <= rhs._ctnr);
+		return (lhs.c <= rhs.c);
 	}
 	template <class T, class Container>
   	bool operator>  (const stack<T,Container>& lhs, const stack<T,Container>& rhs){
-		return (lhs._ctnr > rhs._ctnr);
+		return (lhs.c > rhs.c);
 	}
 	template <class T, class Container>
   	bool operator>= (const stack<T,Container>& lhs, const stack<T,Container>& rhs){
-		return (lhs._ctnr >= rhs._ctnr);
+		return (lhs.c >= rhs.c);
 	}
 }//namespace
 #endif

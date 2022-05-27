@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:47:38 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/25 15:47:51 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/27 13:42:39 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,109 +44,186 @@ namespace ft {
 		typedef const value_type*	const_pointer;
 
 		private:	
-		  	value_type *_ptr;
+		  	pointer _it;
 			
 		public:
-			iterator(void): _ptr(0){};
-			iterator(value_type *ptr = 0):_ptr(ptr) {}
-			iterator(const iterator &copy) {
-				_ptr = copy._ptr;
-			}
+			iterator(void): _it(NULL){};
+			iterator(value_type *it):_it(it) {}
+			iterator(iterator const &copy) {*this = copy;}
 			~iterator(void){};
-			iterator& operator=(const iterator& assign){
+			iterator& operator=(iterator const &assign){
 				if (this != &assign)
-					_ptr = assign._ptr;
+					_it = assign._it;
 				return (*this);
 			}
 			/* ------------------------------------------------------------- */
 			/* --------------------- BOOL OPERATOR ------------------------- */
 
-			bool operator ==(const iterator &it)const{return (it._ptr == _ptr);}
-			bool operator !=(const iterator &it)const{return (it._ptr != _ptr);}
-			bool operator <(const iterator &it)const{return (it._ptr < _ptr);}
-			bool operator >(const iterator &it)const{return (it._ptr > _ptr);}
-			bool operator <=(const iterator &it)const{return (it._ptr <= _ptr);}
-			bool operator >=(const iterator &it)const{return (it._ptr >= _ptr);}
+			bool operator ==(const iterator &it)const{return (it._it == _it);}
+			bool operator !=(const iterator &it)const{return (it._it != _it);}
+			bool operator <(const iterator &it)const{return (it._it > _it);}
+			bool operator >(const iterator &it)const{return (it._it < _it);}
+			bool operator <=(const iterator &it)const{return (it._it >= _it);}
+			bool operator >=(const iterator &it)const{return (it._it <= _it);}
 
 			/* ------------------------------------------------------------- */
 			/* --------------------- OPERATOR OVERLOAD --------------------- */
-			reference operator*() const{ return (*_ptr); }
+			reference operator*() const{ return (*_it); }
+			reference operator[](difference_type n) const{return (_it[n]);}
+			pointer operator->() const{return(&(operator*()));}
+			pointer base() const{return (_it);}
+			iterator& operator++(void){ ++_it; return (*this); }
+            		iterator& operator--(void){ --_it; return (*this); }
 
-			/* Incrementate iterator n pos*/
-			iterator &operator+=(int n){
-				this->move_ptr(this->_ptr, n, ADD);
-				return (*this);
-			}
-
-			/* Incrementate iterator n pos */
-			iterator operator+(int n){
-				iterator it(*this);
-				this->move_ptr(it._ptr, n, ADD);
-				return (it);
-			}
-			/* Incrementate iterator ++*/
-			iterator &operator++(int){
-				/* this->move_ptr(this->_ptr, 1, ADD); */
-				this->_ptr++;
-				return (*this);
-			}
-
-			/* Decrementate iterator n pos*/
-			iterator &operator-=(int n){
-				this->move_ptr(this->_ptr, n, SUB);
-				return (*this);
-			}
-			/* Decrementate iterator n pos*/
-			iterator operator-(int n)const{
-				iterator it(*this);
-				this->move_ptr(it._ptr, n, SUB);
-				return (it);
-			}
-			/* Decrementate iterator --*/
-			iterator &operator--(int){
-				this->_ptr--;
-				/* this->move_ptr(this->_ptr, 1, SUB); */
-				return (*this);
-			}
-			
-			size_t operator-(iterator it) const
+			iterator operator++(int)
             		{
-                		return (this->_ptr - it._ptr);
+                		iterator res(*this);
+                		++(*this);
+                		return (res);
             		}
-			
-			size_t operator+(iterator it) const
+            
+            		iterator operator--(int)
             		{
-                		return (this->_ptr + it._ptr);
+                		iterator res(*this);
+                		--(*this);
+                		return (res);
             		}
 
-			friend iterator operator+(const iterator& it, int nb)
-        	        {
-        	            	iterator newIt(it);
-        	            	return (newIt += nb);
-        	        }
-        	    
-        	        friend iterator operator-(const iterator& it, int nb)
-        	        {
-        	            	iterator newIt(it);
-        	            	return (newIt -= nb);
-        	        }
+			/**
+            		*   Increments 1 time vector_iterator position.
+            		*/
+            		iterator& operator+=(difference_type nb){
+            		    	movePtr(this->_it, nb, ADD);
+            		    	return (*this);
+            		}
 
+            		/**
+            		*   Increments nb times iterator position.
+            		*/
+            		iterator operator+(difference_type nb) const{
+            		    	iterator it(*this);
+            		    	
+            		    	movePtr(it._it, nb, ADD);
+            		    	return (it);
+            		}
+            		
+            		/**
+            		*   Decrements 1 time iterator position.
+            		*/
+            		iterator& operator-=(difference_type nb){
+            		    	movePtr(this->_it, nb, SUB);
+            		    	return (*this);
+            		}
+
+            		/**
+            		*   Decrements nb times iterator position.
+            		*/
+            		iterator operator-(difference_type nb) const{
+            		    	iterator it(*this);
+            		    	
+            		    	movePtr(it._it, nb, SUB);
+            		    	return (it);
+            		}
+
+            		/**
+            		*   @return     The range's lenght between this iterator and another one.
+            		*/
+            		difference_type operator-(iterator it) const{
+            		    	return (this->_it - it._it);
+            		}
+            		
+
+            		/* ------------------------------------------------------------- */
+            		/* --------------- NON-MEMBER OPERATOR OVERLOADS --------------- */ 
+            		
+            		friend iterator operator+(difference_type nb, const iterator& it){
+            		    	iterator newIt(it);
+            		    	return (newIt += nb);
+            		}
+
+            		friend iterator operator-(difference_type nb, const iterator& it){
+            		    	iterator newIt(it);
+            		    	return (newIt -= nb);
+            		}
+            		/* ------------------------------------------------------------- */
+            		/* ------------------ PRIVATE MEMBER FUNCTIONS ----------------- */
 
 		private:
-			void move_ptr(T *elem, size_t n, bool sign){
-				int mov;
 
-				if (!sign)
-					mov = n > 0 ? mov = 1 : mov = -1;
-				else 
-					mov = n > 0 ? mov = -1 : mov = 1;
-				if (n < 0)
-					n *= -1;
-				for (; n > 0; n--)
-					elem += mov;
-			}
+        	    	/**
+        	    	*   Moves random_acces_iterator's pointer. Adapt between addition / substraction
+        	    	*   operation. 
+        	    	*
+        	    	*   @param val  The pointer to move.
+        	    	*   @param nb   Number of time the pointer will be increased / decreased.
+        	    	*   @param sign Indicate if it's an addition or a substraction.
+        	    	*/
+        	    	void movePtr(pointer& val, long nb, bool sign) const
+        	    	{
+        	    	    int mov;
+                    	
+        	    	    // If addtion, mov will be positive. If substraction, negative.
+        	    	    if (sign == ADD)
+        	    	        mov = nb > 0 ? mov = 1: mov = -1;
+        	    	    else
+        	    	        mov = nb > 0 ? mov = -1: mov = 1;
+                    	
+        	    	    if (nb < 0)
+        	    	        nb *= -1;
+        	    	    for (; nb > 0; --nb)
+        	    	        val += mov;
+        	    	}
 
-	};//class
+	};//class iterator
+	  //// Non-member function overload of random access iterator
+	template <class Iterator>
+	bool operator==(const iterator<Iterator> &lhs, const iterator<Iterator> &rhs){
+		return (lhs.base() == rhs.base());
+	}
+
+	template <class Iterator>
+	bool operator!=(const iterator<Iterator> &lhs,
+		const iterator<Iterator> &rhs){
+		return (lhs.base() != rhs.base());
+	}
+
+	template <class Iterator>
+	bool operator<(const iterator<Iterator> &lhs,
+			const iterator<Iterator> &rhs){
+		return (lhs.base() < rhs.base());
+	}
+
+	template <class Iterator>
+	bool operator<=(const iterator<Iterator> &lhs,
+		const iterator<Iterator> &rhs){
+		return (lhs.base() <= rhs.base());
+	}
+
+	template <class Iterator>
+	bool operator>(const iterator<Iterator> &lhs,
+		const iterator<Iterator> &rhs){
+		return (lhs.base() > rhs.base());
+	}
+
+	template <class Iterator>
+	bool operator>=(const iterator<Iterator> &lhs,
+		const iterator<Iterator> &rhs){
+		return (lhs.base() >= rhs.base());
+	}
+
+	template <class Iterator>
+	iterator<Iterator> operator+(
+		typename iterator<Iterator>::difference_type n,
+		const iterator<Iterator> &rev_it){
+		return (iterator<Iterator>(rev_it.base() + n));
+	}
+
+	template <class Iterator>
+	typename iterator<Iterator>::difference_type operator-( const iterator<Iterator> &lhs,
+		const iterator<Iterator> &rhs){
+		return (lhs.base() - rhs.base());
+	}
+
 	template <class InputIterator>
 	size_t lenght_it(InputIterator &first, InputIterator &last){
 		size_t ret = 0;

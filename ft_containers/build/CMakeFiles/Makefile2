@@ -78,12 +78,19 @@ all: CMakeFiles/v_enable.dir/all
 all: CMakeFiles/v_is_integral.dir/all
 all: CMakeFiles/v_pair.dir/all
 all: CMakeFiles/v_iterator_traits.dir/all
+all: CMakeFiles/v_rev_iterator.dir/all
+all: CMakeFiles/v_pop_back.dir/all
+all: CMakeFiles/v_back.dir/all
+all: CMakeFiles/v_empty.dir/all
+all: CMakeFiles/v_capacity.dir/all
+all: CMakeFiles/v_insert.dir/all
 all: CMakeFiles/v_stack_empty.dir/all
 all: CMakeFiles/v_stack_size.dir/all
 all: CMakeFiles/v_stack_top.dir/all
 all: CMakeFiles/v_stack_push.dir/all
 all: CMakeFiles/v_stack_pop.dir/all
 all: CMakeFiles/v_stack_swap.dir/all
+all: CMakeFiles/v_42.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -106,12 +113,19 @@ clean: CMakeFiles/v_enable.dir/clean
 clean: CMakeFiles/v_is_integral.dir/clean
 clean: CMakeFiles/v_pair.dir/clean
 clean: CMakeFiles/v_iterator_traits.dir/clean
+clean: CMakeFiles/v_rev_iterator.dir/clean
+clean: CMakeFiles/v_pop_back.dir/clean
+clean: CMakeFiles/v_back.dir/clean
+clean: CMakeFiles/v_empty.dir/clean
+clean: CMakeFiles/v_capacity.dir/clean
+clean: CMakeFiles/v_insert.dir/clean
 clean: CMakeFiles/v_stack_empty.dir/clean
 clean: CMakeFiles/v_stack_size.dir/clean
 clean: CMakeFiles/v_stack_top.dir/clean
 clean: CMakeFiles/v_stack_push.dir/clean
 clean: CMakeFiles/v_stack_pop.dir/clean
 clean: CMakeFiles/v_stack_swap.dir/clean
+clean: CMakeFiles/v_42.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -147,7 +161,7 @@ CMakeFiles/exec.dir/clean:
 CMakeFiles/v_erase.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_erase.dir/build.make CMakeFiles/v_erase.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_erase.dir/build.make CMakeFiles/v_erase.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=13,14 "Built target v_erase"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=21,22 "Built target v_erase"
 .PHONY : CMakeFiles/v_erase.dir/all
 
 # Build rule for subdir invocation for target.
@@ -173,7 +187,7 @@ CMakeFiles/v_erase.dir/clean:
 CMakeFiles/v_iterator.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_iterator.dir/build.make CMakeFiles/v_iterator.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_iterator.dir/build.make CMakeFiles/v_iterator.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=17,18 "Built target v_iterator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=27,28 "Built target v_iterator"
 .PHONY : CMakeFiles/v_iterator.dir/all
 
 # Build rule for subdir invocation for target.
@@ -199,7 +213,7 @@ CMakeFiles/v_iterator.dir/clean:
 CMakeFiles/v_assign.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_assign.dir/build.make CMakeFiles/v_assign.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_assign.dir/build.make CMakeFiles/v_assign.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=5,6 "Built target v_assign"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=7,8 "Built target v_assign"
 .PHONY : CMakeFiles/v_assign.dir/all
 
 # Build rule for subdir invocation for target.
@@ -225,7 +239,7 @@ CMakeFiles/v_assign.dir/clean:
 CMakeFiles/v_push_back.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_push_back.dir/build.make CMakeFiles/v_push_back.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_push_back.dir/build.make CMakeFiles/v_push_back.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=25,26 "Built target v_push_back"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=37,38 "Built target v_push_back"
 .PHONY : CMakeFiles/v_push_back.dir/all
 
 # Build rule for subdir invocation for target.
@@ -251,7 +265,7 @@ CMakeFiles/v_push_back.dir/clean:
 CMakeFiles/v_swap.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_swap.dir/build.make CMakeFiles/v_swap.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_swap.dir/build.make CMakeFiles/v_swap.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=41,42 "Built target v_swap"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=55,56 "Built target v_swap"
 .PHONY : CMakeFiles/v_swap.dir/all
 
 # Build rule for subdir invocation for target.
@@ -277,7 +291,7 @@ CMakeFiles/v_swap.dir/clean:
 CMakeFiles/v_resize.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_resize.dir/build.make CMakeFiles/v_resize.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_resize.dir/build.make CMakeFiles/v_resize.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=27,28 "Built target v_resize"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=39,40 "Built target v_resize"
 .PHONY : CMakeFiles/v_resize.dir/all
 
 # Build rule for subdir invocation for target.
@@ -303,7 +317,7 @@ CMakeFiles/v_resize.dir/clean:
 CMakeFiles/v_clear.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_clear.dir/build.make CMakeFiles/v_clear.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_clear.dir/build.make CMakeFiles/v_clear.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=7,8 "Built target v_clear"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=13,14 "Built target v_clear"
 .PHONY : CMakeFiles/v_clear.dir/all
 
 # Build rule for subdir invocation for target.
@@ -329,7 +343,7 @@ CMakeFiles/v_clear.dir/clean:
 CMakeFiles/v_access.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_access.dir/build.make CMakeFiles/v_access.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_access.dir/build.make CMakeFiles/v_access.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=3,4 "Built target v_access"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=5,6 "Built target v_access"
 .PHONY : CMakeFiles/v_access.dir/all
 
 # Build rule for subdir invocation for target.
@@ -355,7 +369,7 @@ CMakeFiles/v_access.dir/clean:
 CMakeFiles/v_equal.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_equal.dir/build.make CMakeFiles/v_equal.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_equal.dir/build.make CMakeFiles/v_equal.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=11,12 "Built target v_equal"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=19,20 "Built target v_equal"
 .PHONY : CMakeFiles/v_equal.dir/all
 
 # Build rule for subdir invocation for target.
@@ -381,7 +395,7 @@ CMakeFiles/v_equal.dir/clean:
 CMakeFiles/v_lex.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_lex.dir/build.make CMakeFiles/v_lex.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_lex.dir/build.make CMakeFiles/v_lex.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=21,22 "Built target v_lex"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=31,32 "Built target v_lex"
 .PHONY : CMakeFiles/v_lex.dir/all
 
 # Build rule for subdir invocation for target.
@@ -407,7 +421,7 @@ CMakeFiles/v_lex.dir/clean:
 CMakeFiles/v_enable.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_enable.dir/build.make CMakeFiles/v_enable.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_enable.dir/build.make CMakeFiles/v_enable.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=9,10 "Built target v_enable"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=17,18 "Built target v_enable"
 .PHONY : CMakeFiles/v_enable.dir/all
 
 # Build rule for subdir invocation for target.
@@ -433,7 +447,7 @@ CMakeFiles/v_enable.dir/clean:
 CMakeFiles/v_is_integral.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_is_integral.dir/build.make CMakeFiles/v_is_integral.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_is_integral.dir/build.make CMakeFiles/v_is_integral.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=15,16 "Built target v_is_integral"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=25,26 "Built target v_is_integral"
 .PHONY : CMakeFiles/v_is_integral.dir/all
 
 # Build rule for subdir invocation for target.
@@ -459,7 +473,7 @@ CMakeFiles/v_is_integral.dir/clean:
 CMakeFiles/v_pair.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_pair.dir/build.make CMakeFiles/v_pair.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_pair.dir/build.make CMakeFiles/v_pair.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=23,24 "Built target v_pair"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=33,34 "Built target v_pair"
 .PHONY : CMakeFiles/v_pair.dir/all
 
 # Build rule for subdir invocation for target.
@@ -485,7 +499,7 @@ CMakeFiles/v_pair.dir/clean:
 CMakeFiles/v_iterator_traits.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_iterator_traits.dir/build.make CMakeFiles/v_iterator_traits.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_iterator_traits.dir/build.make CMakeFiles/v_iterator_traits.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=19,20 "Built target v_iterator_traits"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=29,30 "Built target v_iterator_traits"
 .PHONY : CMakeFiles/v_iterator_traits.dir/all
 
 # Build rule for subdir invocation for target.
@@ -505,13 +519,169 @@ CMakeFiles/v_iterator_traits.dir/clean:
 .PHONY : CMakeFiles/v_iterator_traits.dir/clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/v_rev_iterator.dir
+
+# All Build rule for target.
+CMakeFiles/v_rev_iterator.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_rev_iterator.dir/build.make CMakeFiles/v_rev_iterator.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_rev_iterator.dir/build.make CMakeFiles/v_rev_iterator.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=41,42 "Built target v_rev_iterator"
+.PHONY : CMakeFiles/v_rev_iterator.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/v_rev_iterator.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wax/42/ft_containers/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/v_rev_iterator.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wax/42/ft_containers/build/CMakeFiles 0
+.PHONY : CMakeFiles/v_rev_iterator.dir/rule
+
+# Convenience name for target.
+v_rev_iterator: CMakeFiles/v_rev_iterator.dir/rule
+.PHONY : v_rev_iterator
+
+# clean rule for target.
+CMakeFiles/v_rev_iterator.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_rev_iterator.dir/build.make CMakeFiles/v_rev_iterator.dir/clean
+.PHONY : CMakeFiles/v_rev_iterator.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/v_pop_back.dir
+
+# All Build rule for target.
+CMakeFiles/v_pop_back.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_pop_back.dir/build.make CMakeFiles/v_pop_back.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_pop_back.dir/build.make CMakeFiles/v_pop_back.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=35,36 "Built target v_pop_back"
+.PHONY : CMakeFiles/v_pop_back.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/v_pop_back.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wax/42/ft_containers/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/v_pop_back.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wax/42/ft_containers/build/CMakeFiles 0
+.PHONY : CMakeFiles/v_pop_back.dir/rule
+
+# Convenience name for target.
+v_pop_back: CMakeFiles/v_pop_back.dir/rule
+.PHONY : v_pop_back
+
+# clean rule for target.
+CMakeFiles/v_pop_back.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_pop_back.dir/build.make CMakeFiles/v_pop_back.dir/clean
+.PHONY : CMakeFiles/v_pop_back.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/v_back.dir
+
+# All Build rule for target.
+CMakeFiles/v_back.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_back.dir/build.make CMakeFiles/v_back.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_back.dir/build.make CMakeFiles/v_back.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=9,10 "Built target v_back"
+.PHONY : CMakeFiles/v_back.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/v_back.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wax/42/ft_containers/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/v_back.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wax/42/ft_containers/build/CMakeFiles 0
+.PHONY : CMakeFiles/v_back.dir/rule
+
+# Convenience name for target.
+v_back: CMakeFiles/v_back.dir/rule
+.PHONY : v_back
+
+# clean rule for target.
+CMakeFiles/v_back.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_back.dir/build.make CMakeFiles/v_back.dir/clean
+.PHONY : CMakeFiles/v_back.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/v_empty.dir
+
+# All Build rule for target.
+CMakeFiles/v_empty.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_empty.dir/build.make CMakeFiles/v_empty.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_empty.dir/build.make CMakeFiles/v_empty.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=15,16 "Built target v_empty"
+.PHONY : CMakeFiles/v_empty.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/v_empty.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wax/42/ft_containers/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/v_empty.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wax/42/ft_containers/build/CMakeFiles 0
+.PHONY : CMakeFiles/v_empty.dir/rule
+
+# Convenience name for target.
+v_empty: CMakeFiles/v_empty.dir/rule
+.PHONY : v_empty
+
+# clean rule for target.
+CMakeFiles/v_empty.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_empty.dir/build.make CMakeFiles/v_empty.dir/clean
+.PHONY : CMakeFiles/v_empty.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/v_capacity.dir
+
+# All Build rule for target.
+CMakeFiles/v_capacity.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_capacity.dir/build.make CMakeFiles/v_capacity.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_capacity.dir/build.make CMakeFiles/v_capacity.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=11,12 "Built target v_capacity"
+.PHONY : CMakeFiles/v_capacity.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/v_capacity.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wax/42/ft_containers/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/v_capacity.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wax/42/ft_containers/build/CMakeFiles 0
+.PHONY : CMakeFiles/v_capacity.dir/rule
+
+# Convenience name for target.
+v_capacity: CMakeFiles/v_capacity.dir/rule
+.PHONY : v_capacity
+
+# clean rule for target.
+CMakeFiles/v_capacity.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_capacity.dir/build.make CMakeFiles/v_capacity.dir/clean
+.PHONY : CMakeFiles/v_capacity.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/v_insert.dir
+
+# All Build rule for target.
+CMakeFiles/v_insert.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_insert.dir/build.make CMakeFiles/v_insert.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_insert.dir/build.make CMakeFiles/v_insert.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=23,24 "Built target v_insert"
+.PHONY : CMakeFiles/v_insert.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/v_insert.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wax/42/ft_containers/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/v_insert.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wax/42/ft_containers/build/CMakeFiles 0
+.PHONY : CMakeFiles/v_insert.dir/rule
+
+# Convenience name for target.
+v_insert: CMakeFiles/v_insert.dir/rule
+.PHONY : v_insert
+
+# clean rule for target.
+CMakeFiles/v_insert.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_insert.dir/build.make CMakeFiles/v_insert.dir/clean
+.PHONY : CMakeFiles/v_insert.dir/clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/v_stack_empty.dir
 
 # All Build rule for target.
 CMakeFiles/v_stack_empty.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_stack_empty.dir/build.make CMakeFiles/v_stack_empty.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_stack_empty.dir/build.make CMakeFiles/v_stack_empty.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=29,30 "Built target v_stack_empty"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=43,44 "Built target v_stack_empty"
 .PHONY : CMakeFiles/v_stack_empty.dir/all
 
 # Build rule for subdir invocation for target.
@@ -537,7 +707,7 @@ CMakeFiles/v_stack_empty.dir/clean:
 CMakeFiles/v_stack_size.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_stack_size.dir/build.make CMakeFiles/v_stack_size.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_stack_size.dir/build.make CMakeFiles/v_stack_size.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=35,36 "Built target v_stack_size"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=49,50 "Built target v_stack_size"
 .PHONY : CMakeFiles/v_stack_size.dir/all
 
 # Build rule for subdir invocation for target.
@@ -563,7 +733,7 @@ CMakeFiles/v_stack_size.dir/clean:
 CMakeFiles/v_stack_top.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_stack_top.dir/build.make CMakeFiles/v_stack_top.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_stack_top.dir/build.make CMakeFiles/v_stack_top.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=39,40 "Built target v_stack_top"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=53,54 "Built target v_stack_top"
 .PHONY : CMakeFiles/v_stack_top.dir/all
 
 # Build rule for subdir invocation for target.
@@ -589,7 +759,7 @@ CMakeFiles/v_stack_top.dir/clean:
 CMakeFiles/v_stack_push.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_stack_push.dir/build.make CMakeFiles/v_stack_push.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_stack_push.dir/build.make CMakeFiles/v_stack_push.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=33,34 "Built target v_stack_push"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=47,48 "Built target v_stack_push"
 .PHONY : CMakeFiles/v_stack_push.dir/all
 
 # Build rule for subdir invocation for target.
@@ -615,7 +785,7 @@ CMakeFiles/v_stack_push.dir/clean:
 CMakeFiles/v_stack_pop.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_stack_pop.dir/build.make CMakeFiles/v_stack_pop.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_stack_pop.dir/build.make CMakeFiles/v_stack_pop.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=31,32 "Built target v_stack_pop"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=45,46 "Built target v_stack_pop"
 .PHONY : CMakeFiles/v_stack_pop.dir/all
 
 # Build rule for subdir invocation for target.
@@ -641,7 +811,7 @@ CMakeFiles/v_stack_pop.dir/clean:
 CMakeFiles/v_stack_swap.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_stack_swap.dir/build.make CMakeFiles/v_stack_swap.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_stack_swap.dir/build.make CMakeFiles/v_stack_swap.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=37,38 "Built target v_stack_swap"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=51,52 "Built target v_stack_swap"
 .PHONY : CMakeFiles/v_stack_swap.dir/all
 
 # Build rule for subdir invocation for target.
@@ -659,6 +829,32 @@ v_stack_swap: CMakeFiles/v_stack_swap.dir/rule
 CMakeFiles/v_stack_swap.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_stack_swap.dir/build.make CMakeFiles/v_stack_swap.dir/clean
 .PHONY : CMakeFiles/v_stack_swap.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/v_42.dir
+
+# All Build rule for target.
+CMakeFiles/v_42.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_42.dir/build.make CMakeFiles/v_42.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_42.dir/build.make CMakeFiles/v_42.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wax/42/ft_containers/build/CMakeFiles --progress-num=3,4 "Built target v_42"
+.PHONY : CMakeFiles/v_42.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/v_42.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wax/42/ft_containers/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/v_42.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wax/42/ft_containers/build/CMakeFiles 0
+.PHONY : CMakeFiles/v_42.dir/rule
+
+# Convenience name for target.
+v_42: CMakeFiles/v_42.dir/rule
+.PHONY : v_42
+
+# clean rule for target.
+CMakeFiles/v_42.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_42.dir/build.make CMakeFiles/v_42.dir/clean
+.PHONY : CMakeFiles/v_42.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

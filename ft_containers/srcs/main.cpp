@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:33:06 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/26 15:11:40 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/27 16:11:59 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,51 +18,109 @@
 #include <vector>
 #include <stack>
 #include <sstream>
+#include <iostream>
+#include <string>
+#include <deque>
 
-bool mycomp (char c1, char c2)
-{ return std::tolower(c1) < std::tolower(c2); }
+#include <stdlib.h>
 
-int main(void)
+#define MAX_RAM 4294967296
+#define BUFFER_SIZE 4096
+struct Buffer
 {
-	ft::vector<int> myvector;
-	std::vector<int> vector;
-	std::stringstream my;
-	std::stringstream origine;
+	int idx;
+	char buff[BUFFER_SIZE];
+};
 
+/* #define COUNT (MAX_RAM / (int)sizeof(Buffer)) */
+#define COUNT 10
 
-  	// set some values (from 1 to 10)
-  	for (int i=1; i<=10; i++){
-		myvector.push_back(i);
-		vector.push_back(i);
-	}  	
-  	// erase the 6th element
-  	myvector.erase (myvector.begin()+5);
-  	vector.erase (vector.begin()+5);
-  	
-  	// erase the first 3 elements:
-  	myvector.erase (myvector.begin(),myvector.begin()+3);
-  	vector.erase (vector.begin(),vector.begin()+3);
-  	
-	std::cout << "My vector: "<< std::endl;
-  	for (unsigned i=0; i<myvector.size(); ++i){
-  	  	my << ' ' << myvector[i];
-		std::cout << ' ' << myvector[i];
+template<typename T>
+class MutantStack : public ft::stack<T>
+{
+public:
+	MutantStack() {}
+	MutantStack(const MutantStack<T>& src) { *this = src; }
+	MutantStack<T>& operator=(const MutantStack<T>& rhs) 
+	{
+		this->c = rhs.c;
+		return *this;
+	}
+	~MutantStack() {}
+
+	typedef typename ft::stack<T>::container_type::iterator iterator;
+
+	iterator begin() { return this->c.begin(); }
+	iterator end() { return this->c.end(); }
+};
+
+int main(int argc, char** argv) {
+	if (argc != 2)
+	{
+		std::cerr << "Usage: ./test seed" << std::endl;
+		std::cerr << "Provide a seed please" << std::endl;
+		std::cerr << "Count value:" << COUNT << std::endl;
+		return 1;
+	}
+	const int seed = atoi(argv[1]);
+	srand(seed);
+
+	ft::vector<std::string> vector_str;
+	ft::vector<int> vector_int;
+	ft::stack<int> stack_int;
+	ft::vector<Buffer> vector_buffer;
+	ft::stack<Buffer, std::deque<Buffer> > stack_deq_buffer;
+	/* std::map<int, int> map_int; */
+
+	for (int i = 0; i < COUNT; i++)
+	{
+		vector_buffer.push_back(Buffer());
+	}
+
+	for (int i = 0; i < COUNT; i++)
+	{
+		const int idx = rand() % COUNT;
+		vector_buffer[idx].idx = 5;
+	}
+	ft::vector<Buffer>().swap(vector_buffer);
+
+	try
+	{
+		for (int i = 0; i < COUNT; i++)
+		{
+			const int idx = rand() % COUNT;
+			vector_buffer.at(idx);
+			std::cerr << "Error: THIS VECTOR SHOULD BE EMPTY!!" <<std::endl;
+		}
+	}
+	catch(const std::exception& e)
+	{
+		//NORMAL ! :P
+	}
+	
+	/* for (int i = 0; i < COUNT; ++i) */
+	/* { */
+	/* 	map_int.insert(std::make_pair(rand(), rand())); */
+	/* } */
+
+	/* int sum = 0; */
+	/* for (int i = 0; i < 10000; i++) */
+	/* { */
+	/* 	int access = rand(); */
+	/* 	sum += map_int[access]; */
+	/* } */
+	/* std::cout << "should be constant with the same seed: " << sum << std::endl; */
+
+	/* { */
+		/* std::map<int, int> copy = map_int; */
+	/* } */
+	MutantStack<char> iterable_stack;
+	for (char letter = 'a'; letter <= 'z'; letter++)
+		iterable_stack.push(letter);
+	for (MutantStack<char>::iterator it = iterable_stack.begin(); it != iterable_stack.end(); it++)
+	{
+		std::cout << *it;
 	}
 	std::cout << std::endl;
-  	
-	std::cout << "vector: "<< std::endl;
-	for (unsigned i=0; i < vector.size(); ++i){
-  	  	origine << ' ' << vector[i];
-		std::cout << ' ' << vector[i];
-	}
-	std::cout << std::endl;
-
-	std::string my_vector = my.str();
-	std::string origine_vector = origine.str();
-	std::cout << my_vector << '\n' << origine_vector << std::endl;
-	if (my_vector != origine_vector)
-		return (1);
-	return 0;
+	return (0);
 }
-
-

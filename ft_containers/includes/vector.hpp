@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:08:46 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/26 15:24:26 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/27 16:17:07 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <memory>
 #include <strings.h>
 # include "vector_iterator.hpp"
-/* # include "rev_vector_iterator.hpp" */
+# include "rev_vector_iterator.hpp"
 # include "tools.hpp"
 /**
     * ------------------------ TODO ------------------------------- *
@@ -66,6 +66,7 @@
 namespace ft{
 	template<typename T, class Allocator = std::allocator<T> >
   	class	vector {
+		public:
     			/*-------------------------------------------------------------*/
     			/*-----------------------ALLIAS--------------------------------*/
 			typedef T 					value_type;
@@ -78,8 +79,8 @@ namespace ft{
 			typedef typename Allocator::const_pointer 	const_pointer;
 			typedef typename ft::iterator<T>      	iterator;
             		typedef typename ft::iterator<T>       	const_iterator;
-			/* typedef typename ft::reverse_iterator<T>      	rev_iterator; */
-            		/* typedef typename ft::reverse_iterator<T>       	rev_const_iterator; */
+			typedef typename ft::reverse_iterator<T>      	rev_iterator;
+            		typedef typename ft::reverse_iterator<T>       	rev_const_iterator;
 
 
 		private:
@@ -115,12 +116,14 @@ namespace ft{
 			 /* @param alloc    The template param used for the allocation. */
 			 template <class InputIterator>
             		 vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
-                    		typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0) :
-                    			_alloc(alloc), _size_alloc(0){
-				while (first != last){
-					push_back(*first);
-					first++;
-				}
+                    		typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0) :_alloc(alloc){
+				 size_type size = last - first;
+				 this->_ptr = _alloc.allocate(size);
+				 for (size_type i = 0; first != last; first++, i++){
+					_alloc.construct(_ptr + i, *first);
+				 }
+				 this->_capacity = size;
+				 this->_size_alloc = size;
 			};
 			
 			/* @Brief Copy constructor, creates a vector with the same size and copy/construct */
@@ -182,10 +185,10 @@ namespace ft{
 			 iterator	end(void){return (iterator(_ptr + _size_alloc));}
 			 const_iterator	cend(void)const {return (const_iterator(_ptr + _size_alloc));}
 			
-			 /* rev_iterator	rbegin(void){return (rev_iterator(_ptr + _size_alloc - 1));} */
-			 /* rev_const_iterator	crbegin(void)const {return (rev_const_iterator(_ptr + _size_alloc - 1));} */
-			 /* rev_iterator	rend(void){return (rev_iterator(_ptr - 1));} */
-			 /* rev_const_iterator	crend(void)const {return (rev_const_iterator(_ptr - 1));} */
+			 rev_iterator	rbegin(void){return (rev_iterator(_ptr + _size_alloc - 1));}
+			 rev_const_iterator	crbegin(void)const {return (rev_const_iterator(_ptr + _size_alloc - 1));}
+			 rev_iterator	rend(void){return (rev_iterator(_ptr - 1));}
+			 rev_const_iterator	crend(void)const {return (rev_const_iterator(_ptr - 1));}
 
 			 /* ------------------------------------------------------------- */
 			 /* -------------------------- CAPACITY ------------------------- */
@@ -234,8 +237,16 @@ namespace ft{
 			 /* if it is not (i.e., if n is greater than, or equal to, its size). */    
 			 /* This is in contrast with member operator[], that does not check against bounds. */
 			 /* @Param position of an element */
-			 reference at(size_type n){return (_ptr[n]);};
-			 const_reference at(size_type n)const {return (_ptr[n]);};
+			 reference at(size_type n){
+				 if (n > _capacity)
+					 throw std::out_of_range("vector::at");
+				 return (_ptr[n]);
+			 };
+			 const_reference at(size_type n)const{
+				 if (n > _capacity)
+					 throw std::out_of_range("vector::at");
+				 return (_ptr[n]);
+			 };
 
 			 /* Access first element */
 			 /* Returns a reference to the first element in the vector. */
@@ -348,40 +359,84 @@ namespace ft{
 			 };
 
 			 iterator erase (iterator position){
-				 if (position == this->end())
-					 this->pop_back();
-				 _alloc.destructor(&*position);
-				 for (iterator it = position; it != this->end(); it++){
-					 _alloc.construct(&*it, *(it + 1));
-					 _alloc.destroy(&*(it + 1));
-				 }
-				 _size_alloc--;
-				 return (position);
+				 return (erase(position, position + 1));
 			 };
 
 		 	 iterator erase (iterator first, iterator last){
-				 for (; first != last; first++){
-					 _alloc.destroy(&*first);
-				 }
-				_size_alloc = last - first;
+				size_type	len = last - first;
+				if (last == this->end()){
+					for (; len > 0; len--)
+						this->pop_back();
+				}
+				else{
+					iterator 	tmp_first = first;
+					pointer 	tmp = _alloc.allocate(this->_capacity);
+					size_type	tmp_capacity(_capacity);
+					size_type	tmp_size(_size_alloc);
+					size_type	i(0);
+					size_type	j(0);
+					for (iterator it = this->begin(); it != this->end(); it++){
+						if (it < first || it >= last){
+							_alloc.construct(&tmp[i], _ptr[j]);
+							i++;
+						}
+						j++;
+					}
+					tmp_size -= static_cast<size_type>(last - first);
+					this->~vector();
+					this->_capacity = tmp_capacity;
+					this->_size_alloc = tmp_size;
+					this->_ptr = tmp;
+				}
 				return (first);
 			 };
-			 /* iterator insert (iterator position, const value_type& val){ */
-			 /* size_type index = position - this->begin(); */
-				 /* this->insert(position, 1, val); */
-				 /* return (iterator(&(_ptr[index]))); */
 
-			 /* } */
-    			 /* void insert (iterator position, size_type n, const value_type& val){ */
-				 /* size_type index = position - this->begin(); */
-				 /* if (_size_alloc + n > _capacity) */
-					 /* this->reserve(_capacity + n); */
-			 /* } */
-			 /* template <class InputIterator> */
-    			 /* void insert (iterator position, InputIterator first, InputIterator last, */
-				/* typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0){ */
+			 iterator insert (iterator position, const value_type& val){
+			 	vector tmp;
+				difference_type n = position - begin();
+				
+				(_size_alloc + 1 > _capacity) ? tmp.reserve(_capacity * 2) : tmp.reserve(_size_alloc + 1);
+				for (iterator it = begin(); it != end(); it++){
+					if (it == position)
+						tmp.push_back(val);
+					tmp.push_back(*it);
+				}
+				swap(*this, tmp);
+				return (&_ptr[n]);
+			 }
 
-			 /* } */
+    			 void insert (iterator position, size_type n, const value_type& val){
+				vector tmp;
+
+				(_size_alloc + n > _capacity) ? tmp.reserve(_capacity * 2) : tmp.reserve(_size_alloc + n);
+				for (iterator it = begin(); it != end(); it++){
+					if (it == position){
+						for (size_type i = 0; i < n; i++){
+							tmp.push_back(val);
+						}
+					}
+					tmp.push_back(*it);
+				}
+				swap(*this, tmp);
+			 }
+
+			 template <class InputIterator>
+    			 void insert (iterator position, InputIterator first, InputIterator last,
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0){
+				vector tmp;
+				size_type n = static_cast<size_type>(last - first);
+
+				(_size_alloc + n > _capacity) ? tmp.reserve(_capacity * 2) : tmp.reserve(_size_alloc + n);
+				for (iterator it = begin(); it != end(); it++){
+					if (it == position){
+						for (; first != last; first++){
+							tmp.push_back(*first);
+						}
+					}
+					tmp.push_back(*it);
+				}
+				swap(*this, tmp);
+			 }
 
 			 /* ------------------------------------------------------------- */
             		 /* --------------- NON-MEMBER FUNCTION OVERLOADS --------------- */
@@ -404,12 +459,11 @@ namespace ft{
 				b = tmp;
 		    	}
 			void moveleft(iterator first, iterator last){
-				size_t i = 0;
-				for(; first != this->end(); first++, i++){
+				for(; first != this->end(); first++, last++){
 					_alloc.destroy(&(*first));
-				}
-				if (last < this->end()){
-					_alloc.construct(&(*first), *last);
+					if (last < this->end()){
+						_alloc.construct(&(*first), *last);
+					}
 				}
 			}
 

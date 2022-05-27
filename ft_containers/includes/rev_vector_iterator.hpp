@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 14:49:26 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/25 15:28:36 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/27 10:00:45 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,109 +44,135 @@ namespace ft{
 		typedef const value_type*	const_pointer;
 
 		private:	
-		  	value_type *_ptr;
-
+		  	pointer _it;
+			
 		public:
-			reverse_iterator(void): _ptr(0){};
-			reverse_iterator(value_type *ptr = 0):_ptr(ptr) {}
-			reverse_iterator(const reverse_iterator &copy) {
-				_ptr = copy._ptr;
-			}
+			reverse_iterator(void): _it(NULL){};
+			reverse_iterator(value_type *it):_it(it) {}
+			reverse_iterator(reverse_iterator const &copy) {*this = copy;}
 			~reverse_iterator(void){};
-			reverse_iterator& operator=(const reverse_iterator& assign){
+			reverse_iterator& operator=(reverse_iterator const &assign){
 				if (this != &assign)
-					_ptr = assign._ptr;
+					_it = assign._it;
 				return (*this);
 			}
-
 			/* ------------------------------------------------------------- */
 			/* --------------------- BOOL OPERATOR ------------------------- */
-			bool operator ==(const reverse_iterator &it)const{return (it._ptr == _ptr);}
-			bool operator !=(const reverse_iterator &it)const{return (it._ptr != _ptr);}
-			bool operator <(const reverse_iterator &it)const{return (it._ptr < _ptr);}
-			bool operator >(const reverse_iterator &it)const{return (it._ptr > _ptr);}
-			bool operator <=(const reverse_iterator &it)const{return (it._ptr <= _ptr);}
-			bool operator >=(const reverse_iterator &it)const{return (it._ptr >= _ptr);}
 
+			bool operator ==(const reverse_iterator &it)const{return (it._it == _it);}
+			bool operator !=(const reverse_iterator &it)const{return (it._it != _it);}
+			bool operator <(const reverse_iterator &it)const{return (it._it > _it);}
+			bool operator >(const reverse_iterator &it)const{return (it._it < _it);}
+			bool operator <=(const reverse_iterator &it)const{return (it._it >= _it);}
+			bool operator >=(const reverse_iterator &it)const{return (it._it <= _it);}
 
 			/* ------------------------------------------------------------- */
 			/* --------------------- OPERATOR OVERLOAD --------------------- */
-			reference operator*() const{ return (*_ptr); }
+			reference operator*() const{ return (*_it); }
+			reference operator[](difference_type n) const{return (_it[n]);}
+			pointer operator->() const{return(&(operator*()));}
+			pointer base() const{return (_it);}
+			reverse_iterator& operator++(void){ --_it; return (*this); }
+            		reverse_iterator& operator--(void){ ++_it; return (*this); }
 
-			/* Incrementate iterator n pos*/
-			reverse_iterator &operator+=(int n){
-				this->move_ptr(this->_ptr, n, SUB);
-				return (*this);
-			}
-
-			/* Incrementate iterator n pos */
-			reverse_iterator operator+(int n){
-				reverse_iterator it(*this);
-				this->move_ptr(it._ptr, n, SUB);
-				return (it);
-			}
-			/* Incrementate iterator ++*/
-			reverse_iterator &operator++(int){
-				/* this->move_ptr(this->_ptr, 1, ADD); */
-				this->_ptr--;
-				return (*this);
-			}
-
-			/* Decrementate iterator n pos*/
-			reverse_iterator &operator-=(int n){
-				this->move_ptr(this->_ptr, n, ADD);
-				return (*this);
-			}
-			/* Decrementate iterator n pos*/
-			reverse_iterator operator-(int n)const{
-				reverse_iterator it(*this);
-				this->move_ptr(it._ptr, n, ADD);
-				return (it);
-			}
-			/* Decrementate iterator --*/
-			reverse_iterator &operator--(int){
-				this->_ptr++;
-				/* this->move_ptr(this->_ptr, 1, SUB); */
-				return (*this);
-			}
-			
-			size_t operator-(reverse_iterator it) const
+			reverse_iterator operator++(int)
             		{
-                		return (this->_ptr + it._ptr);
+                		reverse_iterator res(*this);
+                		++(*this);
+                		return (res);
             		}
-			
-			size_t operator+(reverse_iterator it) const
+            
+            		reverse_iterator operator--(int)
             		{
-                		return (this->_ptr - it._ptr);
+                		reverse_iterator res(*this);
+                		--(*this);
+                		return (res);
             		}
 
-			friend reverse_iterator operator+(const reverse_iterator& it, int nb)
-        	        {
-        	            	reverse_iterator newIt(it);
-        	            	return (newIt -= nb);
-        	        }
-        	    
-        	        friend reverse_iterator operator-(const reverse_iterator& it, int nb)
-        	        {
-        	            	reverse_iterator newIt(it);
-        	            	return (newIt += nb);
-        	        }
+			/**
+            		*   Increments 1 time vector_reverse_iterator position.
+            		*/
+            		reverse_iterator& operator+=(difference_type nb){
+            		    	movePtr(this->_it, nb, SUB);
+            		    	return (*this);
+            		}
+
+            		/**
+            		*   Increments nb times reverse_iterator position.
+            		*/
+            		reverse_iterator operator+(difference_type nb) const{
+            		    	reverse_iterator it(*this);
+            		    	
+            		    	movePtr(it._it, nb, SUB);
+            		    	return (it);
+            		}
+            		
+            		/**
+            		*   Decrements 1 time reverse_iterator position.
+            		*/
+            		reverse_iterator& operator-=(difference_type nb){
+            		    	movePtr(this->_it, nb, ADD);
+            		    	return (*this);
+            		}
+
+            		/**
+            		*   Decrements nb times reverse_iterator position.
+            		*/
+            		reverse_iterator operator-(difference_type nb) const{
+            		    	reverse_iterator it(*this);
+            		    	
+            		    	movePtr(it._it, nb, ADD);
+            		    	return (it);
+            		}
+
+            		/**
+            		*   @return     The range's lenght between this reverse_iterator and another one.
+            		*/
+            		difference_type operator-(reverse_iterator it) const{
+            		    	return (this->_it - it._it);
+            		}
+            		
+
+            		/* ------------------------------------------------------------- */
+            		/* --------------- NON-MEMBER OPERATOR OVERLOADS --------------- */ 
+            		
+            		friend reverse_iterator operator+(difference_type nb, const reverse_iterator& it){
+            		    	reverse_iterator newIt(it);
+            		    	return (newIt += nb);
+            		}
+
+            		friend reverse_iterator operator-(difference_type nb, const reverse_iterator& it){
+            		    	reverse_iterator newIt(it);
+            		    	return (newIt -= nb);
+            		}
+            		/* ------------------------------------------------------------- */
+            		/* ------------------ PRIVATE MEMBER FUNCTIONS ----------------- */
+
 		private:
-			void move_ptr(T *elem, size_t n, bool sign){
-				int mov;
 
-				if (!sign)
-					mov = n > 0 ? mov = 1 : mov = -1;
-				else 
-					mov = n > 0 ? mov = -1 : mov = 1;
-				if (n < 0)
-					n *= -1;
-				for (; n > 0; n--)
-					elem += mov;
-			}
-
-		
-
-	};// class 
+        	    	/**
+        	    	*   Moves random_acces_reverse_iterator's pointer. Adapt between addition / substraction
+        	    	*   operation. 
+        	    	*
+        	    	*   @param val  The pointer to move.
+        	    	*   @param nb   Number of time the pointer will be increased / decreased.
+        	    	*   @param sign Indicate if it's an addition or a substraction.
+        	    	*/
+        	    	void movePtr(pointer& val, long nb, bool sign) const
+        	    	{
+        	    	    int mov;
+                    	
+        	    	    // If addtion, mov will be positive. If substraction, negative.
+        	    	    if (sign == SUB)
+        	    	        mov = nb > 0 ? mov = 1: mov = -1;
+        	    	    else
+        	    	        mov = nb > 0 ? mov = -1: mov = 1;
+                    	
+        	    	    if (nb < 0)
+        	    	        nb *= -1;
+        	    	    for (; nb > 0; --nb)
+        	    	        val += mov;
+        	    	}
+	};// class reverse_reverse_iterator 
 }//namespace
 #endif

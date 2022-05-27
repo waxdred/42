@@ -1,31 +1,31 @@
-Start testing: May 26 15:12 CEST
+Start testing: May 27 16:33 CEST
 ----------------------------------------------------------
-1/18 Testing: Test_Vector_Erase
-1/18 Test: Test_Vector_Erase
+1/25 Testing: Test_Vector_Erase
+1/25 Test: Test_Vector_Erase
 Command: "/Users/wax/42/ft_containers/build/v_erase"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Vector_Erase" start time: May 26 15:12 CEST
+"Test_Vector_Erase" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
 My vector: 
- 1 2 3 4 5 6 7 8 9 10
+ 4 5 7 8 9 10
 vector: 
  4 5 7 8 9 10
- 1 2 3 4 5 6 7 8 9 10
+ 4 5 7 8 9 10
  4 5 7 8 9 10
 <end of output>
 Test time =   0.01 sec
 ----------------------------------------------------------
-Test Failed.
-"Test_Vector_Erase" end time: May 26 15:12 CEST
+Test Passed.
+"Test_Vector_Erase" end time: May 27 16:33 CEST
 "Test_Vector_Erase" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-2/18 Testing: Test_Vector_Iterator
-2/18 Test: Test_Vector_Iterator
+2/25 Testing: Test_Vector_Iterator
+2/25 Test: Test_Vector_Iterator
 Command: "/Users/wax/42/ft_containers/build/v_iterator"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Vector_Iterator" start time: May 26 15:12 CEST
+"Test_Vector_Iterator" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
 Iterator empty
@@ -47,38 +47,41 @@ fr_FR.UTF-8
 My vector test
 salut: 1 salut: 12 salut: 123 salut: 1234 salut: 12345 salut: 123456 salut: 1234567 salut: 12345678 salut: 123456789 salut: 12345678910 
 vector test
-salut: 1 salut: 12 salut: 123 salut: 1234 salut: 12345 salut: 123456 salut: 1234567 salut: 12345678 salut: 123456789 salut: 12345678910 
+salut: 1 salut: 12 salut: 123 salut: 1234 salut: 12345 salut: 123456 salut: 1234567 salut: 12345678 salut: 123456789 salut: 12345678910 My vector test
+salut: 123 salut: 1234 salut: 12345 salut: 123456 salut: 1234567 salut: 12345678 salut: 123456789 salut: 12345678910 
+vector test
+salut: 123 salut: 1234 salut: 12345 salut: 123456 salut: 1234567 salut: 12345678 salut: 123456789 salut: 12345678910 
 <end of output>
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"Test_Vector_Iterator" end time: May 26 15:12 CEST
+"Test_Vector_Iterator" end time: May 27 16:33 CEST
 "Test_Vector_Iterator" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-3/18 Testing: Test_Vector_Assign
-3/18 Test: Test_Vector_Assign
+3/25 Testing: Test_Vector_Assign
+3/25 Test: Test_Vector_Assign
 Command: "/Users/wax/42/ft_containers/build/v_assign"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Vector_Assign" start time: May 26 15:12 CEST
+"Test_Vector_Assign" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
 Size of first: 7
-Size of second: 4
+Size of second: 3
 Size of third: 3
 <end of output>
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"Test_Vector_Assign" end time: May 26 15:12 CEST
+"Test_Vector_Assign" end time: May 27 16:33 CEST
 "Test_Vector_Assign" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-4/18 Testing: Test_Vector_Push_back
-4/18 Test: Test_Vector_Push_back
+4/25 Testing: Test_Vector_Push_back
+4/25 Test: Test_Vector_Push_back
 Command: "/Users/wax/42/ft_containers/build/v_push_back"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Vector_Push_back" start time: May 26 15:12 CEST
+"Test_Vector_Push_back" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
 check vector empty: true
@@ -133,15 +136,15 @@ capacity of vector: 4
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"Test_Vector_Push_back" end time: May 26 15:12 CEST
+"Test_Vector_Push_back" end time: May 27 16:33 CEST
 "Test_Vector_Push_back" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-5/18 Testing: Test_Vector_Swap
-5/18 Test: Test_Vector_Swap
+5/25 Testing: Test_Vector_Swap
+5/25 Test: Test_Vector_Swap
 Command: "/Users/wax/42/ft_containers/build/v_swap"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Vector_Swap" start time: May 26 15:12 CEST
+"Test_Vector_Swap" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
 foo contains: 200 200 200 200 200 200 200 200 200 200
@@ -151,15 +154,15 @@ bar contains: 100 100 100
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"Test_Vector_Swap" end time: May 26 15:12 CEST
+"Test_Vector_Swap" end time: May 27 16:33 CEST
 "Test_Vector_Swap" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-6/18 Testing: Test_Vector_Resize
-6/18 Test: Test_Vector_Resize
+6/25 Testing: Test_Vector_Resize
+6/25 Test: Test_Vector_Resize
 Command: "/Users/wax/42/ft_containers/build/v_resize"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Vector_Resize" start time: May 26 15:12 CEST
+"Test_Vector_Resize" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
 5
@@ -170,15 +173,15 @@ Output:
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"Test_Vector_Resize" end time: May 26 15:12 CEST
+"Test_Vector_Resize" end time: May 27 16:33 CEST
 "Test_Vector_Resize" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-7/18 Testing: Test_Vector_Clear
-7/18 Test: Test_Vector_Clear
+7/25 Testing: Test_Vector_Clear
+7/25 Test: Test_Vector_Clear
 Command: "/Users/wax/42/ft_containers/build/v_clear"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Vector_Clear" start time: May 26 15:12 CEST
+"Test_Vector_Clear" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
 myvector contains: 100 200 300
@@ -189,15 +192,15 @@ vector contains: 1101 2202
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"Test_Vector_Clear" end time: May 26 15:12 CEST
+"Test_Vector_Clear" end time: May 27 16:33 CEST
 "Test_Vector_Clear" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-8/18 Testing: Test_Vector_Access
-8/18 Test: Test_Vector_Access
+8/25 Testing: Test_Vector_Access
+8/25 Test: Test_Vector_Access
 Command: "/Users/wax/42/ft_containers/build/v_access"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Vector_Access" start time: May 26 15:12 CEST
+"Test_Vector_Access" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
 test v.front() empty): 0
@@ -227,30 +230,34 @@ test vec.max_size(): 4611686018427387903
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"Test_Vector_Access" end time: May 26 15:12 CEST
+"Test_Vector_Access" end time: May 27 16:33 CEST
 "Test_Vector_Access" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-9/18 Testing: Test_Vector_Equal
-9/18 Test: Test_Vector_Equal
+9/25 Testing: Test_Vector_Equal
+9/25 Test: Test_Vector_Equal
 Command: "/Users/wax/42/ft_containers/build/v_equal"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Vector_Equal" start time: May 26 15:12 CEST
+"Test_Vector_Equal" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
+The contents of both sequences are equal.
+The contents of both sequences are equal.
+The contents of both sequences differ.
+The contents of both sequences differ.
 <end of output>
 Test time =   0.01 sec
 ----------------------------------------------------------
-Test Failed.
-"Test_Vector_Equal" end time: May 26 15:12 CEST
+Test Passed.
+"Test_Vector_Equal" end time: May 27 16:33 CEST
 "Test_Vector_Equal" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-10/18 Testing: Test_Vector_Lex
-10/18 Test: Test_Vector_Lex
+10/25 Testing: Test_Vector_Lex
+10/25 Test: Test_Vector_Lex
 Command: "/Users/wax/42/ft_containers/build/v_lex"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Vector_Lex" start time: May 26 15:12 CEST
+"Test_Vector_Lex" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
 Comparing foo and bar lexicographically (foo<bar):
@@ -262,15 +269,15 @@ origine: 10
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"Test_Vector_Lex" end time: May 26 15:12 CEST
+"Test_Vector_Lex" end time: May 27 16:33 CEST
 "Test_Vector_Lex" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-11/18 Testing: Test_Vector_enalble_if
-11/18 Test: Test_Vector_enalble_if
+11/25 Testing: Test_Vector_enalble_if
+11/25 Test: Test_Vector_enalble_if
 Command: "/Users/wax/42/ft_containers/build/v_enable"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Vector_enalble_if" start time: May 26 15:12 CEST
+"Test_Vector_enalble_if" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
 i is odd: true
@@ -286,15 +293,15 @@ i is even: 0
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"Test_Vector_enalble_if" end time: May 26 15:12 CEST
+"Test_Vector_enalble_if" end time: May 27 16:33 CEST
 "Test_Vector_enalble_if" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-12/18 Testing: Test_Vector_integral
-12/18 Test: Test_Vector_integral
+12/25 Testing: Test_Vector_integral
+12/25 Test: Test_Vector_integral
 Command: "/Users/wax/42/ft_containers/build/v_is_integral"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Vector_integral" start time: May 26 15:12 CEST
+"Test_Vector_integral" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
 is_integral:
@@ -316,15 +323,15 @@ float: false
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"Test_Vector_integral" end time: May 26 15:12 CEST
+"Test_Vector_integral" end time: May 27 16:33 CEST
 "Test_Vector_integral" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-13/18 Testing: Test_Pair
-13/18 Test: Test_Pair
+13/25 Testing: Test_Pair
+13/25 Test: Test_Pair
 Command: "/Users/wax/42/ft_containers/build/v_pair"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Pair" start time: May 26 15:12 CEST
+"Test_Pair" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
 The price of lightbulbs is $0.99
@@ -354,15 +361,15 @@ bar: 10, 65
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"Test_Pair" end time: May 26 15:12 CEST
+"Test_Pair" end time: May 27 16:33 CEST
 "Test_Pair" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-14/18 Testing: Test_Vector_Iterator_Trais
-14/18 Test: Test_Vector_Iterator_Trais
+14/25 Testing: Test_Vector_Iterator_Trais
+14/25 Test: Test_Vector_Iterator_Trais
 Command: "/Users/wax/42/ft_containers/build/v_iterator_traits"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Vector_Iterator_Trais" start time: May 26 15:12 CEST
+"Test_Vector_Iterator_Trais" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
 int* is a random-access iteratorint* is a random-access iteratorOutput cout: 
@@ -372,15 +379,126 @@ int* is a random-access iterator
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"Test_Vector_Iterator_Trais" end time: May 26 15:12 CEST
+"Test_Vector_Iterator_Trais" end time: May 27 16:33 CEST
 "Test_Vector_Iterator_Trais" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-15/18 Testing: Test_Stack_empty
-15/18 Test: Test_Stack_empty
+15/25 Testing: Test_Rev_iterator
+15/25 Test: Test_Rev_iterator
+Command: "/Users/wax/42/ft_containers/build/v_rev_iterator"
+Directory: /Users/wax/42/ft_containers/build
+"Test_Rev_iterator" start time: May 27 16:33 CEST
+Output:
+----------------------------------------------------------
+vector contains: 5 4 3 2 1
+myvector contains: 5 4 3 2 1
+vector contains: 5 4 3 2 1
+myvector contains: 5 4 3 2 1
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"Test_Rev_iterator" end time: May 27 16:33 CEST
+"Test_Rev_iterator" time elapsed: 00:00:00
+----------------------------------------------------------
+
+16/25 Testing: Test_Pop_Back
+16/25 Test: Test_Pop_Back
+Command: "/Users/wax/42/ft_containers/build/v_pop_back"
+Directory: /Users/wax/42/ft_containers/build
+"Test_Pop_Back" start time: May 27 16:33 CEST
+Output:
+----------------------------------------------------------
+The elements of vector add up to 600
+The elements of myvector add up to 600
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"Test_Pop_Back" end time: May 27 16:33 CEST
+"Test_Pop_Back" time elapsed: 00:00:00
+----------------------------------------------------------
+
+17/25 Testing: Test_Back
+17/25 Test: Test_Back
+Command: "/Users/wax/42/ft_containers/build/v_back"
+Directory: /Users/wax/42/ft_containers/build
+"Test_Back" start time: May 27 16:33 CEST
+Output:
+----------------------------------------------------------
+vector contains: 10 9 8 7 6 5 4 3 2 1 0
+myvector contains: 10 9 8 7 6 5 4 3 2 1 0
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"Test_Back" end time: May 27 16:33 CEST
+"Test_Back" time elapsed: 00:00:00
+----------------------------------------------------------
+
+18/25 Testing: Test_Empty
+18/25 Test: Test_Empty
+Command: "/Users/wax/42/ft_containers/build/v_empty"
+Directory: /Users/wax/42/ft_containers/build
+"Test_Empty" start time: May 27 16:33 CEST
+Output:
+----------------------------------------------------------
+total: 55
+total: 55
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"Test_Empty" end time: May 27 16:33 CEST
+"Test_Empty" time elapsed: 00:00:00
+----------------------------------------------------------
+
+19/25 Testing: Test_Capacity
+19/25 Test: Test_Capacity
+Command: "/Users/wax/42/ft_containers/build/v_capacity"
+Directory: /Users/wax/42/ft_containers/build
+"Test_Capacity" start time: May 27 16:33 CEST
+Output:
+----------------------------------------------------------
+size: 100
+capacity: 128
+max_size: -1
+size: 100
+capacity: 128
+max_size: -1
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"Test_Capacity" end time: May 27 16:33 CEST
+"Test_Capacity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+20/25 Testing: Test_Insert
+20/25 Test: Test_Insert
+Command: "/Users/wax/42/ft_containers/build/v_insert"
+Directory: /Users/wax/42/ft_containers/build
+"Test_Insert" start time: May 27 16:33 CEST
+Output:
+----------------------------------------------------------
+myvector contains: 501 502 503 300 300 400 400 200 100 100 100
+vector contains: 501 502 503 300 300 400 400 200 100 100 100
+Output cout: 
+ 501 502 503 300 300 400 400 200 100 100 100
+ 501 502 503 300 300 400 400 200 100 100 100
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"Test_Insert" end time: May 27 16:33 CEST
+"Test_Insert" time elapsed: 00:00:00
+----------------------------------------------------------
+
+21/25 Testing: Test_Stack_empty
+21/25 Test: Test_Stack_empty
 Command: "/Users/wax/42/ft_containers/build/v_stack_empty"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Stack_empty" start time: May 26 15:12 CEST
+"Test_Stack_empty" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
 total: 55
@@ -394,15 +512,15 @@ total: 55
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"Test_Stack_empty" end time: May 26 15:12 CEST
+"Test_Stack_empty" end time: May 27 16:33 CEST
 "Test_Stack_empty" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-16/18 Testing: Test_Stack_size
-16/18 Test: Test_Stack_size
+22/25 Testing: Test_Stack_size
+22/25 Test: Test_Stack_size
 Command: "/Users/wax/42/ft_containers/build/v_stack_size"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Stack_size" start time: May 26 15:12 CEST
+"Test_Stack_size" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
 0. size: 0
@@ -424,15 +542,15 @@ Output cout:
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"Test_Stack_size" end time: May 26 15:12 CEST
+"Test_Stack_size" end time: May 27 16:33 CEST
 "Test_Stack_size" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-17/18 Testing: Test_Stack_push
-17/18 Test: Test_Stack_push
+23/25 Testing: Test_Stack_push
+23/25 Test: Test_Stack_push
 Command: "/Users/wax/42/ft_containers/build/v_stack_push"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Stack_push" start time: May 26 15:12 CEST
+"Test_Stack_push" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
 Popping out elements... 4 3 2 1 0
@@ -444,15 +562,15 @@ Output cout:
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"Test_Stack_push" end time: May 26 15:12 CEST
+"Test_Stack_push" end time: May 27 16:33 CEST
 "Test_Stack_push" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-18/18 Testing: Test_Stack_swap
-18/18 Test: Test_Stack_swap
+24/25 Testing: Test_Stack_swap
+24/25 Test: Test_Stack_swap
 Command: "/Users/wax/42/ft_containers/build/v_stack_swap"
 Directory: /Users/wax/42/ft_containers/build
-"Test_Stack_swap" start time: May 26 15:12 CEST
+"Test_Stack_swap" start time: May 27 16:33 CEST
 Output:
 ----------------------------------------------------------
 size of foo: 2
@@ -470,8 +588,30 @@ size of bar: 3
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"Test_Stack_swap" end time: May 26 15:12 CEST
+"Test_Stack_swap" end time: May 27 16:33 CEST
 "Test_Stack_swap" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: May 26 15:12 CEST
+25/25 Testing: Test_42
+25/25 Test: Test_42
+Command: "/Users/wax/42/ft_containers/build/v_42"
+Directory: /Users/wax/42/ft_containers/build
+"Test_42" start time: May 27 16:33 CEST
+Output:
+----------------------------------------------------------
+abcdefghijklmnopqrstuvwxyz
+2 sec
+abcdefghijklmnopqrstuvwxyz
+2 sec
+Output cout: 
+abcdefghijklmnopqrstuvwxyz
+abcdefghijklmnopqrstuvwxyz
+<end of output>
+Test time =   5.32 sec
+----------------------------------------------------------
+Test Passed.
+"Test_42" end time: May 27 16:33 CEST
+"Test_42" time elapsed: 00:00:05
+----------------------------------------------------------
+
+End testing: May 27 16:33 CEST

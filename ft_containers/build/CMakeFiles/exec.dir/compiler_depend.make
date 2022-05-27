@@ -417,6 +417,7 @@ CMakeFiles/exec.dir/srcs/main.cpp.o: ../srcs/main.cpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/_types/_nl_item.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__bsd_locale_defaults.h \
   ../includes/vector_iterator.hpp \
+  ../includes/rev_vector_iterator.hpp \
   ../includes/tools.hpp \
   ../includes/stack.hpp \
   ../includes/algorithm.hpp \
@@ -432,6 +433,8 @@ CMakeFiles/exec.dir/srcs/main.cpp.o: ../srcs/main.cpp \
 ../includes/algorithm.hpp:
 
 ../includes/stack.hpp:
+
+../includes/rev_vector_iterator.hpp:
 
 ../includes/vector_iterator.hpp:
 

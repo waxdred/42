@@ -322,6 +322,84 @@ v_iterator_traits/fast:
 .PHONY : v_iterator_traits/fast
 
 #=============================================================================
+# Target rules for targets named v_rev_iterator
+
+# Build rule for target.
+v_rev_iterator: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 v_rev_iterator
+.PHONY : v_rev_iterator
+
+# fast build rule for target.
+v_rev_iterator/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_rev_iterator.dir/build.make CMakeFiles/v_rev_iterator.dir/build
+.PHONY : v_rev_iterator/fast
+
+#=============================================================================
+# Target rules for targets named v_pop_back
+
+# Build rule for target.
+v_pop_back: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 v_pop_back
+.PHONY : v_pop_back
+
+# fast build rule for target.
+v_pop_back/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_pop_back.dir/build.make CMakeFiles/v_pop_back.dir/build
+.PHONY : v_pop_back/fast
+
+#=============================================================================
+# Target rules for targets named v_back
+
+# Build rule for target.
+v_back: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 v_back
+.PHONY : v_back
+
+# fast build rule for target.
+v_back/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_back.dir/build.make CMakeFiles/v_back.dir/build
+.PHONY : v_back/fast
+
+#=============================================================================
+# Target rules for targets named v_empty
+
+# Build rule for target.
+v_empty: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 v_empty
+.PHONY : v_empty
+
+# fast build rule for target.
+v_empty/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_empty.dir/build.make CMakeFiles/v_empty.dir/build
+.PHONY : v_empty/fast
+
+#=============================================================================
+# Target rules for targets named v_capacity
+
+# Build rule for target.
+v_capacity: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 v_capacity
+.PHONY : v_capacity
+
+# fast build rule for target.
+v_capacity/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_capacity.dir/build.make CMakeFiles/v_capacity.dir/build
+.PHONY : v_capacity/fast
+
+#=============================================================================
+# Target rules for targets named v_insert
+
+# Build rule for target.
+v_insert: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 v_insert
+.PHONY : v_insert
+
+# fast build rule for target.
+v_insert/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_insert.dir/build.make CMakeFiles/v_insert.dir/build
+.PHONY : v_insert/fast
+
+#=============================================================================
 # Target rules for targets named v_stack_empty
 
 # Build rule for target.
@@ -399,6 +477,19 @@ v_stack_swap/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_stack_swap.dir/build.make CMakeFiles/v_stack_swap.dir/build
 .PHONY : v_stack_swap/fast
 
+#=============================================================================
+# Target rules for targets named v_42
+
+# Build rule for target.
+v_42: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 v_42
+.PHONY : v_42
+
+# fast build rule for target.
+v_42/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_42.dir/build.make CMakeFiles/v_42.dir/build
+.PHONY : v_42/fast
+
 srcs/main.o: srcs/main.cpp.o
 .PHONY : srcs/main.o
 
@@ -422,6 +513,54 @@ srcs/main.s: srcs/main.cpp.s
 srcs/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/exec.dir/build.make CMakeFiles/exec.dir/srcs/main.cpp.s
 .PHONY : srcs/main.cpp.s
+
+test/main42.o: test/main42.cpp.o
+.PHONY : test/main42.o
+
+# target to build an object file
+test/main42.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_42.dir/build.make CMakeFiles/v_42.dir/test/main42.cpp.o
+.PHONY : test/main42.cpp.o
+
+test/main42.i: test/main42.cpp.i
+.PHONY : test/main42.i
+
+# target to preprocess a source file
+test/main42.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_42.dir/build.make CMakeFiles/v_42.dir/test/main42.cpp.i
+.PHONY : test/main42.cpp.i
+
+test/main42.s: test/main42.cpp.s
+.PHONY : test/main42.s
+
+# target to generate assembly for a file
+test/main42.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_42.dir/build.make CMakeFiles/v_42.dir/test/main42.cpp.s
+.PHONY : test/main42.cpp.s
+
+test/rev_iterator.o: test/rev_iterator.cpp.o
+.PHONY : test/rev_iterator.o
+
+# target to build an object file
+test/rev_iterator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_rev_iterator.dir/build.make CMakeFiles/v_rev_iterator.dir/test/rev_iterator.cpp.o
+.PHONY : test/rev_iterator.cpp.o
+
+test/rev_iterator.i: test/rev_iterator.cpp.i
+.PHONY : test/rev_iterator.i
+
+# target to preprocess a source file
+test/rev_iterator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_rev_iterator.dir/build.make CMakeFiles/v_rev_iterator.dir/test/rev_iterator.cpp.i
+.PHONY : test/rev_iterator.cpp.i
+
+test/rev_iterator.s: test/rev_iterator.cpp.s
+.PHONY : test/rev_iterator.s
+
+# target to generate assembly for a file
+test/rev_iterator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_rev_iterator.dir/build.make CMakeFiles/v_rev_iterator.dir/test/rev_iterator.cpp.s
+.PHONY : test/rev_iterator.cpp.s
 
 test/stack_empty.o: test/stack_empty.cpp.o
 .PHONY : test/stack_empty.o
@@ -615,6 +754,54 @@ test/vector_assign.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_assign.dir/build.make CMakeFiles/v_assign.dir/test/vector_assign.cpp.s
 .PHONY : test/vector_assign.cpp.s
 
+test/vector_back.o: test/vector_back.cpp.o
+.PHONY : test/vector_back.o
+
+# target to build an object file
+test/vector_back.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_back.dir/build.make CMakeFiles/v_back.dir/test/vector_back.cpp.o
+.PHONY : test/vector_back.cpp.o
+
+test/vector_back.i: test/vector_back.cpp.i
+.PHONY : test/vector_back.i
+
+# target to preprocess a source file
+test/vector_back.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_back.dir/build.make CMakeFiles/v_back.dir/test/vector_back.cpp.i
+.PHONY : test/vector_back.cpp.i
+
+test/vector_back.s: test/vector_back.cpp.s
+.PHONY : test/vector_back.s
+
+# target to generate assembly for a file
+test/vector_back.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_back.dir/build.make CMakeFiles/v_back.dir/test/vector_back.cpp.s
+.PHONY : test/vector_back.cpp.s
+
+test/vector_capacity.o: test/vector_capacity.cpp.o
+.PHONY : test/vector_capacity.o
+
+# target to build an object file
+test/vector_capacity.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_capacity.dir/build.make CMakeFiles/v_capacity.dir/test/vector_capacity.cpp.o
+.PHONY : test/vector_capacity.cpp.o
+
+test/vector_capacity.i: test/vector_capacity.cpp.i
+.PHONY : test/vector_capacity.i
+
+# target to preprocess a source file
+test/vector_capacity.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_capacity.dir/build.make CMakeFiles/v_capacity.dir/test/vector_capacity.cpp.i
+.PHONY : test/vector_capacity.cpp.i
+
+test/vector_capacity.s: test/vector_capacity.cpp.s
+.PHONY : test/vector_capacity.s
+
+# target to generate assembly for a file
+test/vector_capacity.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_capacity.dir/build.make CMakeFiles/v_capacity.dir/test/vector_capacity.cpp.s
+.PHONY : test/vector_capacity.cpp.s
+
 test/vector_clear.o: test/vector_clear.cpp.o
 .PHONY : test/vector_clear.o
 
@@ -638,6 +825,30 @@ test/vector_clear.s: test/vector_clear.cpp.s
 test/vector_clear.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_clear.dir/build.make CMakeFiles/v_clear.dir/test/vector_clear.cpp.s
 .PHONY : test/vector_clear.cpp.s
+
+test/vector_empty.o: test/vector_empty.cpp.o
+.PHONY : test/vector_empty.o
+
+# target to build an object file
+test/vector_empty.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_empty.dir/build.make CMakeFiles/v_empty.dir/test/vector_empty.cpp.o
+.PHONY : test/vector_empty.cpp.o
+
+test/vector_empty.i: test/vector_empty.cpp.i
+.PHONY : test/vector_empty.i
+
+# target to preprocess a source file
+test/vector_empty.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_empty.dir/build.make CMakeFiles/v_empty.dir/test/vector_empty.cpp.i
+.PHONY : test/vector_empty.cpp.i
+
+test/vector_empty.s: test/vector_empty.cpp.s
+.PHONY : test/vector_empty.s
+
+# target to generate assembly for a file
+test/vector_empty.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_empty.dir/build.make CMakeFiles/v_empty.dir/test/vector_empty.cpp.s
+.PHONY : test/vector_empty.cpp.s
 
 test/vector_enable_if.o: test/vector_enable_if.cpp.o
 .PHONY : test/vector_enable_if.o
@@ -710,6 +921,30 @@ test/vector_erase.s: test/vector_erase.cpp.s
 test/vector_erase.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_erase.dir/build.make CMakeFiles/v_erase.dir/test/vector_erase.cpp.s
 .PHONY : test/vector_erase.cpp.s
+
+test/vector_insert.o: test/vector_insert.cpp.o
+.PHONY : test/vector_insert.o
+
+# target to build an object file
+test/vector_insert.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_insert.dir/build.make CMakeFiles/v_insert.dir/test/vector_insert.cpp.o
+.PHONY : test/vector_insert.cpp.o
+
+test/vector_insert.i: test/vector_insert.cpp.i
+.PHONY : test/vector_insert.i
+
+# target to preprocess a source file
+test/vector_insert.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_insert.dir/build.make CMakeFiles/v_insert.dir/test/vector_insert.cpp.i
+.PHONY : test/vector_insert.cpp.i
+
+test/vector_insert.s: test/vector_insert.cpp.s
+.PHONY : test/vector_insert.s
+
+# target to generate assembly for a file
+test/vector_insert.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_insert.dir/build.make CMakeFiles/v_insert.dir/test/vector_insert.cpp.s
+.PHONY : test/vector_insert.cpp.s
 
 test/vector_is_integral.o: test/vector_is_integral.cpp.o
 .PHONY : test/vector_is_integral.o
@@ -831,6 +1066,30 @@ test/vector_pair.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_pair.dir/build.make CMakeFiles/v_pair.dir/test/vector_pair.cpp.s
 .PHONY : test/vector_pair.cpp.s
 
+test/vector_pop_back.o: test/vector_pop_back.cpp.o
+.PHONY : test/vector_pop_back.o
+
+# target to build an object file
+test/vector_pop_back.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_pop_back.dir/build.make CMakeFiles/v_pop_back.dir/test/vector_pop_back.cpp.o
+.PHONY : test/vector_pop_back.cpp.o
+
+test/vector_pop_back.i: test/vector_pop_back.cpp.i
+.PHONY : test/vector_pop_back.i
+
+# target to preprocess a source file
+test/vector_pop_back.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_pop_back.dir/build.make CMakeFiles/v_pop_back.dir/test/vector_pop_back.cpp.i
+.PHONY : test/vector_pop_back.cpp.i
+
+test/vector_pop_back.s: test/vector_pop_back.cpp.s
+.PHONY : test/vector_pop_back.s
+
+# target to generate assembly for a file
+test/vector_pop_back.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/v_pop_back.dir/build.make CMakeFiles/v_pop_back.dir/test/vector_pop_back.cpp.s
+.PHONY : test/vector_pop_back.cpp.s
+
 test/vector_push_back.o: test/vector_push_back.cpp.o
 .PHONY : test/vector_push_back.o
 
@@ -913,19 +1172,26 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... exec"
+	@echo "... v_42"
 	@echo "... v_access"
 	@echo "... v_assign"
+	@echo "... v_back"
+	@echo "... v_capacity"
 	@echo "... v_clear"
+	@echo "... v_empty"
 	@echo "... v_enable"
 	@echo "... v_equal"
 	@echo "... v_erase"
+	@echo "... v_insert"
 	@echo "... v_is_integral"
 	@echo "... v_iterator"
 	@echo "... v_iterator_traits"
 	@echo "... v_lex"
 	@echo "... v_pair"
+	@echo "... v_pop_back"
 	@echo "... v_push_back"
 	@echo "... v_resize"
+	@echo "... v_rev_iterator"
 	@echo "... v_stack_empty"
 	@echo "... v_stack_pop"
 	@echo "... v_stack_push"
@@ -936,6 +1202,12 @@ help:
 	@echo "... srcs/main.o"
 	@echo "... srcs/main.i"
 	@echo "... srcs/main.s"
+	@echo "... test/main42.o"
+	@echo "... test/main42.i"
+	@echo "... test/main42.s"
+	@echo "... test/rev_iterator.o"
+	@echo "... test/rev_iterator.i"
+	@echo "... test/rev_iterator.s"
 	@echo "... test/stack_empty.o"
 	@echo "... test/stack_empty.i"
 	@echo "... test/stack_empty.s"
@@ -960,9 +1232,18 @@ help:
 	@echo "... test/vector_assign.o"
 	@echo "... test/vector_assign.i"
 	@echo "... test/vector_assign.s"
+	@echo "... test/vector_back.o"
+	@echo "... test/vector_back.i"
+	@echo "... test/vector_back.s"
+	@echo "... test/vector_capacity.o"
+	@echo "... test/vector_capacity.i"
+	@echo "... test/vector_capacity.s"
 	@echo "... test/vector_clear.o"
 	@echo "... test/vector_clear.i"
 	@echo "... test/vector_clear.s"
+	@echo "... test/vector_empty.o"
+	@echo "... test/vector_empty.i"
+	@echo "... test/vector_empty.s"
 	@echo "... test/vector_enable_if.o"
 	@echo "... test/vector_enable_if.i"
 	@echo "... test/vector_enable_if.s"
@@ -972,6 +1253,9 @@ help:
 	@echo "... test/vector_erase.o"
 	@echo "... test/vector_erase.i"
 	@echo "... test/vector_erase.s"
+	@echo "... test/vector_insert.o"
+	@echo "... test/vector_insert.i"
+	@echo "... test/vector_insert.s"
 	@echo "... test/vector_is_integral.o"
 	@echo "... test/vector_is_integral.i"
 	@echo "... test/vector_is_integral.s"
@@ -987,6 +1271,9 @@ help:
 	@echo "... test/vector_pair.o"
 	@echo "... test/vector_pair.i"
 	@echo "... test/vector_pair.s"
+	@echo "... test/vector_pop_back.o"
+	@echo "... test/vector_pop_back.i"
+	@echo "... test/vector_pop_back.s"
 	@echo "... test/vector_push_back.o"
 	@echo "... test/vector_push_back.i"
 	@echo "... test/vector_push_back.s"

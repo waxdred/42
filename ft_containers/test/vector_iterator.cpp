@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 22:50:14 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/25 15:54:56 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/05/26 22:58:25 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ int main(void)
 	}
 	std::cout << "\nvector test" << std::endl;
 	for (std::vector<std::string>::iterator i = vt.begin(); i != vt.end(); i++){
+		std::cerr << *i << ' ';
+		origine << *i << ' ';
+	}
+	std::cout << "My vector test" << std::endl;
+	for (ft::iterator i = v.begin() + 2; i != v.end(); i++){
+		std::cout << *i << ' ';
+		my << *i << ' ';
+	}
+	std::cout << "\nvector test" << std::endl;
+	for (std::vector<std::string>::iterator i = vt.begin() + 2; i != vt.end(); i++){
 		std::cerr << *i << ' ';
 		origine << *i << ' ';
 	}
