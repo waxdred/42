@@ -4,14 +4,15 @@
 cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g3 -Wall -Wextra -Werror -Weffc++ -std=c++98 -Wno-deprecated")
 # name project 
-project(exec VERSION 1.0)
+project(containers VERSION 1.0)
 # SRC_FILES and add var to add_executable ${SRC_FILES}
 file(GLOB_RECURSE SRC_FILES srcs/*.cpp)
 
-add_executable(exec ${SRC_FILES})
-target_include_directories(exec PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/includes)
-target_compile_options(exec PUBLIC -g3 -Wall -Wextra -Werror -Weffc++ -std=c++98 -Wno-deprecated)
+add_executable(containers ${SRC_FILES})
+target_include_directories(containers PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/includes)
+target_compile_options(containers PUBLIC -g3 -Wall -Wextra -Werror -Weffc++ -std=c++98 -Wno-deprecated)
 
 
 # Testing file 
@@ -77,4 +78,4 @@ add_test(Test_Stack_swap v_stack_swap)
 # main 42 test
 add_executable(v_42 ./test/main42.cpp)
 
-add_test(Test_42 v_42)
+add_test(Test_42 v_42 "42")
