@@ -1,4 +1,4 @@
-version: "3"
+version: "3, 8"
 
 services:
   #==================== Nginx=====================#
@@ -16,9 +16,27 @@ services:
       - "443:443"
     restart: always
 
+  mariadb:
+    env_file:
+      - .env
+    container_name: mariadb
+    build: mariadb
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD:  ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE:       ${MYSQL_DATABASE}
+      MYSQL_PASSWORD:       ${MYSQL_PASSWORD}
+      MYSQL_USER:           ${MYSQL_USER}
+    # volumes:
+    #   - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - inception
+    restart: always
+
 
 networks:
   inception:
-#     name: inception
-#     driver: brigde
+    name: inception
     
