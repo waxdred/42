@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:buster-slim
 
 RUN apt update && apt upgrade -y && apt install nginx -y	# Update && install Nginx
 RUN apt install openssl -y						# install openssl
@@ -8,7 +8,7 @@ RUN mkdir -p docker-web/log/{error,access}.log		# Journaux pour Nginx
 RUN mkdir -p /etc/nginx/ssl				# certificats
 RUN chmod a+rw docker-web/log/* 			# Droit de lecture/ecriture pour tous le monde
 
-COPY default.conf /etc/nginx/http.d/default.conf
+COPY default.conf /etc/nginx/sites-available/default
 
 RUN openssl req\
 	-newkey rsa:4096 \
@@ -22,6 +22,6 @@ RUN openssl req\
 RUN apt install openrc -y && rc-update add nginx default
 
 
-EXPOSE 80
+EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]
