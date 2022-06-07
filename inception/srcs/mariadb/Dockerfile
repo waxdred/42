@@ -16,4 +16,4 @@ HEALTHCHECK --start-period=5m \
 ENTRYPOINT bash ./setting.sh
 
 EXPOSE 3306
-CMD ["mysqld"]
+CMD mysqld_safe --user=mysql

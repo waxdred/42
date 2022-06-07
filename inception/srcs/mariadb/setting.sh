@@ -6,5 +6,5 @@ CREATE DATABASE IF NOT EXISTS $WORDPRESS_DB_NAME;
 GRANT ALL privileges ON $WORDPRESS_DB_NAME.* TO $WORDPRESS_DB_USER@$WORDPRESS_HOST;
 EOF
 
-mysqld -u root -p$MYSQL_ROOT_PASSWORD < setting.sql
+mysqld --user=mysql --bootstrap < setting.sql
 rm setting.sql
