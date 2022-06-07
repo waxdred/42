@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    docker-compose.yml                                 :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/06/07 22:22:47 by jmilhas           #+#    #+#              #
+#    Updated: 2022/06/07 23:24:30 by jmilhas          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 version: "3,8"
 
 services:
@@ -18,15 +30,17 @@ services:
     env_file:
       - .env
     container_name: mariadb
+    hostname: mariadb
     build: mariadb
     image: mariadb
     environment:
       MYSQL_ROOT_PASSWORD:  ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE:       ${MYSQL_DATABASE}
-      MYSQL_PASSWORD:       ${MYSQL_PASSWORD}
-      MYSQL_USER:           ${MYSQL_USER}
-      # volumes:
-      #   - ${VOLPATH}/mariadb/:/var/lib/mysql/
+      WORDPRESS_HOST:       ${WORDPRESS_HOST}
+      WORDPRESS_DB_NAME:       ${WORDPRESS_DB_NAME}
+      WORDPRESS_DB_USER:       ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD:   ${WORDPRESS_DB_PASSWORD}
+    # volumes:                    
+    #   - ${VOLPATH}/mariadb:/var/lib/mysql/
     ports:
       - "3306:3306"
     networks:
@@ -34,9 +48,10 @@ services:
     restart: always
 
   workpress:
-    container_name: workpress
+    container_name: ${WORDPRESS_HOST}
     build: workpress
     image: workpress
+    hostname: ${WORDPRESS_HOST}
     networks: 
       - inception
     restart: always
@@ -44,6 +59,7 @@ services:
 
 networks:
   inception:
+    driver: bridge
 
 # volumes:
 #   volume-mariadb:
