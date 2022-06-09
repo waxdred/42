@@ -1,78 +1,89 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    docker-compose.yml                                 :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/06/07 22:22:47 by jmilhas           #+#    #+#              #
-#    Updated: 2022/06/07 23:24:30 by jmilhas          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 version: "3,8"
 
-services:
-  #==================== Nginx=====================#
-  nginx:
-    networks: 
-      - inception
-    container_name: nginx
-    build:  nginx
-    image:  nginx
-    volumes:
-      - ${VOLPATH}/workpress:/var/www/workpress/
-    ports:
-      - "443:443"
-    restart: always
-
-  mariadb:
-    env_file:
-      - .env
-    container_name: mariadb
-    hostname: mariadb
-    build: mariadb
-    image: mariadb
-    environment:
-      MYSQL_ROOT_PASSWORD:  ${MYSQL_ROOT_PASSWORD}
-      WORDPRESS_HOST:       ${WORDPRESS_HOST}
-      WORDPRESS_DB_NAME:       ${WORDPRESS_DB_NAME}
-      WORDPRESS_DB_USER:       ${WORDPRESS_DB_USER}
-      WORDPRESS_DB_PASSWORD:   ${WORDPRESS_DB_PASSWORD}
-    # volumes:                    
-    #   - ${VOLPATH}/mariadb:/var/lib/mysql/
-    ports:
-      - "3306:3306"
-    networks:
-      - inception
-    restart: always
-
-  workpress:
-    container_name: ${WORDPRESS_HOST}
-    build: workpress
-    image: workpress
-    hostname: ${WORDPRESS_HOST}
-    networks: 
-      - inception
-    restart: always
-
+volumes:
+  mariadb-volumes:
+    driver: local
+    driver_opts:
+      device: /home/jmilhas/data/database
+      type: volume  
+      o: bind
+  
+  wordpress-volumes:
+    driver: local
+    driver_opts:
+      device: /home/jmilhas/data/wordpress
+      type: volume  
+      o: bind
 
 networks:
-  inception:
-    driver: bridge
+  mariadb-network:
+  nginx-network:
+  wordpress-network:
 
-# volumes:
-#   volume-mariadb:
-#     driver: local
-#     driver_opts:
-#       type: 'none'
-#       o: 'bind'
-#       device: ${VOLPATH}/mariadb
+services:
+  nginx:
+    env_file:
+      - .env
+    container_name: nginx
+    build:
+      context: ./requirements/nginx
+      args:
+        ARG_URL: ${WP_ACCESS}
+        ARG_STUD: ${STUD}
+    image: nginx
+    volumes:
+      - wordpress-volumes:/var/www/wordpress
+    networks:
+      - nginx-network
+    ports:
+      - "443:443"
+    restart: unless-stopped
   
-#   volume-workpress:
-#     driver: local
-#     driver_opts:
-#       type: 'none'
-#       o: 'bind'
-#       device: ${VOLPATH}/workpress
-    
+  mariadb:
+    container_name: mariadb
+    env_file:
+      - .env
+    build:
+      ./requirements/mariadb
+    image: mariadb
+    volumes:
+      - ./requirements/mariadb/config/mariadb.conf:/etc/mysql/conf.d/mysql.cnf
+      - mariadb-volumes:/var/lib/mysql
+    networks:
+      - mariadb-network
+    environment:
+      - MARIADB_ROOT_PWD=${MARIADB_ROOT_PWD}
+      - MARIADB_DB=${MARIADB_DB}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PWD=${MARIADB_PWD}
+    restart: unless-stopped
+  
+  wordpress:
+    container_name: 42wordpress
+    depends_on:
+      - mariadb
+    build:
+      context: ./requirements/wordpress
+    image: 42_wordpress
+    volumes:
+      - wordpress-volumes:/var/www/wordpress
+    networks:
+      - nginx-network
+      - mariadb-network
+    environment: 
+      - WP_URL=${WP_URL}
+      - WP_DATABASE=${WP_DATABASE}
+      - WP_TITLE=${WP_TITLE}
+      - WP_ADMIN_USER=${WP_ADMIN_USER}
+      - WP_ADMIN_PWD=${WP_ADMIN_PWD}
+      - WP_ADMIN_EMAIL=${WP_ADMIN_EMAIL}
+      - WP_USER=${WP_USER}
+      - WP_USER_PWD=${WP_USER_PWD}
+      - WP_USER_EMAIL=${WP_USER_EMAIL}
+      - MARIADB_HOST=${MARIADB_HOST}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PWD=${MARIADB_PWD}
+      - MARIADB_DB=${MARIADB_DB}
+    restart: unless-stopped
+
+
