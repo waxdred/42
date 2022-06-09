@@ -24,7 +24,6 @@ define( 'DB_NAME', getenv('MARIADB_DB') );
 
 
 /** MySQL database username */
-dddefine( 'DB_USER', 'wpuser' );
 define( 'DB_USER', getenv('MARIADB_USER') );
 
 
@@ -51,7 +50,6 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
- /* https://api.wordpress.org/secret-key/1.1/salt/  for gen key */
 define('AUTH_KEY',         'r$_f[oSV-kegM8zWx|]f5Q$7q3TJF[I tF,bvmBz*h=&$*!$iw`Ni&Wj(0IgzF6S');
 define('SECURE_AUTH_KEY',  'cHCo&=ZT0+?P! Ig+`nm&,wt?gy-$gmaN=VuezcK#r^*{+03^iEHa0spuM.aLw#3');
 define('LOGGED_IN_KEY',    'YIdd%K,},zYvgK5H8mjCjxnG6RdPt7fAkI|1oann<nD&&`ck1)FLLG;QKXGNL{NL');

@@ -21,10 +21,10 @@ if [ ! -f "wp-config.php" ]; then
 		printf "MySQL is not available.\n"
 		exit 1
 	fi
-	wp core install --url="$WP_URL" --title="$WP_TITLE" --admin_user="$WP_ADMIN_USER" \
-		--admin_password="$WP_ADMIN_PWD" --admin_email="$WP_ADMIN_EMAIL" --skip-email
-	wp plugin update --all
-	wp user create $WP_USER $WP_USER_EMAIL --role=author --user_pass=$WP_USER_PWD
+wp core install --url="$WP_URL" --title="$WP_TITLE" --admin_user="$WP_ADMIN_USER" \
+	--admin_password="$WP_ADMIN_PWD" --admin_email="$WP_ADMIN_EMAIL" --skip-email
+wp plugin update --all
+wp user create $WP_USER $WP_USER_EMAIL --role=author --user_pass=$WP_USER_PWD
 fi
 
 php-fpm7 --nodaemonize
