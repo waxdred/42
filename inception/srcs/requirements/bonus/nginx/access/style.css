@@ -1,0 +1,222 @@
+*{
+    margin 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url("logo/3D_Black_Square-HD_Widescreen_Wallpaper_1366x768.jpg");
+}
+.button{
+    position: absolute;
+    display: flex;
+    transform-style: preserve-3d;
+    transform:deg(-1) skew(15deg);
+    transition: 5s;
+}
+.button li{
+    position: relative;
+    display: flex;
+    transform-style: preserve-3d;
+    color: #fff;
+    list-style: none;
+    width: 60px;
+    height: 60px;
+    margin: 0 28px;
+    box-shadow: -15px -5px 15px black, 5px 20px 15px cyan;
+    transition: 5s;
+}
+input:focus {
+  outline: none;
+}
+
+input[type=search]{
+    border: 3px solid #2a2a2a;
+    border-radius: 10px;
+    box-shadow: 10px 5px 5px cyan,;
+    width: 200px;
+    height: 30px;
+    text-align: center;
+    background-color: #CFCDCD;
+    transform: skew(5deg);
+}
+
+.recherche{
+    position: absolute;
+    top: 20%;
+    left: 40%;
+}
+
+.logo_google span{
+    position: relative;
+    color: #5c5c5c;
+    width: 30px;
+    height: 30px;
+}
+
+button[type=button_google]{
+    background-color: #333;
+    width: 60px;
+    height: 30px;
+    color: white;
+    box-shadow: 10px 5px 5px cyan,;
+}
+
+button[type=button_google]:hover{
+    background-color: #43534F;
+    width: 60px;
+    height: 30px;
+    color: black;
+    box-shadow: 10px 5px 5px #43534F;
+    transition: 2s;
+}
+
+.name{
+    position: absolute;
+    color: cyan;
+    bottom: 1%;
+    right: 2%;
+    font-size: 15px;
+    font-family: Roboto, sans-serif;
+}
+.button li:nth-child(1):hover{
+    box-shadow: -10px 0 30px #3b5999, 0 10px 30px #3b5999;
+    transition: 1s;
+}
+.button li:nth-child(2):hover{
+    box-shadow: -10px 0 30px #55acee, 0 10px 30px #55acee;
+    transition: 1s;
+}
+.button li:nth-child(3):hover{
+    box-shadow: -10px 0 30px #25D366, 0 10px 30px #25D366;
+    transition: 1s;
+}
+.button li:nth-child(4):hover{
+    box-shadow: -10px 0 30px #0077B5, 0 10px 30px #0077B5;
+    transition: 1s;
+}
+.button li:nth-child(5):hover{
+    box-shadow: -10px 0 30px #e4405f, 0 10px 30px #e4405f;
+    transition: 1s;
+}
+.button li:before{
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(#2a2a2a, cyan);
+    transform-origin: top;
+    transform: skewX(-41deg);
+}
+.button li:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -9px;
+    width: 9px;
+    height: 100%;
+    background: #2a2a2a;
+    transform-origin: right;
+    transform: skewY(-49deg);
+}
+.facebook:hover:before{
+   background: #3b5999; 
+   transition: 1s;
+}
+.facebook:hover:after{
+   background: #3b5999; 
+   transition: 1s;
+}
+.twitter:hover:before{
+   background: #55acee; 
+   transition: 1s;
+}
+.twitter:hover:after{
+   background: #55acee; 
+   transition: 1s;
+}
+.github:hover:before{
+   background: #25D366; 
+   transition: 1s;
+}
+.github:hover:after{
+   background: #25D366; 
+   transition: 1s;
+}
+.linkedin:hover:before{
+   background: #0077B5; 
+   transition: 1s;
+}
+.linkedin:hover:after{
+   background: #0077B5; 
+   transition: 1s;
+}
+.google:hover:before{
+   background: #e4405f; 
+   transition: 1s;
+}
+.google:hover:after{
+   background: #e4405f; 
+   transition: 1s;
+}
+.button li span{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    background: #333;
+    color: rgba(255,255,255,0.2);
+    font-size: 30px !important;
+}
+.button li:hover span{
+    position: absolute;
+    z-index: 1000;
+    transition: 1s;
+    color: #fff;
+    box-shadow: -1px 1px 1px rgba(0,0,0,0.05);
+}
+.button li:hover span:nth-child(5){
+    transform: translate(40px, -40px);
+    opacity: 1;
+    color: rgba(0,0,0,0.8);
+}
+.button li:hover span:nth-child(4){
+    transform: translate(30px, -30px);
+    opacity: 0.8;
+}
+.button li:hover span:nth-child(3){
+    transform: translate(20px, -20px);
+    opacity: 0.6;
+}
+.button li:hover span:nth-child(2){
+    transform: translate(10px, -10px);
+    opacity: 0.4;
+}
+.button li:hover span:nth-child(1){
+    transform: translate(0px, 0px);
+    opacity: 0.2;
+}
+.button li:nth-child(1):hover span{
+    background: #3b5999;
+}
+.button li:nth-child(2):hover span{
+    background: #55acee;
+}
+.button li:nth-child(3):hover span{
+    background: #25D366;
+}
+.button li:nth-child(4):hover span{
+    background: #0077B5;
+}
+.button li:nth-child(5):hover span{
+    background: #e4405f;
+}

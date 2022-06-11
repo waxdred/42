@@ -17,9 +17,8 @@ services:
             context: ./requirements/mariadb
             dockerfile: Dockerfile 
         networks:
-            resau:
+             inception:
         env_file: .env
-               
 
     wordpress:
         depends_on:
@@ -48,7 +47,7 @@ services:
             context: ./requirements/wordpress
             dockerfile: Dockerfile
         networks:
-            resau:
+             inception:
         env_file: .env
 
     nginx:
@@ -67,10 +66,22 @@ services:
                 ARG_URL: ${WP_ACCESS}
                 ARG_STUD: ${STUD}
         networks:
-            resau:
+             inception:
         extra_hosts:
             - "jmilhas.42.fr:127.0.0.1"
         env_file: .env
+
+    my_page:
+      image: my_page
+      restart: always
+      ports:
+        - 80:80
+      build:
+        context: ./requirements/bonus/nginx 
+        dockerfile: Dockerfile
+      networks:
+        inception:
+        
 volumes:
   mariadb-volumes:
     driver: local
@@ -88,5 +99,5 @@ volumes:
 
 
 networks:
-    resau:
+     inception:
         driver: bridge
