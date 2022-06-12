@@ -6,7 +6,7 @@
 #    By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/08 22:07:43 by jmilhas           #+#    #+#              #
-#    Updated: 2022/06/11 01:12:37 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/06/11 16:24:27 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ RUN apt install -y php7.3-fpm \
 	openssl \
 	php7.3-mysql \
 	mariadb-client \
+	redis\
+	redis-server\
 	wget \
     	curl
 

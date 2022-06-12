@@ -71,6 +71,9 @@ services:
             - "jmilhas.42.fr:127.0.0.1"
         env_file: .env
 
+###########################################
+#                 BONUS                   #
+###########################################
     my_page:
       image: my_page
       restart: always
@@ -82,6 +85,38 @@ services:
       networks:
         inception:
         
+    redis:
+      container_name: redis
+      image: redis
+      restart: always
+      depends_on:
+        - wordpress
+      ports:
+        - 6379:6379
+      build:
+        context: ./requirements/bonus/redis
+        dockerfile: Dockerfile
+      volumes:
+        - redis-volumes:/var/www/wordpress
+      networks:
+        inception:
+
+    ftp:
+      container_name: ftp
+      image: ftp
+      restart: always
+      ports:
+        - 21:21
+        - 21100-21110:21100-21110
+      build:
+        context: ./requirements/bonus/ftp
+        dockerfile: Dockerfile
+      networks:
+        inception:
+      environment:
+        - FTP_USR= ${FTP_USR}
+        - FTP_PWD= ${FTP_PWD}
+
 volumes:
   mariadb-volumes:
     driver: local
@@ -97,6 +132,12 @@ volumes:
       type: volume  
       o: bind
 
+  redis-volumes:
+    driver: local
+    driver_opts:
+      device: /home/jmilhas/data/redis
+      type: volume  
+      o: bind
 
 networks:
      inception:
