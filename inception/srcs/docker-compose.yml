@@ -105,12 +105,17 @@ services:
       container_name: ftp
       image: ftp
       restart: always
+      depends_on:
+        - wordpress
       ports:
         - 21:21
         - 21100-21110:21100-21110
       build:
         context: ./requirements/bonus/ftp
         dockerfile: Dockerfile
+        args: 
+          - FTP_USR=${FTP_USR}
+          - FTP_PWD=${FTP_PWD}
       volumes:
         - wordpress-volumes:/var/www/wordpress
       networks:
@@ -118,6 +123,34 @@ services:
       environment:
         - FTP_USR= ${FTP_USR}
         - FTP_PWD= ${FTP_PWD}
+
+    ddos:
+      container_name: ddos
+      image: ddos
+      build:
+        context: ./requirements/bonus/ddos
+        dockerfile: Dockerfile
+        args:
+          - ATTACK=${ATTACK}
+      env_file: .env
+      ports:
+        - "253:253"
+      networks:
+        inception:
+
+    adminer:
+      build:
+        context: ./requirements/bonus/adminer
+        dockerfile: Dockerfile
+      depends_on:
+        - mariadb
+      image: adminer
+      container_name: adminer
+      networks:
+        inception:
+      volumes:
+        - wordpress-volumes:/var/www/wordpress
+      restart: unless-stopped
 
 volumes:
   mariadb-volumes:
@@ -138,6 +171,13 @@ volumes:
     driver: local
     driver_opts:
       device: /home/jmilhas/data/redis
+      type: volume  
+      o: bind
+
+  adminer-volumes:
+    driver: local
+    driver_opts:
+      device: /home/jmilhas/data/adminer
       type: volume  
       o: bind
 

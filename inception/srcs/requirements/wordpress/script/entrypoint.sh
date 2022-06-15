@@ -1,6 +1,7 @@
 #!/bin/sh
 
-if  [ ! -f /var/www/wordpress/wp-config.php ]; then 
+if  [ ! -f /var/www/wordpress/wp-config.php ]
+then 
     wp core --allow-root download --locale=fr_FR --force 
     sleep 2;
 
@@ -25,8 +26,8 @@ if  [ ! -f /var/www/wordpress/wp-config.php ]; then
     sed -i "46i define( 'WP_REDIS_DATABASE', 0 );\n"            wp-config.php
     
     wp plugin install redis-cache --activate --allow-root
-    wp plugin update --all
+    wp plugin update --all	
+    wp redis enable --allow-root
 fi 
-wp redis enable --allow-root
 
 php-fpm7.3 --nodaemonize

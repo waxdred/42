@@ -1,22 +1,22 @@
 #!/bin/sh
 
-adduser $FTP_USR --disabled-password
-echo -e "${FTP_USR}\n${FTP_PWD}" > /etc/vsftpd/vsftpd.userlist
+RUN chmod 777 /var/www/wordpress
 
-chown -R ${FTP_USR}:${FTP_PWD} /var/www/wordpress
-cat << EOB
+sleep 5
+cat << EOF
 	*************************************************
 	*                                               *
-	*    Docker image: fauria/vsftpd                *
-	*    https://github.com/fauria/docker-vsftpd    *
+	*    Docker image: vsftpd                       *
 	*                                               *
 	*************************************************
-	SERVER SETTINGS
-	---------------
-	· FTP User: $FTP_USR
-	· FTP Password: $FTP_PWD
-	· Redirect vsftpd log to STDOUT: No.
-EOB
+	* SERVER SETTINGS                               *
+	* ----------------------------------------------*
+	* . Hôte:     		student.42.fr           *
+	* · FTP User: 		$FTP_USR                *
+	* · FTP Password: 	$FTP_PWD                *
+	* · Redirect vsftpd log to STDOUT: No.          *
+	*************************************************
+EOF
 
 vsftpd /etc/vsftpd/vsftpd.conf
 tail -f /dev/null
