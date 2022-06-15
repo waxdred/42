@@ -5,7 +5,6 @@ then
     	mysql_install_db
     	service mysql start
     	mysql -e "DROP DATABASE test"	
-    	mysql -e "CREATE USER '${MARIADB_USER}'@'localhost' identified by '${MARIADB_PWD}';" &&\
 	mysql -e "CREATE DATABASE wordpress;" &&\
 	mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${MARIADB_USER}'@'%' IDENTIFIED BY '${MARIADB_PWD}';" &&\
 	mysql -e "FLUSH PRIVILEGES;"
@@ -13,3 +12,4 @@ then
     	service mysql stop 
 fi
 mysqld_safe --datadir=/var/lib/mysql
+    	# mysql -e "CREATE USER '${MARIADB_USER}'@'localhost' identified by '${MARIADB_PWD}';" &&\
