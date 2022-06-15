@@ -124,20 +124,6 @@ services:
         - FTP_USR= ${FTP_USR}
         - FTP_PWD= ${FTP_PWD}
 
-    ddos:
-      container_name: ddos
-      image: ddos
-      build:
-        context: ./requirements/bonus/ddos
-        dockerfile: Dockerfile
-        args:
-          - ATTACK=${ATTACK}
-      env_file: .env
-      ports:
-        - "253:253"
-      networks:
-        inception:
-
     adminer:
       build:
         context: ./requirements/bonus/adminer
@@ -150,6 +136,21 @@ services:
         inception:
       volumes:
         - wordpress-volumes:/var/www/wordpress
+      restart: unless-stopped
+
+    gitea:
+      build:
+        context: ./requirements/bonus/gitea
+        dockerfile: Dockerfile
+      depends_on:
+         - mariadb
+      image: gitea
+      container_name: gitea
+      ports:
+        - "3000:3000"
+      volumes:
+        - gitea-volumes:/var/www/gitea
+      env_file: .env
       restart: unless-stopped
 
 volumes:
@@ -181,6 +182,12 @@ volumes:
       type: volume  
       o: bind
 
+  gitea-volumes:
+    driver: local
+    driver_opts:
+      device: /home/jmilhas/data/gitea
+      type: volume  
+      o: bind
 networks:
      inception:
         driver: bridge

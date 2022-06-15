@@ -6,7 +6,7 @@
 #    By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 20:43:43 by jmilhas           #+#    #+#              #
-#    Updated: 2022/06/15 16:54:43 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/06/16 01:20:23 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ $(NAME):
 	mkdir -p /home/jmilhas/data/wordpress 2>/dev/null
 	mkdir -p /home/jmilhas/data/redis 2>/dev/null
 	mkdir -p /home/jmilhas/data/adminer 2>/dev/null
+	mkdir -p /home/jmilhas/data/gitea 2>/dev/null
 	sed -i 's/ATTACK=1/ATTACK=0/g' ./srcs/.env
 	docker compose -v -f ./srcs/docker-compose.yml up --force-recreate --build 
 
