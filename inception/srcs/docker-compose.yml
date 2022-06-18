@@ -74,14 +74,30 @@ services:
 ###########################################
 #                 BONUS                   #
 ###########################################
+    caddy:
+        image: caddy
+        restart: always
+        ports:
+          - "8080:8080"
+        volumes:
+            - my_page-volumes:/var/www/html
+        build:
+            context: ./requirements/bonus/caddy
+            dockerfile: Dockerfile
+        networks:
+             inception:
+        env_file: .env
+
     my_page:
       image: my_page
       restart: always
-      ports:
-        - 80:80
+      volumes:
+          - my_page-volumes:/var/www/html
       build:
-        context: ./requirements/bonus/nginx 
+        context: ./requirements/bonus/my_page 
         dockerfile: Dockerfile
+      ports:
+        - 1525:1525
       networks:
         inception:
         
@@ -138,21 +154,6 @@ services:
         - wordpress-volumes:/var/www/wordpress
       restart: unless-stopped
 
-    gitea:
-      build:
-        context: ./requirements/bonus/gitea
-        dockerfile: Dockerfile
-      depends_on:
-         - mariadb
-      image: gitea
-      container_name: gitea
-      ports:
-        - "3000:3000"
-      volumes:
-        - gitea-volumes:/var/www/gitea
-      env_file: .env
-      restart: unless-stopped
-
 volumes:
   mariadb-volumes:
     driver: local
@@ -182,12 +183,13 @@ volumes:
       type: volume  
       o: bind
 
-  gitea-volumes:
+  my_page-volumes:
     driver: local
     driver_opts:
-      device: /home/jmilhas/data/gitea
+      device: /home/jmilhas/data/my_page
       type: volume  
       o: bind
+
 networks:
      inception:
         driver: bridge
