@@ -1,6 +1,9 @@
 version: '3,8'
 
 services:
+  ###############################
+  #           mariadb           #
+  ###############################
     mariadb:
         image: mariadb
         volumes:
@@ -20,6 +23,9 @@ services:
              inception:
         env_file: .env
 
+  ###############################
+  #           wordpress         #
+  ###############################
     wordpress:
         depends_on:
             - mariadb
@@ -50,6 +56,9 @@ services:
              inception:
         env_file: .env
 
+  ###############################
+  #           nginx             #
+  ###############################
     nginx:
         image: nginx
         restart: always
@@ -74,13 +83,14 @@ services:
 ###########################################
 #                 BONUS                   #
 ###########################################
+  ###############################
+  #           caddy proxy       #
+  ###############################
     caddy:
         image: caddy
         restart: always
         ports:
           - "80:80"
-        volumes:
-            - my_page-volumes:/var/www/html
         build:
             context: ./requirements/bonus/caddy
             dockerfile: Dockerfile
@@ -90,6 +100,9 @@ services:
              inception:
         env_file: .env
 
+  ###############################
+  #           my_website        #
+  ###############################
     my_page:
       image: my_page
       restart: always
@@ -103,6 +116,9 @@ services:
       networks:
         inception:
         
+  ###############################
+  #           redis             #
+  ###############################
     redis:
       container_name: redis
       image: redis
@@ -119,6 +135,9 @@ services:
       networks:
         inception:
 
+  ###############################
+  #           ftp               #
+  ###############################
     ftp:
       container_name: ftp
       image: ftp
@@ -142,6 +161,9 @@ services:
         - FTP_USR= ${FTP_USR}
         - FTP_PWD= ${FTP_PWD}
 
+  ###############################
+  #           adminer           #
+  ###############################
     adminer:
       build:
         context: ./requirements/bonus/adminer
@@ -156,6 +178,9 @@ services:
         - wordpress-volumes:/var/www/wordpress
       restart: unless-stopped
 
+###############################
+#           volume            #
+###############################
 volumes:
   mariadb-volumes:
     driver: local

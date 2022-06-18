@@ -6,7 +6,7 @@
 #    By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/08 22:07:43 by jmilhas           #+#    #+#              #
-#    Updated: 2022/06/15 11:35:50 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/06/18 13:05:24 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ COPY ./script/entrypoint.sh /
 COPY ./config/vsftpd.conf /etc/vsftpd/vsftpd.conf
 
 RUN mkdir /etc/cert
-RUN echo -e "FR\nFR\njmilhas\n42\n42\nFTP\nstudent.42.fr\n" | \
+RUN echo -e "FR\nFR\njmilhas\n42\n42\nFTP\njmilhas.42.fr\n" | \
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/cert/vsftpd.pem \
     -out /etc/cert/vsftpd.pem
 

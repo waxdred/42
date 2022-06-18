@@ -11,7 +11,7 @@ cat << EOF
 	*************************************************
 	* SERVER SETTINGS                               *
 	* ----------------------------------------------*
-	* . Hôte:     		student.42.fr           *
+	* . Hôte:     		jmilhas.42.fr           *
 	* · FTP User: 		$FTP_USR                *
 	* · FTP Password: 	$FTP_PWD                *
 	* · Redirect vsftpd log to STDOUT: No.          *
