@@ -78,12 +78,14 @@ services:
         image: caddy
         restart: always
         ports:
-          - "8080:8080"
+          - "80:80"
         volumes:
             - my_page-volumes:/var/www/html
         build:
             context: ./requirements/bonus/caddy
             dockerfile: Dockerfile
+            args:
+                PROXY_PASS: ${PROXY_PASS}
         networks:
              inception:
         env_file: .env
