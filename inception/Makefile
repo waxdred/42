@@ -6,7 +6,7 @@
 #    By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/10 20:43:43 by jmilhas           #+#    #+#              #
-#    Updated: 2022/06/18 13:08:14 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/06/21 13:51:22 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ $(NAME):
 	mkdir -p /home/jmilhas/data/my_page 2>/dev/null
 	docker compose -v -f ./srcs/docker-compose.yml up --force-recreate --build -d 
 
-clean:
+down:
 	docker compose -f ./srcs/docker-compose.yml down
 
 fclean: clean
