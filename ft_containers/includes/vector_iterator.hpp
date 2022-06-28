@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 15:47:38 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/27 13:42:39 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/06/22 22:14:23 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ namespace ft {
 		typedef value_type*		pointer;
 		typedef const value_type*	const_pointer;
 
-		private:	
+		protected:	
 		  	pointer _it;
 			
 		public:
@@ -70,6 +70,7 @@ namespace ft {
 			/* --------------------- OPERATOR OVERLOAD --------------------- */
 			reference operator*() const{ return (*_it); }
 			reference operator[](difference_type n) const{return (_it[n]);}
+			reference operator[](difference_type n) {return (_it[n]);}
 			pointer operator->() const{return(&(operator*()));}
 			pointer base() const{return (_it);}
 			iterator& operator++(void){ ++_it; return (*this); }
@@ -173,7 +174,6 @@ namespace ft {
         	    	    for (; nb > 0; --nb)
         	    	        val += mov;
         	    	}
-
 	};//class iterator
 	  //// Non-member function overload of random access iterator
 	template <class Iterator>

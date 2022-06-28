@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:08:46 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/27 16:17:07 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/06/28 03:01:17 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,11 @@
     * [x]clear:                Clear content
     * 
     * - Non-member function overloads:
-    * [ ]relational operators: Relational operators for vector
+    * [x]relational operators: Relational operators for vector
     * [x]swap:                 Exchange contents of two vectors
+    *
+    * - Allocator:
+    * [ ] get_allocator:       Get allocator
     * ------------------------------------------------------------- *
     */
 
@@ -77,8 +80,8 @@ namespace ft{
 			typedef typename Allocator::const_reference 	const_reference;
 			typedef typename Allocator::pointer 		pointer;
 			typedef typename Allocator::const_pointer 	const_pointer;
-			typedef typename ft::iterator<T>      	iterator;
-            		typedef typename ft::iterator<T>       	const_iterator;
+			typedef typename ft::iterator<T>      		iterator;
+            		typedef typename ft::iterator<T>       		const_iterator;
 			typedef typename ft::reverse_iterator<T>      	rev_iterator;
             		typedef typename ft::reverse_iterator<T>       	rev_const_iterator;
 
@@ -133,7 +136,7 @@ namespace ft{
 				: _alloc(x._alloc), _size_alloc(x._size_alloc), _capacity(x._capacity){
 				_ptr = _alloc.allocate(_capacity);
 				size_t i = 0;
-				for (iterator it = x.cbegin(); it != x.cend(); it++){
+				for (iterator it = x.begin(); it != x.end(); it++){
 					_alloc.construct(&_ptr[i], *it);
 					i++;
 				}
@@ -181,9 +184,9 @@ namespace ft{
 			 /* ------------------------------------------------------------- */
 			 /* ------------------------- ITERATORS ------------------------- */
 			 iterator	begin(void){return (iterator(_ptr));}
-			 const_iterator	cbegin(void)const {return (const_iterator(_ptr));}
+			 const_iterator	begin(void)const {return (const_iterator(_ptr));}
 			 iterator	end(void){return (iterator(_ptr + _size_alloc));}
-			 const_iterator	cend(void)const {return (const_iterator(_ptr + _size_alloc));}
+			 const_iterator	end(void)const{return (const_iterator(_ptr + _size_alloc));}
 			
 			 rev_iterator	rbegin(void){return (rev_iterator(_ptr + _size_alloc - 1));}
 			 rev_const_iterator	crbegin(void)const {return (rev_const_iterator(_ptr + _size_alloc - 1));}

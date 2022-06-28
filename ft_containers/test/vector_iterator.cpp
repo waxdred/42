@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 22:50:14 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/26 22:58:25 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/06/28 02:23:52 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,33 @@ int main(void)
 	std::string val =  "salut: ";
 	std::stringstream my;
 	std::stringstream origine;
+
+	
+
+
+	ft::vector<int> myvector;
+	myvector.push_back(10);
+	myvector.push_back(20);
+	myvector.push_back(30);
+	myvector.push_back(40);
+	myvector.push_back(50);
+	// const test
+  	std::cout << "myvector contains:";
+	*(myvector.begin()) = 100;
+
+  	for (auto it = myvector.begin(); it != myvector.end(); ++it)
+  	  	my << ' ' << *it;
+  	std::cout << '\n';
+
+	std::vector<int> vector = {10,20,30,40,50};
+	*(vector.begin()) = 100;
+
+  	std::cout << "myvector contains:";
+
+  	for (auto it = vector.begin(); it != vector.end(); ++it)
+  	  	origine << ' ' << *it;
+  	std::cout << '\n';
+	//end
 
 	std::cout <<  "Iterator empty\n" << v << std::endl;
 	for (int i = 1; i < 11; i++)
