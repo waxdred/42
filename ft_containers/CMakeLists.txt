@@ -38,6 +38,7 @@ add_executable(v_back ./test/vector_back.cpp)
 add_executable(v_empty ./test/vector_empty.cpp)
 add_executable(v_capacity ./test/vector_capacity.cpp)
 add_executable(v_insert ./test/vector_insert.cpp)
+add_executable(v_get_allocator ./test/vector_insert.cpp)
 
 add_test(Test_Vector_Erase v_erase)
 add_test(Test_Vector_Iterator v_iterator)
@@ -59,6 +60,7 @@ add_test(Test_Back v_back)
 add_test(Test_Empty v_empty)
 add_test(Test_Capacity v_capacity)
 add_test(Test_Insert v_insert)
+add_test(Test_Get_allocator v_get_allocator)
 
 # stack
 add_executable(v_stack_empty ./test/stack_empty.cpp)

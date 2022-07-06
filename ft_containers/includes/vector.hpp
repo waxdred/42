@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:08:46 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/06/28 03:01:17 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/06 15:20:07 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -440,6 +440,8 @@ namespace ft{
 				}
 				swap(*this, tmp);
 			 }
+			 allocator_type get_allocator() const{ return (_alloc);}
+
 
 			 /* ------------------------------------------------------------- */
             		 /* --------------- NON-MEMBER FUNCTION OVERLOADS --------------- */

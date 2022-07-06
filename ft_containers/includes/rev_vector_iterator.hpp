@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 14:49:26 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/27 10:00:45 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/06 15:15:41 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 * [x]operator=:            Assign content
 *
 * - Operators
-* [ ]operators:            Operators for vector_iterator
-* [ ]non-member operators: Operators for vector_iterator
+* [x]operators:            Operators for vector_iterator
+* [x]non-member operators: Operators for vector_iterator
 * ------------------------------------------------------------- *
 */
 
