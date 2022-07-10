@@ -6,12 +6,13 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:52:47 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/11 00:04:00 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/11 00:15:24 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "pair.hpp"
 #include "iterators_traits.hpp"
 #include "map_iterator.hpp"
+#include "tools.hpp"
 #include <cstddef>
 # include <iostream>
 #include <iterator>
@@ -133,7 +134,7 @@ template < class Key,                                     			// map::key_type
 		template <class InputIterator>
 		map (InputIterator first, InputIterator last,
 			const key_compare& comp = key_compare(),
-			const allocator_type& alloc = allocator_type()),
+			const allocator_type& alloc = allocator_type(),
 		        typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0) :
 				_size(0), _allocPair(alloc), _comp(comp){
 			_root = createNode(ft::pair<const key_type, mapped_type>());
