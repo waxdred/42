@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:08:46 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/06 15:20:07 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/08 20:03:36 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ namespace ft{
 
 
 		private:
-			allocator_type 	_alloc;
+			allocator_type 	_alloc; 
 			value_type	*_ptr;
 			size_type	_size_alloc;
 			size_type	_capacity;

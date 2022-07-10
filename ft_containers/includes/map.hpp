@@ -6,15 +6,18 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:52:47 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/06 15:09:06 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/11 00:04:00 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "pair.hpp"
 #include "iterators_traits.hpp"
-#include <i386/endian.h>
+#include "map_iterator.hpp"
+#include <cstddef>
 # include <iostream>
+#include <iterator>
+#include <algorithm>
 # include <memory>
-#include <utility>
+#include <ostream>
 
 /**
     * ------------------------ TODO ------------------------------- *
@@ -74,9 +77,10 @@ template < class Key,                                     			// map::key_type
             	/* ------------------------- NodeStruct ------------------------ */
 		struct  Node{
 			ft::pair<const Key, T>		content;
-			Node				*parent;
+			Node                            *parent;
 			Node				*left;
 			Node				*right;
+			long long int                   level;
 		};
 	public:
 		/* ------------------------------------------------------------- */
@@ -95,10 +99,8 @@ template < class Key,                                     			// map::key_type
 		typedef T*							pointer;
 		typedef const T*						const_pointer;
 
-		typedef mapIterator<value_type>				iterator;
-		typedef mapIterator<const const value_type>			const_iterator;
-		typedef bidir_rev_it<iterator>				reverse_iterator;
-		typedef bidir_rev_it<const_iterator>				const_reverse_iterator;
+		typedef typename ft::map_iterator<Key, T, Compare, Node, false> iterator;
+		typedef typename ft::map_iterator<Key, T, Compare, Node, true> const_iterator;
 		class value_compare
 		{   
 			friend class map;
@@ -114,68 +116,80 @@ template < class Key,                                     			// map::key_type
 			}
 		};
 
-		private:
-			Node			*_root;
-			Node 			*_last;
-			size_type		_size;
-			allocator_type		_allocPair;
-			key_compare		_comp;
-			std::allocator<Node>	_allocNode;
+	private:
+		Node			*_root;
+		size_type		_size;
+		allocator_type		_allocPair;
+		key_compare		_comp;
+		std::allocator<Node>	_allocNode;
+	public:
 
 		explicit map (const key_compare& comp = key_compare(),
 					const allocator_type& alloc = allocator_type()):
 			_size(0), _allocPair(alloc), _comp(comp){
-			_last = createNode(std::pair<const key_type, mapped_type>());
-			_root = _last;
-			_last->right = _last;
-			_last->left = _last;
+			_root = createNode(ft::pair<const key_type, mapped_type>());
 		}
+
 		template <class InputIterator>
 		map (InputIterator first, InputIterator last,
 			const key_compare& comp = key_compare(),
-			const allocator_type& alloc = allocator_type())
-		{}
+			const allocator_type& alloc = allocator_type()),
+		        typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0) :
+				_size(0), _allocPair(alloc), _comp(comp){
+			_root = createNode(ft::pair<const key_type, mapped_type>());
+               	 	for (; first != last; ++first)
+                    		insert(*first);
+		}
 		map (const map& x): _size(0),_allocPair(x._allocPair), _comp(x._comp), _allocNode(x._allocNode){
-			_last  = this->createNode(std::pair<const key_type, mapped_type>());
-			_root = _last;
-			_last->right = _last;
-			_last->left = _last;
+			_root  = this->createNode(std::pair<const key_type, mapped_type>());
 			for (const_iterator it = x.begin(); it != x.end(); ++it)
 				insert(*it);
 		}
+
 		~map() {
 			this->clear();
-			this->deallocateNode(_last);
+			/* this->deallocateNode(_last); */
 		}
+
 		map& operator= (const map& x) {
 			map tmp(x);
 
 			this->swap(tmp);
 			return *this;
 		}
-		/* iterator begin() {} */
-		/* const_iterator begin() const {} */
-		/* iterator end() {} */
-		/* const_iterator end() const {} */
+
+		/* ------------------------------------------------------------- */
+            	/* ------------------------- Iterators ------------------------- */
+		iterator begin() { return iterator(_root, _comp);}
+		const_iterator begin()const { return const_iterator(_root, _comp);}
+		iterator end() {return iterator(_root, _comp);}
+		const_iterator end()const {return const_iterator(_root, _comp);}
 		/* reverse_iterator rbegin() {} */
 		/* const_reverse_iterator rbegin() const {} */
 		/* reverse_iterator rend() {} */
 		/* const_reverse_iterator rend() const {} */
-		bool empty() const {}
-		size_type size() const {}
-		size_type max_size() const {}
-		mapped_type& operator[] (const key_type& k) {}
-		/* pair<iterator,bool> insert (const value_type& val) {} */
-		/* iterator insert (iterator position, const value_type& val) {} */
-		template <class InputIterator>
-		/* void insert (InputIterator first, InputIterator last) {} */
-		void erase (iterator position) {
+
+		/* ------------------------------------------------------------- */
+            	/* ------------------------- CAPACITY  ------------------------- */
+		bool empty() const {return this->_size == 0;}
+		size_type size() const {return(this->_size);}
+		size_type max_size() const {return (allocator_type().max_size());}
+		/* mapped_type& operator[] (const key_type& k) {} */
+		/* pair<iterator,bool> insert (const value_type& val) { */
+
+		/* } */
+		void insert (const value_type& val) {
+			this->_root = avl_insert(this->_root, val, NULL);
+			this->_size += 1;
 		}
-		size_type erase (const key_type& k) {}
-		void erase (iterator first, iterator last) {}
+		/* iterator insert (iterator position, const value_type& val) {} */
+		/* template <class InputIterator> */
+		/* void insert (InputIterator first, InputIterator last) {} */
+		/* void erase (iterator position) {} */
+		/* size_type erase (const key_type& k) {} */
+		/* void erase (iterator first, iterator last) {} */
 		void swap (map& x) {
 			swap(_root, x._root);
-			swap(_last, x._last);
 			swap(_size, x._size);
 			swap(_comp, x._comp);
 			swap(_allocPair, x._allocPair);
@@ -186,7 +200,7 @@ template < class Key,                                     			// map::key_type
 		value_compare value_comp() const {}
 		/* iterator find (const key_type& k) {} */
 		/* const_iterator find (const key_type& k) const {} */
-		size_type count (const key_type& k) const {}
+		/* size_type count (const key_type& k) const {} */
 		/* iterator lower_bound (const key_type& k) {} */
 		/* const_iterator lower_bound (const key_type& k) const {} */
 		/* iterator upper_bound (const key_type& k) {} */
@@ -206,9 +220,9 @@ template < class Key,                                     			// map::key_type
 			Node *newNode = _allocNode.allocate(1);
 
 			_allocNode.construct(&newNode->content, pair);
-			newNode->parent = 0;
-			newNode->right = 0;
-			newNode->left = 0;
+			newNode->right = NULL;
+			newNode->left = NULL;
+			newNode->level = 0;
 			return newNode;
 		}
 
@@ -218,6 +232,101 @@ template < class Key,                                     			// map::key_type
 			_allocPair.destroy(&node->content);
 			_allocPair.deallocate(node, 1);
 		}
+
+		long long int height(Node* t){
+        		return (t == NULL ? -1 : t->level);
+		}
+
+		size_t deltaHeightSize(Node *t, Node *n){
+			if (!t && n)	
+				return(n->level);
+			if (!n && t)	
+				return(t->level);
+			return (t->level - n->level);
+		}
+
+		Node *SRRotate(Node* &t){
+			Node *u = t->left;
+
+			t->left = u->right;
+			u->right = t;
+			t->level = std::max(height(t->left), height(t->right)) + 1;
+			u->level = std::max(height(u->left), u->level) + 1;
+			return (u);
+		}
+
+		Node *SLRotate(Node* &t){
+			Node *u = t->right;
+
+			t->right = u->left;
+			u->left = t;
+			t->level = std::max(height(t->left), height(t->right)) + 1;
+			u->level = std::max(height(u->left), u->level) + 1;
+			return (u);
+		}
+
+		Node* DLRotate(Node* &t){
+    		    	t->right = SRRotate(t->right);
+    		    	return (SLRotate(t));
+    		}
+
+    		Node* DRRotate(Node* &t){
+    		   	t->left = SLRotate(t->left);
+    		    	return (SRRotate(t));
+    		}
+
+		Node* findMax(Node* t){
+			if (!t)
+				return (NULL);
+			else if (!t->right)
+				return (t);
+			else
+			 return findMin(t->right);
+		}
+
+		Node* findMin(Node* t){
+			if (!t)
+				return (NULL);
+			else if (!t->right)
+				return (t);
+			else
+			 return findMax(t->right);
+		}
+
+		long long int balance(Node *t){
+			if (!t)
+				return (0);
+			else
+				return (height(t->left) - height(t->right));
+		}
+
+		Node *avl_insert(Node *t, const value_type &pair, Node *parent){
+			if (!t){
+				t = createNode(pair);
+				t->parent = parent;
+			}
+			else if (pair < t->content){
+				t->left = avl_insert(t->left, pair, t);
+				if (height(t->left) - height(t->right) == 2){
+					if (pair < t->left->content)
+						t = SRRotate(t);
+					else
+						t = DRRotate(t);
+				}
+			}
+			else if (pair > t->content){
+				t->right = avl_insert(t->right, pair, t);
+				if (height(t->right) - height(t->left) == 2){
+					if (pair > t->right->content)
+						t = SLRotate(t);
+					else
+						t = DLRotate(t);
+				}
+			}
+			t->level = std::max(height(t->left), height(t->right)) + 1;
+                        return t;
+		}
+
 		/* @Brief Swap two variable using reference*/
 		/* @Param  a*/
 		/* @Param  b*/
