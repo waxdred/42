@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 16:24:16 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/10 23:04:28 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/12 23:14:39 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ int main(void)
 	t.insert(ft::pair<char, int>('b', 1));
 	t.insert(ft::pair<char, int>('y', 4));
 	t.insert(ft::pair<char, int>('c', 2));
-	ft::map<char, int>::iterator it = t.begin();
-	std::cout << it->first << std::endl;
-	++it;
-	std::cout << it->first << std::endl;
+	t.insert(ft::pair<char, int>('e', 2));
+	t.preOrder(t.getNode());
+	/* ft::map<char, int>::iterator it = t.begin(); */
+	/* std::cout << it->first << ": " << it->second << std::endl; */
+	t.display();
+	/* ++it; */
+	/* std::cout << it->first << std::endl; */
 
 	return 0;
 }

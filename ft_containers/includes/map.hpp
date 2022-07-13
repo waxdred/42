@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:52:47 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/11 00:15:24 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/13 13:45:45 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "pair.hpp"
@@ -23,7 +23,8 @@
 /**
     * ------------------------ TODO ------------------------------- *
     * ------------------------ FT::MAP ---------------------------- *
-    *
+    * visualization AVLtree
+    * https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
     * - Coplien form:
     * [ ](constructor):        Construct vector
     * [ ](destructor):         Destruct vector
@@ -119,6 +120,7 @@ template < class Key,                                     			// map::key_type
 
 	private:
 		Node			*_root;
+		Node			*_last;
 		size_type		_size;
 		allocator_type		_allocPair;
 		key_compare		_comp;
@@ -128,7 +130,8 @@ template < class Key,                                     			// map::key_type
 		explicit map (const key_compare& comp = key_compare(),
 					const allocator_type& alloc = allocator_type()):
 			_size(0), _allocPair(alloc), _comp(comp){
-			_root = createNode(ft::pair<const key_type, mapped_type>());
+			_root = NULL;
+			_last = NULL;
 		}
 
 		template <class InputIterator>
@@ -137,12 +140,12 @@ template < class Key,                                     			// map::key_type
 			const allocator_type& alloc = allocator_type(),
 		        typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0) :
 				_size(0), _allocPair(alloc), _comp(comp){
-			_root = createNode(ft::pair<const key_type, mapped_type>());
+			_root = NULL;
+			_last = NULL;
                	 	for (; first != last; ++first)
                     		insert(*first);
 		}
 		map (const map& x): _size(0),_allocPair(x._allocPair), _comp(x._comp), _allocNode(x._allocNode){
-			_root  = this->createNode(std::pair<const key_type, mapped_type>());
 			for (const_iterator it = x.begin(); it != x.end(); ++it)
 				insert(*it);
 		}
@@ -163,8 +166,8 @@ template < class Key,                                     			// map::key_type
             	/* ------------------------- Iterators ------------------------- */
 		iterator begin() { return iterator(_root, _comp);}
 		const_iterator begin()const { return const_iterator(_root, _comp);}
-		iterator end() {return iterator(_root, _comp);}
-		const_iterator end()const {return const_iterator(_root, _comp);}
+		iterator end() {return iterator(_last, _comp);}
+		const_iterator end()const {return const_iterator(_last, _comp);}
 		/* reverse_iterator rbegin() {} */
 		/* const_reverse_iterator rbegin() const {} */
 		/* reverse_iterator rend() {} */
@@ -175,7 +178,9 @@ template < class Key,                                     			// map::key_type
 		bool empty() const {return this->_size == 0;}
 		size_type size() const {return(this->_size);}
 		size_type max_size() const {return (allocator_type().max_size());}
-		/* mapped_type& operator[] (const key_type& k) {} */
+		mapped_type& operator[] (const key_type& k) {
+
+		}
 		/* pair<iterator,bool> insert (const value_type& val) { */
 
 		/* } */
@@ -209,6 +214,42 @@ template < class Key,                                     			// map::key_type
 		/* pair<const_iterator,const_iterator> equal_range (const key_type& k) const {} */
 		/* pair<iterator,iterator>             equal_range (const key_type& k) {} */
 		allocator_type get_allocator() const {}
+		void display(){
+			if (_root->parent){
+				for (int i = 0; i < _root->level; i++){
+					std::cout << "\t";
+				}
+				std::cout << _root->content.first << ": " << _root->content.second << std::endl;
+				for (int i = 0; i < _root->level; i++){
+					std::cout << "\t";
+				}
+				std::cout << "/" << "    \\" << std::endl;
+			}
+			for (int i = 0; i < _root->level - 1; i++){
+				std::cout << "\t";
+			}
+			std::cout << _root->left->content.first << ": " << _root->left->content.second << "\t\t";
+			std::cout << _root->right->content.first << ": " << _root->right->content.second << std::endl;
+			std::cout << _root->left->left->content.first << ": " << _root->left->left->content.second << "\t";
+			for (int i = 0; i < _root->level - 1; i++){
+				std::cout << "\t";
+			}
+			std::cout << "    ";
+			std::cout << _root->right->left->content.first << ": " << _root->right->left->content.second << "\t";
+			std::cout << _root->right->right->content.first << ": " << _root->right->right->content.second << "\t";
+		}
+		Node *getNode(void){
+			return _root;
+		}
+
+		void preOrder(Node *root)
+		{
+			if (!root)
+				return;
+			preOrder(root->left);
+			std::cout << root->content.first << ": " << root->content.second << std::endl;
+			preOrder(root->right);
+		}
 		
 	private:
 		/* ------------------------------------------------------------- */
@@ -233,6 +274,7 @@ template < class Key,                                     			// map::key_type
 			_allocPair.destroy(&node->content);
 			_allocPair.deallocate(node, 1);
 		}
+
 
 		long long int height(Node* t){
         		return (t == NULL ? -1 : t->level);
@@ -282,7 +324,7 @@ template < class Key,                                     			// map::key_type
 			else if (!t->right)
 				return (t);
 			else
-			 return findMin(t->right);
+			        return findMin(t->right);
 		}
 
 		Node* findMin(Node* t){
@@ -291,7 +333,7 @@ template < class Key,                                     			// map::key_type
 			else if (!t->right)
 				return (t);
 			else
-			 return findMax(t->right);
+			        return findMax(t->right);
 		}
 
 		long long int balance(Node *t){
@@ -304,6 +346,8 @@ template < class Key,                                     			// map::key_type
 		Node *avl_insert(Node *t, const value_type &pair, Node *parent){
 			if (!t){
 				t = createNode(pair);
+				if (!_last || _last->content.first < pair.first)
+					_last = t;
 				t->parent = parent;
 			}
 			else if (pair < t->content){

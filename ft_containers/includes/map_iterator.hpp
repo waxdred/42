@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:53:10 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/11 00:02:46 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/13 14:05:26 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ namespace ft{
     	* [ ]operators:            Operators for map_iterator
     	* [ ]non-member operators: Operators for map_iterator
     	* ------------------------------------------------------------- *
+	*  https://www.cs.odu.edu/~zeil/cs361/latest/Public/treetraversal/index.html#begin-and-end-
     	*/
 
 	template <class Key, class T, class Compare, typename Node, bool B>
@@ -52,18 +53,21 @@ namespace ft{
 
 		private:
 			nodePtr		_node;
+			nodePtr		_last;
 			key_compare	_comp;
 
 		public:
-			map_iterator(nodePtr node = 0,
+			map_iterator(nodePtr node,
                         	const key_compare& comp = key_compare()) :
-                		_node(node), _comp(comp) {}
+                		_comp(comp) {
+				_node = this->findMin(node);
+				_last = this->findMax(node);
+			}
 			map_iterator(const map_iterator<Key, T, Compare, Node, false> &copy){
 				_node = copy.getNode();
 				_comp = copy.getComp();
 			}
-			~map_iterator(){
-			};
+			~map_iterator(){};
 			mapped_type &operator=(const map_iterator &assign){
 				if (this != &assign)
 				{
@@ -84,7 +88,15 @@ namespace ft{
 			reference operator->() const{return(&_node->content);}
 
 			map_iterator &operator++(){
-			}
+				Node *prev = _node;
+
+				if (_node == _last){
+					_node = _last->right;
+					return (*this);
+				}
+
+	 			_node = findnext(_node, prev);
+			};
 
 			map_iterator &operator++(int){
 			}
@@ -118,6 +130,16 @@ namespace ft{
     			    else
     			        return findMax(t->right);
     			}
+
+			Node *findNext(Node *t){
+				if (t->right != 0){
+					t = findMin(t);
+				}
+				else{
+					Node *tmp = t->parent;
+				}
+				return (t);
+			}
 
 	};// map_iterator
         
