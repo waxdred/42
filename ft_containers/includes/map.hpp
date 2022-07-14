@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:52:47 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/13 13:45:45 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/14 04:12:03 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "pair.hpp"
@@ -261,7 +261,7 @@ template < class Key,                                     			// map::key_type
 		Node *createNode(const value_type &pair){
 			Node *newNode = _allocNode.allocate(1);
 
-			_allocNode.construct(&newNode->content, pair);
+			_allocPair.construct(&newNode->content, pair);
 			newNode->right = NULL;
 			newNode->left = NULL;
 			newNode->level = 0;
@@ -291,8 +291,11 @@ template < class Key,                                     			// map::key_type
 		Node *SRRotate(Node* &t){
 			Node *u = t->left;
 
+			u->parent = t->parent;
 			t->left = u->right;
 			u->right = t;
+			u->right->parent = u;
+
 			t->level = std::max(height(t->left), height(t->right)) + 1;
 			u->level = std::max(height(u->left), u->level) + 1;
 			return (u);
@@ -301,8 +304,10 @@ template < class Key,                                     			// map::key_type
 		Node *SLRotate(Node* &t){
 			Node *u = t->right;
 
+			u->parent = t->parent;
 			t->right = u->left;
 			u->left = t;
+			u->left->parent = u;
 			t->level = std::max(height(t->left), height(t->right)) + 1;
 			u->level = std::max(height(u->left), u->level) + 1;
 			return (u);

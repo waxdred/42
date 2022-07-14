@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:53:10 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/13 14:05:26 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/14 02:45:36 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,21 @@ namespace ft{
 			reference operator->() const{return(&_node->content);}
 
 			map_iterator &operator++(){
-				Node *prev = _node;
-
-				if (_node == _last){
-					_node = _last->right;
-					return (*this);
+				Node *t;
+				if (_node->right){
+					while (_node->left) {
+						_node = _node->left;
+					}
 				}
-
-	 			_node = findnext(_node, prev);
+				else{
+					t = _node->parent;
+					while(t && _node == t->right){
+						_node = t;
+						t = t->parent;
+					}
+					_node = t;
+				}
+				return (*this);
 			};
 
 			map_iterator &operator++(int){
@@ -113,33 +120,24 @@ namespace ft{
 		private:
 			Node* findMin(Node* t)
     			{
-    			    if(t == NULL)
-    			        return NULL;
-    			    else if(t->left == NULL)
-    			        return t;
-    			    else
-    			        return findMin(t->left);
+    			    	if(t == NULL)
+    					return NULL;
+    			    	else if(t->left == NULL)
+    			        	return t;
+    			    	else
+    			        	return findMin(t->left);
     			}
     			
     			Node* findMax(Node* t)
     			{
-    			    if(t == NULL)
-    			        return NULL;
-    			    else if(t->right == NULL)
-    			        return t;
-    			    else
-    			        return findMax(t->right);
+    				if(t == NULL)
+    			    		return NULL;
+    				else if(t->right == NULL)
+    			    	    	return t;
+    				else
+    			    	    	return findMax(t->right);
     			}
 
-			Node *findNext(Node *t){
-				if (t->right != 0){
-					t = findMin(t);
-				}
-				else{
-					Node *tmp = t->parent;
-				}
-				return (t);
-			}
 
 	};// map_iterator
         
