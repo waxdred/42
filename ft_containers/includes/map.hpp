@@ -6,13 +6,14 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:52:47 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/14 04:12:03 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/15 01:01:35 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "pair.hpp"
 #include "iterators_traits.hpp"
 #include "map_iterator.hpp"
 #include "tools.hpp"
+#include "vector_iterator.hpp"
 #include <cstddef>
 # include <iostream>
 #include <iterator>
@@ -26,13 +27,13 @@
     * visualization AVLtree
     * https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
     * - Coplien form:
-    * [ ](constructor):        Construct vector
-    * [ ](destructor):         Destruct vector
-    * [ ]operator=:            Assign vector
+    * [x](constructor):        Construct vector
+    * [x](destructor):         Destruct vector
+    * [x]operator=:            Assign vector
     *
     * - Iterators:
-    * [ ]begin:                Return iterator to beginning
-    * [ ]end:                  Return iterator to end
+    * [x]begin:                Return iterator to beginning
+    * [x]end:                  Return iterator to end
     * [ ]rbegin:               Return reverse iterator to reverse beginning
     * [ ]rend:                 Return reverse iterator to reverse end
     *
@@ -42,12 +43,12 @@
     * [ ]max_size:             Return maximum size 
     *
     * - Element access:
-    * [ ]operator[]:           Access element 
+    * [x]operator[]:           Access element 
     *
     * - Modifiers:
     * [ ]insert:	       insert elements
     * [ ]erase:		       erase elements 
-    * [ ]swap:		       swap content
+    * [x]swap:		       swap content
     * [ ]clear:		       clear content 
     * 
     * - Observers:
@@ -166,8 +167,8 @@ template < class Key,                                     			// map::key_type
             	/* ------------------------- Iterators ------------------------- */
 		iterator begin() { return iterator(_root, _comp);}
 		const_iterator begin()const { return const_iterator(_root, _comp);}
-		iterator end() {return iterator(_last, _comp);}
-		const_iterator end()const {return const_iterator(_last, _comp);}
+		iterator end() {return iterator(_last->right, _comp);}
+		const_iterator end()const {return const_iterator(_last->right, _comp);}
 		/* reverse_iterator rbegin() {} */
 		/* const_reverse_iterator rbegin() const {} */
 		/* reverse_iterator rend() {} */
@@ -179,21 +180,45 @@ template < class Key,                                     			// map::key_type
 		size_type size() const {return(this->_size);}
 		size_type max_size() const {return (allocator_type().max_size());}
 		mapped_type& operator[] (const key_type& k) {
-
+			Node *t = SearchKey(_root, k);
+			if (t)
+				return (t->content.second);
+			value_type val = ft::make_pair<key_type, mapped_type>(k, mapped_type());
+			insert(val);
+			Node *ret = SearchKey(_root, k);
+			return (ret->content.second);
 		}
 		/* pair<iterator,bool> insert (const value_type& val) { */
 
 		/* } */
 		void insert (const value_type& val) {
 			this->_root = avl_insert(this->_root, val, NULL);
-			this->_size += 1;
+			this->_size++;
 		}
 		/* iterator insert (iterator position, const value_type& val) {} */
 		/* template <class InputIterator> */
 		/* void insert (InputIterator first, InputIterator last) {} */
-		/* void erase (iterator position) {} */
-		/* size_type erase (const key_type& k) {} */
-		/* void erase (iterator first, iterator last) {} */
+		void erase (iterator position) {
+			_root = remove(position.getNode());
+			--_size;
+		}
+		size_type erase (const key_type& k) {
+                         Node *todel = SearchKey(_root, k);
+			 if (!todel)
+				 return (0);
+			_root = remove(todel);
+			--_size;
+			return (1);
+
+		}
+		void erase (iterator first, iterator last) {
+			while (first != last){
+				iterator tmp(first);
+				++first;
+				erase(tmp);
+			}
+
+		}
 		void swap (map& x) {
 			swap(_root, x._root);
 			swap(_size, x._size);
@@ -214,43 +239,9 @@ template < class Key,                                     			// map::key_type
 		/* pair<const_iterator,const_iterator> equal_range (const key_type& k) const {} */
 		/* pair<iterator,iterator>             equal_range (const key_type& k) {} */
 		allocator_type get_allocator() const {}
-		void display(){
-			if (_root->parent){
-				for (int i = 0; i < _root->level; i++){
-					std::cout << "\t";
-				}
-				std::cout << _root->content.first << ": " << _root->content.second << std::endl;
-				for (int i = 0; i < _root->level; i++){
-					std::cout << "\t";
-				}
-				std::cout << "/" << "    \\" << std::endl;
-			}
-			for (int i = 0; i < _root->level - 1; i++){
-				std::cout << "\t";
-			}
-			std::cout << _root->left->content.first << ": " << _root->left->content.second << "\t\t";
-			std::cout << _root->right->content.first << ": " << _root->right->content.second << std::endl;
-			std::cout << _root->left->left->content.first << ": " << _root->left->left->content.second << "\t";
-			for (int i = 0; i < _root->level - 1; i++){
-				std::cout << "\t";
-			}
-			std::cout << "    ";
-			std::cout << _root->right->left->content.first << ": " << _root->right->left->content.second << "\t";
-			std::cout << _root->right->right->content.first << ": " << _root->right->right->content.second << "\t";
-		}
 		Node *getNode(void){
 			return _root;
 		}
-
-		void preOrder(Node *root)
-		{
-			if (!root)
-				return;
-			preOrder(root->left);
-			std::cout << root->content.first << ": " << root->content.second << std::endl;
-			preOrder(root->right);
-		}
-		
 	private:
 		/* ------------------------------------------------------------- */
             	/* ------------------------- Private Function ------------------ */
@@ -272,7 +263,8 @@ template < class Key,                                     			// map::key_type
 		/* @Param  Node *node */
 		void deallocateNode(Node *node){
 			_allocPair.destroy(&node->content);
-			_allocPair.deallocate(node, 1);
+			_allocPair.deallocate(&node->content, 1);
+			/* _allocNode.deallocate(node, 1); */
 		}
 
 
@@ -287,7 +279,11 @@ template < class Key,                                     			// map::key_type
 				return(t->level);
 			return (t->level - n->level);
 		}
-
+                //               Q                                 P              |
+                //              / \     RIGHT ROTATION            / \             |
+                //             P   C  ------------------->>>     A   Q            |
+                //            / \                                   / \           |
+                //           A   B                                 B   C          |
 		Node *SRRotate(Node* &t){
 			Node *u = t->left;
 
@@ -301,6 +297,12 @@ template < class Key,                                     			// map::key_type
 			return (u);
 		}
 
+                //
+                //               Q                                 P              |
+                //              / \          LEFT ROTATION        / \             |
+                //             P   C    <<<-------------------   A   Q            |
+                //            / \                                   / \           |
+                //           A   B                                 B   C          |
 		Node *SLRotate(Node* &t){
 			Node *u = t->right;
 
@@ -375,6 +377,56 @@ template < class Key,                                     			// map::key_type
 			}
 			t->level = std::max(height(t->left), height(t->right)) + 1;
                         return t;
+		}
+
+		Node *SearchKey(Node *t, const key_type &k){
+			while (t){
+				if (t->content.first == k)
+					return (t);
+				if (t->content.first < k)
+					t = t->right;
+				else if (t->content.first > k)
+					t = t->left;
+			}
+			return (NULL);
+		}
+
+		Node *remove(Node *t){
+			Node *tmp = t;
+
+			if (!t)
+				return (NULL);
+			else if (t->left && t->right){
+				tmp = findMin(t->right);
+				_allocPair.deallocate(&t->content, 1);
+				_allocPair.construct(&t->content, tmp->content);
+				/* t->content = tmp->content; */
+				t->parent = tmp->parent;
+				t->right = remove(t->right);
+			}else{
+				tmp = t;
+				if (!t->left)
+					t = t->right;
+				else if (!t->right)
+					t = t->left;
+				deallocateNode(tmp);
+			}
+			if (!t)
+				return (t);
+			t->level = std::max(height(t->left), height(t->right)) + 1;
+			if(height(t->left) - height(t->right) == 2){
+				if(height(t->left->left) - height(t->left->right) == 1)
+					return SLRotate(t);
+				else
+					return DLRotate(t);
+			}
+			else if(height(t->right) - height(t->left) == 2){
+				if(height(t->right->right) - height(t->right->left) == 1)
+                                        return SRRotate(t);
+				else
+                                        return DRRotate(t);
+			}
+			return (t);
 		}
 
 		/* @Brief Swap two variable using reference*/

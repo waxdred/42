@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 23:14:00 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/26 13:58:01 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/14 15:17:51 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@
 #include "../includes/pair.hpp"
 #include "../includes/iterators_traits.hpp"
 #include "../includes/stack.hpp"
+#include "../includes/map.hpp"
 #include <vector>
 #include <sstream>
 #include <iostream>
 #include <stack>
+#include <map>
 
 	
 #endif

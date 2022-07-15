@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:53:10 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/14 02:45:36 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/14 15:13:58 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "pair.hpp"
 #include <algorithm>
 #include <iterator>
+#include <stdexcept>
 namespace ft{
 	/**
     	* ------------------------------------------------------------- *
@@ -52,6 +53,7 @@ namespace ft{
 			typedef T* 					pointer;
 
 		private:
+			nodePtr		_root;
 			nodePtr		_node;
 			nodePtr		_last;
 			key_compare	_comp;
@@ -60,10 +62,12 @@ namespace ft{
 			map_iterator(nodePtr node,
                         	const key_compare& comp = key_compare()) :
                 		_comp(comp) {
+				_root = node;
 				_node = this->findMin(node);
 				_last = this->findMax(node);
 			}
 			map_iterator(const map_iterator<Key, T, Compare, Node, false> &copy){
+				_root = copy.getRoot();
 				_node = copy.getNode();
 				_comp = copy.getComp();
 			}
@@ -80,6 +84,7 @@ namespace ft{
 		/* ------------------------------------------------------------- */
         	/* -------------------------- GETTER  -------------------------- */
 			nodePtr getNode()const {return (_node);}
+			nodePtr getRoot()const {return (_root);}
 			key_compare getComp()const {return (_comp);}
 
 		/* ------------------------------------------------------------- */
@@ -89,10 +94,14 @@ namespace ft{
 
 			map_iterator &operator++(){
 				Node *t;
+				if (_node == _last){
+					_node = _last->right;
+					return (*this);
+				}
 				if (_node->right){
-					while (_node->left) {
-						_node = _node->left;
-					}
+					_node = _node->right;
+					if (_node->left)
+					         _node = findMin(_node->left);
 				}
 				else{
 					t = _node->parent;
@@ -114,8 +123,14 @@ namespace ft{
 			map_iterator &operator--(int){
 			}
 
+			/* ------------------------------------------------------------- */
+			/* --------------------- BOOL OPERATOR ------------------------- */
 			bool operator==(const map_iterator &it)const { return (it._node == _node);}
 			bool operator!=(const map_iterator &it)const { return (it._node != _node);}
+			bool operator <(const map_iterator &it)const { return (it._node > _node);}
+			bool operator >(const map_iterator &it)const { return (it._node < _node);}
+			bool operator <=(const map_iterator &it)const { return (it._node >= _node);}
+			bool operator >=(const map_iterator &it)const { return (it._node <= _node);}
 
 		private:
 			Node* findMin(Node* t)
