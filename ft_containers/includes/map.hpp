@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:52:47 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/16 03:08:36 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/16 23:03:37 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "pair.hpp"
@@ -148,7 +148,7 @@ template < class Key,                                     			// map::key_type
 			_root = NULL;
 			_last = NULL;
                	 	for (; first != last; ++first)
-                    		insert(*first);
+                    		insert(first.getNode()->content);
 		}
 
 		/* @def Constructs a container with a copy of each of the elements in x. */
@@ -160,7 +160,7 @@ template < class Key,                                     			// map::key_type
 		/* @def This destroys all container elements, and */ 
 		/* deallocates all the storage capacity allocated by the map container using its allocator. */
 		~map() {
-			this->clear();
+			/* this->clear(); */
 		}
 
 		/* @Brief Assigns new contents to the container, replacing its current content.*/
@@ -297,14 +297,18 @@ template < class Key,                                     			// map::key_type
 		/* @Return  None*/
 		pair<iterator,bool> insert (const value_type& val) {
 			Node *t = SearchKey(_root,  val.first);
-			if (t)
+			if (t){
 				return (ft::make_pair<iterator, bool>(iterator(t, _comp), false));
-			t = avl_insert(this->_root, val, NULL);
-			return (ft::make_pair<iterator, bool>(iterator(t, _comp), true));
+			}
+			_root = avl_insert(this->_root, val, NULL);
+			_size++;
+			return (ft::make_pair<iterator, bool>(iterator(_root, _comp), true));
 		}
 
 		iterator insert (iterator position, const value_type& val){
-			iterator it(avl_insert(position.getNode(), val, NULL));
+			position = NULL;
+			iterator it(_root = avl_insert(_root, val, NULL));
+			_size++;
 			return (it);
 		}
 
@@ -312,7 +316,8 @@ template < class Key,                                     			// map::key_type
  		void insert (InputIterator first, InputIterator last,
 		     typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0){
 			while(first != last){
-				insert(*first);
+				insert(first.getNode()->content);
+				_size++;
 				++first;
 			}
 

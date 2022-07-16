@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 00:20:47 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/16 01:55:49 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/16 16:41:23 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int main(void)
   	// first insert function version (single parameter):
   	map.insert ( std::pair<char,int>('a',100) );
   	map.insert ( std::pair<char,int>('z',200) );
+
   	mymap.insert ( ft::pair<char,int>('a',100) );
   	mymap.insert ( ft::pair<char,int>('z',200) );
   	
@@ -37,7 +38,7 @@ int main(void)
   	
   	if (myret.second == false) {
   	  	my << "element 'z' already existed";
-  		my << " with a value of " << ret.first->second << '\n';
+  		my << " with a value of " << myret.first->second << '\n';
   	}
   	// second insert function version (with hint position):
   	std::map<char,int>::iterator it = map.begin();
@@ -53,7 +54,7 @@ int main(void)
   	
   	ft::map<char,int> myanothermap;
   	myanothermap.insert(mymap.begin(),mymap.find('c'));
-  	// showing contents:
+  	/* // showing contents: */
   	std::cout << "map contains:\n";
   	for (it=map.begin(); it!=map.end(); ++it)
   	  	origine << it->first << " => " << it->second << '\n';
@@ -63,11 +64,13 @@ int main(void)
   	std::cout << "anothermap contains:\n";
   	for (it=anothermap.begin(); it!=anothermap.end(); ++it)
   	  	origine << it->first << " => " << it->second << '\n';
-  	for (myit=myanothermap.begin(); myit!=myanothermap.end(); ++it)
+  	for (myit=myanothermap.begin(); myit!=myanothermap.end(); ++myit)
   	  	my << myit->first << " => " << myit->second << '\n';
 
 	std::string my_vector = my.str();
 	std::string origine_vector = origine.str();
+	std::cout << "origine:\n" << origine_vector << std::endl;
+	std::cout << "my:\n" << my_vector << std::endl;
 	if (my_vector != origine_vector)
 		return (1);
 	return 0;

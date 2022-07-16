@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 09:56:50 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/25 10:49:38 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/16 13:44:31 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ namespace ft{
 			second_type	second;
 
 			pair(): first(first_type()), second(second_type()){};
+
 			pair (const first_type& a, const second_type& b): first(a), second(b){};
+
 			template<class T1, class T2>
 			pair(const pair<T1, T2> &p): first(p.first), second(p.second){};
 			pair &operator=(const pair &pr){

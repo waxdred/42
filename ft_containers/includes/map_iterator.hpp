@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:53:10 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/16 02:17:07 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/16 14:11:24 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ namespace ft{
 			key_compare	_comp;
 
 		public:
+			map_iterator(void): _root(0), _node(0), _last(0){
+			}
 			map_iterator(nodePtr node,
                         	const key_compare& comp = key_compare()) :
                 		_comp(comp) {
@@ -70,8 +72,7 @@ namespace ft{
 				_root = copy.getRoot();
 				_node = copy.getNode();
 				_comp = copy.getComp();
-				_last = copy._last;
-				_root = copy._root;
+				_last = copy.getLast();
 			}
 			~map_iterator(){};
 			map_iterator &operator=(const map_iterator &assign){
@@ -79,8 +80,8 @@ namespace ft{
 				{
 					_node = assign.getNode();
 					_comp = assign.getComp();
-					_last = assign._last;
-					_root = assign._root;
+					_last = assign.getLast();
+					_root = assign.getRoot();
 				}
 				return (*this);
 			}
@@ -89,6 +90,7 @@ namespace ft{
         	/* -------------------------- GETTER  -------------------------- */
 			nodePtr getNode()const {return (_node);}
 			nodePtr getRoot()const {return (_root);}
+			nodePtr getLast()const {return (_last);}
 			key_compare getComp()const {return (_comp);}
 
 		/* ------------------------------------------------------------- */
