@@ -79,9 +79,14 @@ add_test(Test_Stack_swap v_stack_swap)
 # map
 add_executable(v_map_begin ./test/map_begin.cpp)
 add_executable(v_map_empty_erase ./test/map_empty.cpp)
+add_executable(v_map_clear ./test/map_clear.cpp)
+add_executable(v_map_insert ./test/map_insert.cpp)
 
 add_test(Test_Map_begin v_map_begin)
 add_test(Test_Map_empty_erase v_map_empty_erase)
+add_test(Test_Map_clear v_map_clear)
+add_test(Test_Map_insert v_map_insert)
+
 # main 42 test
 add_executable(v_42 ./test/main42.cpp)
 

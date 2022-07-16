@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:53:10 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/14 15:13:58 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/16 02:17:07 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ namespace ft{
 	*  https://www.cs.odu.edu/~zeil/cs361/latest/Public/treetraversal/index.html#begin-and-end-
     	*/
 
-	template <class Key, class T, class Compare, typename Node, bool B>
+	template <class Key, class T, class Compare, typename Node>
 	class map_iterator{
 		/* ------------------------------------------------------------- */
         	/* -------------------------- ALIASES -------------------------- */
@@ -66,17 +66,21 @@ namespace ft{
 				_node = this->findMin(node);
 				_last = this->findMax(node);
 			}
-			map_iterator(const map_iterator<Key, T, Compare, Node, false> &copy){
+			map_iterator(const map_iterator<Key, T, Compare, Node> &copy){
 				_root = copy.getRoot();
 				_node = copy.getNode();
 				_comp = copy.getComp();
+				_last = copy._last;
+				_root = copy._root;
 			}
 			~map_iterator(){};
-			mapped_type &operator=(const map_iterator &assign){
+			map_iterator &operator=(const map_iterator &assign){
 				if (this != &assign)
 				{
 					_node = assign.getNode();
 					_comp = assign.getComp();
+					_last = assign._last;
+					_root = assign._root;
 				}
 				return (*this);
 			}
