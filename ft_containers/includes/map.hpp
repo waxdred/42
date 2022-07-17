@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:52:47 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/16 23:03:37 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/17 08:31:11 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "pair.hpp"
@@ -46,24 +46,24 @@
     * [x]operator[]:           Access element 
     *
     * - Modifiers:
-    * [ ]insert:	       insert elements
+    * [x]insert:	       insert elements
     * [x]erase:		       erase elements 
     * [x]swap:		       swap content
     * [x]clear:		       clear content 
     * 
     * - Observers:
-    * [ ] key_comp	       Return key comparison object
+    * [x] key_comp	       Return key comparison object
     * [ ] value_comp	       Return value comparison object
     *
     * - Operations:
     * [x]find:		       Get iterator to element
-    * [ ]count:		       Count elements with a specific key
-    * [ ]lower_bound:   Return iterator to lower bound
+    * [x]count:		       Count elements with a specific key
+    * [ ]lower_bound:          Return iterator to lower bound
     * [ ]upper_bound:  	       Return iterator to upper bound
     * [ ]equal_range: 	       Get range of equal elements
     *
     * - Allocator:
-    * [ ] get_allocator:       Get allocator
+    * [x] get_allocator:       Get allocator
     * ------------------------------------------------------------- *
     */
 
@@ -160,7 +160,14 @@ template < class Key,                                     			// map::key_type
 		/* @def This destroys all container elements, and */ 
 		/* deallocates all the storage capacity allocated by the map container using its allocator. */
 		~map() {
-			/* this->clear(); */
+			iterator begin = this->begin();
+			iterator end = this->end();
+
+			while (begin != end){
+				Node *t = begin.getNode();
+				++begin;
+				_allocNode.deallocate(t, 1);
+			}
 		}
 
 		/* @Brief Assigns new contents to the container, replacing its current content.*/
@@ -176,64 +183,24 @@ template < class Key,                                     			// map::key_type
 
 		/* ------------------------------------------------------------- */
             	/* ------------------------- Iterators ------------------------- */
-		/* @Brief Return iterator to beginning
-		 * Returns an iterator referring to the first element in the map container.
-		 * Because map containers keep their elements ordered at all times,
-		 * begin points to the element that goes first following the container's sorting criterion.
-		 * If the container is empty, the returned iterator value shall not be dereferenced.*/
+		/* @Brief Return iterator to beginning*/
 		/* @Param  None*/
-		/* @Return  An iterator to the first element in the container.
-		 * If the map object is const-qualified, 
-		 * the function returns a const_iterator. Otherwise, it returns an iterator.
-		 * Member types iterator and const_iterator are bidirectional iterator types pointing to elements 
-		 * (of type value_type).
-		 * Notice that value_type in map containers is an alias of pair<const key_type, mapped_type>.*/
+		/* @Return  An iterator to the first element in the container.*/
 		iterator begin() { return iterator(_root, _comp);}
 
-		/* @Brief Return iterator to beginning const
-		 * Returns an iterator referring to the first element in the map container.
-		 * Because map containers keep their elements ordered at all times,
-		 * begin points to the element that goes first following the container's sorting criterion.
-		 * If the container is empty, the returned iterator value shall not be dereferenced.*/
+		/* @Brief Return iterator to beginning const*/
 		/* @Param  None*/
-		/* @Return  An iterator to the first element in the container.
-		 * If the map object is const-qualified, 
-		 * the function returns a const_iterator. Otherwise, it returns an iterator.
-		 * Member types iterator and const_iterator are bidirectional iterator types pointing to elements 
-		 * (of type value_type).
-		 * Notice that value_type in map containers is an alias of pair<const key_type, mapped_type>.*/
+		/* @Return  An iterator to the first element in the container.*/
 		const_iterator begin()const { return const_iterator(_root, _comp);}
 
-		/* @Brief Return iterator to end 
-		 * Returns an iterator referring to the past-the-end element in the map container. 
-		 * The past-the-end element is the theoretical element that would follow the last element 
-		 * in the map container. It does not point to any element, and thus shall not be dereferenced. 
-		 * Because the ranges used by functions of the standard library do not include 
-		 * the element pointed by their closing iterator, 
-		 * this function is often used in combination with 
-		 * map::begin to specify a range including all the elements in the container.
-		 * If the container is empty, this function returns the same as map::begin.*/
+		/* @Brief Return iterator to end*/ 
 		/* @Param  None*/
-		/* @Return  An iterator to the past-the-end element in the container.
-		 * If the map object is const-qualified, 
-		 * the function returns a const_iterator. Otherwise, it returns an iterator.
-		 * Member types iterator and const_iterator are bidirectional iterator types pointing to elements.*/
+		/* @Return  An iterator to the past-the-end element in the container.*/
 		iterator end() {return iterator(_last->right, _comp);}
 
-		/* @Brief Return iterator to end const 
-		 * Returns an iterator referring to the past-the-end element in the map container. 
-		 * The past-the-end element is the theoretical element that would follow the last element 
-		 * in the map container. It does not point to any element, and thus shall not be dereferenced. 
-		 * Because the ranges used by functions of the standard library do not include 
-		 * the element pointed by their closing iterator, 
-		 * this function is often used in combination with 
-		 * map::begin to specify a range including all the elements in the container.
-		 * If the container is empty, this function returns the same as map::begin.*/
+		/* @Brief Return iterator to end const*/ 
 		/* @Param  None*/
-		/* @Return  An iterator to the past-the-end element in the container.
-		 * If the map object is const-qualified, 
-		 * the function returns a const_iterator. Otherwise, it returns an iterator.
-		 * Member types iterator and const_iterator are bidirectional iterator types pointing to elements.*/
+		/* @Return  An iterator to the past-the-end element in the container.*/
 		const_iterator end()const {return const_iterator(_last->right, _comp);}
 
 		/* reverse_iterator rbegin() {} */
@@ -257,30 +224,14 @@ template < class Key,                                     			// map::key_type
 		 * Member type size_type is an unsigned integral type.*/
 		size_type size() const {return(this->_size);}
 
-		/* @Brief Return maximum size  
-		 * Returns the maximum number of elements that the map container can hold. 
-		 * This is the maximum potential size the container can reach due to known system or library 
-		 * implementation limitations, but the container is by no means guaranteed to be able to reach that size: 
-		 * it can still fail to allocate storage at any point before that size is reached.*/
+		/* @Brief Return maximum size */ 
 		/* @Param  none*/
-		/* @Return  The maximum number of elements a map container can hold as content.
-		 * Member type size_type is an unsigned integral type.*/
+		/* @Return  The maximum number of elements a map container can hold as content*/
 		size_type max_size() const {return (allocator_type().max_size());}
 
-		/* @Brief If k matches the key of an element in the container, 
-		 * the function returns a reference to its mapped value.
-		 * If k does not match the key of any element in the container, 
-		 * the function inserts a new element with that key and returns a reference to its mapped value. 
-		 * Notice that this always increases the container size by one, 
-		 * even if no mapped value is assigned to the element (the element is constructed using its default constructor).
-		 * A similar member function, map::at, has the same behavior when an element with the key exists,
-		 * but throws an exception when it does not.
-		 * A call to this function is equivalent to:
-		 * (*((this->insert(make_pair(k,mapped_type()))).first)).second*/
+		/* @Brief If k matches the key of an element in the container*/ 
 		/* @Param  const key_type &k*/
-		/* @Return  A reference to the mapped value of the element with a key value equivalent to k.
-		 * Member type mapped_type is the type of the mapped values in the container, 
-		 * defined in map as an alias of its second template parameter (T)*/
+		/* @Return  A reference to the mapped value of the element with a key value equivalent to k*/
 		mapped_type& operator[] (const key_type& k) {
 			Node *t = SearchKey(_root, k);
 			if (t)
@@ -294,7 +245,7 @@ template < class Key,                                     			// map::key_type
 
 		/* @Brief Extends the container by inserting new elements*/
 		/* @Param  const value_type &val*/
-		/* @Return  None*/
+		/* @Return  Pair<iterator, bool>*/
 		pair<iterator,bool> insert (const value_type& val) {
 			Node *t = SearchKey(_root,  val.first);
 			if (t){
@@ -305,6 +256,9 @@ template < class Key,                                     			// map::key_type
 			return (ft::make_pair<iterator, bool>(iterator(_root, _comp), true));
 		}
 
+		/* @Brief Extends the container by inserting new elements*/
+		/* @Param  const value_type &val*/
+		/* @Return  iterator*/
 		iterator insert (iterator position, const value_type& val){
 			position = NULL;
 			iterator it(_root = avl_insert(_root, val, NULL));
@@ -312,6 +266,9 @@ template < class Key,                                     			// map::key_type
 			return (it);
 		}
 
+		/* @Brief Extends the container by inserting new elements*/
+		/* @Param  const value_type &val*/
+		/* @Return  None*/
 		template <class InputIterator>
  		void insert (InputIterator first, InputIterator last,
 		     typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0){
@@ -322,11 +279,18 @@ template < class Key,                                     			// map::key_type
 			}
 
 		}
+		/* @Brief Removes from the map container either a single element or a range of elements*/
+		/* @Param  iterator*/
+		/* @Return  None*/
 		void erase (iterator position) {
 			Node *t = position.getNode();
 			_root = remove(_root, t->content);
 			--_size;
 		}
+
+		/* @Brief Removes from the map container either a single element or a range of elements*/
+		/* @Param  key_type &k*/
+		/* @Return  size_t / bool*/
 		size_type erase (const key_type& k) {
                          Node *todel = SearchKey(_root, k);
 			 if (!todel)
@@ -336,6 +300,11 @@ template < class Key,                                     			// map::key_type
 			return (1);
 
 		}
+
+		/* @Brief Removes from the map container either a single element or a range of elements*/
+		/* @Param  iterator first*/
+		/* @Param1  iterator end*/
+		/* @Return  None*/
 		void erase (iterator first, iterator last) {
 			while (first != last){
 				iterator tmp(first);
@@ -344,6 +313,10 @@ template < class Key,                                     			// map::key_type
 			}
 
 		}
+
+		/* @Brief Exchanges the content of the container*/
+		/* @Param  map*/
+		/* @Return  None*/
 		void swap (map& x) {
 			swap(_root, x._root);
 			swap(_size, x._size);
@@ -351,23 +324,53 @@ template < class Key,                                     			// map::key_type
 			swap(_allocPair, x._allocPair);
 			swap(_allocNode, x._allocNode);
 		}
+
+		/* @Brief Removes all elements from the map container*/
+		/* @Param  Void*/
+		/* @Return  None*/
 		void clear(void) {
 			this->erase(this->begin(), this->end());
 		}
+
 		key_compare key_comp() const {}
-		value_compare value_comp() const {}
+		/* @Brief Returns a copy of the comparison object used by the container to compare keys.*/
+		/* @Param  void*/
+		/* @Return  the comparison object*/
+		value_compare value_comp() const { return (this->_comp);}
+
+		/* @Brief Search the key in the tree*/
+		/* @Param  const key_type &k*/
+		/* @Return  iterator*/
 		iterator find (const key_type& k) {
 			return (iterator(SearchKey(_root, k)));
 		}
-		/* const_iterator find (const key_type& k) const {} */
-		/* size_type count (const key_type& k) const {} */
+
+		/* @Brief Search the key in the tree*/
+		/* @Param  const key_type &k*/
+		/* @Return  const_iterator*/
+		const_iterator find (const key_type& k)const {
+			return (iterator(SearchKey(_root, k)));
+		}
+
+		/* @Brief  Searches key in the tree and returns the element if it finds key.*/
+		/* @Param  const key_type &k*/
+		/* @Return  bool*/
+		size_type count (const key_type& k) const {
+			Node *t = SearchKey(_root, k);
+			return (t ? true : false);
+		}
 		/* iterator lower_bound (const key_type& k) {} */
 		/* const_iterator lower_bound (const key_type& k) const {} */
 		/* iterator upper_bound (const key_type& k) {} */
 		/* const_iterator upper_bound (const key_type& k) const {} */
 		/* pair<const_iterator,const_iterator> equal_range (const key_type& k) const {} */
 		/* pair<iterator,iterator>             equal_range (const key_type& k) {} */
-		allocator_type get_allocator() const {}
+
+		/* @Brief get copy of allocator type*/
+		/* @Param  void*/
+		/* @Return  _allocPair*/
+		allocator_type get_allocator(void) const {return(this->_allocPair);}
+		
 		Node *getNode(void){
 			return _root;
 		}
@@ -375,6 +378,7 @@ template < class Key,                                     			// map::key_type
 	private:
 		/* ------------------------------------------------------------- */
             	/* ------------------------- Private Function ------------------ */
+
 		/* @Brief Create new node and assign pair.*/
 		/* set pointer left right at NULL */
 		/* @Param  value_type &pair*/
@@ -394,14 +398,19 @@ template < class Key,                                     			// map::key_type
 		void deallocateNode(Node *node){
 			_allocPair.destroy(&node->content);
 			_allocPair.deallocate(&node->content, 1);
-			/* _allocNode.deallocate(node, 1); */
 		}
 
-
+		/* @Brief check the level of the node*/
+		/* @Param  Node *t*/
+		/* @Return  new level*/
 		long long int height(Node* t){
         		return (t == NULL ? -1 : t->level);
 		}
-
+		
+		/* @Brief get delta height of 2 nodes*/
+		/* @Param  Node *t*/
+		/* @Param1  Node *n*/
+		/* @Return  size_t t->level - n->level*/
 		size_t deltaHeightSize(Node *t, Node *n){
 			if (!t && n)	
 				return(n->level);
@@ -409,11 +418,14 @@ template < class Key,                                     			// map::key_type
 				return(t->level);
 			return (t->level - n->level);
 		}
-                //               Q                                 P              |
-                //              / \     RIGHT ROTATION            / \             |
-                //             P   C  ------------------->>>     A   Q            |
-                //            / \                                   / \           |
-                //           A   B                                 B   C          |
+
+		/* @Brief rotation of the node right*/
+		/*      	  Q                                 P     */     
+ 		/*               / \          RIGHT ROTATION       / \    */    
+ 		/*              P   C    ------------------->>>   A   Q   */   
+ 		/*             / \                                   / \  */  
+ 		/*            A   B                                 B   C */ 
+		/* @Param  Node* &t*/
 		Node *SRRotate(Node* &t){
 			Node *u = t->left;
 
@@ -427,12 +439,14 @@ template < class Key,                                     			// map::key_type
 			return (u);
 		}
 
-                //
-                //               Q                                 P              |
-                //              / \          LEFT ROTATION        / \             |
-                //             P   C    <<<-------------------   A   Q            |
-                //            / \                                   / \           |
-                //           A   B                                 B   C          |
+		/* @Brief rotation of the node left*/
+		/*      	  Q                                 P     */     
+ 		/*               / \          LEFT ROTATION        / \    */    
+ 		/*              P   C    <<<-------------------   A   Q   */   
+ 		/*             / \                                   / \  */  
+ 		/*            A   B                                 B   C */ 
+		/* @Param  Node* &t*/
+		/* @Return  Node**/
 		Node *SLRotate(Node* &t){
 			Node *u = t->right;
 
@@ -445,16 +459,25 @@ template < class Key,                                     			// map::key_type
 			return (u);
 		}
 
+		/* @Brief Make double rotation left*/
+		/* @Param  Node *t */
+		/* @Return  Node*/
 		Node* DLRotate(Node* &t){
     		    	t->right = SRRotate(t->right);
     		    	return (SLRotate(t));
     		}
 
+		/* @Brief Make double rotation right*/
+		/* @Param  Node *t */
+		/* @Return  Node*/
     		Node* DRRotate(Node* &t){
     		   	t->left = SLRotate(t->left);
     		    	return (SRRotate(t));
     		}
 
+		/* @Brief Search the max key in the tree*/
+		/* @Param  Node *t*/
+		/* @Return  NodeFound / NULL*/
 		Node* findMax(Node* t){
 			if (!t)
 				return (NULL);
@@ -464,10 +487,10 @@ template < class Key,                                     			// map::key_type
 			        return findMin(t->right);
 		}
 
+		/* @Brief Search the min key in the tree*/
+		/* @Param  Node *t*/
+		/* @Return  NodeFound / NULL*/
 		Node* findMin(Node* t){
-		/* @Brief Extends the container by inserting new elements*/
-		/* @Param  const value_type &val*/
-		/* @Return  None*/
 			if (!t)
 				return (NULL);
 			else if (!t->right)
@@ -476,13 +499,11 @@ template < class Key,                                     			// map::key_type
 			        return findMax(t->right);
 		}
 
-		long long int balance(Node *t){
-			if (!t)
-				return (0);
-			else
-				return (height(t->left) - height(t->right));
-		}
-
+		/* @Brief insert in avl tree*/
+		/* @Param  Node *t*/
+		/* @Param1  const key_type &t*/
+		/* @Param2  Node parent*/
+		/* @Return  Node*/
 		Node *avl_insert(Node *t, const value_type &pair, Node *parent){
 			if (!t){
 				t = createNode(pair);
@@ -511,8 +532,12 @@ template < class Key,                                     			// map::key_type
 			t->level = std::max(height(t->left), height(t->right)) + 1;
                         return t;
 		}
-
-		Node *SearchKey(Node *t, const key_type &k){
+		
+		/* @Brief Search the key_type in the tree*/
+		/* @Param  Node *t*/
+		/* @Param1  const key_type &t*/
+		/* @Return  Node / NULL*/
+		Node *SearchKey(Node *t, const key_type &k) const{
 			while (t){
 				if (t->content.first == k)
 					return (t);
@@ -524,6 +549,10 @@ template < class Key,                                     			// map::key_type
 			return (NULL);
 		}
 
+		/* @Brief Remove Node in the tree*/
+		/* @Param  Node *t*/
+		/* @Param1  const key_type &t*/
+		/* @Return  Node*/
 		Node *remove(Node *t, value_type const &pair){
 			Node *tmp = t;
 
@@ -577,7 +606,4 @@ template < class Key,                                     			// map::key_type
 		}
 
 };
-
-
-
 } // namespace ft
