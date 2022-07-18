@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 07:34:41 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/17 07:39:32 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/17 23:32:11 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,15 @@ int main(void)
   	ft::map<char,int>::iterator it = mymap.begin();
   	std::map<char,int>::iterator its = map.begin();
   	do {
-  	  std::cout << it->first << " => " << it->second << '\n';
-  	} while ( mycomp((*it++).first, highest) );
+  	  my << it->first << " => " << it->second << '\n';
+	  it++;
+  	} while ( mycomp(it->first, highest) );
   	
+  	std::cout << "mymap contains:\n";
   	do {
-  	  std::cout << its->first << " => " << its->second << '\n';
-  	} while ( comp((*its++).first, highests) );
+  	  origine << its->first << " => " << its->second << '\n';
+	  ++its;
+  	} while ( comp(its->first, highests) );
   	std::cout << '\n';
 	std::string my_vector = my.str();
 	std::string origine_vector = origine.str();

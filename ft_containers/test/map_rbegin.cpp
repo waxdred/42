@@ -1,47 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_empty.cpp                                      :+:      :+:    :+:   */
+/*   map_rbegin.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 23:38:53 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/18 11:36:53 by jmilhas          ###   ########.fr       */
+/*   Created: 2022/07/18 00:23:07 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/07/18 00:47:27 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "header.hpp"
-#include <utility>
 
 int main(void)
 {
 	std::stringstream my;
 	std::stringstream origine;
+	
 	std::map<char,int> map;
 	ft::map<char,int> mymap;
 
-  	map['a']=10;
-  	map['b']=20;
-  	map['c']=30;
-
-  	mymap['a']=10;
-  	mymap['b']=20;
-  	mymap['c']=30;
-  	while (!mymap.empty())
-  	{
-  	  	my << mymap.begin()->first << " => " << mymap.begin()->second << '\n';
-  	  	mymap.erase(mymap.begin());
-  	}
-  	while (!map.empty())
-  	{
-  	  	origine << map.begin()->first << " => " << map.begin()->second << '\n';
-  	  	map.erase(map.begin());
-  	}
+  	map['x'] = 100;
+  	map['y'] = 200;
+  	map['z'] = 300;
+  	mymap['x'] = 100;
+  	mymap['y'] = 200;
+  	mymap['z'] = 300;
+  	
+  	// show content:
+  	std::map<char,int>::reverse_iterator rit;
+  	for (rit=map.rbegin(); rit!=map.rend(); ++rit)
+  	  	origine << rit->first << " => " << rit->second << '\n';
+  	ft::map<char,int>::reverse_iterator myrit;
+  	for (myrit=mymap.rbegin(); myrit!=mymap.rend(); ++myrit)
+  	  	my << myrit->first << " => " << myrit->second << '\n';
 	std::string my_vector = my.str();
 	std::string origine_vector = origine.str();
 	std::cout << "Output cout: " << std::endl;
 	std::cout << my_vector << std::endl;
-	std::cout << "Output cout: " << std::endl;
 	std::cout << origine_vector << std::endl;
 
 	if (my_vector != origine_vector)

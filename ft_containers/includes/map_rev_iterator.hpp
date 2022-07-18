@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_iterator.hpp                                   :+:      :+:    :+:   */
+/*   map_rev_iterator.hpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 21:53:10 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/17 09:10:32 by jmilhas          ###   ########.fr       */
+/*   Created: 2022/07/17 09:17:02 by jmilhas           #+#    #+#             */
+/*   Updated: 2022/07/17 09:20:31 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_ITERATOR
-#define MAP_ITERATOR 
+#ifndef MAP_REV_ITERATOR
+#define MAP_REV_ITERATOR 
 
 #include "pair.hpp"
 #include <algorithm>
@@ -35,7 +35,7 @@ namespace ft{
     	*/
 
 	template <class Key, class T, class Compare, typename Node>
-	class map_iterator{
+	class map_rev_iterator{
 		/* ------------------------------------------------------------- */
         	/* -------------------------- ALIASES -------------------------- */
 		public:
@@ -59,23 +59,23 @@ namespace ft{
 			key_compare	_comp;
 
 		public:
-			map_iterator(void): _root(0), _node(0), _last(0){
+			map_rev_iterator(void): _root(0), _node(0), _last(0){
 			}
-			map_iterator(nodePtr node,
+			map_rev_iterator(nodePtr node,
                         	const key_compare& comp = key_compare()) :
                 		_comp(comp) {
 				_root = node;
-				_node = this->findMin(node);
-				_last = this->findMax(node);
+				_node = this->findMax(node);
+				_last = this->findMin(node);
 			}
-			map_iterator(const map_iterator<Key, T, Compare, Node> &copy){
+			map_rev_iterator(const map_rev_iterator<Key, T, Compare, Node> &copy){
 				_root = copy.getRoot();
 				_node = copy.getNode();
 				_comp = copy.getComp();
 				_last = copy.getLast();
 			}
-			~map_iterator(){};
-			map_iterator &operator=(const map_iterator &assign){
+			~map_rev_iterator(){};
+			map_rev_iterator &operator=(const map_rev_iterator &assign){
 				if (this != &assign)
 				{
 					_node = assign.getNode();
@@ -98,20 +98,20 @@ namespace ft{
 			reference operator*() const{return(_node->content);}
 			reference operator->() const{return(&_node->content);}
 
-			map_iterator &operator++(){
+			map_rev_iterator &operator++(){
 				Node *t;
 				if (_node == _last){
-					_node = _last->right;
+					_node = _last->left;
 					return (*this);
 				}
-				if (_node->right){
-					_node = _node->right;
-					if (_node->left)
-					         _node = findMin(_node->left);
+				if (_node->left){
+					_node = _node->left;
+					if (_node->right)
+					         _node = findMax(_node->left);
 				}
 				else{
 					t = _node->parent;
-					while(t && _node == t->right){
+					while(t && _node == t->left){
 						_node = t;
 						t = t->parent;
 					}
@@ -120,7 +120,29 @@ namespace ft{
 				return (*this);
 			};
 
-			map_iterator &operator++(int){
+			map_rev_iterator &operator++(int){
+				Node *t;
+				if (_node == _last){
+					_node = _last->left;
+					return (*this);
+				}
+				if (_node->left){
+					_node = _node->left;
+					if (_node->right)
+					         _node = findMax(_node->left);
+				}
+				else{
+					t = _node->parent;
+					while(t && _node == t->left){
+						_node = t;
+						t = t->parent;
+					}
+					_node = t;
+				}
+				return (*this);
+			}
+
+			map_rev_iterator &operator--(){
 				Node *t;
 				if (_node == _last){
 					_node = _last->right;
@@ -142,42 +164,20 @@ namespace ft{
 				return (*this);
 			}
 
-			map_iterator &operator--(){
+			map_rev_iterator &operator--(int){
 				Node *t;
 				if (_node == _last){
-					_node = _last->left;
+					_node = _last->right;
 					return (*this);
 				}
-				if (_node->left){
-					_node = _node->left;
-					if (_node->right)
-					         _node = findMax(_node->left);
+				if (_node->right){
+					_node = _node->right;
+					if (_node->left)
+					         _node = findMin(_node->left);
 				}
 				else{
 					t = _node->parent;
-					while(t && _node == t->left){
-						_node = t;
-						t = t->parent;
-					}
-					_node = t;
-				}
-				return (*this);
-			}
-
-			map_iterator &operator--(int){
-				Node *t;
-				if (_node == _last){
-					_node = _last->left;
-					return (*this);
-				}
-				if (_node->left){
-					_node = _node->left;
-					if (_node->right)
-					         _node = findMax(_node->left);
-				}
-				else{
-					t = _node->parent;
-					while(t && _node == t->left){
+					while(t && _node == t->right){
 						_node = t;
 						t = t->parent;
 					}
@@ -188,12 +188,12 @@ namespace ft{
 
 			/* ------------------------------------------------------------- */
 			/* --------------------- BOOL OPERATOR ------------------------- */
-			bool operator==(const map_iterator &it)const { return (it._node == _node);}
-			bool operator!=(const map_iterator &it)const { return (it._node != _node);}
-			bool operator <(const map_iterator &it)const { return (it._node > _node);}
-			bool operator >(const map_iterator &it)const { return (it._node < _node);}
-			bool operator <=(const map_iterator &it)const { return (it._node >= _node);}
-			bool operator >=(const map_iterator &it)const { return (it._node <= _node);}
+			bool operator==(const map_rev_iterator &it)const { return (it._node == _node);}
+			bool operator!=(const map_rev_iterator &it)const { return (it._node != _node);}
+			bool operator <(const map_rev_iterator &it)const { return (it._node > _node);}
+			bool operator >(const map_rev_iterator &it)const { return (it._node < _node);}
+			bool operator <=(const map_rev_iterator &it)const { return (it._node >= _node);}
+			bool operator >=(const map_rev_iterator &it)const { return (it._node <= _node);}
 
 		private:
 			Node* findMin(Node* t)
@@ -217,7 +217,8 @@ namespace ft{
     			}
 
 
-	};// map_iterator
+	};// map_rev_iterator
         
 }//namespace
 #endif /* ifndef MAP_ITERATOR */
+

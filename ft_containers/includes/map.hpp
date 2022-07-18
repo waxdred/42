@@ -6,12 +6,13 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:52:47 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/17 08:31:11 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/18 11:48:28 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "pair.hpp"
 #include "iterators_traits.hpp"
 #include "map_iterator.hpp"
+#include "map_rev_iterator.hpp"
 #include "tools.hpp"
 #include "vector_iterator.hpp"
 #include <cstddef>
@@ -34,8 +35,8 @@
     * - Iterators:
     * [x]begin:                Return iterator to beginning
     * [x]end:                  Return iterator to end
-    * [ ]rbegin:               Return reverse iterator to reverse beginning
-    * [ ]rend:                 Return reverse iterator to reverse end
+    * [x]rbegin:               Return reverse iterator to reverse beginning
+    * [x]rend:                 Return reverse iterator to reverse end
     *
     * - Capacity:
     * [x]empty:                Test whether container is empty 
@@ -53,14 +54,14 @@
     * 
     * - Observers:
     * [x] key_comp	       Return key comparison object
-    * [ ] value_comp	       Return value comparison object
+    * [x] value_comp	       Return value comparison object
     *
     * - Operations:
     * [x]find:		       Get iterator to element
     * [x]count:		       Count elements with a specific key
-    * [ ]lower_bound:          Return iterator to lower bound
-    * [ ]upper_bound:  	       Return iterator to upper bound
-    * [ ]equal_range: 	       Get range of equal elements
+    * [x]lower_bound:          Return iterator to lower bound
+    * [x]upper_bound:  	       Return iterator to upper bound
+    * [x]equal_range: 	       Get range of equal elements
     *
     * - Allocator:
     * [x] get_allocator:       Get allocator
@@ -104,6 +105,9 @@ template < class Key,                                     			// map::key_type
 
 		typedef typename ft::map_iterator<Key, T, Compare, Node> iterator;
 		typedef typename ft::map_iterator<Key, T, Compare, Node> const_iterator;
+		typedef typename ft::map_rev_iterator<Key, T, Compare, Node> reverse_iterator;
+		typedef typename ft::map_rev_iterator<Key, T, Compare, Node> const_reverse_iterator;
+
 		class value_compare
 		{   
 			friend class map;
@@ -126,6 +130,7 @@ template < class Key,                                     			// map::key_type
 		allocator_type		_allocPair;
 		key_compare		_comp;
 		std::allocator<Node>	_allocNode;
+
 	public:
 
 		/* @def empty container constructor (default constructor) */
@@ -203,25 +208,21 @@ template < class Key,                                     			// map::key_type
 		/* @Return  An iterator to the past-the-end element in the container.*/
 		const_iterator end()const {return const_iterator(_last->right, _comp);}
 
-		/* reverse_iterator rbegin() {} */
-		/* const_reverse_iterator rbegin() const {} */
-		/* reverse_iterator rend() {} */
-		/* const_reverse_iterator rend() const {} */
+		reverse_iterator rbegin() {return reverse_iterator(_root, _comp);}
+		const_reverse_iterator rbegin() const{return const_reverse_iterator(_root, _comp);}
+		reverse_iterator rend() {return reverse_iterator(_last->right, _comp);}
+		const_reverse_iterator rend()const {return const_reverse_iterator(_last->right, _comp);}
 
 		/* ------------------------------------------------------------- */
             	/* ------------------------- CAPACITY  ------------------------- */
-		/* @Brief Test whether container is empty 
-		 * Returns whether the map container is empty (i.e. whether its size is 0).
-		 * This function does not modify the container in any way. 
-		 * To clear the content of a map container, see map::clear.*/
+		/* @Brief Test whether container is empty*/ 
 		/* @Param  None*/
 		/* @Return  true if the container size is 0, false otherwise.*/
 		bool empty() const {return this->_size == 0;}
 
 		/* @Brief Returns the number of elements in the map container.*/
 		/* @Param  None*/
-		/* @Return  The number of elements in the container.
-		 * Member type size_type is an unsigned integral type.*/
+		/* @Return  The number of elements in the container.*/
 		size_type size() const {return(this->_size);}
 
 		/* @Brief Return maximum size */ 
@@ -279,6 +280,7 @@ template < class Key,                                     			// map::key_type
 			}
 
 		}
+
 		/* @Brief Removes from the map container either a single element or a range of elements*/
 		/* @Param  iterator*/
 		/* @Return  None*/
@@ -298,7 +300,6 @@ template < class Key,                                     			// map::key_type
 			_root = remove(_root, ft::make_pair<key_type, mapped_type>(k, mapped_type()));
 			--_size;
 			return (1);
-
 		}
 
 		/* @Brief Removes from the map container either a single element or a range of elements*/
@@ -332,11 +333,16 @@ template < class Key,                                     			// map::key_type
 			this->erase(this->begin(), this->end());
 		}
 
-		key_compare key_comp() const {}
 		/* @Brief Returns a copy of the comparison object used by the container to compare keys.*/
 		/* @Param  void*/
 		/* @Return  the comparison object*/
-		value_compare value_comp() const { return (this->_comp);}
+		key_compare key_comp() const { return (this->_comp);}
+
+		/* @Brief Returns a comparison object that can be used to compare two elements 
+		 * to get whether the key of the first one goes before the second.*/
+		/* @Param  Void*/
+		/* @Return  value_compare*/
+		value_compare value_comp() const { return (value_compare(key_compare()));}
 
 		/* @Brief Search the key in the tree*/
 		/* @Param  const key_type &k*/
@@ -349,7 +355,7 @@ template < class Key,                                     			// map::key_type
 		/* @Param  const key_type &k*/
 		/* @Return  const_iterator*/
 		const_iterator find (const key_type& k)const {
-			return (iterator(SearchKey(_root, k)));
+			return (const_iterator(SearchKey(_root, k)));
 		}
 
 		/* @Brief  Searches key in the tree and returns the element if it finds key.*/
@@ -359,12 +365,66 @@ template < class Key,                                     			// map::key_type
 			Node *t = SearchKey(_root, k);
 			return (t ? true : false);
 		}
-		/* iterator lower_bound (const key_type& k) {} */
-		/* const_iterator lower_bound (const key_type& k) const {} */
-		/* iterator upper_bound (const key_type& k) {} */
-		/* const_iterator upper_bound (const key_type& k) const {} */
-		/* pair<const_iterator,const_iterator> equal_range (const key_type& k) const {} */
-		/* pair<iterator,iterator>             equal_range (const key_type& k) {} */
+
+		/* @Brief Returns an iterator pointing to the first element 
+		 * in the container whose key is not considered to go before k*/
+		/* @Param  const key_type &k*/
+		/* @Return  iterator*/
+		iterator lower_bound (const key_type& k) {
+			iterator begin = this->begin();
+			iterator end = this->end();
+			while (begin != end){
+				if (begin.getNode()->content.first >= k)
+					return begin;
+				begin++;
+			}
+			return (NULL);
+		}
+
+		/* @Brief Returns an Const iterator pointing to the first element 
+		 * in the container whose key is not considered to go before k*/
+		/* @Param  const key_type &k*/
+		/* @Return  const_iterator*/
+		const_iterator lower_bound (const key_type& k) const {
+			return (const_iterator(lower_bound(k)));
+		}
+
+		/* @Brief Returns an iterator pointing to the first element 
+		 * in the container whose key is not considered to go after k*/
+		/* @Param  const key_type &k*/
+		/* @Return  iterator*/
+		iterator upper_bound (const key_type& k) {
+			iterator begin = this->begin();
+			iterator end = this->end();
+			while (begin != end){
+				if (begin.getNode()->content.first < k)
+					return begin;
+				begin++;
+			}
+			return (NULL);
+		}
+		/* @Brief Returns an Const iterator pointing to the first element 
+		 * in the container whose key is not considered to go after k*/
+		/* @Param  const key_type &k*/
+		/* @Return  const_iterator*/
+		const_iterator upper_bound (const key_type& k) const {
+			return (const_iterator(upper_bound(k)));
+		}
+
+		/* @Brief Get range of equal elements*/
+		/* @Param  const key_type &k*/
+		/* @Return  pair(lower_bound const iterator, upper_bound const iterator)*/
+		pair<const_iterator,const_iterator> equal_range (const key_type& k) const {
+			return(ft::make_pair(lower_bound(k), upper_bound(k)));
+
+		}
+
+		/* @Brief Get range of equal elements*/
+		/* @Param  const key_type &k*/
+		/* @Return  pair(lower_bound iterator, upper_bound iterator)*/
+		pair<iterator,iterator>             equal_range (const key_type& k) {
+			return(ft::make_pair(lower_bound(k), upper_bound(k)));
+		}
 
 		/* @Brief get copy of allocator type*/
 		/* @Param  void*/
@@ -493,10 +553,10 @@ template < class Key,                                     			// map::key_type
 		Node* findMin(Node* t){
 			if (!t)
 				return (NULL);
-			else if (!t->right)
+			else if (!t->left)
 				return (t);
 			else
-			        return findMax(t->right);
+			        return findMin(t->left);
 		}
 
 		/* @Brief insert in avl tree*/
@@ -565,6 +625,7 @@ template < class Key,                                     			// map::key_type
 
 			else if (t->left && t->right){
 				tmp = findMin(t->right);
+				_allocPair.destroy(&t->content);
 				_allocPair.deallocate(&t->content, 1);
 				_allocPair.construct(&t->content, tmp->content);
 				t->parent = tmp->parent;
