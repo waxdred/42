@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2022/06/27 23:06:36 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/07/18 11:52:58 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ fclean: clean
 
 ctest:
 	@echo "Run Test"
-	cd ./build && make && ctest
+	cd ./build && ctest
 
 log:
 	cat ./build/Testing/Temporary/LastTest.log 2>/dev/null
