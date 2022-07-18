@@ -16,6 +16,8 @@ List des Projet:<br />
 - [X] ![](https://img.shields.io/static/v1?label=Minishell&message=125&color=success&style=?style=for-the-badge&logo=appveyor)<br />
 - [X] ![](https://img.shields.io/static/v1?label=Cub3D&message=120&color=success&style=?style=for-the-badge&logo=appveyor)<br />
 - [X] ![](https://img.shields.io/static/v1?label=CPP&message=100&color=success&style=?style=for-the-badge&logo=appveyor)<br />
-- [ ] ![](https://img.shields.io/static/v1?label=NetPratice&message=100&color=success&style=?style=for-the-badge&logo=appveyor)<br />
+- [X] ![](https://img.shields.io/static/v1?label=NetPratice&message=100&color=success&style=?style=for-the-badge&logo=appveyor)<br />
+- [X] ![](https://img.shields.io/static/v1?label=Inception&message=125&color=success&style=?style=for-the-badge&logo=appveyor)<br />
+- [ ] ![](https://img.shields.io/static/v1?label=ft_container&message=0&color=success&style=?style=for-the-badge&logo=appveyor)<br />
 
 
