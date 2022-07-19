@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:33:06 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/19 02:04:05 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/20 00:07:58 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ int main(int argc, char** argv) {
 	std::cout << "should be constant with the same seed: " << sum << std::endl;
 
 	{
-		ft::map<int, char> copy;
-		copy = map_int;
+		/* ft::map<int, char> copy; */
+		/* copy = map_int; */
 	}
 	MutantStack<char> iterable_stack;
 	for (char letter = 'a'; letter <= 'z'; letter++)

@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:52:47 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/19 02:45:43 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/20 00:17:05 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "pair.hpp"
@@ -158,7 +158,9 @@ template < class Key,                                     			// map::key_type
 
 		/* @def Constructs a container with a copy of each of the elements in x. */
 		map (const map& x): _size(0),_allocPair(x._allocPair), _comp(x._comp), _allocNode(x._allocNode){
-			for (const_iterator it = x.begin(); it != x.end(); ++it)
+			_root = NULL;
+			_last = NULL;
+			for (iterator it = x.begin(); it != x.end(); ++it)
                     		insert(it.getNode()->content);
 		}
 		
@@ -182,10 +184,13 @@ template < class Key,                                     			// map::key_type
 		/* (i.e., with the same template parameters, key, T, Compare and Alloc).*/
 		/* @Return  *This*/
 		map& operator= (const map& x) {
-			map tmp(x);
-
-			this->swap(tmp);
-			return *this;
+			_root = x._root;
+			_last = x._last;
+			_size = x._size;
+			_allocNode = x._allocNode;
+			_allocPair = x._allocPair;
+			_comp = x._comp;
+			return(*this);
 		}
 
 		/* ------------------------------------------------------------- */
@@ -269,7 +274,6 @@ template < class Key,                                     			// map::key_type
 			return (it);
 		}
 
-		/* @Brief Extends the container by inserting new elements*/
 		/* @Param  const value_type &val*/
 		/* @Return  None*/
 		template <class InputIterator>

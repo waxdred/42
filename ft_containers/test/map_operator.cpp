@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 02:34:15 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/19 02:41:28 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/20 00:17:31 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int main(void)
   	
   	second=first;                // second now contains 3 ints
   	mysecond=myfirst;                // second now contains 3 ints
-	/* ft::map<char, int> t = myfirst; */
 
   	first=std::map<char,int>();  // and first is now empty
   	myfirst=ft::map<char,int>();  // and first is now empty

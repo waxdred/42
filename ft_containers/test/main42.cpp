@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:27:03 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/27 16:33:58 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/20 00:24:31 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ struct Buffer
 };
 
 
-#define COUNT (MAX_RAM / (int)sizeof(Buffer))
+#define COUNT 1000
 
 template<typename T>
 class MutantStack : public ft::stack<T>
@@ -73,7 +73,7 @@ std::string ft_container(std::string n){
 	ft::stack<int> stack_int;
 	ft::vector<Buffer> vector_buffer;
 	ft::stack<Buffer, std::deque<Buffer> > stack_deq_buffer;
-	/* ft::map<int, int> map_int; */
+	ft::map<int, int> map_int;
 
 	for (int i = 0; i < COUNT; i++)
 	{
@@ -102,22 +102,22 @@ std::string ft_container(std::string n){
 		//NORMAL ! :P
 	}
 	
-	/* for (int i = 0; i < COUNT; ++i) */
-	/* { */
-	/* 	map_int.insert(ft::make_pair(rand(), rand())); */
-	/* } */
+	for (int i = 0; i < COUNT; ++i)
+	{
+		map_int.insert(ft::make_pair(rand(), rand()));
+	}
 
-	/* int sum = 0; */
-	/* for (int i = 0; i < 10000; i++) */
-	/* { */
-	/* 	int access = rand(); */
-	/* 	sum += map_int[access]; */
-	/* } */
-	/* std::cout << "should be constant with the same seed: " << sum << std::endl; */
+	int sum = 0;
+	for (int i = 0; i < 10000; i++)
+	{
+		int access = rand();
+		sum += map_int[access];
+	}
+	std::cout << "should be constant with the same seed: " << sum << std::endl;
 
-	/* { */
-	/* 	ft::map<int, int> copy = map_int; */
-	/* } */
+	{
+		ft::map<int, int> copy = map_int;
+	}
 	MutantStack<char> iterable_stack;
 	for (char letter = 'a'; letter <= 'z'; letter++)
 		iterable_stack.push(letter);
@@ -143,7 +143,7 @@ std::string std_container(std::string n){
 	std::stack<int> stack_int;
 	std::vector<Buffer> vector_buffer;
 	std::stack<Buffer, std::deque<Buffer> > stack_deq_buffer;
-	/* ft::map<int, int> map_int; */
+	ft::map<int, int> map_int;
 
 	for (int i = 0; i < COUNT; i++)
 	{
@@ -172,22 +172,22 @@ std::string std_container(std::string n){
 		//NORMAL ! :P
 	}
 	
-	/* for (int i = 0; i < COUNT; ++i) */
-	/* { */
-	/* 	map_int.insert(ft::make_pair(rand(), rand())); */
-	/* } */
+	for (int i = 0; i < COUNT; ++i)
+	{
+		map_int.insert(ft::make_pair(rand(), rand()));
+	}
 
-	/* int sum = 0; */
-	/* for (int i = 0; i < 10000; i++) */
-	/* { */
-	/* 	int access = rand(); */
-	/* 	sum += map_int[access]; */
-	/* } */
-	/* std::cout << "should be constant with the same seed: " << sum << std::endl; */
+	int sum = 0;
+	for (int i = 0; i < 10000; i++)
+	{
+		int access = rand();
+		sum += map_int[access];
+	}
+	std::cout << "should be constant with the same seed: " << sum << std::endl;
 
-	/* { */
-	/* 	ft::map<int, int> copy = map_int; */
-	/* } */
+	{
+		ft::map<int, int> copy = map_int;
+	}
 	OMutantStack<char> iterable_stack;
 	for (char letter = 'a'; letter <= 'z'; letter++)
 		iterable_stack.push(letter);
