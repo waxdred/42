@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 00:42:45 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/18 11:49:24 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/18 21:13:38 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,11 @@ int main(void)
   	itlow=map.lower_bound ('b');  // itlow points to b
 	itup=map.upper_bound ('d');
 	myitup=mymap.upper_bound ('d');
-  	
-  	mymap.erase(myitlow);        // erases [itlow,itup)
-  	map.erase(itlow);        // erases [itlow,itup)
-  	
+	my << myitlow->first << " => " << myitlow->second << std::endl;
+	my << myitup->first << " => " << myitup->second << std::endl;
+	origine << itlow->first << " => " << itlow->second << std::endl;
+	origine << itup->first << " => " << itup->second << std::endl;
   	// print content:
-  	for (ft::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
-  		my << it->first << " => " << it->second << '\n';
-  	for (std::map<char,int>::iterator its=map.begin(); its!=map.end(); ++its)
-  		origine << its->first << " => " << its->second << '\n';
 	std::string my_vector = my.str();
 	std::string origine_vector = origine.str();
 	std::cout << "Output cout: " << std::endl;

@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:08:46 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/08 20:03:36 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/18 23:39:58 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,21 +163,14 @@ namespace ft{
 
 			 /* ------------------------------------------------------------- */
 			 /* ------------------------- OPERATOR -------------------------- */  
-			 /* Returns a reference to the element at position n in the vector container. */
-			 /* A similar member function, vector::at, has the same behavior as this operator function, */ 
-			 /* except that vector::at is bound-checked and signals */ 
-		  	 /* if the requested position is out of range by throwing an out_of_range exception. */
-			 /* Portable programs should never call this function with an argument n that is out of range, */ 
-		         /* since this causes undefined behavior. */
+			 /* @Brief Returns a reference to the element at position n in the vector container. */
 			 /* @Param Position of an element in the container. */
-			 /* Notice that the first element has a position of 0 (not 1). */
-			 /* Member type size_type is an unsigned integral type. */
 			 /* @Return The element at the specified position in the vector. */
-			 /* If the vector object is const-qualified, the function returns a const_reference. */		 
-			 /* Otherwise, it returns a reference. */
-			 /* Member types reference and const_reference are the reference types */ 
-			 /* to the elements of the container (see vector member types). */
 			 reference &operator[] (const size_type &n){return (_ptr[n]);}
+
+			 /* @Brief Returns a const reference to the element at position n in the vector container. */
+			 /* @Param Position of an element in the container. */
+			 /* @Return The element at the specified position in the vector. */
 			 const_reference &operator[] (const size_type &n) const{return (_ptr[n]);}
 
 
@@ -198,80 +191,65 @@ namespace ft{
 			 /* ------------------------------------------------------------- */
 
 			 /* @Brief Returns the number of elements in the vector. */
-			 /* This is the number of actual objects held in the vector */
-			 /* which is not necessarily equal to its storage capacity. */
+			 /* @Return size allocation */
 			 size_type	size() const { return (_size_alloc); };
 
 			 /* @Brief Returns whether the vector is empty (i.e. whether its size is 0). */
-			 /* This function does not modify the container in any way. */
-			 /* To clear the content of a vector, see vector::clear. */
 			 /* @Return  Bool*/
 			 bool      	empty() const{ return (_size_alloc < 1 ? true : false);}
 
 			 /* @Brief Returns the size of the storage space currently allocated for the vector, */ 
-		  	 /* expressed in terms of elements. */
-			 /* This capacity is not necessarily equal to the vector size. */ 
-			 /* It can be equal or greater, */ 
-			 /* with the extra space allowing to accommodate for growth without the need to reallocate on each insertion. */
-			 /* Notice that this capacity does not suppose a limit on the size of the vector. */
-			 /* When this capacity is exhausted and more is needed, */ 
-			 /* it is automatically expanded by the container (reallocating it storage space). */ 
-			 /* The theoretical limit on the size of a vector is given by member max_size. */
-			 /* The capacity of a vector can be explicitly altered by calling member vector::reserve. */
-			 /* @Return The size of the currently allocated storage capacity in the vector, */ 
-			 /* measured in terms of the number elements it can hold. */
+			 /* @Return The size of the currently allocated storage capacity in the vector*/ 
 			 size_t         capacity()const{ return (this->_capacity);}
 
-			 /* Returns the maximum number of elements that the vector can hold. */
-			 /* This is the maximum potential size the container can reach due to */ 
-			 /* known system or library implementation limitations, */ 
-			 /* but the container is by no means guaranteed to be able to reach that size: */ 
-		         /* it can still fail to allocate storage at any point before that size is reached. */
+			 /* @brief Returns the maximum number of elements that the vector can hold. */
+			 /* @Return The size max*/ 
 			 size_t 	max_size()const{ return (allocator_type().max_size());}
 
 			 /* ------------------------------------------------------------- */
             		 /* ---------------------- ELEMENTS ACCESS ---------------------- */ 
 			 /* ------------------------------------------------------------- */
 			 
-			 /* Access element */
-			 /* Returns a reference to the element at position n in the vector. */
-			 /* The function automatically checks whether n is within the bounds of valid elements in the vector, */ 
-			 /* throwing an out_of_range exception */ 
-			 /* if it is not (i.e., if n is greater than, or equal to, its size). */    
-			 /* This is in contrast with member operator[], that does not check against bounds. */
+			 /* @brief Access element */
 			 /* @Param position of an element */
+			 /* @return reference */
 			 reference at(size_type n){
 				 if (n > _capacity)
 					 throw std::out_of_range("vector::at");
 				 return (_ptr[n]);
 			 };
+			 /* @brief Access element */
+			 /* @Param position of an element */
+			 /* @return const_reference */
 			 const_reference at(size_type n)const{
 				 if (n > _capacity)
 					 throw std::out_of_range("vector::at");
 				 return (_ptr[n]);
 			 };
 
-			 /* Access first element */
-			 /* Returns a reference to the first element in the vector. */
-			 /* Unlike member vector::begin, which returns an iterator to this same element, */
-			 /* this function returns a direct reference. */
-			 /* Calling this function on an empty container causes undefined behavior. */
+			 /* @brief Access first element */
+			 /* @Returns a reference to the first element in the vector. */
 			 reference front(void){return (*_ptr);};
+
+			 /* @brief Access first element */
+			 /* @Returns a const_reference to the first element in the vector. */
 			 const_reference front(void)const{return (*_ptr);};
 
-			 /* Access last element */
-			 /* Returns a reference to the last element in the vector. */
-			 /* Unlike member vector::end, which returns an iterator just past this element, */ 
-			 /* this function returns a direct reference. */
-			 /* Calling this function on an empty container causes undefined behavior. */
+			 /* @Brief Access last element */
+			 /* @Returns a reference to the last element in the vector. */
 			 reference back(void){return (_ptr[_size_alloc  - 1]);}
+
+			 /* @Brief Access last element */
+			 /* @Returns a const reference to the last element in the vector. */
 			 const_reference back(void)const{return (_ptr[_size_alloc - 1]);}
 
 			 /* ------------------------------------------------------------- */
             		 /* ------------------------- MODIFIERS ------------------------- */
 			 /* ------------------------------------------------------------- */
-
-			 void push_back (const value_type val){
+			/* @Brief Add element at the end*/
+			/* @Param  const value_type val*/
+			/* @Return  Return*/
+			 void push_back (const value_type &val){
 				 if (this->_size_alloc == this->_capacity){
 					 int next_capacity = (this->size() > 0) ? (int)(this->size() * 2) : 1;
 					 this->reserve(next_capacity);
@@ -279,6 +257,9 @@ namespace ft{
 				_alloc.construct(&_ptr[_size_alloc++], val);
 			 }
 
+			 /* @Brief Removes all elements from the vector*/
+			 /* @Param  Void*/
+			 /* @Return  Void*/
 			 void clear(void){
 				 for (size_type i = 0; i < _size_alloc; i++){
 					 pop_back();
@@ -288,6 +269,9 @@ namespace ft{
 				 this->_size_alloc = 0;
 			 }
 
+			/* @Brief Add element at the front*/
+			/* @Param  const value_type val*/
+			/* @Return  Return*/
 			 void pop_back(void){
 				 if (_size_alloc)
                     			_alloc.destroy(&_ptr[_size_alloc-- - 1]);
@@ -305,21 +289,15 @@ namespace ft{
 			 }
 
 			 void swap (vector& x){
-				 swap(x._alloc, _alloc);
-				 swap(x._ptr, _ptr);
-				 swap(x._capacity, _capacity);
-				 swap(x._size_alloc, _size_alloc);
+				 __swap(x._alloc, _alloc);
+				 __swap(x._ptr, _ptr);
+				 __swap(x._capacity, _capacity);
+				 __swap(x._size_alloc, _size_alloc);
 			 }
 
-			 /* Request a change in capacity */
-			 /* Requests that the vector capacity be at least enough to contain n elements. */
-			 /* If n is greater than the current vector capacity, */ 
-			 /* the function causes the container to reallocate its storage increasing its capacity to n (or greater). */
-			 /* In all other cases, the function call does not cause a reallocation and the vector capacity is not affected. */
-			 /* This function has no effect on the vector size and cannot alter its elements. */
+			 /* @Brief Request a change in capacity */
 			 /* @Param Minimum capacity for the vector. */
-			 /* Note that the resulting vector capacity may be equal or greater than n. */
-			 /* Member type size_type is an unsigned integral type. */
+			 /* @Return NONE */
 			 void reserve(size_t n){
 				 if (n > this->max_size())
 					 throw ("error::vector::size_max");
@@ -394,6 +372,10 @@ namespace ft{
 				return (first);
 			 };
 
+			 /* @Brief The vector is extended by inserting new elements before the element at the specified position*/
+			 /* @Param  Position in the vector where the new elements are inserted.*/
+			 /* @Param1 Value to be copied (or moved) to the inserted elements.*/
+			 /* @Return  None*/
 			 iterator insert (iterator position, const value_type& val){
 			 	vector tmp;
 				difference_type n = position - begin();
@@ -408,6 +390,11 @@ namespace ft{
 				return (&_ptr[n]);
 			 }
 
+			 /* @Brief The vector is extended by inserting new elements before the element at the specified position*/
+			 /* @Param  Position in the vector where the new elements are inserted.*/
+			 /* @Param1 Number of elements to insert. Each element is initialized to a copy of val. */
+			 /* @Param1 Value to be copied (or moved) to the inserted elements.*/
+			 /* @Return  None*/
     			 void insert (iterator position, size_type n, const value_type& val){
 				vector tmp;
 
@@ -423,6 +410,11 @@ namespace ft{
 				swap(*this, tmp);
 			 }
 
+			 /* @Brief The vector is extended by inserting new elements before the element at the specified position*/
+			 /* @Param  Position in the vector where the new elements are inserted.*/
+			 /* @Param1 Iterators specifying a range of elements. Copies of the elements in the range first */
+			 /* @Param1 Iterators specifying a range of elements. Copies of the elements in the range last */
+			 /* @Return  None*/
 			 template <class InputIterator>
     			 void insert (iterator position, InputIterator first, InputIterator last,
 				typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0){
@@ -440,6 +432,10 @@ namespace ft{
 				}
 				swap(*this, tmp);
 			 }
+
+			 /* @Brief Returns a copy of the allocator object associated with the vector.*/
+			 /* @Param  Void*/
+			 /* @Return  allocator*/
 			 allocator_type get_allocator() const{ return (_alloc);}
 
 
@@ -457,21 +453,15 @@ namespace ft{
 
 		private:
 			template <typename U>
-		   	void swap(U& a, U&b)
+			/* @Brief Swap two variable using reference*/
+			/* @Param  a*/
+			/* @Param  b*/
+		   	void __swap(U& a, U&b)
 		    	{
 				U tmp = a;
 				a = b;
 				b = tmp;
 		    	}
-			void moveleft(iterator first, iterator last){
-				for(; first != this->end(); first++, last++){
-					_alloc.destroy(&(*first));
-					if (last < this->end()){
-						_alloc.construct(&(*first), *last);
-					}
-				}
-			}
-
 };
 
 template < class T >

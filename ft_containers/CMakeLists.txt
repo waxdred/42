@@ -87,6 +87,7 @@ add_executable(v_map_allocator ./test/map_get_allocator.cpp)
 add_executable(v_map_swap ./test/map_swap.cpp)
 add_executable(v_map_rbegin ./test/map_rbegin.cpp)
 add_executable(v_map_lower_bound ./test/map_lower_bound.cpp)
+# add_executable(v_map_equal_range ./test/map_equal_range.cpp)
 
 add_test(Test_Map_begin v_map_begin)
 add_test(Test_Map_empty_erase v_map_empty_erase)
@@ -98,6 +99,7 @@ add_test(Test_Map_get_allacator v_map_allocator)
 add_test(Test_Map_swap v_map_swap)
 add_test(Test_Map_rbegin v_map_rbegin)
 add_test(Test_Map_lower_bound v_map_lower_bound)
+# add_test(Test_Map_equal_range v_map_equal_range)
 
 # main 42 test
 add_executable(v_42 ./test/main42.cpp)
