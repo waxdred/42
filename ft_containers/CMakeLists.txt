@@ -88,6 +88,11 @@ add_executable(v_map_swap ./test/map_swap.cpp)
 add_executable(v_map_rbegin ./test/map_rbegin.cpp)
 add_executable(v_map_lower_bound ./test/map_lower_bound.cpp)
 add_executable(v_map_operator_equal ./test/map_operator.cpp)
+add_executable(v_map_operator_crocher ./test/map_operator1.cpp)
+add_executable(v_map_find ./test/map_find.cpp)
+add_executable(v_map_max_size ./test/map_size_max.cpp)
+add_executable(v_map_size ./test/map_size.cpp)
+
 # add_executable(v_map_equal_range ./test/map_equal_range.cpp)
 
 add_test(Test_Map_begin v_map_begin)
@@ -101,9 +106,8 @@ add_test(Test_Map_swap v_map_swap)
 add_test(Test_Map_rbegin v_map_rbegin)
 add_test(Test_Map_lower_bound v_map_lower_bound)
 add_test(Test_Map_operator_equale v_map_operator_equal)
+add_test(Test_Map_operator_crocher v_map_operator_crocher)
+add_test(Test_Map_Find v_map_find)
+add_test(Test_Map_size_max v_map_max_size)
+add_test(Test_Map_size v_map_size)
 # add_test(Test_Map_equal_range v_map_equal_range)
-
-# main 42 test
-add_executable(v_42 ./test/main42.cpp)
-
-add_test(Test_42 v_42 "42")
