@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:52:47 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/20 00:17:05 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/22 01:04:33 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "pair.hpp"
@@ -198,12 +198,12 @@ template < class Key,                                     			// map::key_type
 		/* @Brief Return iterator to beginning*/
 		/* @Param  None*/
 		/* @Return  An iterator to the first element in the container.*/
-		iterator begin() { return iterator(_root, _comp);}
+		iterator begin() { return iterator(__find_min(_root), _comp);}
 
 		/* @Brief Return iterator to beginning const*/
 		/* @Param  None*/
 		/* @Return  An iterator to the first element in the container.*/
-		const_iterator begin()const { return const_iterator(_root, _comp);}
+		const_iterator begin()const { return const_iterator(__find_min(_root), _comp);}
 
 		/* @Brief Return iterator to end*/ 
 		/* @Param  None*/
@@ -215,8 +215,8 @@ template < class Key,                                     			// map::key_type
 		/* @Return  An iterator to the past-the-end element in the container.*/
 		const_iterator end()const {return const_iterator(_last->right, _comp);}
 
-		reverse_iterator rbegin() {return reverse_iterator(_root, _comp);}
-		const_reverse_iterator rbegin() const{return const_reverse_iterator(_root, _comp);}
+		reverse_iterator rbegin() {return reverse_iterator(__find_max(_root), _comp);}
+		const_reverse_iterator rbegin() const{return const_reverse_iterator(__find_max(_root), _comp);}
 		reverse_iterator rend() {return reverse_iterator(_last->right, _comp);}
 		const_reverse_iterator rend()const {return const_reverse_iterator(_last->right, _comp);}
 
@@ -300,10 +300,9 @@ template < class Key,                                     			// map::key_type
 		/* @Param  key_type &k*/
 		/* @Return  size_t / bool*/
 		size_type erase (const key_type& k) {
-                         Node *todel = __search_key(_root, k);
-			 if (!todel)
-				 return (0);
-			_root = __remove(_root, ft::make_pair<key_type, mapped_type>(k, mapped_type()));
+			Node *ret = __remove(_root, ft::make_pair<key_type, mapped_type>(k, mapped_type()));
+			if (!ret)
+				return(0);
 			--_size;
 			return (1);
 		}
@@ -318,7 +317,6 @@ template < class Key,                                     			// map::key_type
 				++first;
 				erase(tmp);
 			}
-
 		}
 
 		/* @Brief Exchanges the content of the container*/
@@ -421,7 +419,7 @@ template < class Key,                                     			// map::key_type
 		/* @Param  const key_type &k*/
 		/* @Return  pair(lower_bound const iterator, upper_bound const iterator)*/
 		pair<const_iterator,const_iterator> equal_range (const key_type& k) const {
-			return(ft::make_pair(lower_bound(k), upper_bound(k)));
+			return(ft::pair<const_iterator, const_iterator>(lower_bound(k), upper_bound(k)));
 
 		}
 
@@ -429,7 +427,7 @@ template < class Key,                                     			// map::key_type
 		/* @Param  const key_type &k*/
 		/* @Return  pair(lower_bound iterator, upper_bound iterator)*/
 		pair<iterator,iterator>             equal_range (const key_type& k) {
-			return(ft::make_pair(lower_bound(k), upper_bound(k)));
+			return(ft::pair<iterator, iterator>(lower_bound(k), upper_bound(k)));
 		}
 
 		/* @Brief get copy of allocator type*/
@@ -606,42 +604,64 @@ template < class Key,                                     			// map::key_type
 		Node *__remove(Node *t, value_type const &pair){
 			Node *tmp = t;
 
+			// Element not found
 			if (!t)
 				return (NULL);
+
+			// Searching for element
 			else if(pair.first < t->content.first)
             			t->left = __remove(t->left, pair);
 			else if(pair.first > t->content.first)
             			t->right = __remove(t->right, pair);
 
+			// Element found
+                        // With 2 children
 			else if (t->left && t->right){
+				Node *parent = t->parent;
 				tmp = __find_min(t->right);
 				_allocPair.destroy(&t->content);
 				_allocPair.deallocate(&t->content, 1);
 				_allocPair.construct(&t->content, tmp->content);
-				t->parent = tmp->parent;
-				t->right = __remove(t->right, pair);
-			}else{
+				t->parent = parent;
+				t->right = __remove(t->right, t->content);
+			}
+			// With one or zero child
+			else{
 				tmp = t;
-				if (!t->left)
-					t = t->right;
-				else if (!t->right)
-					t = t->left;
+				if(!t->left){
+					if (t->right)
+						t->right->parent = t->parent;
+            				t = t->right;
+				}
+            			else if(!t->right){
+					if (t->left)
+						t->left->parent = t->parent;
+            			    	t = t->left;
+
+				}
 				__deallocateNode(tmp);
 			}
 			if (!t)
 				return (t);
 			t->level = std::max(__height(t->left), __height(t->right)) + 1;
+			// If node is unbalanced
+        		// If left node is deleted, right case
 			if(__height(t->left) - __height(t->right) == 2){
+				// right right case
 				if(__height(t->left->left) - __height(t->left->right) == 1)
-					return __SLRotate(t);
+					return __SRRotate(t);
+				// right left case
 				else
-					return __DLRotate(t);
+					return __DRRotate(t);
 			}
+			// If right node is deleted, left case
 			else if(__height(t->right) - __height(t->left) == 2){
+				// left left case
 				if(__height(t->right->right) - __height(t->right->left) == 1)
-                                        return __SRRotate(t);
+                                        return __SLRotate(t);
+				// left right case
 				else
-                                        return __DRRotate(t);
+                                        return __DLRotate(t);
 			}
 			return (t);
 		}

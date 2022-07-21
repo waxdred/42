@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:53:10 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/17 09:10:32 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/21 10:26:14 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ namespace ft{
 			map_iterator(nodePtr node,
                         	const key_compare& comp = key_compare()) :
                 		_comp(comp) {
-				_root = node;
-				_node = this->findMin(node);
-				_last = this->findMax(node);
+				_root = __findRoot(node);
+				_node = node;
+				_last = this->__findMax(_root);
 			}
 			map_iterator(const map_iterator<Key, T, Compare, Node> &copy){
 				_root = copy.getRoot();
@@ -107,7 +107,7 @@ namespace ft{
 				if (_node->right){
 					_node = _node->right;
 					if (_node->left)
-					         _node = findMin(_node->left);
+					         _node = __findMin(_node->left);
 				}
 				else{
 					t = _node->parent;
@@ -129,7 +129,7 @@ namespace ft{
 				if (_node->right){
 					_node = _node->right;
 					if (_node->left)
-					         _node = findMin(_node->left);
+					         _node = __findMin(_node->left);
 				}
 				else{
 					t = _node->parent;
@@ -151,7 +151,7 @@ namespace ft{
 				if (_node->left){
 					_node = _node->left;
 					if (_node->right)
-					         _node = findMax(_node->left);
+					         _node = __findMax(_node->left);
 				}
 				else{
 					t = _node->parent;
@@ -173,7 +173,7 @@ namespace ft{
 				if (_node->left){
 					_node = _node->left;
 					if (_node->right)
-					         _node = findMax(_node->left);
+					         _node = __findMax(_node->left);
 				}
 				else{
 					t = _node->parent;
@@ -196,26 +196,35 @@ namespace ft{
 			bool operator >=(const map_iterator &it)const { return (it._node <= _node);}
 
 		private:
-			Node* findMin(Node* t)
+			Node* __findMin(Node* t)
     			{
     			    	if(t == NULL)
     					return NULL;
     			    	else if(t->left == NULL)
     			        	return t;
     			    	else
-    			        	return findMin(t->left);
+    			        	return __findMin(t->left);
     			}
     			
-    			Node* findMax(Node* t)
+    			Node* __findMax(Node* t)
     			{
     				if(t == NULL)
     			    		return NULL;
     				else if(t->right == NULL)
     			    	    	return t;
     				else
-    			    	    	return findMax(t->right);
+    			    	    	return __findMax(t->right);
     			}
 
+    			Node* __findRoot(Node* t)
+    			{
+    				if(t == NULL)
+    			    		return NULL;
+    				else if(t->parent == NULL)
+    			    	    	return t;
+    				else
+    			    	    	return __findRoot(t->parent);
+    			}
 
 	};// map_iterator
         
