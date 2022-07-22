@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:52:47 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/22 01:04:33 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/22 14:25:19 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "pair.hpp"
@@ -22,7 +22,7 @@
 # include <memory>
 #include <ostream>
 
-/**
+/*
     * ------------------------ TODO ------------------------------- *
     * ------------------------ FT::MAP ---------------------------- *
     * visualization AVLtree
@@ -169,14 +169,7 @@ template < class Key,                                     			// map::key_type
 		~map() {
 			if (!_root)
 				return;
-			iterator begin = this->begin();
-			iterator end = this->end();
-
-			while (begin != end){
-				Node *t = begin.getNode();
-				++begin;
-				_allocNode.deallocate(t, 1);
-			}
+			clear();
 		}
 
 		/* @Brief Assigns new contents to the container, replacing its current content.*/
@@ -184,12 +177,10 @@ template < class Key,                                     			// map::key_type
 		/* (i.e., with the same template parameters, key, T, Compare and Alloc).*/
 		/* @Return  *This*/
 		map& operator= (const map& x) {
-			_root = x._root;
-			_last = x._last;
-			_size = x._size;
-			_allocNode = x._allocNode;
-			_allocPair = x._allocPair;
-			_comp = x._comp;
+			if (&x == this)
+				return (*this);
+			clear();
+			insert(x.begin(), x.end());
 			return(*this);
 		}
 
@@ -334,7 +325,8 @@ template < class Key,                                     			// map::key_type
 		/* @Param  Void*/
 		/* @Return  None*/
 		void clear(void) {
-			this->erase(this->begin(), this->end());
+			if (_size)
+				__inorder(_root);
 		}
 
 		/* @Brief Returns a copy of the comparison object used by the container to compare keys.*/
@@ -512,6 +504,8 @@ template < class Key,                                     			// map::key_type
 		/* @Return  Node*/
 		Node* __DLRotate(Node* &t){
     		    	t->right = __SRRotate(t->right);
+			if (t->right && t->right->right && t->right->right->left)
+				t->right->right->left->parent = t->right->right; 
     		    	return (__SLRotate(t));
     		}
 
@@ -520,6 +514,8 @@ template < class Key,                                     			// map::key_type
 		/* @Return  Node*/
     		Node* __DRRotate(Node* &t){
     		   	t->left = __SLRotate(t->left);
+			if (t->left && t->left->left && t->left->left->right)
+				t->left->left->right->parent = t->left->left; 
     		    	return (__SRRotate(t));
     		}
 
@@ -539,6 +535,27 @@ template < class Key,                                     			// map::key_type
 		/* @Param  Node *t*/
 		/* @Return  NodeFound / NULL*/
 		Node* __find_min(Node* t){
+			if (!t)
+				return (NULL);
+			else if (!t->left)
+				return (t);
+			else
+			        return __find_min(t->left);
+		}
+		
+		void __inorder(Node* t)
+    		{
+        		if(t == NULL)
+        		    return;
+        		__inorder(t->left);
+			__deallocateNode(t);
+        		__inorder(t->right);
+    		}
+
+		/* @Brief Search the min key in the tree*/
+		/* @Param  Node *t*/
+		/* @Return  NodeFound / NULL*/
+		Node* __find_min(Node* t)const{
 			if (!t)
 				return (NULL);
 			else if (!t->left)

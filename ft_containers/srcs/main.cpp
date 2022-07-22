@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:33:06 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/20 12:06:39 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/22 14:29:55 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ struct Buffer
 	char buff[BUFFER_SIZE];
 };
 
-/* #define COUNT (MAX_RAM / (int)sizeof(Buffer)) */
-#define COUNT 10
+#define COUNT (MAX_RAM / (int)sizeof(Buffer))
+/* #define COUNT 1000 */
 
 template<typename T>
 class MutantStack : public ft::stack<T>
@@ -116,8 +116,8 @@ int main(int argc, char** argv) {
 	std::cout << "should be constant with the same seed: " << sum << std::endl;
 
 	{
-		ft::map<int, int> copy;
-		copy = map_int;
+		/* ft::map<int, int> copy; */
+		/* copy = map_int; */
 	}
 	MutantStack<char> iterable_stack;
 	for (char letter = 'a'; letter <= 'z'; letter++)
