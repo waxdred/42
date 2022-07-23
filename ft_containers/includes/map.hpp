@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:52:47 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/22 14:25:19 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/23 01:23:42 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "pair.hpp"
@@ -326,7 +326,7 @@ template < class Key,                                     			// map::key_type
 		/* @Return  None*/
 		void clear(void) {
 			if (_size)
-				__inorder(_root);
+				erase(begin(), end());
 		}
 
 		/* @Brief Returns a copy of the comparison object used by the container to compare keys.*/
@@ -450,6 +450,7 @@ template < class Key,                                     			// map::key_type
 		void __deallocateNode(Node *node){
 			_allocPair.destroy(&node->content);
 			_allocPair.deallocate(&node->content, 1);
+			_allocNode.destroy(node);
 		}
 
 		/* @Brief check the level of the node*/
@@ -543,15 +544,6 @@ template < class Key,                                     			// map::key_type
 			        return __find_min(t->left);
 		}
 		
-		void __inorder(Node* t)
-    		{
-        		if(t == NULL)
-        		    return;
-        		__inorder(t->left);
-			__deallocateNode(t);
-        		__inorder(t->right);
-    		}
-
 		/* @Brief Search the min key in the tree*/
 		/* @Param  Node *t*/
 		/* @Return  NodeFound / NULL*/
