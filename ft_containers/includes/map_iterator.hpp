@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:53:10 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/23 02:15:23 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/23 16:00:30 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,26 +99,10 @@ namespace ft{
 			reference operator->() const{return(&_node->content);}
 
 			map_iterator &operator++(){
-				Node *t;
-				if (_node == _last){
-					_node = _last->right;
-					return (*this);
-				}
-				if (_node->right){
-					_node = _node->right;
-					if (_node->left)
-					         _node = __findMin(_node->left);
-				}
-				else{
-					t = _node->parent;
-					while(t && _node == t->right){
-						_node = t;
-						t = t->parent;
-					}
-					_node = t;
-				}
+				_node = __next(_node); 
 				return (*this);
 			};
+
 
 			map_iterator &operator++(int){
 				Node *t;
@@ -225,6 +209,24 @@ namespace ft{
     				else
     			    	    	return __findRoot(t->parent);
     			}
+
+			Node* __next(Node *t)
+			{
+				if(t == NULL)
+					return NULL;
+				else if(t->right != NULL)
+					return __findMin(t->right);
+				else
+				{
+					Node *p = t->parent;
+					while(p != NULL && t == p->right)
+					{
+						t = p;
+						p = p->parent;
+					}
+					return p;
+				}
+			}
 
 	};// map_iterator
         

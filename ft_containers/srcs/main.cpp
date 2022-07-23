@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:33:06 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/23 01:33:01 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/24 01:30:23 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ struct Buffer
 	char buff[BUFFER_SIZE];
 };
 
-/* #define COUNT (MAX_RAM / (int)sizeof(Buffer)) */
-#define COUNT 4
+#define COUNT (MAX_RAM / (int)sizeof(Buffer))
+/* #define COUNT 4 */
 
 template<typename T>
 class MutantStack : public ft::stack<T>
@@ -104,22 +104,20 @@ int main(int argc, char** argv) {
 	
 	for (int i = 0; i < COUNT; ++i)
 	{
-		map_int.insert(ft::make_pair(rand()%seed, rand()%seed));
+		map_int.insert(ft::make_pair(rand(), rand()));
 	}
 
 	int sum = 0;
-	for (int i = 0; i < 10000; i++)
+	for (int i = 0; i < 1000; i++)
 	{
 		int access = rand()  % seed;
 		sum += map_int[access];
 	}
-	for (ft::map<int, int>::iterator it = map_int.begin(); it != map_int.end(); ++it)
-		std::cout << it->first << std::endl;
 	std::cout << "should be constant with the same seed: " << sum << std::endl;
 
 	{
-		ft::map<int, int> copy;
-		copy = map_int;
+		/* ft::map<int, int> copy; */
+		/* copy = map_int; */
 	}
 	MutantStack<char> iterable_stack;
 	for (char letter = 'a'; letter <= 'z'; letter++)

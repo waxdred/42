@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:52:47 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/23 01:23:42 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/24 01:33:53 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "pair.hpp"
@@ -472,6 +472,8 @@ template < class Key,                                     			// map::key_type
 
 			u->parent = t->parent;
 			t->left = u->right;
+			if (t->left)
+				t->left->parent = t;
 			u->right = t;
 			u->right->parent = u;
 
@@ -493,6 +495,8 @@ template < class Key,                                     			// map::key_type
 
 			u->parent = t->parent;
 			t->right = u->left;
+			if (t->right)
+				t->right->parent = t;
 			u->left = t;
 			u->left->parent = u;
 			t->level = std::max(__height(t->left), __height(t->right)) + 1;

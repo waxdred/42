@@ -6,21 +6,22 @@
 #    By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 23:07:13 by jmilhas           #+#    #+#              #
-#    Updated: 2022/06/27 23:41:17 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/07/24 01:28:06 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #! /bin/sh
+seed="100"
 
-timer(){
-	echo "run main 42"
-	g++ -D CHECK=0 ./test/timer_main_42.cpp -o ./build/timer_0
-	g++ -D CHECK=1 ./test/timer_main_42.cpp -o ./build/timer_1
-	echo "Std main"
-	timer ./build/timer_0
-	echo "FT main"
-	timer ./build/timer_1
-	exit
-}
+echo "run main 42"
+g++ -D CHECK=0 ./srcs/main.cpp -I ./includes -o ./build/timer_0
+g++ -D CHECK=1 ./srcs/main.cpp -I ./includes -o ./build/timer_1
+echo "Std main"
+time ./build/timer_0 ${seed}
+./build/timer_0 ${seed}>> std
+echo "FT main"
+time ./build/timer_1 ${seed}
+./build/timer_1 ${seed} >> ft
 
-timer
+echo "diff std => ft"
+diff std ft
