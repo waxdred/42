@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 13:23:57 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/23 01:24:47 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/25 01:03:06 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(void)
   	std::map<char,int>::iterator it;
 	ft::map<char,int> mymap;
   	ft::map<char,int>::iterator mit;
-  	
+
   	map['a']=50;
   	map['b']=100;
   	map['c']=150;
@@ -43,10 +43,10 @@ int main(void)
 
 	my << "a => " << mymap.find('a')->second << '\n';
   	my << "c => " << mymap.find('c')->second << '\n';
-  	my << "d => " << mymap.find('d')->second << '\n';
+	std::cout << "d => " << mymap.find('d')->second << '\n';
 	origine << "a => " << map.find('a')->second << '\n';
   	origine << "c => " << map.find('c')->second << '\n';
-  	origine << "d => " << map.find('d')->second << '\n';
+	std::cout << "d => " << map.find('d')->second << '\n';
 
 	std::string my_vector = my.str();
 	std::string origine_vector = origine.str();

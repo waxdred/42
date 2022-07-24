@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/17 09:17:02 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/21 10:28:39 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/24 23:46:25 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ namespace ft{
 
 			map_rev_iterator &operator++(int){
 				Node *t;
+				map_rev_iterator &ret(*this);
 				if (_node == _last){
 					_node = _last->left;
 					return (*this);
@@ -140,7 +141,7 @@ namespace ft{
 					}
 					_node = t;
 				}
-				return (*this);
+				return (ret);
 			}
 
 			map_rev_iterator &operator--(){
@@ -167,6 +168,7 @@ namespace ft{
 
 			map_rev_iterator &operator--(int){
 				Node *t;
+				map_rev_iterator &ret(*this);
 				if (_node == _last){
 					_node = _last->right;
 					return (*this);
@@ -184,7 +186,7 @@ namespace ft{
 					}
 					_node = t;
 				}
-				return (*this);
+				return (ret);
 			}
 
 			/* ------------------------------------------------------------- */

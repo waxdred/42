@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:53:10 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/23 16:00:30 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/25 00:44:14 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,69 +105,22 @@ namespace ft{
 
 
 			map_iterator &operator++(int){
-				Node *t;
-				if (_node == _last){
-					_node = _last->right;
-					return (*this);
-				}
-				if (_node->right){
-					_node = _node->right;
-					if (_node->left)
-					         _node = __findMin(_node->left);
-				}
-				else{
-					t = _node->parent;
-					while(t && _node == t->right){
-						_node = t;
-						t = t->parent;
-					}
-					_node = t;
-				}
-				return (*this);
+				map_iterator &ret(*this);
+
+				_node = __next(_node);
+				return (ret);
 			}
 
 			map_iterator &operator--(){
-				Node *t;
-				if (_node == _last){
-					_node = _last->left;
-					return (*this);
-				}
-				if (_node->left){
-					_node = _node->left;
-					if (_node->right)
-					         _node = __findMax(_node->left);
-				}
-				else{
-					t = _node->parent;
-					while(t && _node == t->left){
-						_node = t;
-						t = t->parent;
-					}
-					_node = t;
-				}
+				_node = __prev(_node);
 				return (*this);
 			}
 
 			map_iterator &operator--(int){
-				Node *t;
-				if (_node == _last){
-					_node = _last->left;
-					return (*this);
-				}
-				if (_node->left){
-					_node = _node->left;
-					if (_node->right)
-					         _node = __findMax(_node->left);
-				}
-				else{
-					t = _node->parent;
-					while(t && _node == t->left){
-						_node = t;
-						t = t->parent;
-					}
-					_node = t;
-				}
-				return (*this);
+				map_iterator &ret(*this);
+
+				_node = __prev(_node);
+				return (*ret);
 			}
 
 			/* ------------------------------------------------------------- */
@@ -220,6 +173,24 @@ namespace ft{
 				{
 					Node *p = t->parent;
 					while(p != NULL && t == p->right)
+					{
+						t = p;
+						p = p->parent;
+					}
+					return p;
+				}
+			}
+
+			Node* __prev(Node *t)
+			{
+				if(t == NULL)
+					return NULL;
+				else if(t->left != NULL)
+					return __findMax(t->right);
+				else
+				{
+					Node *p = t->parent;
+					while(p != NULL && t == p->left)
 					{
 						t = p;
 						p = p->parent;

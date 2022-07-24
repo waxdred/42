@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:52:47 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/24 01:33:53 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/25 01:02:27 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "pair.hpp"
@@ -169,7 +169,7 @@ template < class Key,                                     			// map::key_type
 		~map() {
 			if (!_root)
 				return;
-			clear();
+			__full_clear(_root);
 		}
 
 		/* @Brief Assigns new contents to the container, replacing its current content.*/
@@ -199,16 +199,31 @@ template < class Key,                                     			// map::key_type
 		/* @Brief Return iterator to end*/ 
 		/* @Param  None*/
 		/* @Return  An iterator to the past-the-end element in the container.*/
-		iterator end() {return iterator(_last->right, _comp);}
+		iterator end() {return iterator(!_last ? NULL : _last->right, _comp);}
 
 		/* @Brief Return iterator to end const*/ 
 		/* @Param  None*/
 		/* @Return  An iterator to the past-the-end element in the container.*/
 		const_iterator end()const {return const_iterator(_last->right, _comp);}
 
+		/* @Brief Return iterator to end*/
+		/* @Param  None*/
+		/* @Return  An iterator to the last element in the container.*/
 		reverse_iterator rbegin() {return reverse_iterator(__find_max(_root), _comp);}
+
+		/* @Brief Return const iterator to end*/
+		/* @Param  None*/
+		/* @Return  An iterator to the last element in the container.*/
 		const_reverse_iterator rbegin() const{return const_reverse_iterator(__find_max(_root), _comp);}
+
+		/* @Brief Return iterator to beginning*/
+		/* @Param  None*/
+		/* @Return  An iterator to the first element in the container.*/
 		reverse_iterator rend() {return reverse_iterator(_last->right, _comp);}
+
+		/* @Brief Return const iterator to beginning*/
+		/* @Param  None*/
+		/* @Return  An iterator to the first element in the container.*/
 		const_reverse_iterator rend()const {return const_reverse_iterator(_last->right, _comp);}
 
 		/* ------------------------------------------------------------- */
@@ -325,8 +340,11 @@ template < class Key,                                     			// map::key_type
 		/* @Param  Void*/
 		/* @Return  None*/
 		void clear(void) {
-			if (_size)
-				erase(begin(), end());
+			if (_size){
+				__full_clear(_root);
+				_size = 0;
+				_root = NULL;
+			}
 		}
 
 		/* @Brief Returns a copy of the comparison object used by the container to compare keys.*/
@@ -344,14 +362,26 @@ template < class Key,                                     			// map::key_type
 		/* @Param  const key_type &k*/
 		/* @Return  iterator*/
 		iterator find (const key_type& k) {
-			return (iterator(__search_key(_root, k)));
+			Node *ret = __search_key(_root, k);
+			if (!ret){
+				ft::map<key_type, mapped_type> t;
+				t.insert(ft::pair<key_type, mapped_type>());
+				return (iterator(t._root));
+			}
+			return (iterator(ret));
 		}
 
 		/* @Brief Search the key in the tree*/
 		/* @Param  const key_type &k*/
 		/* @Return  const_iterator*/
 		const_iterator find (const key_type& k)const {
-			return (const_iterator(__search_key(_root, k)));
+			Node *ret = __search_key(_root, k);
+			if (!ret){
+				ft::map<key_type, mapped_type> t;
+				t.insert(ft::pair<key_type, mapped_type>());
+				return (const_iterator(t._root));
+			}
+			return (const_iterator(ret));
 		}
 
 		/* @Brief  Searches key in the tree and returns the element if it finds key.*/
@@ -399,6 +429,7 @@ template < class Key,                                     			// map::key_type
 			}
 			return (NULL);
 		}
+
 		/* @Brief Returns an Const iterator pointing to the first element 
 		 * in the container whose key is not considered to go after k*/
 		/* @Param  const key_type &k*/
@@ -470,16 +501,26 @@ template < class Key,                                     			// map::key_type
 		Node *__SRRotate(Node* &t){
 			Node *u = t->left;
 
-			u->parent = t->parent;
+			if (u)
+				u->parent = t->parent;
 			t->left = u->right;
 			if (t->left)
 				t->left->parent = t;
 			u->right = t;
-			u->right->parent = u;
+			if (u->right)
+				u->right->parent = u;
 
 			t->level = std::max(__height(t->left), __height(t->right)) + 1;
 			u->level = std::max(__height(u->left), u->level) + 1;
 			return (u);
+		}
+
+		void __full_clear(Node *t){
+			if(t == NULL)
+            			return;
+			__full_clear(t->left);
+			__deallocateNode(t);
+			__full_clear(t->right);
 		}
 
 		/* @Brief rotation of the node left*/
@@ -493,12 +534,14 @@ template < class Key,                                     			// map::key_type
 		Node *__SLRotate(Node* &t){
 			Node *u = t->right;
 
-			u->parent = t->parent;
+			if (u)
+				u->parent = t->parent;
 			t->right = u->left;
 			if (t->right)
 				t->right->parent = t;
 			u->left = t;
-			u->left->parent = u;
+			if (u->left)
+				u->left->parent = u;
 			t->level = std::max(__height(t->left), __height(t->right)) + 1;
 			u->level = std::max(__height(u->left), u->level) + 1;
 			return (u);
@@ -509,8 +552,6 @@ template < class Key,                                     			// map::key_type
 		/* @Return  Node*/
 		Node* __DLRotate(Node* &t){
     		    	t->right = __SRRotate(t->right);
-			if (t->right && t->right->right && t->right->right->left)
-				t->right->right->left->parent = t->right->right; 
     		    	return (__SLRotate(t));
     		}
 
@@ -519,8 +560,6 @@ template < class Key,                                     			// map::key_type
 		/* @Return  Node*/
     		Node* __DRRotate(Node* &t){
     		   	t->left = __SLRotate(t->left);
-			if (t->left && t->left->left && t->left->left->right)
-				t->left->left->right->parent = t->left->left; 
     		    	return (__SRRotate(t));
     		}
 
@@ -662,19 +701,19 @@ template < class Key,                                     			// map::key_type
 			if(__height(t->left) - __height(t->right) == 2){
 				// right right case
 				if(__height(t->left->left) - __height(t->left->right) == 1)
-					return __SRRotate(t);
+					return __SLRotate(t);
 				// right left case
 				else
-					return __DRRotate(t);
+					return __DLRotate(t);
 			}
 			// If right node is deleted, left case
 			else if(__height(t->right) - __height(t->left) == 2){
 				// left left case
 				if(__height(t->right->right) - __height(t->right->left) == 1)
-                                        return __SLRotate(t);
+                                        return __SRRotate(t);
 				// left right case
 				else
-                                        return __DLRotate(t);
+                                        return __DRRotate(t);
 			}
 			return (t);
 		}

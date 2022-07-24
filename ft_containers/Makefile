@@ -6,7 +6,7 @@
 #    By: jmilhas <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 22:49:51 by jmilhas           #+#    #+#              #
-#    Updated: 2022/07/18 11:52:58 by jmilhas          ###   ########.fr        #
+#    Updated: 2022/07/24 23:51:15 by jmilhas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ endif
 
 all:
 	$(RULES)
-	@leaks -atExit -- ./build/containers
+	echo "run: make 42test\n\tfor compare test main 42 with ft et std\n"
+	echo "run: make ctest\n\tfor full fonction test libs"
 
 clean:
 	@rm -rf ./build 2>/dev/null
@@ -34,6 +35,7 @@ clean:
 fclean: clean
 
 ctest:
+	clear
 	@echo "Run Test"
 	cd ./build && ctest
 
