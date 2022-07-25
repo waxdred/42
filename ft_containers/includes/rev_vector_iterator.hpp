@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 14:49:26 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/06 15:15:41 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/25 13:56:02 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 
 # include <iostream>
 /**
-* ------------------------ TODO ------------------------------- *
-* ------------------------ FT_VECTOR_ITERATOR ----------------- *
-* - Coplien form:
-* [x](constructor):        Construct vector_iterator
-* [x](destructor):         Vector_iterator destructor
-* [x]operator=:            Assign content
-*
-* - Operators
-* [x]operators:            Operators for vector_iterator
-* [x]non-member operators: Operators for vector_iterator
-* ------------------------------------------------------------- *
+	| ------------------------ TODO ------------------------------- *
+	| ------------------------ FT_VECTOR_ITERATOR ----------------- *
+	| - Coplien form:
+	| [x](constructor):        Construct vector_iterator
+	| [x](destructor):         Vector_iterator destructor
+	| [x]operator=:            Assign content
+	|
+	| - Operators
+	| [x]operators:            Operators for vector_iterator
+	| [x]non-member operators: Operators for vector_iterator
+	| ------------------------------------------------------------- *
 */
 
 #define ADD 0
@@ -48,9 +48,13 @@ namespace ft{
 			
 		public:
 			reverse_iterator(void): _it(NULL){};
+
 			reverse_iterator(value_type *it):_it(it) {}
+
 			reverse_iterator(reverse_iterator const &copy) {*this = copy;}
+
 			~reverse_iterator(void){};
+
 			reverse_iterator& operator=(reverse_iterator const &assign){
 				if (this != &assign)
 					_it = assign._it;

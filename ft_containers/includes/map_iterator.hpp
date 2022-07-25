@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 21:53:10 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/25 00:44:14 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/25 13:55:35 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@
 #include <stdexcept>
 namespace ft{
 	/**
-    	* ------------------------------------------------------------- *
-    	* ---------------------- FT::MAP_ITERATOR --------------------- *
-    	*
-    	* - Coplien form:
-    	* [x](constructor):        Construct map_iterator
-    	* [x](destructor):         Map_iterator destructor
-    	* [x]operator=:            Assign content
-    	*
-    	* - Operators
-    	* [x]operators:            Operators for map_iterator
-    	* [x]non-member operators: Operators for map_iterator
-    	* ------------------------------------------------------------- *
-	*  https://www.cs.odu.edu/~zeil/cs361/latest/Public/treetraversal/index.html#begin-and-end-
+    	| ------------------------------------------------------------- *
+    	| ---------------------- FT::MAP_ITERATOR --------------------- *
+    	|
+    	| - Coplien form:
+    	| [x](constructor):        Construct map_iterator
+    	| [x](destructor):         Map_iterator destructor
+    	| [x]operator=:            Assign content
+    	|
+    	| - Operators
+    	| [x]operators:            Operators for map_iterator
+    	| [x]non-member operators: Operators for map_iterator
+    	| ------------------------------------------------------------- *
+	|  https://www.cs.odu.edu/~zeil/cs361/latest/Public/treetraversal/index.html#begin-and-end-
     	*/
 
 	template <class Key, class T, class Compare, typename Node>
@@ -61,6 +61,7 @@ namespace ft{
 		public:
 			map_iterator(void): _root(0), _node(0), _last(0){
 			}
+
 			map_iterator(nodePtr node,
                         	const key_compare& comp = key_compare()) :
                 		_comp(comp) {
@@ -68,13 +69,16 @@ namespace ft{
 				_node = node;
 				_last = this->__findMax(_root);
 			}
+
 			map_iterator(const map_iterator<Key, T, Compare, Node> &copy){
 				_root = copy.getRoot();
 				_node = copy.getNode();
 				_comp = copy.getComp();
 				_last = copy.getLast();
 			}
+
 			~map_iterator(){};
+
 			map_iterator &operator=(const map_iterator &assign){
 				if (this != &assign)
 				{
@@ -107,7 +111,7 @@ namespace ft{
 			map_iterator &operator++(int){
 				map_iterator &ret(*this);
 
-				_node = __next(_node);
+				++*this;
 				return (ret);
 			}
 
@@ -120,6 +124,7 @@ namespace ft{
 				map_iterator &ret(*this);
 
 				_node = __prev(_node);
+				--*this;
 				return (*ret);
 			}
 

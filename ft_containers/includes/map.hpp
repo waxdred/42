@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:52:47 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/25 01:02:27 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/25 13:48:52 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "pair.hpp"
@@ -23,49 +23,49 @@
 #include <ostream>
 
 /*
-    * ------------------------ TODO ------------------------------- *
-    * ------------------------ FT::MAP ---------------------------- *
-    * visualization AVLtree
-    * https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
-    * - Coplien form:
-    * [x](constructor):        Construct vector
-    * [x](destructor):         Destruct vector
-    * [x]operator=:            Assign vector
-    *
-    * - Iterators:
-    * [x]begin:                Return iterator to beginning
-    * [x]end:                  Return iterator to end
-    * [x]rbegin:               Return reverse iterator to reverse beginning
-    * [x]rend:                 Return reverse iterator to reverse end
-    *
-    * - Capacity:
-    * [x]empty:                Test whether container is empty 
-    * [x]size:                 Return container size
-    * [x]max_size:             Return maximum size 
-    *
-    * - Element access:
-    * [x]operator[]:           Access element 
-    *
-    * - Modifiers:
-    * [x]insert:	       insert elements
-    * [x]erase:		       erase elements 
-    * [x]swap:		       swap content
-    * [x]clear:		       clear content 
-    * 
-    * - Observers:
-    * [x] key_comp	       Return key comparison object
-    * [x] value_comp	       Return value comparison object
-    *
-    * - Operations:
-    * [x]find:		       Get iterator to element
-    * [x]count:		       Count elements with a specific key
-    * [x]lower_bound:          Return iterator to lower bound
-    * [x]upper_bound:  	       Return iterator to upper bound
-    * [x]equal_range: 	       Get range of equal elements
-    *
-    * - Allocator:
-    * [x] get_allocator:       Get allocator
-    * ------------------------------------------------------------- *
+    | ------------------------ TODO ------------------------------- *
+    | ------------------------ FT::MAP ---------------------------- *
+    | visualization AVLtree
+    | https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
+    | - Coplien form:
+    | [x](constructor):        Construct vector
+    | [x](destructor):         Destruct vector
+    | [x]operator=:            Assign vector
+    |
+    | - Iterators:
+    | [x]begin:                Return iterator to beginning
+    | [x]end:                  Return iterator to end
+    | [x]rbegin:               Return reverse iterator to reverse beginning
+    | [x]rend:                 Return reverse iterator to reverse end
+    |
+    | - Capacity:
+    | [x]empty:                Test whether container is empty 
+    | [x]size:                 Return container size
+    | [x]max_size:             Return maximum size 
+    |
+    | - Element access:
+    | [x]operator[]:           Access element 
+    |
+    | - Modifiers:
+    | [x]insert:	       insert elements
+    | [x]erase:		       erase elements 
+    | [x]swap:		       swap content
+    | [x]clear:		       clear content 
+    | 
+    | - Observers:
+    | [x] key_comp	       Return key comparison object
+    | [x] value_comp	       Return value comparison object
+    |
+    | - Operations:
+    | [x]find:		       Get iterator to element
+    | [x]count:		       Count elements with a specific key
+    | [x]lower_bound:          Return iterator to lower bound
+    | [x]upper_bound:  	       Return iterator to upper bound
+    | [x]equal_range: 	       Get range of equal elements
+    |
+    | - Allocator:
+    | [x] get_allocator:       Get allocator
+    | ------------------------------------------------------------- *
     */
 
 namespace ft
@@ -103,10 +103,10 @@ template < class Key,                                     			// map::key_type
 		typedef T*							pointer;
 		typedef const T*						const_pointer;
 
-		typedef typename ft::map_iterator<Key, T, Compare, Node> iterator;
-		typedef typename ft::map_iterator<Key, T, Compare, Node> const_iterator;
-		typedef typename ft::map_rev_iterator<Key, T, Compare, Node> reverse_iterator;
-		typedef typename ft::map_rev_iterator<Key, T, Compare, Node> const_reverse_iterator;
+		typedef typename ft::map_iterator<Key, T, Compare, Node>	iterator;
+		typedef typename ft::map_iterator<Key, T, Compare, Node> 	const_iterator;
+		typedef typename ft::map_rev_iterator<Key, T, Compare, Node> 	reverse_iterator;
+		typedef typename ft::map_rev_iterator<Key, T, Compare, Node> 	const_reverse_iterator;
 
 		class value_compare
 		{   
@@ -255,7 +255,6 @@ template < class Key,                                     			// map::key_type
 			Node *ret = __search_key(_root, k);
 			return (ret->content.second);
 		}
-		
 
 		/* @Brief Extends the container by inserting new elements*/
 		/* @Param  const value_type &val*/
@@ -515,6 +514,9 @@ template < class Key,                                     			// map::key_type
 			return (u);
 		}
 
+		/* @Brief clear all the tree without us iterator  for faster */
+		/* @Param Node *t */
+		/* @Return None */
 		void __full_clear(Node *t){
 			if(t == NULL)
             			return;

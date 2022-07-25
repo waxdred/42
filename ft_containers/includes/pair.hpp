@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 09:56:50 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/16 13:44:31 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/25 13:56:28 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,26 @@
 # include <iostream>
 
 /**
-	* ------------------------ TODO ------------------------------- *
-	* ------------------------ FT::PAIR --------------------------- *
-	*
-    	* - Coplien form:
-    	* [x](constructor):        Construct pair
-    	* [x](destructor):         Destruct pair
-    	* [x]operator=:            Assign pair
-    	* [x]copy:            	   Copy pair
-	*
-	* - Non-member function overloads:
-	* [x] operator ==
-	* [x] operator !=
-	* [x] operator <
-	* [x] operator >
-	* [x] operator <=
-	* [x] operator >=
-	*
-	* - Makepair:
-	* [x] make_pair
-	*
-	* ------------------------------------------------------------- *
+	| ------------------------ TODO ------------------------------- *
+	| ------------------------ FT::PAIR --------------------------- *
+	|
+    	| - Coplien form:
+    	| [x](constructor):        Construct pair
+    	| [x](destructor):         Destruct pair
+    	| [x]operator=:            Assign pair
+    	| [x]copy:            	   Copy pair
+	|
+	| - Non-member function overloads:
+	| [x] operator ==
+	| [x] operator !=
+	| [x] operator <
+	| [x] operator >
+	| [x] operator <=
+	| [x] operator >=
+	|
+	| - Makepair:
+	| [x] make_pair
+	| ------------------------------------------------------------- *
 	*/
 namespace ft{
 	template<class U, class V>
@@ -53,12 +52,14 @@ namespace ft{
 
 			template<class T1, class T2>
 			pair(const pair<T1, T2> &p): first(p.first), second(p.second){};
+
 			pair &operator=(const pair &pr){
 				first = pr.first;
 				second = pr.second;
 				return (*this);
 			}
 	}; //pair
+
 	template <class T1, class T2>
  	pair<T1,T2> make_pair (T1 x, T2 y){
 		return ( pair<T1,T2>(x,y) );

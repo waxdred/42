@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:52:48 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/05/27 15:21:18 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/25 13:56:17 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,31 @@
 # include "vector.hpp"
 
  /**
-    * ------------------------------------------------------------- *
-    * ------------------------ FT::STACK -------------------------- *
-    *
-    * - Coplien form:
-    * [x](constructor):        Construct stack
-    * [x](destructor):         Destruct stack
-    * [x]operator=:            Assign content
-    *
-    * - Member functions:
-    * [x]empty:                Test whether container is empty
-    * [x]size:                 Return size
-    * [x]top:                  Access next element
-    * [x]push:                 Insert element
-    * [x]pop:                  Remove top element
-    * [x]swap:		       swap element
-    *
-    * - Non-member function overloads:
-    * [x]relational operators: Relational operators for stack
-    * [x]operator==
-    * [x]operator!=
-    * [x]operator<
-    * [x]operator<=
-    * [x]operator>
-    * [x]operator>=
-    * ------------------------------------------------------------- *
+    | ------------------------------------------------------------- *
+    | ------------------------ FT::STACK -------------------------- *
+    |
+    | - Coplien form:
+    | [x](constructor):        Construct stack
+    | [x](destructor):         Destruct stack
+    | [x]operator=:            Assign content
+    |
+    | - Member functions:
+    | [x]empty:                Test whether container is empty
+    | [x]size:                 Return size
+    | [x]top:                  Access next element
+    | [x]push:                 Insert element
+    | [x]pop:                  Remove top element
+    | [x]swap:		       swap element
+    |
+    | - Non-member function overloads:
+    | [x]relational operators: Relational operators for stack
+    | [x]operator==
+    | [x]operator!=
+    | [x]operator<
+    | [x]operator<=
+    | [x]operator>
+    | [x]operator>=
+    | ------------------------------------------------------------- *
     */
 
 namespace ft{
