@@ -6,7 +6,7 @@
 /*   By: jmilhas <jmilhas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:33:06 by jmilhas           #+#    #+#             */
-/*   Updated: 2022/07/24 23:43:35 by jmilhas          ###   ########.fr       */
+/*   Updated: 2022/07/25 23:19:01 by jmilhas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int main(int argc, char** argv) {
 	
 	for (int i = 0; i < COUNT; ++i)
 	{
-		map_int.insert(ft::make_pair(rand(), rand()));
+		map_int.insert(ft::make_pair(rand() % seed, rand() % seed));
 	}
 
 	int sum = 0;
